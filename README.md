@@ -1,6 +1,6 @@
 # AdvBench
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/AdvBench?style=social)](https://github.com/yourusername/AdvBench/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/AdVocate-LLM/AdvBench?style=social)](https://github.com/AdVocate-LLM/AdvBench/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 
