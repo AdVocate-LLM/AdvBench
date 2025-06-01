@@ -45,7 +45,7 @@ class ModernLogger:
         name: str = "app",
         level: str = "info",
         log_file: Optional[str] = None,
-        show_path: bool = False,
+        show_path: bool = True,
         rich_tracebacks: bool = True
     ):
         # Enable rich tracebacks

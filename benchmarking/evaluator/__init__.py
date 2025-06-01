@@ -1,5 +1,5 @@
-from .laaj_evaluator.compare_evaluator import CompareEvaluator
-from .quantitative_evaluator.quant_evaluator import QuantEvaluator
+from .laaj_evaluator import CompareEvaluator, LAJQualitativeEvaluator
+from .quantitative_evaluator import QuantEvaluator
 
-__all__ = ['CompareEvaluator', 'QuantEvaluator']
+__all__ = ['CompareEvaluator', 'LAJQualitativeEvaluator', 'QuantEvaluator']
 

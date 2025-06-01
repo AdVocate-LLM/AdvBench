@@ -1,9 +1,8 @@
 from benchmarking.evaluator.base_evaluator import BaseEvaluator
-from benchmarking.evaluator.laaj_evaluator.agents.laaj_agent import LAJAgent
+from benchmarking.evaluator.laaj_evaluator.agents.compare_agent import CompareAgent
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
-from typing import List, Any, Dict
-import os
-from collections import defaultdict
+from typing import List, Any
+
 
 class CompareEvaluator(BaseEvaluator):
     """Compare Evaluator
@@ -21,7 +20,7 @@ class CompareEvaluator(BaseEvaluator):
                 judge_model: str='gpt-4o'                
                 ):
         super().__init__(output_dir=output_dir, results=results)
-        self.judge = LAJAgent(judge_model)
+        self.compare_judge = CompareAgent(judge_model)
         
     def get_analysis_matrixes(self) -> List[str]:
         return self.ANALYSIS_MATRIXES
@@ -51,12 +50,12 @@ class CompareEvaluator(BaseEvaluator):
                 isinstance(records[0], SolutionResult) and 
                 isinstance(records[1], SolutionResult)):
                 # get questions, a_answers, b_answers from response
-                judge_result = self.judge.compare_A_B_solutions(
+                compare_result = self.compare_judge.compare_A_B_solutions(
                     A_Solutions=records[0],
                     B_Solutions=records[1],
                     export_path=self.output_dir if is_saved else None
                 )
-                return judge_result
+                return compare_result
             else:
                 raise ValueError(f"Invalid response type: {type(records)}")
         else:

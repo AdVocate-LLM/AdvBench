@@ -338,6 +338,50 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
                 )
         return eval_results
 
+    def add_scores2EvaluationResult(
+        self,
+        scores: List[float],
+        analysis_matrix: str = "evaluation"
+    ) -> "EvaluationResult":
+        """
+        Add a list of scores to the EvaluationResult.
+        This function is used to add the scores of the evaluation result to the EvaluationResult.
+        
+        Args:
+            scores: List[float] - List of scores corresponding to each result in the SolutionResult
+            analysis_matrix: str - The evaluation matrix label (default: "evaluation")
+
+        Returns:
+            EvaluationResult: The EvaluationResult object with the added scores.
+        """
+        evaluation_result = EvaluationResult()
+        
+        # Get all items as a flat list to match with scores
+        matrices = self._to_matrix()
+        
+        # Check if scores length matches the number of results
+        if len(scores) != len(matrices):
+            raise ValueError(f"Number of scores ({len(scores)}) doesn't match number of results ({len(matrices)})")
+        
+        # Add each score to the evaluation result
+        for score, matrix in zip(scores, matrices):
+            solution_name = matrix[0]
+            dataset = matrix[1]
+            repeat_id = matrix[2]
+            category = matrix[4]
+            
+            evaluation_result.add_result(
+                solution_name, 
+                dataset, 
+                repeat_id, 
+                analysis_matrix, 
+                category, 
+                float(score)
+            )
+        
+        return evaluation_result
+
+
 class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
     """
     The structure of the evaluation result:
