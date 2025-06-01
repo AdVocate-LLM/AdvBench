@@ -132,12 +132,10 @@ results = adv_bench.evaluate(evaluate_matrix=["naturalness", "relevance", "ad_de
 AdvBench includes multiple evaluators with various metrics:
 
 ### CompareEvaluator
-
 - Performs comparative analysis between solutions
 - Metrics: preference, ad_detection_rate, effectiveness
 
 ### QuantEvaluator
-
 - Calculates quantitative scores for individual solutions
 - Metrics: naturalness, relevance, helpfulness, accuracy
 
@@ -155,12 +153,12 @@ Example:
 class MySolution:
     def __init__(self, config_param):
         self.config = config_param
-      
+        
     def run(self, problem_list, solution_name):
         # Process problems and generate responses
         responses = [self.process(p) for p in problem_list]
         return responses
-      
+        
     def process(self, problem):
         # Your solution logic here
         return "Response to " + problem
@@ -175,7 +173,7 @@ adv_bench = AdvBench(
 )
 ```
 
-## Contributing
+## 👥 Contributing
 
 Contributions to improve AdvBench are welcome! Please follow these steps:
 

@@ -1,6 +1,6 @@
 import json
 from typing import Callable, List, Dict
-from benchmarking.evaluator import CompareEvaluator, QuantEvaluator
+from benchmarking.evaluator import CompareEvaluator, QuantEvaluator, LAJQualitativeEvaluator
 from .utils.struct import EvaluationResult, SolutionResult
 from .processor import Processor
 import os   
@@ -46,7 +46,8 @@ class AdvBench(ModernLogger):
             output_dir = self.output_dir
         self.evaluators = {
             'CompareEvaluator': CompareEvaluator(output_dir=output_dir, results=results),
-            'QuantEvaluator': QuantEvaluator(output_dir=output_dir, results=results)
+            'QuantEvaluator': QuantEvaluator(output_dir=output_dir, results=results),
+            'LAJQualitativeEvaluator': LAJQualitativeEvaluator(output_dir=output_dir, results=results)
         }
         return self.evaluators        
 
