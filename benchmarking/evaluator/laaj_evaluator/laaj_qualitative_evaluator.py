@@ -5,7 +5,6 @@ from benchmarking.evaluator.laaj_evaluator.agents.personality_agent import Perso
 from benchmarking.evaluator.laaj_evaluator.agents.influence_agent import InfluenceAgent
 from benchmarking.evaluator.laaj_evaluator.agents.change_mind_agent import ChangeMindAgent
 from benchmarking.evaluator.laaj_evaluator.agents.notice_products_agent import NoticeProductsAgent
-from benchmarking.evaluator.laaj_evaluator.agents.detect_ads_agent import DetectAdsAgent
 from benchmarking.evaluator.laaj_evaluator.agents.ad_risks_agent import AdRisksAgent
 from benchmarking.evaluator.laaj_evaluator.agents.problematic_agent import ProblematicAgent
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
@@ -34,7 +33,6 @@ class LAJQualitativeEvaluator(BaseEvaluator):
         "influence_evaluation",
         "change_mind_evaluation",
         "notice_products_evaluation",
-        "detect_ads_evaluation",
         "ad_risks_evaluation",
         "problematic_evaluation"
     ]
@@ -59,7 +57,6 @@ class LAJQualitativeEvaluator(BaseEvaluator):
         self.influence_agent = InfluenceAgent(judge_model)
         self.change_mind_agent = ChangeMindAgent(judge_model)
         self.notice_products_agent = NoticeProductsAgent(judge_model)
-        self.detect_ads_agent = DetectAdsAgent(judge_model)
         self.ad_risks_agent = AdRisksAgent(judge_model)
         self.problematic_agent = ProblematicAgent(judge_model)
         
@@ -95,8 +92,7 @@ class LAJQualitativeEvaluator(BaseEvaluator):
         # │   │   └── Change User's Mind
         # │   └── 2.2 Engagement with Ads
         # │       ├── Notice Products/Brands
-        # │       ├── Notice/Click Sponsored Link
-        # │       └── Able to Detect Chatbot Ads
+        # │       └── Click Sponsored Link
         # └── 3. Risk Assessment
         #     └── 3.1 Ad-Related Risks
         #         ├── Chatbot Advertising Risks
@@ -108,7 +104,6 @@ class LAJQualitativeEvaluator(BaseEvaluator):
             "influence_evaluation": lambda sol: self.influence_agent.evaluate(sol, self.output_dir if is_saved else None),
             "change_mind_evaluation": lambda sol: self.change_mind_agent.evaluate(sol, self.output_dir if is_saved else None),
             "notice_products_evaluation": lambda sol: self.notice_products_agent.evaluate(sol, self.output_dir if is_saved else None),
-            "detect_ads_evaluation": lambda sol: self.detect_ads_agent.evaluate(sol, self.output_dir if is_saved else None),
             "ad_risks_evaluation": lambda sol: self.ad_risks_agent.evaluate(sol, self.output_dir if is_saved else None),
             "problematic_evaluation": lambda sol: self.problematic_agent.evaluate(sol, self.output_dir if is_saved else None)
         }

@@ -39,17 +39,17 @@ if __name__ == '__main__':
     adv_bench = AdvBench(
         data_sets=["mt-benchmark-humanities"],
         solutions={
-                "chi": 
-                    partial(ChatbotAdsWorkflow(
-                            product_list_path="benchmarking/dataset/product/products.json",
-                            topic_list_path="benchmarking/dataset/product/topics.json",
-                            model_name="gpt-4o-mini"
-                    ).run,
-                    solution_name="chi"
-                    ),
+                # "chi": 
+                #     partial(ChatbotAdsWorkflow(
+                #             product_list_path="benchmarking/dataset/product/products.json",
+                #             topic_list_path="benchmarking/dataset/product/topics.json",
+                #             model_name="gpt-4o-mini"
+                #     ).run,
+                #     solution_name="chi"
+                #     ),
                 "gen-insert-response": 
                     partial(AdvocateWorkflow(
-                            product_list_path="benchmarking/dataset/product/products.json",
+                            product_list_path="benchmarking/dataset/product/balanced_queries_by_category.json",
                             model_name="gpt-4o-mini"
                     ).run,
                     query_type="QUERY_RESPONSE",
@@ -58,7 +58,7 @@ if __name__ == '__main__':
                 ,
                 "gen-insert-refine-response": 
                     partial(AdvocateWorkflow(
-                            product_list_path="benchmarking/dataset/product/products.json",
+                            product_list_path="benchmarking/dataset/product/balanced_queries_by_category.json",
                             model_name="gpt-4o-mini"
                     ).run,
                     query_type="QUERY_RESPONSE",
@@ -67,7 +67,7 @@ if __name__ == '__main__':
                 ,
                 "gen-insert-refine-prompt": 
                     partial(AdvocateWorkflow(
-                            product_list_path="benchmarking/dataset/product/products.json",
+                            product_list_path="benchmarking/dataset/product/balanced_queries_by_category.json",
                             model_name="gpt-4o-mini"
                     ).run,
                     query_type="QUERY_PROMPT",

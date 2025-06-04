@@ -21,7 +21,8 @@ def setup_nltk() -> None:
             logging.info(f"Added NLTK data directory: {nltk_dir}")
             
             # Check and download required NLTK data if missing
-            required_packages = ['punkt', 'stopwords', 'wordnet']
+            # Skip wordnet due to compatibility issues with some NLTK versions
+            required_packages = ['punkt', 'stopwords']
             for package in required_packages:
                 try:
                     # Try to use the package to verify it exists
@@ -29,19 +30,49 @@ def setup_nltk() -> None:
                         sent_tokenize('Test sentence.')
                     elif package == 'stopwords':
                         nltk.corpus.stopwords.words('english')
-                    elif package == 'wordnet':
-                        nltk.corpus.wordnet.synsets('test')
                 except LookupError:
                     logging.info(f"Downloading missing NLTK package: {package}")
                     nltk.download(package, quiet=True)
+                except Exception as e:
+                    logging.warning(f"Error verifying NLTK package {package}: {e}")
+                    # Try to download anyway
+                    try:
+                        nltk.download(package, quiet=True)
+                        logging.info(f"Downloaded NLTK package: {package}")
+                    except Exception as download_error:
+                        logging.error(f"Failed to download NLTK package {package}: {download_error}")
+            
+            # For wordnet, just try to download without verification
+            try:
+                nltk.data.find('corpora/wordnet')
+                logging.info("WordNet corpus data found")
+            except LookupError:
+                try:
+                    logging.info("Downloading WordNet corpus data")
+                    nltk.download('wordnet', quiet=True)
+                except Exception as e:
+                    logging.warning(f"Could not download WordNet: {e}")
+            except Exception as e:
+                logging.warning(f"WordNet check failed: {e}")
             
             logging.info("Successfully verified/loaded all required NLTK data")
         else:
-            raise FileNotFoundError(f"NLTK data directory not found at: {nltk_dir}")
+            # If no local nltk_data directory, just try to download required packages
+            logging.warning(f"NLTK data directory not found at: {nltk_dir}")
+            logging.info("Attempting to download required NLTK packages")
+            
+            required_packages = ['punkt', 'stopwords', 'wordnet']
+            for package in required_packages:
+                try:
+                    nltk.download(package, quiet=True)
+                    logging.info(f"Downloaded NLTK package: {package}")
+                except Exception as e:
+                    logging.warning(f"Could not download NLTK package {package}: {e}")
                 
     except Exception as e:
         logging.error(f"Error setting up NLTK: {str(e)}")
-        raise
+        # Don't raise the exception, just log it to allow the program to continue
+        logging.warning("Continuing without complete NLTK setup")
 
 
 def split_sentences_nltk(text: Optional[str]) -> List[str]:
