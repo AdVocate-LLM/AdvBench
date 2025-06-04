@@ -8,16 +8,19 @@ class productRAG:
     def __init__(self, file_path:str, model):
         self.model = model  # Initialize model first
         self.file_path = file_path
-        self.index_file = os.path.join(os.path.dirname(file_path), 'product_with_index.json')
-        if not os.path.exists(self.index_file):
-            self.products = self.read_products()
-        else:
-            success = self.load_index()
-            assert success, "Failed to load index"
+        self.products = self.read_products()
+        # Index the products to create embeddings
+        self.index()
+        # self.index_file = os.path.join(os.path.dirname(file_path), 'product_with_index.json')
+        # if not os.path.exists(self.index_file):
+        #     self.products = self.read_products()
+        # else:
+        #     success = self.load_index()
+        #     assert success, "Failed to load index"
 
     def read_products(self) -> List[Product]:
         products = []
-        with open(self.file_path, 'r') as infile:
+        with open(self.file_path, 'r', encoding='utf-8') as infile:
             product_data = json.load(infile)
             # Each item in the JSON is a category with its associated data
             for category_item in product_data.items():
@@ -37,7 +40,7 @@ class productRAG:
         index_data = {
             'products': [product.to_dict() for product in self.products]
         }
-        with open(self.index_file, 'w') as f:
+        with open(self.index_file, 'w', encoding='utf-8') as f:
             json.dump(index_data, f)
 
     def load_index(self) -> bool:
@@ -46,7 +49,7 @@ class productRAG:
             return False
         
         try:
-            with open(self.index_file, 'r') as f:
+            with open(self.index_file, 'r', encoding='utf-8') as f:
                 index_data = json.load(f)
             
             self.products = [
@@ -59,13 +62,9 @@ class productRAG:
             return False
 
     def index(self) -> None:
-        """Index the products, loading from file if available"""
-        if not os.path.exists(self.index_file):
-            for product in tqdm(self.products, desc="Indexing products"):
-                product.index()
-            self.save_index()
-        else:
-            print("Index loaded successfully from file")
+        """Index the products by creating embeddings for each product"""
+        for product in tqdm(self.products, desc="Indexing products"):
+            product.index()
 
     def query(self, query:str, top_k:int=5) -> List[Product]:
         query_embedding = self.model.encode(query, show_progress_bar=False, convert_to_numpy=True)
