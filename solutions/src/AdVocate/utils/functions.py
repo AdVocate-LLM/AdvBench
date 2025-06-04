@@ -20,7 +20,21 @@ def get_adjacent_sentence_similarities(sentences: List[Sentence]) -> List[Tuple[
 
 def get_cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -> float:
     """Calculate cosine similarity between two vectors using scikit-learn"""
+    # Handle None values
+    if vec1 is None or vec2 is None:
+        logging.warning("One or both vectors are None, returning 0.0")
+        return 0.0
+    
     try:
+        # Ensure data types and dimensions are correct
+        if not isinstance(vec1, np.ndarray) or not isinstance(vec2, np.ndarray):
+            logging.warning("One or both inputs are not numpy arrays, returning 0.0")
+            return 0.0
+            
+        if vec1.size == 0 or vec2.size == 0:
+            logging.warning("One or both vectors are empty, returning 0.0")
+            return 0.0
+        
         vec1_2d = vec1.reshape(1, -1)
         vec2_2d = vec2.reshape(1, -1)
         similarity = cosine_similarity(vec1_2d, vec2_2d)[0][0]
@@ -50,7 +64,8 @@ def setup_nltk() -> None:
             logging.info(f"Added NLTK data directory: {nltk_dir}")
             
             # Check and download required NLTK data if missing
-            required_packages = ['punkt', 'stopwords', 'wordnet']
+            # Skip wordnet due to compatibility issues with some NLTK versions
+            required_packages = ['punkt', 'stopwords']
             for package in required_packages:
                 try:
                     # Try to use the package to verify it exists
@@ -58,19 +73,49 @@ def setup_nltk() -> None:
                         sent_tokenize('Test sentence.')
                     elif package == 'stopwords':
                         nltk.corpus.stopwords.words('english')
-                    elif package == 'wordnet':
-                        nltk.corpus.wordnet.synsets('test')
                 except LookupError:
                     logging.info(f"Downloading missing NLTK package: {package}")
                     nltk.download(package, quiet=True)
+                except Exception as e:
+                    logging.warning(f"Error verifying NLTK package {package}: {e}")
+                    # Try to download anyway
+                    try:
+                        nltk.download(package, quiet=True)
+                        logging.info(f"Downloaded NLTK package: {package}")
+                    except Exception as download_error:
+                        logging.error(f"Failed to download NLTK package {package}: {download_error}")
+            
+            # For wordnet, just try to download without verification
+            try:
+                nltk.data.find('corpora/wordnet')
+                logging.info("WordNet corpus data found")
+            except LookupError:
+                try:
+                    logging.info("Downloading WordNet corpus data")
+                    nltk.download('wordnet', quiet=True)
+                except Exception as e:
+                    logging.warning(f"Could not download WordNet: {e}")
+            except Exception as e:
+                logging.warning(f"WordNet check failed: {e}")
             
             logging.info("Successfully verified/loaded all required NLTK data")
         else:
-            raise FileNotFoundError(f"NLTK data directory not found at: {nltk_dir}")
+            # If no local nltk_data directory, just try to download required packages
+            logging.warning(f"NLTK data directory not found at: {nltk_dir}")
+            logging.info("Attempting to download required NLTK packages")
+            
+            required_packages = ['punkt', 'stopwords', 'wordnet']
+            for package in required_packages:
+                try:
+                    nltk.download(package, quiet=True)
+                    logging.info(f"Downloaded NLTK package: {package}")
+                except Exception as e:
+                    logging.warning(f"Could not download NLTK package {package}: {e}")
                 
     except Exception as e:
         logging.error(f"Error setting up NLTK: {str(e)}")
-        raise
+        # Don't raise the exception, just log it to allow the program to continue
+        logging.warning("Continuing without complete NLTK setup")
     
 def split_sentences_nltk(content: str, rag_model) -> List[Sentence]:
     """Split text into sentences using NLTK tokenizer and filter out short sentences."""
