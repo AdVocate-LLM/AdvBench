@@ -1,11 +1,11 @@
 from benchmarking.evaluator.base_evaluator import BaseEvaluator
 from benchmarking.evaluator.laaj_evaluator.agents.trust_agent import TrustAgent
-from benchmarking.evaluator.laaj_evaluator.agents.benefits_agent import BenefitsAgent
+from benchmarking.evaluator.laaj_evaluator.agents.accuracy_agent import BenefitsAgent
 from benchmarking.evaluator.laaj_evaluator.agents.personality_agent import PersonalityAgent
 from benchmarking.evaluator.laaj_evaluator.agents.influence_agent import InfluenceAgent
 from benchmarking.evaluator.laaj_evaluator.agents.change_mind_agent import ChangeMindAgent
 from benchmarking.evaluator.laaj_evaluator.agents.notice_products_agent import NoticeProductsAgent
-from benchmarking.evaluator.laaj_evaluator.agents.ad_risks_agent import AdRisksAgent
+from benchmarking.evaluator.laaj_evaluator.agents.integrity_agent import AdRisksAgent
 from benchmarking.evaluator.laaj_evaluator.agents.problematic_agent import ProblematicAgent
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
 from typing import List, Any

@@ -1,9 +1,9 @@
 import re
 from .base_agent import BaseAgent
-from ..prompts.notice_products_prompt import SYS_NOTICE_PRODUCTS_EVAL, USER_NOTICE_PRODUCTS_EVAL
+from ..prompts.click_products_prompt import SYS_CLICK_PRODUCTS_EVAL, USER_CLICK_PRODUCTS_EVAL
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
 
-class NoticeProductsAgent(BaseAgent):
+class ClickProductsAgent(BaseAgent):
     """Agent for evaluating if users notice products/brands and sponsored links in chatbot responses"""
     
     def __init__(self, model: str = 'gpt-4o'):
@@ -13,7 +13,7 @@ class NoticeProductsAgent(BaseAgent):
             model: Model used for evaluation
         """
         super().__init__(model)
-        self.system_prompt = SYS_NOTICE_PRODUCTS_EVAL
+        self.system_prompt = SYS_CLICK_PRODUCTS_EVAL
         # Combined notice categories with scores based on new scoring system
         self.notice_categories = {
             'PROD_POS__SP_CLICK': 100,     # User noticed products/brands and was positive; clicked sponsored link
@@ -120,7 +120,7 @@ class NoticeProductsAgent(BaseAgent):
         """
         # Prepare evaluation questions using base class method
         format_questions = self._prepare_evaluation_questions(
-            solution, USER_NOTICE_PRODUCTS_EVAL
+            solution, USER_CLICK_PRODUCTS_EVAL
         )
         
         # Get evaluations
@@ -154,12 +154,12 @@ class NoticeProductsAgent(BaseAgent):
             
             self._export_evaluation_report(
                 export_path=export_path,
-                filename=f"notice_products_evaluation.xlsx",
+                filename=f"click_products_evaluation.xlsx",
                 columns=['Question', 'Method', 'Response', 'Evaluation', 'Category', 'Product Notice', 'Sponsored Link', 'Score', 'Description'],
                 data=export_data
             )
         
         # Add scores to evaluation result
-        evaluation_result = solution.add_scores2EvaluationResult(scores, analysis_matrix='notice_products')
+        evaluation_result = solution.add_scores2EvaluationResult(scores, analysis_matrix='click_products')
         
         return evaluation_result 
