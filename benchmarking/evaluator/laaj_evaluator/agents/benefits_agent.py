@@ -1,6 +1,6 @@
 import re
 from .base_agent import BaseAgent
-from ..prompts.benefits_prompt import SYS_BENEFITS_EVAL, USER_BENEFITS_EVAL
+from ..prompts.accuracy_n_relevance_prompt import SYS_BENEFITS_EVAL, USER_BENEFITS_EVAL
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
 
 class BenefitsAgent(BaseAgent):

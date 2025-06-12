@@ -1,6 +1,6 @@
 import re
 from .base_agent import BaseAgent
-from ..prompts.ad_risks_prompt import SYS_AD_RISKS_EVAL, USER_AD_RISKS_EVAL
+from ..prompts.integrity_prompt import SYS_AD_RISKS_EVAL, USER_AD_RISKS_EVAL
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
 
 class AdRisksAgent(BaseAgent):
