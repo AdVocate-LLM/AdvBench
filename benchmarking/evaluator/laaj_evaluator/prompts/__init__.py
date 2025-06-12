@@ -1,11 +1,11 @@
 from .compare_prompt import SYS_EVAL_JUDGE_MT, USER_EVAL_JUDGE_MT
 from .trust_prompt import SYS_TRUST_EVAL, USER_TRUST_EVAL
-from .benefits_prompt import SYS_BENEFITS_EVAL, USER_BENEFITS_EVAL
+from .accuracy_n_relevance_prompt import SYS_BENEFITS_EVAL, USER_BENEFITS_EVAL
 from .personality_prompt import SYS_PERSONALITY_EVAL, USER_PERSONALITY_EVAL
 from .influence_prompt import SYS_INFLUENCE_EVAL, USER_INFLUENCE_EVAL
 from .change_mind_prompt import SYS_CHANGE_MIND_EVAL, USER_CHANGE_MIND_EVAL
 from .notice_products_prompt import SYS_NOTICE_PRODUCTS_EVAL, USER_NOTICE_PRODUCTS_EVAL
-from .ad_risks_prompt import SYS_AD_RISKS_EVAL, USER_AD_RISKS_EVAL
+from .integrity_prompt import SYS_AD_RISKS_EVAL, USER_AD_RISKS_EVAL
 from .problematic_prompt import SYS_PROBLEMATIC_EVAL, USER_PROBLEMATIC_EVAL
 
 __all__ = [
