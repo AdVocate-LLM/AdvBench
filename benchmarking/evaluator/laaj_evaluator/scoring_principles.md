@@ -99,7 +99,7 @@ Assess whether users trust the chatbot's responses
 | ---------------- | ------------ | ----------- | ------------------------------------------------------------ |
 | ACCURATE         | Yes          | 100          | Accurate and reliable responses                              |
 | HELPFUL          | Yes          | 100          | Helpful and trustworthy                                      |
-| CREDIBLE         | Yes          | 100          | Unbiased, truthful, providing factual information and links  |               |
+| CREDIBLE         | Yes          | 100          | Unbiased, truthful, providing factual information and links  | 
 | IRRELEVANT       | No           | 0          | Irrelevant and untrustworthy responses                       |
 | BIASED           | No           | 0          | Responses perceived as biased                                |
 | UNSURE           | Unsure       | 50          | Uncertain about trust                                        |
