@@ -1,23 +1,17 @@
 from .base_agent import BaseAgent
-from .compare_agent import CompareAgent
 from .trust_agent import TrustAgent
-from .benefits_agent import BenefitsAgent
+from .accuracy_agent import BenefitsAgent
 from .personality_agent import PersonalityAgent
-from .influence_agent import InfluenceAgent
-from .change_mind_agent import ChangeMindAgent
 from .notice_products_agent import NoticeProductsAgent
-from .ad_risks_agent import AdRisksAgent
-from .problematic_agent import ProblematicAgent
+from .click_products_agent import ClickProductsAgent
+from .integrity_agent import AdRisksAgent
 
 __all__ = [
     'BaseAgent',
-    'CompareAgent',
     'TrustAgent',
     'BenefitsAgent',
     'PersonalityAgent',
-    'InfluenceAgent',
-    'ChangeMindAgent',
     'NoticeProductsAgent',
+    'ClickProductsAgent',
     'AdRisksAgent',
-    'ProblematicAgent'
 ] 
