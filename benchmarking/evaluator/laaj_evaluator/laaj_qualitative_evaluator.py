@@ -1,12 +1,10 @@
 from benchmarking.evaluator.base_evaluator import BaseEvaluator
 from benchmarking.evaluator.laaj_evaluator.agents.trust_agent import TrustAgent
-from benchmarking.evaluator.laaj_evaluator.agents.accuracy_agent import BenefitsAgent
+from benchmarking.evaluator.laaj_evaluator.agents.accuracy_agent import AccuracyAgent
 from benchmarking.evaluator.laaj_evaluator.agents.personality_agent import PersonalityAgent
-from benchmarking.evaluator.laaj_evaluator.agents.influence_agent import InfluenceAgent
-from benchmarking.evaluator.laaj_evaluator.agents.change_mind_agent import ChangeMindAgent
 from benchmarking.evaluator.laaj_evaluator.agents.notice_products_agent import NoticeProductsAgent
-from benchmarking.evaluator.laaj_evaluator.agents.integrity_agent import AdRisksAgent
-from benchmarking.evaluator.laaj_evaluator.agents.problematic_agent import ProblematicAgent
+from benchmarking.evaluator.laaj_evaluator.agents.integrity_agent import IntegrityAgent
+from benchmarking.evaluator.laaj_evaluator.agents.click_products_agent import ClickProductsAgent
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
 from typing import List, Any
 
@@ -16,25 +14,22 @@ class LAJQualitativeEvaluator(BaseEvaluator):
     
     This evaluator implements the Qualitative Evaluation Ontology:
     1. User Satisfaction
-       - Credibility (Trust Chatbot)
-       - Helpfulness (Benefits for Users)
-       - Neutrality and Tone (Chatbot Personality)
+       - Accuracy (Response relevance and accuracy to users - whether responses directly answer questions)
+       - Integrity (Content integrity related to advertisements)
+       - Personality (Personality traits exhibited by the chatbot)
+       - Trustworthiness (Whether users trust the chatbot's responses)
     2. User Engagement
-       - Convincingness (Influence Users, Change User's Mind)
-       - Engagement with Ads (Notice Products/Brands, Detect Ads)
-    3. Risk Assessment
-       - Ad-Related Risks (Chatbot Advertising Risks, Any Problematic Responses)
+       - Ad Notice (Whether users will notice products or brands)
+       - Ad Click (Whether users will click products or brands)
     """
     
     ANALYSIS_MATRIXES = [
-        "trust_evaluation",
-        "benefits_evaluation",
+        "accuracy_evaluation",
+        "integrity_evaluation",
         "personality_evaluation",
-        "influence_evaluation",
-        "change_mind_evaluation",
+        "trust_evaluation",
         "notice_products_evaluation",
-        "ad_risks_evaluation",
-        "problematic_evaluation"
+        "click_products_evaluation",
     ]
     
     def __init__(self, 
@@ -52,13 +47,11 @@ class LAJQualitativeEvaluator(BaseEvaluator):
         
         # Initialize all evaluation agents
         self.trust_agent = TrustAgent(judge_model)
-        self.benefits_agent = BenefitsAgent(judge_model)
+        self.accuracy_agent = AccuracyAgent(judge_model)
         self.personality_agent = PersonalityAgent(judge_model)
-        self.influence_agent = InfluenceAgent(judge_model)
-        self.change_mind_agent = ChangeMindAgent(judge_model)
         self.notice_products_agent = NoticeProductsAgent(judge_model)
-        self.ad_risks_agent = AdRisksAgent(judge_model)
-        self.problematic_agent = ProblematicAgent(judge_model)
+        self.integrity_agent = IntegrityAgent(judge_model)
+        self.click_products_agent = ClickProductsAgent(judge_model)
         
     def get_analysis_matrixes(self) -> List[str]:
         return self.ANALYSIS_MATRIXES
@@ -80,32 +73,26 @@ class LAJQualitativeEvaluator(BaseEvaluator):
         # Map matrix names to corresponding evaluation methods
         # Qualitative Evaluation Ontology
         # ├── 1. User Satisfaction
-        # │   ├── 1.1 Credibility
-        # │   │   └── Trust Chatbot
-        # │   ├── 1.2 Helpfulness
-        # │   │   └── Benefits for Users
-        # │   └── 1.3 Neutrality and Tone
-        # │       └── Chatbot Personality
-        # ├── 2. User Engagement
-        # │   ├── 2.1 Convincingness
-        # │   │   ├── Influence Users
-        # │   │   └── Change User's Mind
-        # │   └── 2.2 Engagement with Ads
-        # │       ├── Notice Products/Brands
-        # │       └── Click Sponsored Link
-        # └── 3. Risk Assessment
-        #     └── 3.1 Ad-Related Risks
-        #         ├── Chatbot Advertising Risks
-        #         └── Any Problematic Responses
+        # │   ├── 1.1 Accuracy
+        # │   │   └── Response relevance and accuracy to users (whether responses directly answer questions)
+        # │   ├── 1.2 Integrity
+        # │   │   └── Content integrity related to advertisements
+        # │   ├── 1.3 Personality
+        # │   │   └── Personality traits exhibited by the chatbot
+        # │   └── 1.4 Trustworthiness
+        # │       └── Whether users trust the chatbot's responses
+        # └── 2. User Engagement
+        #     ├── 2.1 Ad Notice
+        #     │   └── Whether users will notice products or brands
+        #     └── 2.2 Ad Click
+        #         └── Whether users will click products or brands
         evaluation_methods = {
             "trust_evaluation": lambda sol: self.trust_agent.evaluate(sol, self.output_dir if is_saved else None),
-            "benefits_evaluation": lambda sol: self.benefits_agent.evaluate(sol, self.output_dir if is_saved else None),
+            "accuracy_evaluation": lambda sol: self.accuracy_agent.evaluate(sol, self.output_dir if is_saved else None),
             "personality_evaluation": lambda sol: self.personality_agent.evaluate(sol, self.output_dir if is_saved else None),
-            "influence_evaluation": lambda sol: self.influence_agent.evaluate(sol, self.output_dir if is_saved else None),
-            "change_mind_evaluation": lambda sol: self.change_mind_agent.evaluate(sol, self.output_dir if is_saved else None),
             "notice_products_evaluation": lambda sol: self.notice_products_agent.evaluate(sol, self.output_dir if is_saved else None),
-            "ad_risks_evaluation": lambda sol: self.ad_risks_agent.evaluate(sol, self.output_dir if is_saved else None),
-            "problematic_evaluation": lambda sol: self.problematic_agent.evaluate(sol, self.output_dir if is_saved else None)
+            "integrity_evaluation": lambda sol: self.integrity_agent.evaluate(sol, self.output_dir if is_saved else None),
+            "click_products_evaluation": lambda sol: self.click_products_agent.evaluate(sol, self.output_dir if is_saved else None),
         }
         
         if matrix_name in evaluation_methods:

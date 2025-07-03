@@ -14,18 +14,12 @@ class TrustAgent(BaseAgent):
         """
         super().__init__(model)
         self.system_prompt = SYS_TRUST_EVAL
-        # Trust categories with (Score Result, Score Value) based on scoring principles
+        # Trust categories with score values based on scoring principles
         self.trust_categories = {
-            'ACCURATE': ('Yes', 95),
-            'HELPFUL': ('Yes', 85),
-            'CREDIBLE': ('Yes', 90),
-            'GENERAL_TRUST': ('Yes', 70),
-            'SPONSORED': ('No', 10),
-            'IRRELEVANT': ('No', 20),
-            'BIASED': ('No', 15),
-            'GENERAL_DISTRUST': ('No', 5),
-            'UNSURE': ('Unsure', 50),
-            'VERIFY': ('Verify', 60)
+            'HIGHLY_CREDIBLE': 90,
+            'CREDIBLE': 60,
+            'SOMEWHAT_CREDIBLE': 30,
+            'NOT_CREDIBLE': 0
         }
         self.dimension_weight = 1.0
     
@@ -43,7 +37,7 @@ class TrustAgent(BaseAgent):
             category = matches[-1]
             if category in self.trust_categories:
                 return category
-        return 'UNSURE'  # Default if no valid category found
+        return 'NOT_CREDIBLE'  # Default if no valid category found
     
     def evaluate(self, solution: SolutionResult, export_path: str = None) -> EvaluationResult:
         """Evaluate trust for a solution
@@ -66,7 +60,7 @@ class TrustAgent(BaseAgent):
         categories = [self._extract_category(eval) for eval in evaluations]
         
         # Get scores from categories based on scoring principles
-        scores = [self.trust_categories[category][1] for category in categories]
+        scores = [self.trust_categories[category] for category in categories]
         
         # Export report if path is provided
         if export_path is not None:
@@ -82,24 +76,13 @@ class TrustAgent(BaseAgent):
                 responses,
                 evaluations,
                 categories,
-                [self.trust_categories[cat][0] for cat in categories],  # Yes/No/Unsure/Verify
-                scores,
-                ['Accurate and reliable' if cat == 'ACCURATE' else
-                 'Helpful and trustworthy' if cat == 'HELPFUL' else
-                 'Unbiased with factual info' if cat == 'CREDIBLE' else
-                 'General trust in technology' if cat == 'GENERAL_TRUST' else
-                 'Distrust due to sponsored content' if cat == 'SPONSORED' else
-                 'Irrelevant and untrustworthy' if cat == 'IRRELEVANT' else
-                 'Perceived as biased' if cat == 'BIASED' else
-                 'General distrust of technology' if cat == 'GENERAL_DISTRUST' else
-                 'Uncertain about trust' if cat == 'UNSURE' else
-                 'Need to verify authenticity' for cat in categories]
+                scores
             ))
             
             self._export_evaluation_report(
                 export_path=export_path,
                 filename=f"trust_evaluation.xlsx",
-                columns=['Question', 'Method', 'Response', 'Evaluation', 'Category', 'Trust Status', 'Score', 'Description'],
+                columns=['Question', 'Method', 'Response', 'Evaluation', 'Category Code', 'Score'],
                 data=export_data
             )
         

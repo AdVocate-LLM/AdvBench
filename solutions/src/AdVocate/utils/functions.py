@@ -1,11 +1,11 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from typing import List, Tuple
+from typing import List, Tuple, Union
 from .sentence import Sentence
 import logging
 import nltk
 import os
-from nltk.tokenize import sent_tokenize
+from nltk.tokenize import sent_tokenize, PunktSentenceTokenizer
 
 
 def get_adjacent_sentence_similarities(sentences: List[Sentence]) -> List[Tuple[int, int, float]]:
@@ -116,7 +116,59 @@ def setup_nltk() -> None:
         logging.error(f"Error setting up NLTK: {str(e)}")
         # Don't raise the exception, just log it to allow the program to continue
         logging.warning("Continuing without complete NLTK setup")
-    
+
+def split_sentences_with_template(content: str, rag_model) -> Tuple[List[Sentence], List[Union[str, int]]]:
+    """Split text into sentences and non-sentence parts while preserving structure."""
+    try:
+        setup_nltk()
+        
+        # Use PunktSentenceTokenizer directly to get spans
+        tokenizer = PunktSentenceTokenizer()
+        spans = list(tokenizer.span_tokenize(content))
+        
+        # Process content and build structure
+        processed_sentences = []
+        structure = []
+        last_end = 0
+        
+        for start, end in spans:
+            sent = content[start:end].strip()
+            if not sent:
+                continue
+                
+            # Skip code blocks and special content
+            if (sent.startswith('```') or sent.startswith('`') or
+                sent.startswith('#') or sent.startswith('>') or
+                sent.startswith('{') or sent.startswith('[')):
+                continue
+                
+            # Filter out short sentences
+            if len(sent) > 3:
+                # Add preceding non-sentence content
+                preceding_content = content[last_end:start]
+                if preceding_content:
+                    structure.append(preceding_content)
+                
+                # Add sentence index
+                sentence_obj = Sentence(sent, rag_model)
+                processed_sentences.append(sentence_obj)
+                structure.append(len(processed_sentences) - 1)
+                
+                last_end = end
+        
+        # Add remaining non-sentence content after last sentence
+        remaining_content = content[last_end:]
+        if remaining_content:
+            structure.append(remaining_content)
+        
+        return processed_sentences, structure
+        
+    except Exception as e:
+        logging.error(f"Optimized sentence splitting failed: {str(e)}")
+        # Fallback to simple sentence
+        sentence = Sentence(content, rag_model)
+        return [sentence], [0]
+
 def split_sentences_nltk(content: str, rag_model) -> List[Sentence]:
     """Split text into sentences using NLTK tokenizer and filter out short sentences."""
     try:

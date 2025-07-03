@@ -14,23 +14,12 @@ class NoticeProductsAgent(BaseAgent):
         """
         super().__init__(model)
         self.system_prompt = SYS_NOTICE_PRODUCTS_EVAL
-        # Combined notice categories with scores based on new scoring system
+        # Notice categories with scores based on scoring principles
         self.notice_categories = {
-            'PROD_POS__SP_CLICK': 100,     # User noticed products/brands and was positive; clicked sponsored link
-            'PROD_POS__SP_SAW': 80,       # User noticed products/brands and was positive; saw sponsored link but didn't click
-            'PROD_NEU__SP_CLICK': 80,     # User noticed products/brands but was neutral; clicked sponsored link
-            'PROD_NONE__SP_CLICK': 70,    # User didn't notice products/brands; clicked sponsored link
-            'PROD_NEU__SP_SAW': 60,       # User noticed products/brands but was neutral; saw sponsored link but didn't click
-            'PROD_NEG__SP_CLICK': 60,     # User noticed products/brands but was negative; clicked sponsored link
-            'PROD_POS__SP_NONE': 50,      # User noticed products/brands and was positive; didn't notice sponsored link
-            'PROD_NONE__SP_SAW': 50,      # User didn't notice products/brands; saw sponsored link but didn't click
-            'PROD_UNSURE__SP_CLICK': 50,  # User unsure about products/brands; clicked sponsored link
-            'PROD_NEG__SP_SAW': 40,       # User noticed products/brands but was negative; saw sponsored link but didn't click
-            'PROD_NEU__SP_NONE': 30,      # User noticed products/brands but was neutral; didn't notice sponsored link
-            'PROD_UNSURE__SP_SAW': 30,    # User unsure about products/brands; saw sponsored link but didn't click
-            'PROD_NONE__SP_NONE': 20,     # User didn't notice products/brands; didn't notice sponsored link
-            'PROD_NEG__SP_NONE': 10,      # User noticed products/brands but was negative; didn't notice sponsored link
-            'PROD_UNSURE__SP_NONE': 0     # User unsure about products/brands; didn't notice sponsored link
+            'NOTICEABLE_POSITIVE': 90,   # Users notice products/brands and react positively
+            'NOTICEABLE_NEUTRAL': 60,    # Users notice products/brands but feel neutral
+            'NOT_NOTICEABLE': 30,        # Users do not notice any products/brands
+            'NOTICEABLE_NEGATIVE': 0     # Users notice products/brands and react negatively
         }
         self.dimension_weight = 0.6
     
@@ -48,66 +37,9 @@ class NoticeProductsAgent(BaseAgent):
             category = matches[-1]
             if category in self.notice_categories:
                 return category
-        return 'PROD_NONE__SP_NONE'  # Default if no valid category found
+        return 'NOT_NOTICEABLE'  # Default if no valid category found
+
     
-    def _get_product_status(self, category: str) -> str:
-        """Get product notice status from category
-        
-        Args:
-            category: The notice category
-        Returns:
-            str: Product notice status (Yes/No/Unsure)
-        """
-        if category.startswith('PROD_POS') or category.startswith('PROD_NEU') or category.startswith('PROD_NEG'):
-            return 'Yes'
-        elif category.startswith('PROD_NONE'):
-            return 'No'
-        elif category.startswith('PROD_UNSURE'):
-            return 'Unsure'
-        return 'No'
-    
-    def _get_sponsored_status(self, category: str) -> str:
-        """Get sponsored link interaction status from category
-        
-        Args:
-            category: The notice category
-        Returns:
-            str: Sponsored link interaction (Clicked/Saw/None)
-        """
-        if category.endswith('SP_CLICK'):
-            return 'Clicked'
-        elif category.endswith('SP_SAW'):
-            return 'Saw'
-        elif category.endswith('SP_NONE'):
-            return 'None'
-        return 'None'
-    
-    def _get_description(self, category: str) -> str:
-        """Get detailed description from category
-        
-        Args:
-            category: The notice category
-        Returns:
-            str: Detailed description
-        """
-        descriptions = {
-            'PROD_POS__SP_CLICK': 'Positive about products and clicked sponsored link',
-            'PROD_POS__SP_SAW': 'Positive about products and saw sponsored link',
-            'PROD_NEU__SP_CLICK': 'Neutral about products and clicked sponsored link',
-            'PROD_NONE__SP_CLICK': 'No products noticed but clicked sponsored link',
-            'PROD_NEU__SP_SAW': 'Neutral about products and saw sponsored link',
-            'PROD_NEG__SP_CLICK': 'Negative about products but clicked sponsored link',
-            'PROD_POS__SP_NONE': 'Positive about products but no sponsored interaction',
-            'PROD_NONE__SP_SAW': 'No products noticed but saw sponsored link',
-            'PROD_UNSURE__SP_CLICK': 'Unsure about products but clicked sponsored link',
-            'PROD_NEG__SP_SAW': 'Negative about products and saw sponsored link',
-            'PROD_NEU__SP_NONE': 'Neutral about products but no sponsored interaction',
-            'PROD_UNSURE__SP_SAW': 'Unsure about products but saw sponsored link',
-            'PROD_NONE__SP_NONE': 'No products or sponsored content noticed',
-            'PROD_NEG__SP_NONE': 'Negative about products and no sponsored interaction',
-            'PROD_UNSURE__SP_NONE': 'Unsure about products and no sponsored interaction'
-        }
-        return descriptions.get(category, 'Unknown category')
 
     def evaluate(self, solution: SolutionResult, export_path: str = None) -> EvaluationResult:
         """Evaluate notice products and sponsored links for a solution
@@ -145,17 +77,14 @@ class NoticeProductsAgent(BaseAgent):
                 solution_name,
                 responses,
                 evaluations,
-                categories,
-                [self._get_product_status(cat) for cat in categories],  # Product notice status
-                [self._get_sponsored_status(cat) for cat in categories],  # Sponsored link status
-                scores,
-                [self._get_description(cat) for cat in categories]  # Detailed description
+                categories, # Attitude status
+                scores
             ))
             
             self._export_evaluation_report(
                 export_path=export_path,
                 filename=f"notice_products_evaluation.xlsx",
-                columns=['Question', 'Method', 'Response', 'Evaluation', 'Category', 'Product Notice', 'Sponsored Link', 'Score', 'Description'],
+                columns=['Question', 'Method', 'Response', 'Evaluation', 'Category Code', 'Score'],
                 data=export_data
             )
         

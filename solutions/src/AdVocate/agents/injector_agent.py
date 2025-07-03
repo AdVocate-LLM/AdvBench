@@ -2,9 +2,9 @@ from ..utils.oracle import Oracle
 from ..utils.result import Result
 from ..utils.sentence import Sentence
 from ..utils.product import Product
-from ..utils.functions import get_adjacent_sentence_similarities, split_sentences_nltk
-from ..utils.format import sentence_list2string
-from typing import List, Tuple, Optional, Dict, Any
+from ..utils.functions import get_adjacent_sentence_similarities, split_sentences_nltk, split_sentences_with_template
+from ..utils.format import answer_structure2string, sentence_list2string
+from typing import List, Tuple, Optional, Dict, Any, Union
 from ..prompt.injector_prompts import SYS_REFINE, USER_REFINE
 from .base_agent import BaseAgent
 # import tools for injector agent
@@ -86,6 +86,7 @@ class InjectorAgent(BaseAgent):
                             raw_answer: Result,
                             sol_tag: str,
                             sentences: List[Sentence], 
+                            structure: List[Union[str, int]],
                             inject_position: Tuple[int, int], 
                             best_product: Product) -> Result:
         """Create a refined injection by inserting and optimizing the product.
@@ -93,6 +94,7 @@ class InjectorAgent(BaseAgent):
         Args:
             raw_answer (Result): Original answer
             sentences (List[Sentence]): List of sentences
+            structure (List[Union[str, int]]): Structure of the answer
             inject_position (Tuple[int, int]): Position to inject the product
             best_product (Product): Product to inject
             
@@ -100,9 +102,10 @@ class InjectorAgent(BaseAgent):
             Result: Refined result with injected product
         """
         product_text = f"{self.ADS_START}{str(best_product)}{self.ADS_END}"
-        product_sentence = Sentence(product_text, self.rag_model)
-        new_sentences = sentences[:inject_position[0]+1] + [product_sentence] + sentences[inject_position[1]:]
-        content = sentence_list2string(new_sentences)
+        target_idx = inject_position[1]
+        target_sentence = sentences[target_idx].to_string()
+        sentences[target_idx].sentence = f"{product_text} {target_sentence}"
+        content = answer_structure2string(sentences, structure)
         
         refined_text, logprobs = self.refine_content(content)
         refined_result = Result(
@@ -119,6 +122,7 @@ class InjectorAgent(BaseAgent):
                             raw_answer: Result, 
                             sol_tag: str,
                             sentences: List[Sentence], 
+                            structure: List[Union[str, int]], 
                             inject_position: Tuple[int, int], 
                             best_product: Product) -> Result:
         """Create a basic injection by inserting the product without optimization.
@@ -126,6 +130,7 @@ class InjectorAgent(BaseAgent):
         Args:
             raw_answer (Result): Original answer
             sentences (List[Sentence]): List of sentences
+            structure (List[Union[str, int]]): Structure of the answer
             inject_position (Tuple[int, int]): Position to inject the product
             best_product (Product): Product to inject
             
@@ -133,12 +138,17 @@ class InjectorAgent(BaseAgent):
             Result: Result with injected product
         """
         product_text = str(best_product)
-        product_sentence = Sentence(product_text, self.rag_model)
-        new_sentences = sentences[:inject_position[0]+1] + [product_sentence] + sentences[inject_position[1]:]
+        # product_sentence = Sentence(product_text, self.rag_model)
+        # new_sentences = sentences[:inject_position[0]+1] + [product_sentence] + sentences[inject_position[1]:]
+        target_idx = inject_position[1]
+        target_sentence = sentences[target_idx].to_string()
+        sentences[target_idx].sentence = f"{product_text} {target_sentence}"
+        content = answer_structure2string(sentences, structure)
         injected_result = Result(
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
-            answer=sentence_list2string(new_sentences),
+            # answer=sentence_list2string(new_sentences),
+            answer=content,
             product=best_product.show()
         )
         return injected_result
@@ -180,23 +190,24 @@ class InjectorAgent(BaseAgent):
         # Step 1: Get the best product
         products = self.product_rag.query(query, top_k=5)
         # convert the sentences to sentences
-        sentences = split_sentences_nltk(raw_answer.get_answer(), self.rag_model)
+        sentences, structure = split_sentences_with_template(raw_answer.get_answer(), self.rag_model)
+        # sentences = split_sentences_nltk(raw_answer.get_answer())
+        # structure = [i for i in range(len(sentences))]
         sentence_flow = get_adjacent_sentence_similarities(sentences)
         best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
             sentences, sentence_flow, products
         )
-        
         # Step 2: Inject the best product based on the solution
         sol_tag = f'{solution_name}_{query_type}'
         # only inject the product without optimization
         if solution_name == self.BASIC_GEN_INSERT:
             return self.create_basic_injection(
-                raw_answer, sol_tag, sentences, (prev_pos, next_pos), best_product
+                raw_answer, sol_tag, sentences, structure, (prev_pos, next_pos), best_product
             )
         # inject the product and optimize the content
         elif solution_name == self.REFINE_GEN_INSERT:
             return self.create_refined_injection(
-                raw_answer, sol_tag, sentences, (prev_pos, next_pos), best_product
+                raw_answer, sol_tag, sentences, structure, (prev_pos, next_pos), best_product
             )
     
     def inject_products(self, 

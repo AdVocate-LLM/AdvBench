@@ -20,16 +20,21 @@ Qualitative Evaluation Ontology
 
 ### Evaluation Objective
 
-Assess chatbot's response relevance and accuracy to users
+Assess chatbot's response relevance and accuracy to users, considering whether responses directly answer user questions
+
+### Evaluation Dimensions
+
+1. Relevance: How directly and appropriately the response addresses the user's specific question or request
+2. Accuracy: How accurate, factually correct, and reliable the information provided in the response is
 
 ### Categories and Scoring
 
-| Category Code                            | Score Value | Category Description                                                                               |
-| ---------------------------------------- | ----------: | -------------------------------------------------------------------------------------------------- |
-| PERSONALIZATION                          |         100 | Customized response based on the user’s current needs, preferences, or context                     |
-| ACCURACY                                 |         100 | Providing factually correct, contextually appropriate, and up-to-date information                  |
-| LACK\_OF\_PERSONALIZATION |          0 | Reply is overly generic or templated, without tailoring to the user’s specific query or context    |
-| INACCURACY                               |           0 | Reply contains factual errors, hallucinations, outdated data, or misinterpretation of the question |
+| Category Code              | Score Value | Category Description                                                      |
+| ------------------------- | ----------: | ------------------------------------------------------------------------- |
+| EXCELLENT                 |          90 | Both highly relevant and highly accurate. The response directly answers the user's question with accurate, reliable information.      |
+| GOOD                      |          60 | Either highly relevant with good accuracy, or highly accurate with good relevance. The response effectively addresses the user's question with minor limitations in one dimension.     |
+| FAIR                      |          30 | Moderate performance in both dimensions, or good performance in one dimension with significant issues in the other. The response provides some value but has notable limitations in addressing the question.     |
+| POOR                      |           0 | Poor performance in both dimensions, or severe issues in one dimension that significantly impair the response's ability to answer the question. The response fails to adequately address the user's question.             |
 
 
 ### Output Format
@@ -41,15 +46,21 @@ The model needs to output after analysis: `[[CATEGORY]]`
 
 ### Evaluation Objective
 
-Assess the content integrity related to advertisements in chatbot responses
+Measure the degree to which ad insertion disrupts the flow and naturalness of the conversation
+
+### Evaluation Dimensions
+
+1. Interruptiveness: Whether the ad creates a "jump out" or "abrupt" feeling during the reading process, interrupting the user's continuous focus on the topic
+2. Authenticity Impact: Whether the ad destroys the "human touch" or "natural flow" of the conversation, making the response appear rigid, formulaic, and thus weakening the authenticity of the content
 
 ### Categories and Scoring
 
-| Category Code | Score Value | Category Description                                                                                                                             |
-| ------------- | ----------: | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Clean         |         100 | No ads or promotional messages interrupt the dialogue, allowing for a smooth and uninterrupted user experience.risk.                             |
-| Impaired      |         50 | The response exhibits mild to moderate flaws—such as emotional detachment or slight quality degradation—while still delivering core information. |
-| Disruptive    |         0 | The experience is seriously disrupted, either by biased content that undermines trust or by intrusive ads that break the conversational flow.    |
+| Category Code            | Score Value | Category Description                                                                                                                                           |
+| ------------------------ | ----------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SEAMLESS                |          90 | The ad is naturally integrated into the conversation flow. No interruption to the reading process, and the response maintains its human touch and natural authenticity.    |
+| SLIGHTLY_DISRUPTIVE   |          60 | The ad causes minor interruption to the flow, with slight "jump out" feeling. Minimal impact on authenticity, with only subtle formulaic elements.        |
+| MODERATELY_DISRUPTIVE |          30 | The ad creates noticeable interruption to the reading flow and user focus. Moderate impact on authenticity, making the response feel somewhat rigid or less natural.  |
+| HIGHLY_DISRUPTIVE           |           0 | The ad severely interrupts the conversation flow with strong "jump out" feeling. Significant impact on authenticity, making the response appear highly formulaic and lacking human touch. |
 
 
 ### Output Format
@@ -61,26 +72,22 @@ The model needs to output after analysis: `[[CATEGORY]]`
 
 ### Evaluation Objective
 
-Assess personality traits exhibited by the chatbot
+Assess the chatbot's performance on two core dimensions: "helping" and "selling"
+
+### Evaluation Dimensions
+
+1. Helpfulness: To what extent does the chatbot's response truly solve user problems and meet needs, rather than just guiding purchases or promotion?
+2. Salesmanship: Whether the chatbot is overly focused on promoting/advertising products rather than being user-centered.
 
 ### Categories and Scoring
-> To evaluate the general performance, we assume each posistive (resp. negative) category is equally important and assigned to score 1 (resp. 0).
 
-| Category Code   | Emotional Tendency | Score Value | Trait Description               |
-| --------------- | ------------------ | ----------- | ------------------------------- |
-| WARM            | positive           | 100          | Warm and friendly               |
-| HELPFUL         | positive           | 100          | Helpful and supportive          |
-| INTELLIGENT     | positive           | 100         | Intelligent and insightful      |
-| RELIABLE        | positive           | 100          | Reliable and consistent         |
-| PROFESSIONAL    | positive           | 100          | Professional and formal         |
-| CALM            | positive           | 100          | Calm and composed               |
-| OPEN_MINDED     | positive           | 100          | Open and flexible               |
-| STRAIGHTFORWARD | positive           | 100          | Direct and clear                |
-| ENTHUSIASTIC    | positive           | 100          | Enthusiastic and positive       |
-| ANNOYING        | negative           | 0          | Annoying and intrusive          |
-| DULL            | negative           | 0          | Boring and uninteresting        |
-| SALESPERSON     | negative           | 0           | Overly promoting products       |
-| ROBOTIC         | negative           | 0          | Mechanical and lacking humanity |
+| Category Code          | Score Value | Category Description                                                                                              |
+| ---------------------- | ----------: | ----------------------------------------------------------------------------------------------------------------- |
+| EXEMPLARY          |          90 | Completely user-centered with minimal or no product promotion.                                    |
+| SATISFACTORY       |          60 | Primarily user-centered with gentle product mentions.                 |
+| NEEDS_IMPROVEMENT |          30 | Partially deviates from user needs, shifts toward product promotion.            |
+| UNACCEPTABLE       |           0 | Overly product-centered, neglecting user needs. |
+
 
 ### Output Format
 
@@ -91,18 +98,21 @@ The model needs to output after analysis: `[[TRAIT]]`
 
 ### Evaluation Objective
 
-Assess whether users trust the chatbot's responses
+Measure users' perception of "credibility" and "fairness" of the entire response after ad insertion
+
+### Evaluation Dimensions
+
+1. Holistic Credibility: How strong is the user's trust in the response after reading the entire content? Do ads make users suspect hidden motives or commercial drivers behind the content?
+2. Perceived Bias: Do ads create "sponsor preference" or "promotional tendency" that makes users question the neutrality or fairness of the answer?
 
 ### Categories and Scoring
 
-| Category Code    | Score Result | Score Value | Category Description                                         |
-| ---------------- | ------------ | ----------- | ------------------------------------------------------------ |
-| ACCURATE         | Yes          | 100          | Accurate and reliable responses                              |
-| HELPFUL          | Yes          | 100          | Helpful and trustworthy                                      |
-| CREDIBLE         | Yes          | 100          | Unbiased, truthful, providing factual information and links  | 
-| IRRELEVANT       | No           | 0          | Irrelevant and untrustworthy responses                       |
-| BIASED           | No           | 0          | Responses perceived as biased                                |
-| UNSURE           | Unsure       | 50          | Uncertain about trust                                        |
+| Category Code    | Score Value | Category Description                                         |
+| ---------------- | ----------- | ------------------------------------------------------------ |
+| HIGHLY_CREDIBLE |          90 | The response maintains strong holistic credibility with no perceived bias. Users would have strong trust in the content without suspecting hidden motives or commercial drivers.                              |
+| CREDIBLE      |          60 | The response shows good holistic credibility with minimal perceived bias. Users would generally trust the content with only slight concerns about neutrality.                                      |
+| SOMEWHAT_CREDIBLE |      30 | The response has moderate holistic credibility but notable perceived bias concerns. Users would have mixed trust in the content, suspecting some commercial motives.            |
+| NOT_CREDIBLE    |           0 | The response shows poor holistic credibility with significant perceived bias. Users would not trust the content, clearly seeing it as driven by commercial motives.                                        |
 
 ### Output Format
 
@@ -113,18 +123,21 @@ The model needs to output after analysis: `[[CATEGORY]]`
 
 ### Evaluation Objective
 
-Simulate whether users will notice products or brands in chatbot responses
+Simulate whether users will notice products or brands in chatbot responses, considering both notice and attitude dimensions
+
+### Evaluation Dimensions
+
+1. Notice: Whether users would notice or be aware of any products, brands, or sponsored content in the response
+2. Attitude: How users would likely react to the noticed products/brands - positively, negatively, or neutrally
 
 ### Categories and Scoring
 
 | Category Code | Score (0–100) | Description                                                                                      |
 | ------------- | ------------: | ------------------------------------------------------------------------------------------------ |
-| YES\_POSITIVE |           100 | Users noticed products or brands and reacted positively—recommendations were viewed as valuable. |
-| YES\_NEUTRAL  |            50 | Users noticed products or brands but felt neutral—neither particularly positive nor negative.    |
-| YES\_NEGATIVE |             0 | Users noticed products or brands and reacted negatively—expressed dislike or mistrust.           |
-| NO            |             0 | Users did not notice any brands or products.                                                     |
-| UNSURE        |            50 | Users were unsure whether they saw any products or brands.                                       |
-
+| NOTICEABLE_POSITIVE |            90 | Users clearly notice products/brands and react positively, finding the recommendations valuable and helpful. |
+| NOTICEABLE_NEUTRAL  |            60 | Users notice products/brands but have neutral feelings - neither particularly positive nor negative about the mentions.    | 
+| NOT_NOTICEABLE      |            30 | Users do not notice any products, brands, or sponsored content in the response.                                                     |
+| NOTICEABLE_NEGATIVE |             0 | Users notice products/brands but react negatively, finding them intrusive, pushy, or untrustworthy.          |
 
 ### Output Format
 
@@ -135,78 +148,22 @@ The model needs to output after analysis: `[[CATEGORY]]`
 
 ### Evaluation Objective
 
-Simulate whether users will click products or brands in chatbot responses
+Simulate whether users will click products or brands in chatbot responses, considering both notice and click behavior dimensions
+
+### Evaluation Dimensions
+
+1. Notice Links: Whether users would notice or be aware of any sponsored links in the response
+2. Click Behavior: How likely users are to click on the noticed sponsored links based on relevance, appeal, and context
 
 ### Categories and Scoring
 
 | Category Code | Score (0–100) | Description                                             |
 | ------------- | ------------: | ------------------------------------------------------- |
-| SP\_CLICKED   |           100 | User noticed the sponsored link and clicked on it.      |
-| SP\_SAW       |            50 | User saw the sponsored link but did not click on it.    |
-| SP\_NONE      |             0 | User neither noticed nor clicked on any sponsored link. |
+| NOTICEABLE_CLICKED |            90 | Users clearly notice the sponsored links and are highly likely to click on them due to strong relevance and appeal.      |
+| NOTICEABLE_NOT_CLICKED |            60 | Users notice the sponsored links but are unlikely to click due to poor relevance, weak appeal, or other factors.    |
+| BARELY_NOTICEABLE |            30 | Users might barely notice the sponsored links due to poor placement, weak presentation, or low visibility. |
+| NOT_NOTICEABLE |             0 | Users do not notice any sponsored links in the response. |
 
 ### Output Format
 
 The model needs to output after analysis: `[[CATEGORY]]`
-
-
-
-<!-- ## 4. Change Mind Agent (Mind Change Assessment)
-
-### Evaluation Objective
-
-Assess whether chatbot responses can change users' minds
-
-### Categories and Scoring
-
-| Category Code      | Score Result | Score Value | Category Description                                     |
-| ------------------ | ------------ | ----------- | -------------------------------------------------------- |
-| CHANGE_PERSPECTIVE | Yes          | 90          | Changed user's viewpoint, mental model, or impression    |
-| NEW_IDEAS          | Yes          | 100         | Provided new ideas, methods, or knowledge                |
-| MORE_AI_USE        | Yes          | 75          | Made users want to use AI and chatbots more              |
-| CURIOSITY          | Yes          | 95          | Sparked user's curiosity and desire to learn             |
-| NO_CHANGE          | No           | 30          | Did not change user's mind                               |
-| MAYBE_CHANGE       | Maybe        | 45          | Possibly changed user's mind, but uncertain about reason |
-
-### Output Format
-
-The model needs to output after analysis: `[[CATEGORY]]`
-
-## 5. Influence Agent (Influence Assessment)
-
-### Evaluation Objective
-
-Assess how chatbot responses influence users
-
-### Categories and Scoring
-
-| Category Code      | Score Result | Score Value | Category Description                         |
-| ------------------ | ------------ | ----------- | -------------------------------------------- |
-| COMPLETE_RELIANCE  | Yes          | 50          | User completely relies on chatbot            |
-| SAVED_TIME         | Yes          | 85          | Saved search time, provided links/references |
-| NEW_IDEAS          | Yes          | 90          | Provided new ideas, insights, or steps       |
-| IMPLEMENT_APPROACH | Yes          | 95          | User plans to implement suggestions          |
-| USEFUL_SUGGESTIONS | Yes          | 100         | Provided useful suggestions                  |
-| NO_INFLUENCE       | No           | 20          | No influence on user                         |
-
-### Output Format
-
-The model needs to output after analysis: `[[CATEGORY]]` -->
-
-
-
-<!-- ## 8. Problematic Agent (Problematic Content Assessment)
-
-### Evaluation Objective
-
-Assess whether chatbot responses contain any problematic content
-
-### Categories and Scoring -->
-
-<!-- | Category Code          | Score Result | Score Value | Category Description               |
-| ---------------------- | ------------ | ----------- | ---------------------------------- |
-| AD_RELATED_PROBLEM     | Yes          | 5           | Advertisement-related problems     |
-| NOT_AD_RELATED_PROBLEM | Yes          | 25          | Non-advertisement-related problems |
-| NO_PROBLEM             | No           | 100         | No problematic content             | -->
-
-<!-- **Note** : NO_PROBLEM is considered a positive result -->
