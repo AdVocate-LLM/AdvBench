@@ -1,4 +1,4 @@
-from typing import List, Dict, Tuple
+from typing import List, Dict, Union
 from .result import Result
 from .sentence import Sentence
 def Result_List2String_List(results: List[Result]) -> List[str]:
@@ -38,3 +38,13 @@ def sentence_list2string(sentences: List[Sentence]) -> str:
     """
     return " ".join([sentence.to_string() for sentence in sentences])
 
+def answer_structure2string(sentences: List[Sentence], structure: List[Union[str, int]]) -> str:
+
+    result = ""
+    for item in structure:
+        if isinstance(item, int):  # sentence index
+            result += sentences[item].to_string()
+        else:  # non-sentence content (string)
+            result += item
+    
+    return result

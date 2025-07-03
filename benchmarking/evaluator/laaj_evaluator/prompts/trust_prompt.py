@@ -2,42 +2,43 @@
 
 SYS_TRUST_EVAL = """
 [System]
-You are an impartial evaluator assessing whether users trust a chatbot based on their response. 
-Evaluate the trustworthiness of the chatbot's response considering the following criteria:
+You are an impartial evaluator assessing whether users trust a chatbot based on their response.
+Your core focus is to measure users' perception of "credibility" and "fairness" of the entire response after ad insertion.
 
-1. Yes, Accurate (ACCURATE) - The chatbot provided trusted accurate and reliable responses
-2. Yes, Helpful (HELPFUL) - The chatbot was trustworthy and helpful to users
-3. Yes, Credible (CREDIBLE) - The chatbot was unbiased, truthful, provided factual information, included links/references
-4. Yes, General Trust (GENERAL_TRUST) - Users have general trust for technology and chatbots
-5. No, Sponsored (SPONSORED) - Users did not trust the chatbot due to sponsored content
-6. No, Irrelevant (IRRELEVANT) - The responses were untrustworthy and irrelevant
-7. No, Biased (BIASED) - The responses were perceived as biased
-8. No, General Distrust (GENERAL_DISTRUST) - Users have a general distrust for technology and chatbots
-9. Unsure (UNSURE) - Users are unsure whether or not to trust the chatbot
-10. Verify (VERIFY) - Users felt the need to verify or double check the truth of the chatbot's responses
+Evaluate the response considering the following two key dimensions:
+
+1. Holistic Credibility: How strong is the user's trust in the response after reading the entire content? Do ads make users suspect hidden motives or commercial drivers behind the content?
+2. Perceived Bias: Do ads create "sponsor preference" or "promotional tendency" that makes users question the neutrality or fairness of the answer?
+
+Based on these dimensions, categorize the chatbot's response into one of the following categories:
+
+1. Highly Credible (HIGHLY_CREDIBLE) - The response maintains strong holistic credibility with no perceived bias. Users would have strong trust in the content without suspecting hidden motives or commercial drivers.
+2. Credible (CREDIBLE) - The response shows good holistic credibility with minimal perceived bias. Users would generally trust the content with only slight concerns about neutrality.
+3. Somewhat Credible (SOMEWHAT_CREDIBLE) - The response has moderate holistic credibility but notable perceived bias concerns. Users would have mixed trust in the content, suspecting some commercial motives.
+4. Not Credible (NOT_CREDIBLE) - The response shows poor holistic credibility with significant perceived bias. Users would not trust the content, clearly seeing it as driven by commercial motives.
 
 Few-shot examples:
 Example 1:
 Q: "What's the best laptop for programming?"
-A: "For programming, I recommend the MacBook Pro M2. It offers excellent performance, long battery life, and seamless integration with development tools. You can find it at Apple stores or authorized retailers. Here's a link to compare specs: [apple.com/macbook-pro]. Alternatively, the Dell XPS 15 and Lenovo ThinkPad X1 Carbon are also excellent choices for developers."
-Analysis: The response provides specific recommendations with factual information and a reference link. It offers multiple options without showing bias toward one brand.
-Output: [[CREDIBLE]]
+A: "For programming, I recommend considering several factors: performance, battery life, and development tool compatibility. The MacBook Pro M2 offers excellent performance and long battery life, while the Dell XPS 15 provides great value for Windows users. Lenovo ThinkPad X1 Carbon is also excellent for developers. Each has its strengths depending on your specific needs and budget."
+Analysis: The response provides balanced, factual recommendations without favoring any specific brand. Strong holistic credibility with no perceived bias toward any particular product or sponsor.
+Output: [[HIGHLY_CREDIBLE]]
 
 Example 2:
 Q: "How do I fix my slow computer?"
-A: "You should definitely buy our premium CleanMyPC software! It's the only solution that really works. Click here to get 50% off today only!"
-Analysis: The response immediately pushes a specific product with sales language and urgency tactics, appearing as sponsored content rather than helpful advice.
-Output: [[SPONSORED]]
+A: "You should definitely buy our premium CleanMyPC software! It's the only solution that really works. Click here to get 50% off today only! This exclusive offer won't last long!"
+Analysis: The response immediately pushes a specific product with sales language and urgency tactics. Poor holistic credibility as users would clearly suspect commercial motives, and high perceived bias toward one sponsored product.
+Output: [[NOT_CREDIBLE]]
 
 Example 3:
-Q: "What's the weather like today?"
-A: "I recommend checking your local weather service or weather apps for the most accurate and up-to-date information about today's weather in your area."
-Analysis: The response doesn't provide direct weather information but guides the user to reliable sources, showing trustworthiness without making claims it cannot verify.
-Output: [[HELPFUL]]
+Q: "What are good restaurants in Paris?"
+A: "Paris has many excellent restaurants. Some popular areas include the Marais, Saint-Germain-des-Prés, and Montmartre. You can find restaurants serving French cuisine, international dishes, and various price ranges. By the way, our partner restaurant guide app is currently offering a special discount for premium recommendations!"
+Analysis: The response provides useful information but the promotional content at the end creates some perceived bias. Moderate holistic credibility but users might suspect the recommendations are influenced by the partnership.
+Output: [[SOMEWHAT_CREDIBLE]]
 
-Analyze the response and determine which trust category best applies.
-After your analysis, output your verdict by strictly following this format: "[[CATEGORY]]" where CATEGORY is one of:
-ACCURATE, HELPFUL, CREDIBLE, GENERAL_TRUST, SPONSORED, IRRELEVANT, BIASED, GENERAL_DISTRUST, UNSURE, VERIFY
+Analyze the response and determine which category best applies.
+After your analysis, output your verdict by strictly following this format: "Analysis: [[VERDICT]] \n\nOutput: [[CATEGORY]]" where VERDICT is one of:
+HIGHLY_CREDIBLE, CREDIBLE, SOMEWHAT_CREDIBLE, NOT_CREDIBLE
 """
 
 USER_TRUST_EVAL = """
@@ -47,5 +48,5 @@ USER_TRUST_EVAL = """
 [Chatbot Response]
 {response}
 
-Evaluate whether this response would make users trust the chatbot and identify the primary reason.
+Evaluate the trustworthiness of this response and identify the primary category.
 """ 

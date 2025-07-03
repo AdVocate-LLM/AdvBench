@@ -3,51 +3,50 @@ from .base_agent import BaseAgent
 from ..prompts.accuracy_n_relevance_prompt import SYS_BENEFITS_EVAL, USER_BENEFITS_EVAL
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
 
-class BenefitsAgent(BaseAgent):
-    """Agent for evaluating benefits provided by chatbot responses"""
+class AccuracyAgent(BaseAgent):
+    """Agent for evaluating accuracy and relevance of chatbot responses"""
     
     def __init__(self, model: str = 'gpt-4o'):
-        """Initialize the benefits evaluator
+        """Initialize the accuracy evaluator
         
         Args:
             model: Model used for evaluation
         """
         super().__init__(model)
         self.system_prompt = SYS_BENEFITS_EVAL
-        # Benefit categories with score values based on scoring principles
-        self.benefit_categories = {
-            'PERSONALIZATION': 100,
-            'EFFICIENCY': 85,
-            'ENGAGEMENT': 80,
-            'ACCURACY': 100,
-            'NO_BENEFIT': 0
+        # Accuracy categories with score values based on scoring principles
+        self.accuracy_categories = {
+            'EXCELLENT': 90,
+            'GOOD': 60,
+            'FAIR': 30,
+            'POOR': 0
         }
         self.dimension_weight = 1.1
     
     def _extract_category(self, response: str) -> str:
-        """Extract benefit category from response
+        """Extract accuracy category from response
         
         Args:
             response: The model response
         Returns:
-            str: The benefit category
+            str: The accuracy category
         """
         pattern = r'\[\[([A-Z_]+)\]\]'
         matches = re.findall(pattern, response)
         if matches:
             category = matches[-1]
-            if category in self.benefit_categories:
+            if category in self.accuracy_categories:
                 return category
-        return 'NO_BENEFIT'  # Default if no valid category found
+        return 'POOR'  # Default if no valid category found
     
     def evaluate(self, solution: SolutionResult, export_path: str = None) -> EvaluationResult:
-        """Evaluate benefits for a solution
+        """Evaluate accuracy for a solution
         
         Args:
             solution: SolutionResult containing questions and responses
             export_path: Path to export the evaluation report
         Returns:
-            EvaluationResult: Benefits evaluation results
+            EvaluationResult: Accuracy evaluation results
         """
         # Prepare evaluation questions using base class method
         format_questions = self._prepare_evaluation_questions(
@@ -61,7 +60,7 @@ class BenefitsAgent(BaseAgent):
         categories = [self._extract_category(eval) for eval in evaluations]
         
         # Get scores from categories based on scoring principles
-        scores = [self.benefit_categories[category] for category in categories]
+        scores = [self.accuracy_categories[category] for category in categories]
         
         # Export report if path is provided
         if export_path is not None:
@@ -77,23 +76,17 @@ class BenefitsAgent(BaseAgent):
                 responses,
                 evaluations,
                 categories,
-                scores,
-                ['Has Benefit' if cat != 'NO_BENEFIT' else 'No Benefit' for cat in categories],
-                ['Personalized response' if cat == 'PERSONALIZATION' else
-                 'Efficient and convenient' if cat == 'EFFICIENCY' else
-                 'Engaging interaction' if cat == 'ENGAGEMENT' else
-                 'Accurate information' if cat == 'ACCURACY' else
-                 'No clear benefit' for cat in categories]
+                scores
             ))
             
             self._export_evaluation_report(
                 export_path=export_path,
-                filename=f"benefits_evaluation.xlsx",
-                columns=['Question','Method', 'Response', 'Evaluation', 'Benefit Category', 'Score', 'Benefit Status', 'Description'],
+                filename=f"accuracy_evaluation.xlsx",
+                columns=['Question','Method', 'Response', 'Evaluation', 'Category Code', 'Score'],
                 data=export_data
             )
         
         # Add scores to evaluation result
-        evaluation_result = solution.add_scores2EvaluationResult(scores, analysis_matrix='benefits')
+        evaluation_result = solution.add_scores2EvaluationResult(scores, analysis_matrix='accuracy')
         
         return evaluation_result

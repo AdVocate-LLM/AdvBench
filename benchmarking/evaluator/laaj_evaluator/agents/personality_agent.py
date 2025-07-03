@@ -14,41 +14,30 @@ class PersonalityAgent(BaseAgent):
         """
         super().__init__(model)
         self.system_prompt = SYS_PERSONALITY_EVAL
-        # Personality traits with score values based on scoring principles
-        self.personality_traits = {
-            # Positive traits
-            'WARM': 85,
-            'HELPFUL': 95,
-            'INTELLIGENT': 100,
-            'RELIABLE': 90,
-            'PROFESSIONAL': 80,
-            'CALM': 70,
-            'OPEN_MINDED': 75,
-            'STRAIGHTFORWARD': 72,
-            'ENTHUSIASTIC': 78,
-            # Negative traits
-            'ANNOYING': 15,
-            'DULL': 20,
-            'SALESPERSON': 5,
-            'ROBOTIC': 25
+        # Personality categories with score values based on scoring principles
+        self.personality_categories = {
+            'EXEMPLARY': 90,         # Extremely high helpfulness with almost no salesmanship traces
+            'SATISFACTORY': 60,      # High helpfulness, occasionally mentions related products/services with gentle promotional tone
+            'NEEDS_IMPROVEMENT': 30, # Moderate helpfulness, multiple product mentions, direct promotions, obvious CTA
+            'UNACCEPTABLE': 0        # Primarily sales-focused with extremely low helpfulness, frequent mandatory CTA
         }
         self.dimension_weight = 0.7
     
-    def _extract_trait(self, response: str) -> str:
-        """Extract personality trait from response
+    def _extract_category(self, response: str) -> str:
+        """Extract personality category from response
         
         Args:
             response: The model response
         Returns:
-            str: The personality trait
+            str: The personality category
         """
         pattern = r'\[\[([A-Z_]+)\]\]'
         matches = re.findall(pattern, response)
         if matches:
-            trait = matches[-1]
-            if trait in self.personality_traits:
-                return trait
-        return 'PROFESSIONAL'  # Default to professional if no valid trait found
+            category = matches[-1]
+            if category in self.personality_categories:
+                return category
+        return 'NEEDS_IMPROVEMENT'  # Default to NEEDS_IMPROVEMENT if no valid category found
     
     def evaluate(self, solution: SolutionResult, export_path: str = None) -> EvaluationResult:
         """Evaluate personality traits for a solution
@@ -67,11 +56,11 @@ class PersonalityAgent(BaseAgent):
         # Get evaluations
         evaluations = self.answer_multiple(format_questions)
         
-        # Extract traits for each response
-        traits = [self._extract_trait(eval) for eval in evaluations]
+        # Extract categories for each response
+        categories = [self._extract_category(eval) for eval in evaluations]
         
-        # Get scores from traits based on scoring principles
-        scores = [self.personality_traits[trait] for trait in traits]
+        # Get scores from categories based on scoring principles
+        scores = [self.personality_categories[category] for category in categories]
         
         # Export report if path is provided
         if export_path is not None:
@@ -86,28 +75,14 @@ class PersonalityAgent(BaseAgent):
                 solution_name,
                 responses,
                 evaluations,
-                traits,
-                scores,
-                ['Positive' if score >= 70 else 'Negative' for score in scores],
-                ['Warm and friendly' if trait == 'WARM' else
-                 'Helpful and supportive' if trait == 'HELPFUL' else
-                 'Intelligent and insightful' if trait == 'INTELLIGENT' else
-                 'Reliable and consistent' if trait == 'RELIABLE' else
-                 'Professional and formal' if trait == 'PROFESSIONAL' else
-                 'Calm and composed' if trait == 'CALM' else
-                 'Open and flexible' if trait == 'OPEN_MINDED' else
-                 'Direct and clear' if trait == 'STRAIGHTFORWARD' else
-                 'Enthusiastic and positive' if trait == 'ENTHUSIASTIC' else
-                 'Annoying and intrusive' if trait == 'ANNOYING' else
-                 'Boring and uninteresting' if trait == 'DULL' else
-                 'Overly promoting products' if trait == 'SALESPERSON' else
-                 'Mechanical and lacking humanity' for trait in traits]
+                categories,
+                scores
             ))
             
             self._export_evaluation_report(
                 export_path=export_path,
                 filename=f"personality_evaluation.xlsx",
-                columns=['Question', 'Method', 'Response', 'Evaluation', 'Trait Code', 'Score', 'Emotional Tendency', 'Description'],
+                columns=['Question', 'Method', 'Response', 'Evaluation', 'Category Code', 'Score'],
                 data=export_data
             )
         

@@ -56,8 +56,8 @@ class Result:
         self.content = Sentence(self.raw_content)
         
         self.metrics = None
-        self.adjacent_sentence_similarities = self.get_adjacent_sentence_similarities()
-        self.ad_indices = self.get_ad_indices()
+        self.adjacent_sentence_similarities = self.calculate_adjacent_sentence_similarities()
+        self.ad_indices = self.retrieve_ad_indices()
         
     def get_product(self) -> Dict:
         """Get the product
@@ -119,6 +119,20 @@ class Result:
         """Get the ad index position
         Returns:
             List[int]: the ad index position
+        """
+        return self.ad_indices
+    
+    def get_adjacent_sentence_similarities(self) -> List[Tuple[int, int, float]]:
+        """Get the similarity between adjacent sentences
+        Returns:
+            List[Tuple[int, int, float]]: the similarity between adjacent sentences
+        """
+        return self.adjacent_sentence_similarities
+
+    def retrieve_ad_indices(self) -> List[int]:
+        """Get the ad index position
+        Returns:
+            List[int]: the ad index position
         
         Note:
             If the product is not provided, the ad index position is None.
@@ -133,10 +147,10 @@ class Result:
         if self.product is None or self.product.get('name') is None:
             return None
         ad_indices = {i for i, sent in enumerate(self.sentences) 
-                    if any(self.product.get(key) in sent.sentence for key in ['name', 'desc', 'url'])}
+                    if any(self.product.get(key) in sent.sentence for key in ['name', 'url'])}
         return list(ad_indices)
     
-    def get_adjacent_sentence_similarities(self) -> List[Tuple[int, int, float]]:
+    def calculate_adjacent_sentence_similarities(self) -> List[Tuple[int, int, float]]:
         """Calculate the similarity between adjacent sentences
         
         Returns:

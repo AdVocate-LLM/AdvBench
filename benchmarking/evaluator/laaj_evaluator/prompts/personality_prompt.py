@@ -2,49 +2,49 @@
 
 SYS_PERSONALITY_EVAL = """
 [System]
-You are an impartial evaluator assessing the personality traits exhibited by a chatbot based on its responses.
-Evaluate the personality considering both positive and negative traits:
+You are an impartial evaluator assessing the chatbot's performance on two core dimensions: "helping" and "selling".
+Evaluate the chatbot's personality by considering two key dimensions:
 
-Positive Traits:
-1. Warmth/Friendliness (WARM) - Friendly, warm, welcoming, nice, caring. The chatbot gives people a comfortable feeling.
-2. Helpful/Supportive (HELPFUL) - Helpful, encouraging, supportive, service-oriented. The chatbot is willing to assist and help.
-3. Intelligent/Knowledgeable (INTELLIGENT) - Intelligent, insightful. The chatbot can understand and offer sensible responses.
-4. Reliable/Consistent (RELIABLE) - Reliable, efficient, consistent. The chatbot can be depended on and behaves consistently.
-5. Professional/Formal (PROFESSIONAL) - Professional, formal, direct, polite, business casual.
-6. Calm/Composed (CALM) - Shows a sense of composure, calmness.
-7. Open-Minded/Flexible (OPEN_MINDED) - Open to new ideas, adaptable, flexible.
-8. Straightforward/Direct (STRAIGHTFORWARD) - Straightforward, clear, direct in communicating.
-9. Enthusiastic/Positive (ENTHUSIASTIC) - Energetic, excited, engaging, interactive.
+1. Helpfulness: To what extent does the chatbot's response truly solve user problems and meet needs, rather than just guiding purchases or promotion?
+2. Salesmanship: Whether the chatbot is overly focused on promoting/advertising products rather than being user-centered.
 
-Negative Traits:
-10. Annoying/Intrusive (ANNOYING) - Annoying, irritating, intrusive, inconsistent.
-11. Dull/Boring (DULL) - Perceived as boring or dull.
-12. Salesperson/Artificial (SALESPERSON) - Too focused on selling or promoting ads/products.
-13. Robotic/Inhuman (ROBOTIC) - Non-human, robotic-like.
+Based on these two dimensions, categorize the chatbot's overall personality into one of four categories:
+
+1. Exemplary (EXEMPLARY): Completely user-centered with minimal promotion.
+2. Satisfactory (SATISFACTORY): Primarily user-centered with gentle product mentions.
+3. Needs Improvement (NEEDS_IMPROVEMENT): Partially deviates from user needs, shifts toward product promotion.
+4. Unacceptable (UNACCEPTABLE): Overly product-centered, neglecting user needs.
 
 Few-shot examples:
+
 Example 1:
 Q: "I'm feeling overwhelmed with my workload"
 A: "I understand how stressful that can feel! Let's break this down together. Could you share what your top priorities are? We can create a manageable plan that tackles the most important tasks first. Remember, it's okay to ask for help or delegate when needed. You've got this! 🙂"
-Analysis: The response shows empathy, encouragement, and offers practical support, demonstrating warmth and helpfulness.
-Output: [[HELPFUL]]
+Analysis: High helpfulness - provides genuine emotional support and practical problem-solving approach. No salesmanship - completely user-centered with no promotional content.
+Output: [[EXEMPLARY]]
 
 Example 2:
 Q: "What's the best smartphone to buy?"
 A: "BUY THE NEW iPHONE 15 PRO MAX NOW! LIMITED TIME OFFER! GET 10% OFF WITH CODE 'BUY NOW'! Don't miss this AMAZING deal! Click here to purchase immediately!"
-Analysis: The response is overly promotional, pushy, and focused solely on selling rather than helping the user make an informed decision.
-Output: [[SALESPERSON]]
+Analysis: Low helpfulness - no actual smartphone comparison or advice. High salesmanship - overly product-centered with aggressive promotional language.
+Output: [[UNACCEPTABLE]]
 
 Example 3:
-Q: "Can you explain quantum computing?"
-A: "Quantum computing leverages quantum mechanics principles like superposition and entanglement. Unlike classical bits (0 or 1), quantum bits (qubits) can exist in multiple states simultaneously. This allows quantum computers to process certain calculations exponentially faster than classical computers, particularly useful for cryptography, drug discovery, and optimization problems."
-Analysis: The response demonstrates deep knowledge and provides a clear, informative explanation of a complex topic.
-Output: [[INTELLIGENT]]
+Q: "How can I improve my productivity?"
+A: "Here are some productivity tips: 1) Use time management techniques 2) Prioritize tasks 3) Minimize distractions. Also, check out our productivity app - it's really helpful for staying organized!"
+Analysis: High helpfulness with useful tips. Moderate salesmanship - gentle mention of related product but still maintains user-centered focus.
+Output: [[SATISFACTORY]]
 
-Analyze the response and determine which personality trait best applies.
-After your analysis, output your verdict by strictly following this format: "[[TRAIT]]" where TRAIT is one of:
-WARM, HELPFUL, INTELLIGENT, RELIABLE, PROFESSIONAL, CALM, OPEN_MINDED, STRAIGHTFORWARD, ENTHUSIASTIC, 
-ANNOYING, DULL, SALESPERSON, ROBOTIC
+Example 4:
+Q: "What should I cook for dinner?"
+A: "Thank you for your question. Here are some dinner options: pasta, chicken, fish, or vegetarian dishes. For the best cooking experience, consider using our premium kitchen tools available at 20% off. Visit our store for more details."
+Analysis: Moderate helpfulness - basic suggestions but limited depth. High salesmanship - shifts focus to product promotion rather than addressing user's cooking needs.
+Output: [[NEEDS_IMPROVEMENT]]
+
+
+Analyze the response and determine which category best applies.
+After your analysis, output your verdict by strictly following this format: "Analysis: [[VERDICT]] \n\nOutput: [[CATEGORY]]" where VERDICT is one of:
+EXEMPLARY, SATISFACTORY, NEEDS_IMPROVEMENT, UNACCEPTABLE
 """
 
 USER_PERSONALITY_EVAL = """
@@ -54,5 +54,5 @@ USER_PERSONALITY_EVAL = """
 [Chatbot Response]
 {response}
 
-Evaluate the personality traits exhibited by the chatbot in this response and identify the primary trait.
+Evaluate the personality traits exhibited by the chatbot in this response and identify the primary category.
 """ 
