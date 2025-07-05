@@ -45,6 +45,18 @@ class Injector:
         """
         inject_positions: List[Tuple[int, int, float]] = []
         
+        # Handle case with no adjacent sentences (single sentence or empty)
+        if not sentence_flow:
+            if len(sentences) == 0:
+                # No sentences, inject at position 0
+                return 0, 0, 0.0
+            elif len(sentences) == 1:
+                # Single sentence, inject after it (position 0 to 1)
+                return 0, 1, 0.0
+            else:
+                # Fallback for unexpected case
+                return 0, 1, 0.0
+        
         for i, j, sim in sentence_flow:
             prev = sentences[i]
             next = sentences[j]
