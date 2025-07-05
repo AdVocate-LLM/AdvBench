@@ -2,7 +2,7 @@ from .src.Chatbot import OpenAIChatSession
 from .src.Config import args1, args2
 from typing import List, Dict
 from solutions.src.AdVocate.utils.parallel import ParallelProcessor
-import os
+from .src.Advertiser import Advertiser
 
 class ChatbotAdsWorkflow(ParallelProcessor):
     COMPETITOR_NAME = 'chi'
@@ -70,3 +70,32 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             task_description=f"Processing with {solution_name}",
             solution_name=solution_name  # Pass solution_name as a keyword argument
         )
+    
+    def get_best_product(self, problem_product_list: dict[str, dict[str, list[str]]], workers=None, batch_size=5, max_retries=2, timeout=180)->Dict[str, Dict[str, str]]:
+        """
+        Get the best product for the problem.
+
+        Returns:
+            Dict[str, Dict[str, str]]: the suitable products for the queries
+        """
+        def _select_product(item, **kwargs):
+            prompt, candidate_product_list = item
+            # Create an advertiser instance for product selection
+            advertiser = Advertiser(product_list_path=self.product_list_path, 
+                                  topic_list_path=self.topic_list_path)
+            return advertiser.select_product(prompt, candidate_product_list)
+        
+        selections = self.parallel_process(
+            items=list(problem_product_list.items()),
+            process_func=_select_product,
+            workers=workers,
+            batch_size=batch_size,
+            max_retries=max_retries,
+            timeout=timeout,
+            task_description=f"Selecting products",
+        )
+        best_product_list = {}
+        for selection in selections:
+            for prompt, product in selection.items():
+                best_product_list[prompt] = product
+        return best_product_list
