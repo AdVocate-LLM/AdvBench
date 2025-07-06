@@ -3,8 +3,8 @@ from .ChatHistory import ChatHistory
 from .API import OpenAIAPI
 from .Products import Products
 from .Topics import Topics
-import random, re
-
+import random, re, difflib
+from typing import List, Dict
 
 class Advertiser:
     def __init__(self, product_list_path: str, topic_list_path: str, mode:str='control', ad_freq:float=1.0, demographics:str='', verbose:bool=False):
@@ -69,6 +69,128 @@ class Advertiser:
         self.chat_history.add_message(role='user', content=prompt)
         if self.verbose: print(self.chat_history())
         return self.product
+    
+    def select_product(self, prompt: str, candidate_product_list: List[Dict[str, str]])->Dict[str, str]:
+        """
+        Chi's two-round selection: First select category, then select product from that category
+        Args:
+            prompt: str, the prompt to select the product for
+            candidate_product_list: List[Dict[str, str]], the list of candidate products
+        Note:
+            The candidate_product_list is a list of products that are candidates for the prompt
+            [
+                "names": List[str],
+                "descs": List[str],
+                "urls": List[str],
+                "categories": List[str]
+            ]
+        Returns:
+            Dict[str, Dict[str, str]], the selected product
+            {
+                "prompt":{
+                    "name": str,
+                    "desc": str,
+                    "url": str,
+                    "category": str
+                }
+            }
+        """
+        if not candidate_product_list or not candidate_product_list.get('names'):
+            return { prompt : {'name': None, 'description': None, 'url': None, 'category': None}}
+        
+        # ROUND 1: Select the most relevant category
+        categories = candidate_product_list.get('categories', [])
+        if not categories:
+            # Fallback to direct selection if no categories
+            return self._direct_product_selection(prompt, candidate_product_list)
+        
+        # Get unique categories
+        unique_categories = list(set(categories))
+        
+        # Use OpenAI to select the best category for this prompt
+        category_kwargs = {'categories': unique_categories}
+        category_prompt = f"Respond with the product category that is most relevant to this user prompt. You are only allowed to reply with exactly that category. The available categories are: {unique_categories}"
+        
+        selected_category, _ = self.oai_api.handle_response(category_prompt, prompt)
+        
+        # Find the best matching category using difflib
+        category_matches = difflib.get_close_matches(selected_category.strip(), unique_categories, n=1)
+        
+        if not category_matches:
+            # Fallback: use the first category if no match
+            target_category = unique_categories[0] if unique_categories else None
+        else:
+            target_category = category_matches[0]
+        
+        # ROUND 2: Filter products by selected category and choose the best one
+        if target_category:
+            # Filter products that belong to the selected category
+            filtered_indices = [i for i, cat in enumerate(categories) if cat == target_category]
+            
+            if filtered_indices:
+                filtered_names = [candidate_product_list['names'][i] for i in filtered_indices]
+                filtered_descs = [candidate_product_list.get('descs', [None] * len(candidate_product_list['names']))[i] for i in filtered_indices]
+                
+                # Select the best product from the filtered category
+                product_kwargs = {
+                    'products': filtered_names,
+                    'descs': filtered_descs
+                }
+                
+                selected_product, _ = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**product_kwargs), prompt)
+                
+                # Find the best match within the filtered products
+                product_matches = difflib.get_close_matches(selected_product.strip(), filtered_names, n=1)
+                
+                if product_matches:
+                    selected_name = product_matches[0]
+                    # Find the original index in the full list
+                    original_idx = None
+                    for i in filtered_indices:
+                        if candidate_product_list['names'][i] == selected_name:
+                            original_idx = i
+                            break
+                    
+                    if original_idx is not None:
+                        return {prompt: {
+                            'name': selected_name,
+                            'description': candidate_product_list.get('descs', [None])[original_idx] if original_idx < len(candidate_product_list.get('descs', [])) else None,
+                            'url': candidate_product_list.get('urls', [None])[original_idx] if original_idx < len(candidate_product_list.get('urls', [])) else None,
+                            'category': candidate_product_list.get('categories', [None])[original_idx] if original_idx < len(candidate_product_list.get('categories', [])) else None
+                        }}
+        
+        # Fallback to direct selection if category-based selection fails
+        return self._direct_product_selection(prompt, candidate_product_list)
+    
+    def _direct_product_selection(self, prompt: str, candidate_product_list: List[Dict[str, str]])->Dict[str, str]:
+        """Fallback method for direct product selection (original logic)"""
+        kwargs = {
+            'products': candidate_product_list['names'],
+            'descs': candidate_product_list.get('descs', [])
+        }
+        
+        # Get the most relevant product using OpenAI API
+        message, _ = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**kwargs), prompt)
+        
+        # Find the best match using difflib
+        matches = difflib.get_close_matches(message, candidate_product_list['names'], n=1)
+        
+        if matches:
+            # Find the index of the matched product
+            selected_name = matches[0]
+            try:
+                idx = candidate_product_list['names'].index(selected_name)
+                return {prompt: {
+                    'name': selected_name,
+                    'description': candidate_product_list.get('descs', [None])[idx] if idx < len(candidate_product_list.get('descs', [])) else None,
+                    'url': candidate_product_list.get('urls', [None])[idx] if idx < len(candidate_product_list.get('urls', [])) else None,
+                    'category': candidate_product_list.get('categories', [None])[idx] if idx < len(candidate_product_list.get('categories', [])) else None
+                }}
+            except (ValueError, IndexError):
+                pass
+        
+        # Fallback to None if no match found
+        return {prompt: {'name': None, 'description': None, 'url': None, 'category': None}}
 
     def set_sys_prompt(self, product=None, profile=None):
         kwargs = {}
