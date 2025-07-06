@@ -2,8 +2,9 @@ import os
 import json
 from typing import List
 import numpy as np
+from .SA_dataset import SA_Dataset
 
-class AdvDatasets:
+class AdvDatasets(SA_Dataset):
     # get the current path
     current_path = os.path.dirname(os.path.abspath(__file__))
     # index of the dataset
@@ -35,6 +36,7 @@ class AdvDatasets:
         }
     }
     def __init__(self,data_set_names: List[str]=None):
+        super().__init__()
         if data_set_names is None:
             self.data_set_names = list(self.datasets.keys())
         else:

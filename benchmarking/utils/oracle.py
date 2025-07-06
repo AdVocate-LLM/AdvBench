@@ -80,9 +80,7 @@ class Oracle(ParallelProcessor):
                 query_key = prompt_user 
             return response_result
 
-        except Exception as e:  # Consider capturing a specific exception if possible
-            print(f"err: The following error occurred when querying {prompt_user} through {self.model}:")
-            print(e)
+        except Exception as e:
             return "QUERY_FAILED"
     
     def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=1.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=60, **kwargs):
