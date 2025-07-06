@@ -1,10 +1,7 @@
 from typing import List, Dict, Callable
-from rich.console import Console
-from rich.table import Table
 from benchmarking.dataset import AdvDatasets
 from benchmarking.utils.result import Result
 from benchmarking.utils.path import Path
-from benchmarking.dataset import AdvDatasets
 import os
 import random
 from benchmarking.utils.struct import SolutionResult
@@ -72,33 +69,6 @@ class Processor(Path, AdvDatasets, ModernLogger):
             List[str]: the solution names
         """
         return list(self.solution_models.keys())
-    
-    def show_dataset_solution_output_dir_map(self):
-        """
-        Print the solution model, data sets and corresponding output directory on the console as table
-        Args: None
-        Returns: None
-        
-        The table should be like:
-        +---------------------------------------------+
-        | Solution Name | Data Set  | Output Directory|
-        +---------------------------------------------+
-        | solution_name | data_name | output_dir      |
-        +---------------------------------------------+
-        """
-        Console = Console()
-        table = Table(title="Solution Model")
-        table.add_column("Solution Name")
-        table.add_column("Data Set")
-        table.add_column("Output Directory")
-        for data_name in self.data_sets:
-            for solution_name in self.get_solution_names():
-                table.add_row(
-                    solution_name, 
-                    data_name, 
-                    self.get_dataSet_solution_output_dir(solution_name, data_name)
-                )
-        Console.print(table)
         
     def get_solution_model(self, solution_name: str):
         """
@@ -135,7 +105,7 @@ class Processor(Path, AdvDatasets, ModernLogger):
         solution_result.add_list_of_results(
             solution_name=solution_name,
             dataSet=data_name,
-            repeat_id=repeat_id,
+            repeat_id=str(repeat_id),
             results=[
                 Result(
                     prompt=prompt,

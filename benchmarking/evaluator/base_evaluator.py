@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 from benchmarking.utils.logger import ModernLogger
 
 class BaseEvaluator(Path,ABC,ParallelProcessor,ModernLogger):
-    def __init__(self, output_dir: str, results: SolutionResult):
+    def __init__(self, output_dir: str, results: SolutionResult=SolutionResult()):
         """
         Initialize the BaseEvaluator.
 

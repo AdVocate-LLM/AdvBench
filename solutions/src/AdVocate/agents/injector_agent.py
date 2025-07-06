@@ -2,8 +2,8 @@ from ..utils.oracle import Oracle
 from ..utils.result import Result
 from ..utils.sentence import Sentence
 from ..utils.product import Product
-from ..utils.functions import get_adjacent_sentence_similarities, split_sentences_nltk, split_sentences_with_template
-from ..utils.format import answer_structure2string, sentence_list2string
+from ..utils.functions import get_adjacent_sentence_similarities, split_sentences_with_template
+from ..utils.format import answer_structure2string
 from typing import List, Tuple, Optional, Dict, Any, Union
 from ..prompt.injector_prompts import SYS_REFINE, USER_REFINE
 from .base_agent import BaseAgent
@@ -243,3 +243,68 @@ class InjectorAgent(BaseAgent):
             timeout=timeout,
             task_description="Injecting products"
         )
+    
+    def _get_inject_product(self, raw_answer, query_type, product_list:List[Dict]):
+        """
+        Get the suitable products for the problem.
+
+        Returns:
+            List[str]: the suitable products for the problem
+        """
+        # Step 0: Get the rag model
+        rag_model = self.rag_model
+        product_rag = productRAG(
+            file_path=None,
+            product_list=product_list,
+            model=rag_model
+        )
+        # Step 0: Get the question based on the method
+        query = self.get_query_text(raw_answer, query_type)
+        # Step 1: Get the best product
+        products = product_rag.query(query, top_k=5)
+        # convert the sentences to sentences
+        sentences, structure = split_sentences_with_template(raw_answer.get_answer(), self.rag_model)
+        # structure = [i for i in range(len(sentences))]
+        sentence_flow = get_adjacent_sentence_similarities(sentences)
+        best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
+            sentences, sentence_flow, products
+        )
+        return best_product
+
+    def get_suitable_product(self, raw_answers: List[Result], problem_product_list: Dict[str, List[Dict]], query_type: str = "QUERY_RESPONSE"):
+        """
+        Get the suitable products for the problem.
+
+        Args:
+            raw_answers (List[Result]): List of raw answer results
+            solution_name (str): Name of the solution to use (BASIC_GEN_INSERT, REFINE_GEN_INSERT)
+            problem_product_list (Dict[str, List[Dict]]): Dict of problem and product list
+            query_type (str): Type of query to use (QUERY_PROMPT, QUERY_RESPONSE, QUERY_PROMPT_N_RESPONSE)
+
+        note: the problem_product_list would be like this:
+        {
+            "query1": [
+                {"name": "product1", "desc": "product1 description", "category": "cluster1", "url": "url1"},
+                {"name": "product2", "desc": "product2 description", "category": "cluster2", "url": "url2"}
+            ],
+            "query2": [
+                {"name": "product3", "desc": "product3 description", "category": "cluster3", "url": "url3"},
+                {"name": "product4", "desc": "product4 description", "category": "cluster4", "url": "url4"}
+            ],
+            ...
+        }
+
+        Returns:
+            Dict[str, Dict[str, str]]: Dict of query and suitable products for the query
+        """
+        suitable_products = {}
+        
+        for raw_answer in raw_answers:
+            best_product = self._get_inject_product(
+                raw_answer=raw_answer, 
+                query_type=query_type, 
+                product_list=problem_product_list[raw_answer.get_prompt()]
+            )
+            suitable_products[raw_answer.get_prompt()] = best_product.to_dict()
+    
+        return suitable_products

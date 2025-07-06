@@ -2,7 +2,7 @@ import json
 from typing import Callable, List, Dict
 from benchmarking.evaluator import QuantEvaluator, LAJQualitativeEvaluator
 from .utils.struct import EvaluationResult
-from .processor import Processor
+from .processor import Processor, SelectProcessor
 import os   
 from .utils.logger import ModernLogger
 from .utils.struct import SolutionResult
@@ -12,7 +12,8 @@ class AdvBench(ModernLogger):
 
     def __init__(self, 
                 data_sets: List[str],
-                solutions: List[Dict[str, Callable]], # 
+                solutions: List[Dict[str, Callable]], 
+                best_product_selector: List[Dict[str, Callable]]=None,
                 judge_model: str = 'gpt-4o-mini',
                 output_dir: str = current_dir,
                 n_repeats: int = 1, 
@@ -20,6 +21,8 @@ class AdvBench(ModernLogger):
         super().__init__(name="AdvBench")
         self.data_sets = data_sets
         self.solutions = solutions
+        self.best_product_selector = best_product_selector
+        self.evaluate_result = EvaluationResult()
         self.output_dir = os.path.join(output_dir, 'output')
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
@@ -53,7 +56,6 @@ class AdvBench(ModernLogger):
 
     def evaluate(self, output_dir: str=None, evaluate_matrix: List[str]=None):
         # Step 1: Get the results from the solutions
-        
         self.stage("Stage 1: Using the solutions to process the data sets")
         processor = Processor(
             data_sets=self.data_sets, 
@@ -90,8 +92,39 @@ class AdvBench(ModernLogger):
         for evaluator, matrix_names in evaluator_matrix_map.items():
             evaluation_result += evaluator.evaluate(matrix_names)
         
-        # Step 5: Save the results to the output directory as json file
-        evaluation_result.save_to_excel_report(os.path.join(self.output_dir, 'evaluation_result.xlsx'))
-        
-        return evaluation_result
+        self.evaluate_result += evaluation_result
+        return self
 
+    def evaluate_the_selector(self):
+        # Step 1: Get the selector processor
+        selector_processor = SelectProcessor(
+            data_sets=self.data_sets, 
+            solution_models=self.solutions, 
+            output_dir=self.output_dir,
+            best_product_selectors=self.best_product_selector
+        )
+        results = selector_processor.process()        
+        # Step 2: Get the selector evaluator
+        from .evaluator.selector_evaluator import SelectEvaluator
+        selector_evaluator = SelectEvaluator(
+            output_dir=self.output_dir,
+            best_product_selectors=self.best_product_selector,
+            results=results
+        )
+        
+        # Step 3: Evaluate the results
+        evaluation_result = selector_evaluator.evaluate(["product_selection_accuracy"])
+        
+        self.evaluate_result += evaluation_result
+        return self
+
+    def report(self):
+        # Step 5: Save the results to the output directory as json file
+        self.evaluate_result.save_to_excel_report(os.path.join(self.output_dir, 'evaluation_result.xlsx'))
+        return self
+
+    def run(self):
+        self.evaluate()
+        self.evaluate_the_selector()
+        self.report()
+        return self

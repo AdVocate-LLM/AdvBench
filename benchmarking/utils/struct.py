@@ -572,6 +572,16 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
                     rec.update(metrics)
                     records.append(rec)
         df = pd.DataFrame(records)
+        
+        # Check if DataFrame is empty
+        if df.empty:
+            print("Warning: No evaluation results to save. Creating empty Excel file.")
+            # Create empty Excel file with basic structure
+            with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
+                empty_df = pd.DataFrame(columns=['data_set', 'solution', 'run'])
+                empty_df.to_excel(writer, sheet_name='Results', index=False)
+            return
+        
         # Step 4: Configure the Excel report settings
         metric_config = {}
         all_metrics = [col for col in df.columns if col not in ['data_set', 'solution', 'run']]

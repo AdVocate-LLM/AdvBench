@@ -107,8 +107,7 @@ class Advertiser:
         # Get unique categories
         unique_categories = list(set(categories))
         
-        # Use OpenAI to select the best category for this prompt
-        category_kwargs = {'categories': unique_categories}
+        # Use llm to select the best category for this prompt
         category_prompt = f"Respond with the product category that is most relevant to this user prompt. You are only allowed to reply with exactly that category. The available categories are: {unique_categories}"
         
         selected_category, _ = self.oai_api.handle_response(category_prompt, prompt)
