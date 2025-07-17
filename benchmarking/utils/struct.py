@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Dict, List, Tuple, Any, Callable
+from typing import Dict, List, Tuple, Any, Callable, Optional
 from collections import defaultdict
 from .result import Result
 from .report import Report
@@ -292,7 +292,7 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
                 solution_result.add_result(
                     solution_name=solution_name, 
                     dataSet=dataSet, 
-                    repeat_id=repeat_id, 
+                    repeat_id=str(repeat_id), 
                     result=result
                 )
         
@@ -486,7 +486,7 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
             for val in self.get_keys_by_attr(attr)
         }
 
-    def to_dict_report(self, output_dir: str=None) -> Dict[str, Any]:
+    def to_dict_report(self, output_dir: Optional[str]=None) -> Dict[str, Any]:
         """
         Convert flat list into nested dictionary report with averages (__all__ entries).
         """

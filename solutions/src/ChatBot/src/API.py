@@ -41,7 +41,7 @@ class OpenAIAPI:
                     model=self.model,
                     messages=chat,
                     stream=False,
-                    logprobs=logprobs
+                    logprobs=bool(logprobs) if logprobs is not None else False
                 )
                 
                 if response.choices[0].finish_reason == 'stop':

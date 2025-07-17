@@ -45,13 +45,15 @@ class ChatbotAdsWorkflow(ParallelProcessor):
                                         topic_list_path=self.topic_list_path, 
                                         mode=args1['mode'], 
                                         ad_freq=args1['ad_freq'], 
-                                        demographics=args1['demos'])
+                                        demographics=args1['demos'],
+                                        model=self.model_name)
             elif solution_name == self.CONTROL_NAME:
                 oai = OpenAIChatSession(product_list_path=self.product_list_path, 
                                         topic_list_path=self.topic_list_path, 
                                         mode=args2['mode'], 
                                         ad_freq=args2['ad_freq'], 
-                                        demographics=args2['demos'])
+                                        demographics=args2['demos'],
+                                        model=self.model_name)
             else:
                 raise ValueError(f"Unknown solution name: {solution_name}")
                                 
@@ -82,7 +84,8 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             prompt, candidate_product_list = item
             # Create an advertiser instance for product selection
             advertiser = Advertiser(product_list_path=self.product_list_path, 
-                                  topic_list_path=self.topic_list_path)
+                                  topic_list_path=self.topic_list_path,
+                                  model=self.model_name)
             return advertiser.select_product(prompt, candidate_product_list)
         
         selections = self.parallel_process(

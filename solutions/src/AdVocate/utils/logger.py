@@ -11,7 +11,6 @@ from rich.progress import (
     TimeElapsedColumn,
     TimeRemainingColumn,
 )
-from pyfiglet import Figlet
 from rich.panel import Panel
 from rich.text import Text
 from rich.table import Table
@@ -19,9 +18,8 @@ from rich.box import ROUNDED
 from rich.theme import Theme
 import logging
 import os
-import time
 from typing import Any, Optional, Tuple
-
+from pyfiglet import Figlet
 
 class ModernLogger:
     """
@@ -47,7 +45,7 @@ class ModernLogger:
         name: str = "app",
         level: str = "info",
         log_file: Optional[str] = None,
-        show_path: bool = True,
+        show_path: bool = False,
         rich_tracebacks: bool = True
     ):
         # Enable rich tracebacks
@@ -115,7 +113,7 @@ class ModernLogger:
         Create a smooth gradient across the text from GRADIENT_START to GRADIENT_END.
         """
         def hex_to_rgb(h: str) -> Tuple[int,int,int]:
-            return tuple(int(h[i:i+2], 16) for i in (1, 3, 5))
+            return (int(h[1:3], 16), int(h[3:5], 16), int(h[5:7], 16))
 
         start_rgb = hex_to_rgb(self.GRADIENT_START)
         end_rgb   = hex_to_rgb(self.GRADIENT_END)
@@ -174,27 +172,7 @@ class ModernLogger:
             expand=True
         )
         task_id = progress.add_task(description, total=total)
-        return progress, task_id
-
-    def tmp_progress(self, total: int = 100, description: str = "Processing") -> Tuple[Progress, int]:
-        """
-        Create a temporary progress bar that automatically cleans up after completion.
-        The progress bar will be removed from display once the task is finished.
-        """
-        progress = Progress(
-            SpinnerColumn("bouncingBall", style="vue_secondary"),
-            TextColumn("[bold vue_primary]{task.description}"),
-            BarColumn(complete_style=self.GRADIENT_START, finished_style=self.GRADIENT_END),
-            TaskProgressColumn("[bold vue_secondary]{task.percentage:>3.0f}%"),
-            TextColumn("{task.completed}/{task.total}"),
-            TimeElapsedColumn(),
-            TimeRemainingColumn(),
-            console=self.console,
-            expand=True,
-            transient=True  # This makes the progress bar disappear after completion
-        )
-        task_id = progress.add_task(description, total=total)
-        return progress, task_id
+        return progress, int(task_id)
 
     def stage(self, message: str) -> None:
         """
@@ -277,7 +255,7 @@ class ModernLogger:
 
     # —— New: File Save Notification —— #
 
-    def file_saved(self, file_path: str, file_name: str=None) -> None:
+    def file_saved(self, file_path: str, file_name: Optional[str]=None) -> None:
         """
         Print "File saved" with path as clickable link and emoji indicator.
         """
@@ -292,6 +270,7 @@ class ModernLogger:
                 f"💾 File saved: [link={uri}][bold blue]{file_path}[/bold blue][/link]"
             )
     
+        
     def banner(self, project_name: str, title: str, description: str, font: str = "slant") -> None:
         """
         Print an ASCII Art Banner at program startup with gradient styling,
@@ -313,41 +292,3 @@ class ModernLogger:
             padding=(1, 2),
         )
         self.console.print(panel)
-
-
-
-# Usage example
-if __name__ == "__main__":
-    log = ModernLogger(name="demo", level="debug")
-
-    log.stage("Modern Logger Demo")
-
-    log.section("Exception Handling")
-
-    log.section("Enhanced Visual Elements")
-    log.gradient_text("This text has a smooth color gradient")
-    log.highlight("Important information with star marker")
-    log.success("Operation completed successfully")
-    log.error_box("An error occurred during processing")
-
-    log.info_panel("System Status", "All systems operational\nMemory: 67% free\nStorage: 82% available")
-
-    log.section("Progress Visualization")
-    progress, task = log.progress(total=100, description="Downloading assets")
-    with progress:
-        for i in range(100):
-            time.sleep(0.01)
-            progress.update(task, advance=1)
-
-    log.section("Data Presentation")
-    table = log.table("Resource Usage")
-    table.add_column("Resource", style="vue_primary")
-    table.add_column("Usage", justify="right")
-    table.add_column("Status", style="dim")
-    table.add_row("CPU", "23%", "Normal")
-    table.add_row("Memory", "47%", "Normal")
-    table.add_row("Disk", "89%", "Warning")
-    log.console.print(table)
-
-    log.stage("Demo Completed")
-    log.success("All operations finished successfully")

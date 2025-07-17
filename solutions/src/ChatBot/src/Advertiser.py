@@ -7,8 +7,8 @@ import random, re, difflib
 from typing import List, Dict
 
 class Advertiser:
-    def __init__(self, product_list_path: str, topic_list_path: str, mode:str='control', ad_freq:float=1.0, demographics:str='', verbose:bool=False):
-        self.oai_api = OpenAIAPI()
+    def __init__(self, product_list_path: str, topic_list_path: str, mode:str='control', ad_freq:float=1.0, demographics:str='', verbose:bool=False, model:str='gpt-4o-mini'):
+        self.oai_api = OpenAIAPI(model=model)
         self.mode = mode
         self.system_prompt = ''
         self.products = Products(product_list_path, verbose=verbose)

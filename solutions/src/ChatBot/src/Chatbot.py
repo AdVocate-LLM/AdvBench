@@ -9,8 +9,8 @@ class OpenAIChatSession:
     '''
     def __init__(self,product_list_path: str,topic_list_path: str, mode:str='control', model='gpt-4o-mini', ad_freq:float=1.0, demographics:str='', verbose:bool=False):
         self.oai_response_api = OpenAIAPI(verbose=verbose, model=model)
-        self.oai_api = OpenAIAPI(verbose=verbose)
-        self.advertiser = Advertiser(product_list_path, topic_list_path, mode=mode, ad_freq=ad_freq, demographics=demographics, verbose=verbose)
+        self.oai_api = OpenAIAPI(verbose=verbose, model=model)
+        self.advertiser = Advertiser(product_list_path, topic_list_path, mode=mode, ad_freq=ad_freq, demographics=demographics, verbose=verbose, model=model)
         self.verbose = verbose
 
     def run_chat(self, prompt: str, logprobs:bool=True):

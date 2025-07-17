@@ -11,7 +11,29 @@ def Result_List2answer_product_Dict_list(results: List[Result]) -> List[Dict[str
     """
     Convert a list of Result objects to a list of dictionaries of answer and product.
     """
-    return [{'answer': result.get_answer(), 'product': result.get_product()} for result in results]
+    valid_results = []
+    failed_count = 0
+    
+    for i, result in enumerate(results):
+        if result is None:
+            failed_count += 1
+            print(f"Warning: Result at index {i} is None (failed processing)")
+        else:
+            try:
+                valid_results.append({
+                    'answer': result.get_answer(), 
+                    'product': result.get_product()
+                })
+            except Exception as e:
+                failed_count += 1
+                print(f"Error processing result at index {i}: {e}")
+                if hasattr(result, 'get_prompt'):
+                    print(f"  Failed prompt: {result.get_prompt()}")
+    
+    if failed_count > 0:
+        print(f"Total failed results: {failed_count}/{len(results)}")
+    
+    return valid_results
 
 def answer_string2Result(prompt: str, category: str, answer_string: str) -> Result:
     """

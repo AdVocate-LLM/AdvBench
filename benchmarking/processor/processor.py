@@ -102,21 +102,46 @@ class Processor(Path, AdvDatasets, ModernLogger):
         category = category_list[0]
         solution_result = SolutionResult()
         raw_result = solution_fn(problem_list=prompt_list)
+        # Filter out results where answer is None
+        valid_results = []
+        error_results = []
+        
+        for prompt, result in zip(prompt_list, raw_result):
+            if result is not None and result['answer'] is not None:
+                valid_results.append(
+                    Result(
+                        prompt=prompt,
+                        category=category,
+                        solution_tag=solution_name,
+                        content=result['answer'],
+                        product=result['product']
+                    )
+                )
+            else:
+                error_results.append({
+                    'prompt': prompt,
+                    'category': category,
+                    'solution_tag': solution_name,
+                    'error': 'No answer generated',
+                    'product': result['product']
+                })
+        
         solution_result.add_list_of_results(
             solution_name=solution_name,
             dataSet=data_name,
             repeat_id=str(repeat_id),
-            results=[
-                Result(
-                    prompt=prompt,
-                    category=category,
-                    solution_tag=solution_name,
-                    content=result['answer'],
-                    product=result['product']
-                )
-                for prompt,result in zip(prompt_list, raw_result)
-            ]
+            results=valid_results
         )
+        
+        # Save error results if any
+        if error_results:
+            output_path = self.get_store_path_for_solution_dataset_repeat(solution_name, data_name, repeat_id)    
+            error_file_path = output_path + '/errors.json'
+            import json
+            import os
+            os.makedirs(output_path, exist_ok=True)
+            with open(error_file_path, 'w') as f:
+                json.dump(error_results, f, indent=2)
             
         if is_saved:
             output_path = self.get_store_path_for_solution_dataset_repeat(solution_name, data_name, repeat_id)    
