@@ -1,7 +1,7 @@
 from openai import OpenAI
 import os
 import logging
-from ..utils.parallel import ParallelProcessor
+from .parallel import ParallelProcessor
 
 # Disable OpenAI HTTP request logging
 logging.getLogger("openai").setLevel(logging.ERROR)
@@ -29,10 +29,6 @@ class Oracle(ParallelProcessor):
         self.base_url_deepinfra = 'https://api.deepinfra.com/v1/openai'
         # for openai models
         self.openai_model_list = [self.MODEL_GPT4o_MINI, self.MODEL_GPT4o, self.MODEL_GPT4_TURBO,]
-        
-        # all models
-        self.all_model_list = self.deepinfra_model_list + self.openai_model_list
-        assert model in self.all_model_list, f'err: model named {model} is not supported'
 
         # initialize the client
         if model in self.openai_model_list:
@@ -42,7 +38,7 @@ class Oracle(ParallelProcessor):
             self.client = OpenAI(api_key=self.apikey, base_url=self.base_url_deepinfra)
     
     # for chat completion
-    def query(self, prompt_sys, prompt_user, temp=1.0, top_p=0.9, logprobs=True, query_key=None):
+    def query(self, prompt_sys, prompt_user, temp=0.0, top_p=0.9, logprobs=True, query_key=None):
         """
         Query the model with a system prompt and user prompt.
         Args:
@@ -70,12 +66,9 @@ class Oracle(ParallelProcessor):
 
             response_result = ""
             # for chunk in stream:
-            if completion.choices[0].message:
-                response_result += completion.choices[0].message.content
+            if completion.choices[0].message and completion.choices[0].message.content:
+                response_result = completion.choices[0].message.content
             
-            logprobs_list = []
-            if logprobs and completion.choices[0].logprobs:
-                logprobs_list = [token.logprob for token in completion.choices[0].logprobs.content]
             if not query_key:
                 query_key = prompt_user 
             return response_result
@@ -83,7 +76,7 @@ class Oracle(ParallelProcessor):
         except Exception as e:
             return "QUERY_FAILED"
     
-    def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=1.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=60, **kwargs):
+    def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=60, **kwargs):
         """
         Query all prompts in parallel using ThreadPoolExecutor with optimized performance.
         Args:

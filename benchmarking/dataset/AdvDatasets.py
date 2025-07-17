@@ -45,6 +45,9 @@ class AdvDatasets(SA_Dataset):
                     raise ValueError(f"Invalid dataset name: {data_set_name}")
             self.data_set_names = data_set_names
     
+    def get_all_data_set_names(self):
+        return list(self.datasets.keys())
+    
     def get_data_set_names(self):
         return self.data_set_names
     

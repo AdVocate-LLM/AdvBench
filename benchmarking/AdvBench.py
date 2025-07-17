@@ -1,25 +1,30 @@
 import json
-from typing import Callable, List, Dict
+from typing import Callable, List, Dict, Optional
 from benchmarking.evaluator import QuantEvaluator, LAJQualitativeEvaluator
 from .utils.struct import EvaluationResult
 from .processor import Processor, SelectProcessor
 import os   
 from .utils.logger import ModernLogger
 from .utils.struct import SolutionResult
+from .dataset.AdvDatasets import AdvDatasets
 
 class AdvBench(ModernLogger):
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     def __init__(self, 
-                data_sets: List[str],
                 solutions: List[Dict[str, Callable]], 
-                best_product_selector: List[Dict[str, Callable]]=None,
+                data_sets: Optional[List[str]]=None,
+                best_product_selector: Optional[List[Dict[str, Callable]]]=None,
                 judge_model: str = 'gpt-4o-mini',
                 output_dir: str = current_dir,
                 n_repeats: int = 1, 
                 max_samples: int = 0):
         super().__init__(name="AdvBench")
-        self.data_sets = data_sets
+        self.datasets = AdvDatasets()
+        if not data_sets:
+            self.data_sets = self.datasets.get_all_data_set_names()
+        else:
+            self.data_sets = data_sets
         self.solutions = solutions
         self.best_product_selector = best_product_selector
         self.evaluate_result = EvaluationResult()
@@ -125,6 +130,6 @@ class AdvBench(ModernLogger):
 
     def run(self):
         self.evaluate()
-        self.evaluate_the_selector()
+        # self.evaluate_the_selector()
         self.report()
         return self

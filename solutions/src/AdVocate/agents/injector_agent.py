@@ -1,4 +1,3 @@
-from ..utils.oracle import Oracle
 from ..utils.result import Result
 from ..utils.sentence import Sentence
 from ..utils.product import Product
@@ -28,7 +27,7 @@ class InjectorAgent(BaseAgent):
     BASIC_GEN_INSERT = 'BASIC_GEN_INSERT'
     
     def __init__(self, 
-                model: Oracle, 
+                model: str, 
                 product_list_path: str,
                 rag_model: Optional[SentenceTransformer] = None
                 ) -> None:
@@ -103,8 +102,15 @@ class InjectorAgent(BaseAgent):
         """
         product_text = f"{self.ADS_START}{str(best_product)}{self.ADS_END}"
         target_idx = inject_position[1]
-        target_sentence = sentences[target_idx].to_string()
-        sentences[target_idx].sentence = f"{product_text} {target_sentence}"
+        
+        # Handle single sentence case: if target_idx is out of bounds, append to the last sentence
+        if target_idx >= len(sentences):
+            target_idx = len(sentences) - 1
+            target_sentence = sentences[target_idx].to_string()
+            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
+        else:
+            target_sentence = sentences[target_idx].to_string()
+            sentences[target_idx].sentence = f"{product_text} {target_sentence}"
         content = answer_structure2string(sentences, structure)
         
         refined_text, logprobs = self.refine_content(content)
@@ -141,8 +147,15 @@ class InjectorAgent(BaseAgent):
         # product_sentence = Sentence(product_text, self.rag_model)
         # new_sentences = sentences[:inject_position[0]+1] + [product_sentence] + sentences[inject_position[1]:]
         target_idx = inject_position[1]
-        target_sentence = sentences[target_idx].to_string()
-        sentences[target_idx].sentence = f"{product_text} {target_sentence}"
+        
+        # Handle single sentence case: if target_idx is out of bounds, append to the last sentence
+        if target_idx >= len(sentences):
+            target_idx = len(sentences) - 1
+            target_sentence = sentences[target_idx].to_string()
+            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
+        else:
+            target_sentence = sentences[target_idx].to_string()
+            sentences[target_idx].sentence = f"{product_text} {target_sentence}"
         content = answer_structure2string(sentences, structure)
         injected_result = Result(
             prompt=raw_answer.get_prompt(),
@@ -232,7 +245,12 @@ class InjectorAgent(BaseAgent):
         """
         # Use the parallel processor base class
         def process_func(raw_answer, query_type=query_type, solution_name=solution_name):
-            return self.inject_products_single(raw_answer, query_type, solution_name)
+            result = self.inject_products_single(raw_answer, query_type, solution_name)
+            if result is None:
+                self.error(f"Failed to inject product for {raw_answer.get_prompt()}")
+                return None
+            else:
+                return result
         
         return self.parallel_process(
             items=raw_answers,

@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Optional
 from .sentence import Sentence
 import logging
 import nltk
@@ -58,53 +58,29 @@ def evaluate_global_coherence(sentences: List[Sentence]):
         get_cosine_similarity(sent.embedding, mean_embedding) for sent in sentences
     ]
     return np.mean(similarities)
+# keep track so we only do this once
+_nltk_initialized = False
 
+def setup_nltk(nltk_data_dir: Optional[str] = None) -> None:
+    """Ensure punkt, stopwords and wordnet corpora are available."""
+    global _nltk_initialized
+    if _nltk_initialized:
+        return
+    # if you have a bundled nltk_data directory, add it
+    if nltk_data_dir:
+        nltk.data.path.append(nltk_data_dir)
 
-def setup_nltk() -> None:
-    """Set up NLTK with error handling"""
-    try:
-        nltk_dir = os.path.join(os.path.dirname(__file__), "nltk_data")
-        if os.path.exists(nltk_dir):
-            nltk.data.path.append(nltk_dir)
-            # Check and download required NLTK data if missing
-            # Skip wordnet due to compatibility issues with some NLTK versions
-            required_packages = ["punkt", "stopwords"]
-            for package in required_packages:
-                try:
-                    # Try to use the package to verify it exists
-                    if package == "punkt":
-                        sent_tokenize("Test sentence.")
-                    elif package == "stopwords":
-                        nltk.corpus.stopwords.words("english")
-                except LookupError:
-                    logging.info(f"Downloading missing NLTK package: {package}")
-                    nltk.download(package, quiet=True)
-                except Exception as e:
-                    logging.warning(f"Error verifying NLTK package {package}: {e}")
-                    # Try to download anyway
-                    try:
-                        nltk.download(package, quiet=True)
-                        logging.info(f"Downloaded NLTK package: {package}")
-                    except Exception as download_error:
-                        logging.error(
-                            f"Failed to download NLTK package {package}: {download_error}"
-                        )
-
-            # For wordnet, just try to download without verification
-            try:
-                nltk.data.find("corpora/wordnet")
-                logging.info("WordNet corpus data found")
-            except LookupError:
-                logging.info("Downloading WordNet corpus data")
-                nltk.download("wordnet", quiet=True)
-
-        else:
-            required_packages = ["punkt", "stopwords", "wordnet"]
-            for package in required_packages:
-                nltk.download(package, quiet=True)
-
-    except Exception as e:
-        logging.warning(f"Error setting up NLTK: {str(e)}")
+    for package, path in [
+        ("punkt", "tokenizers/punkt"),
+        ("stopwords", "corpora/stopwords"),
+        ("wordnet", "corpora/wordnet"),
+    ]:
+        try:
+            nltk.data.find(path)
+        except LookupError:
+            logging.info(f"NLTK corpus '{package}' not found. Downloading…")
+            nltk.download(package, quiet=True)
+    _nltk_initialized = True
 
 
 def split_sentences_with_template(
