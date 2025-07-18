@@ -6,7 +6,7 @@ from benchmarking.utils.struct import SolutionResult, EvaluationResult
 class ClickProductsAgent(BaseAgent):
     """Agent for evaluating if users will click products or brands in chatbot responses"""
     
-    def __init__(self, model: str = 'gpt-4o'):
+    def __init__(self, model):
         """Initialize the click products evaluator
         
         Args:

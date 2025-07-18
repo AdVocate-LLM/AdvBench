@@ -34,8 +34,8 @@ class LAJQualitativeEvaluator(BaseEvaluator):
     
     def __init__(self, 
                 output_dir: str,
-                results: SolutionResult,
-                judge_model: str = 'gpt-4o'):
+                judge_model: str,
+                results: SolutionResult):
         """Initialize the qualitative evaluator with all evaluation agents
         
         Args:

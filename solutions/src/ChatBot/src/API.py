@@ -3,7 +3,7 @@ from openai import OpenAI
 
 
 class OpenAIAPI:
-    def __init__(self, model:str='gpt-4o-mini', max_tries:int=5, verbose:bool=False):
+    def __init__(self, model, max_tries:int=5, verbose:bool=False):
         openai_key = os.getenv('OPENAI_API_KEY')
         base_url = os.getenv('BASE_URL')
         self.client = OpenAI(api_key=openai_key, base_url=base_url)

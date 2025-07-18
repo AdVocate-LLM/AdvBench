@@ -6,8 +6,8 @@ import json, difflib, os
 absolute_path = os.path.dirname(os.path.abspath(__file__))
 
 class Topics:
-    def __init__(self,topic_list_path: str, verbose=False):
-        self.oai_api = OpenAIAPI(verbose=verbose)
+    def __init__(self,topic_list_path: str, model:str, verbose=False):
+        self.oai_api = OpenAIAPI(verbose=verbose, model=model)
         self.topics = {}
         self.verbose = verbose
         self.topic_list_path = topic_list_path
