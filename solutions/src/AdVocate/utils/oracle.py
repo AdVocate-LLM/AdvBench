@@ -30,12 +30,11 @@ class Oracle(ParallelProcessor):
         # for openai models
         self.openai_model_list = [self.MODEL_GPT4o_MINI, self.MODEL_GPT4o, self.MODEL_GPT4_TURBO,]
 
-        # initialize the client
-        if model in self.openai_model_list:
-            self.client = OpenAI(api_key=self.apikey, base_url=self.base_url)
         # for deepinfra models
-        elif model in self.deepinfra_model_list:
+        if model in self.deepinfra_model_list:
             self.client = OpenAI(api_key=self.apikey, base_url=self.base_url_deepinfra)
+        else:
+            self.client = OpenAI(api_key=self.apikey, base_url=self.base_url)
     
     # for chat completion
     def query(self, prompt_sys, prompt_user, temp=0.0, top_p=0.9, logprobs=True, query_key=None):
