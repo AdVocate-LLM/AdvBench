@@ -6,7 +6,7 @@ from benchmarking.utils.struct import SolutionResult, EvaluationResult
 class TrustAgent(BaseAgent):
     """Agent for evaluating trust in chatbot responses"""
     
-    def __init__(self, model: str = 'gpt-4o'):
+    def __init__(self, model: str):
         """Initialize the trust evaluator
         
         Args:

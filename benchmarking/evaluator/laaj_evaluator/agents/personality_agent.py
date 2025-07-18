@@ -6,7 +6,7 @@ from benchmarking.utils.struct import SolutionResult, EvaluationResult
 class PersonalityAgent(BaseAgent):
     """Agent for evaluating chatbot personality traits"""
     
-    def __init__(self, model: str = 'gpt-4o'):
+    def __init__(self, model: str):
         """Initialize the personality evaluator
         
         Args:

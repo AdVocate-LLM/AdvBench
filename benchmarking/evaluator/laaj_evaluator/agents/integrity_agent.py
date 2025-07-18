@@ -6,7 +6,7 @@ from benchmarking.utils.struct import SolutionResult, EvaluationResult
 class IntegrityAgent(BaseAgent):
     """Agent for evaluating content integrity related to advertisements in chatbot responses"""
     
-    def __init__(self, model: str = 'gpt-4o'):
+    def __init__(self, model: str):
         """Initialize the integrity evaluator
         
         Args:

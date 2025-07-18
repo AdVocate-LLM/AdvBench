@@ -11,7 +11,7 @@ class ChatbotAdsWorkflow(ParallelProcessor):
     def __init__(self,
                     product_list_path: str,
                     topic_list_path: str,
-                    model_name: str="gpt-4o",
+                    model_name: str,
                 ):
         super().__init__()
         self.model_name = model_name

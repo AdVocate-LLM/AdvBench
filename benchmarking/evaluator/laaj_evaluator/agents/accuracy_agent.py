@@ -6,7 +6,7 @@ from benchmarking.utils.struct import SolutionResult, EvaluationResult
 class AccuracyAgent(BaseAgent):
     """Agent for evaluating accuracy and relevance of chatbot responses"""
     
-    def __init__(self, model: str = 'gpt-4o'):
+    def __init__(self, model: str):
         """Initialize the accuracy evaluator
         
         Args:

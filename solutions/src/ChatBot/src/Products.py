@@ -3,9 +3,9 @@ from .API import OpenAIAPI
 import json, difflib, random
 
 class Products:
-    def __init__(self, product_list_path: str, verbose:bool=False):
+    def __init__(self, product_list_path: str, model:str, verbose:bool=False):
         self.verbose = verbose
-        self.oai_api = OpenAIAPI(verbose=verbose)
+        self.oai_api = OpenAIAPI(verbose=verbose, model=model)
         self.product_list_path = product_list_path
         self.read_products_file(product_list_path)
         self.current_product = ''

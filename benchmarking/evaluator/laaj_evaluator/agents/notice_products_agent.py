@@ -6,7 +6,7 @@ from benchmarking.utils.struct import SolutionResult, EvaluationResult
 class NoticeProductsAgent(BaseAgent):
     """Agent for evaluating if users notice products/brands and sponsored links in chatbot responses"""
     
-    def __init__(self, model: str = 'gpt-4o'):
+    def __init__(self, model: str):
         """Initialize the notice products evaluator
         
         Args:
