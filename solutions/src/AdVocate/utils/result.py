@@ -5,12 +5,10 @@ class Result:
     def __init__(self, prompt: str, 
                 answer: str=None, 
                 solution_tag: str=None, 
-                logprobs: List[float]=None, 
                 product: List[Dict]=None):
         self.prompt = prompt
         self.solution_tag = solution_tag
         self.answer = answer
-        self.logprobs = logprobs
         self.product = product
     
     def get_product(self):
@@ -30,7 +28,6 @@ class Result:
             'prompt': self.prompt,
             'solution': self.solution_tag,
             'answer': self.answer,
-            'logprobs': self.logprobs,
             'product': self.product
         }
     

@@ -44,7 +44,7 @@ if __name__ == '__main__':
     )
     # Example usage of the AdvBench
     adv_bench = AdvBench(
-        # data_sets=["lmsys100"],
+        # data_sets=["mt-benchmark-humanities"],
         solutions={
                 "chi": 
                     partial(

@@ -14,11 +14,11 @@ class AdvDatasets(SA_Dataset):
             'prompt_file': 'prompts.json',
             'categories_file': 'categories.json'
         },
-        'mt-benchmark-ordered': {
-            'folder': 'mt-benchmark', 
-            'prompt_file': 'prompts_ordered.json',
-            'categories_file': 'categories_ordered.json'
-        },
+        # 'mt-benchmark-ordered': {
+        #     'folder': 'mt-benchmark', 
+        #     'prompt_file': 'prompts_ordered.json',
+        #     'categories_file': 'categories_ordered.json'
+        # },
         'mt-benchmark-humanities': {
             'folder': 'mt-benchmark', 
             'prompt_file': 'prompts_Humanities.json',

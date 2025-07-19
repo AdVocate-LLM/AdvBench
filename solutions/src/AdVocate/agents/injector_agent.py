@@ -3,7 +3,7 @@ from ..utils.sentence import Sentence
 from ..utils.product import Product
 from ..utils.functions import get_adjacent_sentence_similarities, split_sentences_with_template
 from ..utils.format import answer_structure2string
-from typing import List, Tuple, Optional, Dict, Any, Union
+from typing import List, Tuple, Optional, Dict, Union
 from ..prompt.injector_prompts import SYS_REFINE, USER_REFINE
 from .base_agent import BaseAgent
 # import tools for injector agent
@@ -63,23 +63,18 @@ class InjectorAgent(BaseAgent):
         """
         return self.INJECT_METHODS
 
-    def refine_content(self, content: str, logprobs: bool = True) -> Tuple[str, Optional[Dict[str, Any]]]:
+    def refine_content(self, content: str) -> str:
         """Refine the given content using the language model.
         
         Args:
             content (str): The content to be refined
-            logprobs (bool): Whether to return log probabilities
             
         Returns:
-            Tuple[str, Optional[Dict[str, Any]]]: Refined text and log probabilities if requested
+            str: Refined text
         """
         usr_refine_ass = USER_REFINE.format(ori_text=content)
-        response = self.model.query(SYS_REFINE, usr_refine_ass, logprobs=logprobs)
-        refined_text = response["answer"]
-        if logprobs:
-            return refined_text, response["logprobs"]
-        else:
-            return refined_text, None
+        response = self.answer(usr_refine_ass)
+        return response
 
     def create_refined_injection(self, 
                             raw_answer: Result,
@@ -113,12 +108,11 @@ class InjectorAgent(BaseAgent):
             sentences[target_idx].sentence = f"{product_text} {target_sentence}"
         content = answer_structure2string(sentences, structure)
         
-        refined_text, logprobs = self.refine_content(content)
+        refined_text = self.refine_content(content)
         refined_result = Result(
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
             answer=refined_text,
-            logprobs=logprobs,
             product=best_product.show()
         )
 

@@ -45,47 +45,25 @@ class ParallelProcessor(ModernLogger):
         **kwargs
     ) -> Tuple[int, Any]:
         """Process a single item with retry and backoff."""
-        retries = 0
-        last_error = None
-        
+        retries = 0        
         while True:
             try:
                 result = process_func(item, **kwargs)
                 return idx, result
-            except (ConnectionError, TimeoutError) as e:
+            except Exception as e:
                 # Network/timeout errors are retryable
-                last_error = e
+                self.error(f"Failed due to {e}")
                 retries += 1
                 if retries > max_retries:
                     item_desc = str(item)[:100] if hasattr(item, '__str__') else str(type(item))
                     if hasattr(item, 'get_prompt'):
                         item_desc = f"prompt: {item.get_prompt()[:100]}"
-                    self.error(f"Failed after {max_retries} retries (Connection/Timeout) - {item_desc}: {e}")
+                    self.error(f"Failed after {max_retries} retries - {item_desc}: {e}")
                     return idx, None
                 # Non-blocking backoff using exponential delay
                 backoff = min(0.1 * (2 ** retries), 5)  # Faster backoff, max 5s
                 time.sleep(backoff)
-            except (ValueError, TypeError, KeyError) as e:
-                # Data/logic errors are not retryable
-                last_error = e
-                item_desc = str(item)[:100] if hasattr(item, '__str__') else str(type(item))
-                if hasattr(item, 'get_prompt'):
-                    item_desc = f"prompt: {item.get_prompt()[:100]}"
-                self.error(f"Data/Logic error (not retryable) - {item_desc}: {e}")
-                return idx, None
-            except Exception as e:
-                # Other exceptions get limited retries
-                last_error = e
-                retries += 1
-                if retries > max_retries:
-                    item_desc = str(item)[:100] if hasattr(item, '__str__') else str(type(item))
-                    if hasattr(item, 'get_prompt'):
-                        item_desc = f"prompt: {item.get_prompt()[:100]}"
-                    self.error(f"Failed after {max_retries} retries (Other error) - {item_desc}: {e}")
-                    return idx, None
-                backoff = min(0.1 * (2 ** retries), 5)
-                time.sleep(backoff)
-    
+            
     def process_batches(
         self,
         batches: List[Tuple[List[int], List[Any]]],
