@@ -57,7 +57,7 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             else:
                 raise ValueError(f"Unknown solution name: {solution_name}")
                                 
-            response, product, logprobs = oai.run_chat(prompt, logprobs=True)
+            response, product = oai.run_chat(prompt)
             
             return {'answer': response, 'product': product}
         

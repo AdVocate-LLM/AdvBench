@@ -13,7 +13,7 @@ class OpenAIChatSession:
         self.advertiser = Advertiser(product_list_path, topic_list_path, mode=mode, ad_freq=ad_freq, demographics=demographics, verbose=verbose, model=model)
         self.verbose = verbose
 
-    def run_chat(self, prompt: str, logprobs:bool=True):
+    def run_chat(self, prompt: str):
         if not prompt:
             raise ValueError("prompt cannot be empty")
             
@@ -22,15 +22,11 @@ class OpenAIChatSession:
             product = self.advertiser.parse(prompt)
             
             message, response = self.oai_api.handle_response(
-                chat_history=self.advertiser.chat_history(),
-                logprobs=logprobs
+                chat_history=self.advertiser.chat_history()
             )
             # advertiser.chat_history stores the system prompt which instructs the LLM to embed ads in the next assistant message
-            logprobs_list = []
-            if logprobs:
-                logprobs_list = [token.logprob for token in response.choices[0].logprobs.content]
 
-            return message, product, logprobs_list
+            return message, product
             
         except Exception as e:
             if self.verbose:

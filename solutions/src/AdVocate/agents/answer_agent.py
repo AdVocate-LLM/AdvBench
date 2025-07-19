@@ -12,6 +12,11 @@ class AnswerAgent(BaseAgent):
         
     def raw_answer(self, problem_list: List[str]) -> List[Result]:
         responses = self.answer_multiple(problem_list)
-        results = [Result(prompt=response["prompt"], answer=response["answer"]) for response in responses]
+        results = []
+        for i, (q,a) in enumerate(zip(problem_list, responses)):
+            if a and a != "QUERY_FAILED":
+                results.append(Result(prompt=q, answer=a))
+            else:
+                self.error(f"Query failed for problem(with index {i}): {q}")
         self.debug(f"The number of results is: {len(results)}, the number of failed results is: {len([result for result in results if result.get_answer() == 'QUERY_FAILED'])}")
         return results

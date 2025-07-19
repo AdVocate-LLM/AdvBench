@@ -11,7 +11,7 @@ class OpenAIAPI:
         self.verbose = verbose
         self.max_tries = max_tries
 
-    def handle_response(self, sys_prompt:str=None, user_prompt:str=None, chat_history:list=None, keyword:str=None, include_role:bool=False, logprobs:bool=False):
+    def handle_response(self, sys_prompt:str=None, user_prompt:str=None, chat_history:list=None, keyword:str=None, include_role:bool=False):
         """
         This function handles the response from an AI chatbot and returns the message content.
         
@@ -41,7 +41,6 @@ class OpenAIAPI:
                     model=self.model,
                     messages=chat,
                     stream=False,
-                    logprobs=bool(logprobs) if logprobs is not None else False
                 )
                 
                 if response.choices[0].finish_reason == 'stop':

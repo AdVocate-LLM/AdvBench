@@ -37,7 +37,7 @@ class Oracle(ParallelProcessor):
             self.client = OpenAI(api_key=self.apikey, base_url=self.base_url)
     
     # for chat completion
-    def query(self, prompt_sys, prompt_user, temp=0.0, top_p=0.9, logprobs=True, query_key=None):
+    def query(self, prompt_sys, prompt_user, temp=0.0, top_p=0.9, query_key=None):
         """
         Query the model with a system prompt and user prompt.
         Args:
@@ -45,7 +45,6 @@ class Oracle(ParallelProcessor):
             prompt_user (str): User prompt.
             temp (float): Temperature for the model.
             top_p (float): Top-p sampling parameter.
-            logprobs (bool): Whether to return log probabilities.
             query_key (str): Key for the query.
         Returns:
             dict: Dictionary containing the query, answer, and log probabilities.
@@ -60,27 +59,20 @@ class Oracle(ParallelProcessor):
                 stream=False,
                 temperature=temp,
                 top_p=top_p,
-                logprobs=logprobs,
             )
 
             response_result = ""
             # for chunk in stream:
-            if completion.choices[0].message:
+            if completion.choices[0].message and completion.choices[0].message.content:
                 response_result = completion.choices[0].message.content
             
-            logprobs_list = []
-            if logprobs and completion.choices[0].logprobs:
-                logprobs_list = [token.logprob for token in completion.choices[0].logprobs.content]
             if not query_key:
                 query_key = prompt_user 
-            return {"prompt": query_key, "answer": response_result, "logprobs": logprobs_list}
+            return response_result
 
-        except Exception as e:  # Consider capturing a specific exception if possible
-            print(f"err: The following error occurred when querying {prompt_user} through {self.model}:")
-            print(f"System prompt: {prompt_sys}")
-            print(f"User prompt: {prompt_user}")
-            print(f"Error: {e}")
-            return {"prompt": prompt_user, "answer": "QUERY_FAILED"}
+        except Exception as e:
+            self.error(f"Query failed for problem({query_key}): due to {e}")
+            return "QUERY_FAILED"
     
     def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=60, **kwargs):
         """
@@ -112,7 +104,8 @@ class Oracle(ParallelProcessor):
                 else:
                     return self.query(prompt_sys, prompt, temp, top_p)
             except Exception as e:
-                return {"prompt": prompt, "answer": f"QUERY_FAILED: {str(e)}"}
+                self.error(f"Query failed for problem(with index {i}): due to {e}")
+                return f"QUERY_FAILED"
         
         # Use the parallel processor base class
         workers = min(32, (os.cpu_count() or 4) * 4) if workers is None else workers
