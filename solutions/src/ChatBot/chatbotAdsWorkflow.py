@@ -23,7 +23,7 @@ class ChatbotAdsWorkflow(ParallelProcessor):
         print("    - workflow = ChatbotAdsWorkflow(product_list_path, topic_list_path, model_name)")
         print("    - workflow.run(problem_list, solution_name(chi, control))")
     
-    def run(self, problem_list: List[str], solution_name: str, workers=None, batch_size=5, max_retries=2, timeout=180) -> List[Dict[str, str]]:
+    def run(self, problem_list: List[Dict[str, str]], solution_name: str, workers=None, batch_size=5, max_retries=2, timeout=180) -> List[Dict[str, str]]:
         """Run the workflow on a list of problems in parallel.
         
         Args:
