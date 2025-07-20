@@ -68,11 +68,19 @@ class Oracle(ParallelProcessor):
             
             if not query_key:
                 query_key = prompt_user 
-            return response_result
+            return {
+                "query": query_key,
+                "answer": response_result
+            }
 
         except Exception as e:
             self.error(f"Query failed for problem({query_key}): due to {e}")
-            return "QUERY_FAILED"
+            if not query_key:
+                query_key = prompt_user 
+            return {
+                "query": query_key,
+                "answer": "QUERY_FAILED"
+            }
     
     def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=60, **kwargs):
         """
@@ -98,15 +106,11 @@ class Oracle(ParallelProcessor):
         # Define process function for a single query
         def process_func(item, prompt_sys=prompt_sys, temp=temp, top_p=top_p):
             prompt, key = item
-            try:
-                if key:
-                    return self.query(prompt_sys, prompt, temp, top_p, query_key=key)
-                else:
-                    return self.query(prompt_sys, prompt, temp, top_p)
-            except Exception as e:
-                self.error(f"Query failed for problem(with index {i}): due to {e}")
-                return f"QUERY_FAILED"
-        
+            if key:
+                return self.query(prompt_sys, prompt, temp, top_p, query_key=key)
+            else:
+                return self.query(prompt_sys, prompt, temp, top_p)
+            
         # Use the parallel processor base class
         workers = min(32, (os.cpu_count() or 4) * 4) if workers is None else workers
         

@@ -4,8 +4,8 @@ from typing import List, Tuple, Union, Optional
 from .sentence import Sentence
 import logging
 import nltk
-import os
 from nltk.tokenize import sent_tokenize, PunktSentenceTokenizer
+from sentence_transformers import SentenceTransformer
 
 
 def get_adjacent_sentence_similarities(
@@ -84,7 +84,7 @@ def setup_nltk(nltk_data_dir: Optional[str] = None) -> None:
 
 
 def split_sentences_with_template(
-    content: str, rag_model
+    content: str, rag_model:SentenceTransformer
 ) -> Tuple[List[Sentence], List[Union[str, int]]]:
     """Split text into sentences and non-sentence parts while preserving structure."""
     setup_nltk()

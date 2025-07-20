@@ -1,5 +1,5 @@
 from ..utils.oracle import Oracle
-from typing import List
+from typing import List, Dict
 from ..utils.parallel import ParallelProcessor
 
 class BaseAgent(ParallelProcessor):
@@ -8,10 +8,10 @@ class BaseAgent(ParallelProcessor):
         self.model = Oracle(model)
         self.system_prompt = ''
         
-    def answer(self, question:str) -> str:
+    def answer(self, question:str) -> Dict:
         response = self.model.query(self.system_prompt, question)
         return response
     
-    def answer_multiple(self, questions:List[str]) -> List[str]:
+    def answer_multiple(self, questions:List[str]) -> List[Dict]:
         responses = self.model.query_all(self.system_prompt, questions)
         return responses

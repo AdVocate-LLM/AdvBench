@@ -63,7 +63,7 @@ class InjectorAgent(BaseAgent):
         """
         return self.INJECT_METHODS
 
-    def refine_content(self, content: str) -> str:
+    def refine_content(self, content: str) -> Dict:
         """Refine the given content using the language model.
         
         Args:
@@ -108,7 +108,10 @@ class InjectorAgent(BaseAgent):
             sentences[target_idx].sentence = f"{product_text} {target_sentence}"
         content = answer_structure2string(sentences, structure)
         
-        refined_text = self.refine_content(content)
+        refined_text = content
+        refined = self.refine_content(content)
+        if refined["answer"] != "QUERY_FAILED":
+            refined_text = refined["answer"]
         refined_result = Result(
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
@@ -138,8 +141,6 @@ class InjectorAgent(BaseAgent):
             Result: Result with injected product
         """
         product_text = str(best_product)
-        # product_sentence = Sentence(product_text, self.rag_model)
-        # new_sentences = sentences[:inject_position[0]+1] + [product_sentence] + sentences[inject_position[1]:]
         target_idx = inject_position[1]
         
         # Handle single sentence case: if target_idx is out of bounds, append to the last sentence
@@ -154,13 +155,12 @@ class InjectorAgent(BaseAgent):
         injected_result = Result(
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
-            # answer=sentence_list2string(new_sentences),
             answer=content,
             product=best_product.show()
         )
         return injected_result
     
-    def get_query_text(self, raw_answer: Result, query_type: str) -> str:
+    def get_query_text(self, raw_answer: Result, query_type: str) -> Optional[str]:
         """Extract query text based on query type.
         
         Args:
