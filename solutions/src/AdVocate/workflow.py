@@ -69,7 +69,7 @@ class AdvocateWorkflow:
             query_type: str
             solution_name: str:
         Returns:
-            List[str]
+            List[Dict[str, str]]: the injected_answer
         """
         # Stage 1: answer agent give the raw_answer
         raw_answer = self.answer_agent.raw_answer(problem_list)
