@@ -75,7 +75,7 @@ class Oracle(ParallelProcessor):
         except Exception as e:
             return "QUERY_FAILED"
     
-    def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=60, **kwargs):
+    def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=3000, **kwargs):
         """
         Query all prompts in parallel using ThreadPoolExecutor with optimized performance.
         Args:

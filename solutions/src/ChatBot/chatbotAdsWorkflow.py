@@ -23,7 +23,7 @@ class ChatbotAdsWorkflow(ParallelProcessor):
         print("    - workflow = ChatbotAdsWorkflow(product_list_path, topic_list_path, model_name)")
         print("    - workflow.run(problem_list, solution_name(chi, control))")
     
-    def run(self, problem_list: List[Dict[str, str]], solution_name: str, workers=None, batch_size=5, max_retries=2, timeout=180) -> List[Dict[str, str]]:
+    def run(self, problem_list: List[Dict[str, str]], solution_name: str, workers=None, batch_size=5, max_retries=2, timeout=3000) -> List[Dict[str, str]]:
         """Run the workflow on a list of problems in parallel.
         
         Args:
@@ -73,7 +73,7 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             solution_name=solution_name  # Pass solution_name as a keyword argument
         )
     
-    def get_best_product(self, problem_product_list: dict[str, dict[str, list[str]]], workers=None, batch_size=5, max_retries=2, timeout=180)->Dict[str, Dict[str, str]]:
+    def get_best_product(self, problem_product_list: dict[str, dict[str, list[str]]], workers=None, batch_size=5, max_retries=2, timeout=3000)->Dict[str, Dict[str, str]]:
         """
         Get the best product for the problem.
 
