@@ -9,11 +9,11 @@ class AdvDatasets(SA_Dataset):
     current_path = os.path.dirname(os.path.abspath(__file__))
     # index of the dataset
     datasets = {
-        'mt-benchmark': {
-            'folder': 'mt-benchmark',
-            'prompt_file': 'prompts.json',
-            'categories_file': 'categories.json'
-        },
+        # 'mt-benchmark': {
+        #     'folder': 'mt-benchmark',
+        #     'prompt_file': 'prompts.json',
+        #     'categories_file': 'categories.json'
+        # },
         # 'mt-benchmark-ordered': {
         #     'folder': 'mt-benchmark', 
         #     'prompt_file': 'prompts_ordered.json',
@@ -24,11 +24,11 @@ class AdvDatasets(SA_Dataset):
             'prompt_file': 'prompts_Humanities.json',
             'categories_file': 'categories_Humanities.json'
         },
-        'wild100': {
-            'folder': 'wild', 
-            'prompt_file': 'prompts100.json',
-            'categories_file': 'categories100.json'
-        },
+        # 'wild100': {
+        #     'folder': 'wild', 
+        #     'prompt_file': 'prompts100.json',
+        #     'categories_file': 'categories100.json'
+        # },
         'lmsys100': {
             'folder': 'lmsys', 
             'prompt_file': 'prompts100.json',
