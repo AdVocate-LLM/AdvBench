@@ -173,6 +173,26 @@ class ModernLogger:
         )
         task_id = progress.add_task(description, total=total)
         return progress, int(task_id)
+    
+    def tmp_progress(self, total: int = 100, description: str = "Processing") -> Tuple[Progress, int]:
+        """
+        Create a temporary progress bar that automatically cleans up after completion.
+        The progress bar will be removed from display once the task is finished.
+        """
+        progress = Progress(
+            SpinnerColumn("bouncingBall", style="vue_secondary"),
+            TextColumn("[bold vue_primary]{task.description}"),
+            BarColumn(complete_style=self.GRADIENT_START, finished_style=self.GRADIENT_END),
+            TaskProgressColumn("[bold vue_secondary]{task.percentage:>3.0f}%"),
+            TextColumn("{task.completed}/{task.total}"),
+            TimeElapsedColumn(),
+            TimeRemainingColumn(),
+            console=self.console,
+            expand=True,
+            transient=True  # This makes the progress bar disappear after completion
+        )
+        task_id = progress.add_task(description, total=total)
+        return progress, int(task_id)
 
     def stage(self, message: str) -> None:
         """

@@ -34,16 +34,16 @@ if __name__ == '__main__':
     chi_workflow = ChatbotAdsWorkflow(
             product_list_path="benchmarking/dataset/product/products.json",
             topic_list_path="benchmarking/dataset/product/topics.json",
-            model_name="gpt-4o-mini"
+            model_name="Qwen/Qwen3-14B"
     )
     advocate_workflow = AdvocateWorkflow(
             product_list_path="benchmarking/dataset/product/products.json",
-            model_name="gpt-4o-mini"
+            model_name="Qwen/Qwen3-14B"
     )
     # Example usage of the AdvBench
     adv_bench = AdvBench(
         # data_sets=["mt-benchmark-humanities"],
-        data_sets=["lmsys100"],
+        # data_sets=["lmsys100"],
         solutions={
                 "chi": 
                     partial(
@@ -93,6 +93,6 @@ if __name__ == '__main__':
                     query_type="QUERY_PROMPT",
                 ),
         },
-        judge_model="gpt-4o",
+        judge_model="Qwen/Qwen3-32B",
     )
     adv_bench.run()
