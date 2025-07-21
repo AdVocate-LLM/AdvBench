@@ -109,14 +109,21 @@ class InjectorAgent(BaseAgent):
         content = answer_structure2string(sentences, structure)
         
         refined_text = content
+        product={
+            "name": None,
+            "category": None,
+            "desc": None,
+            "url": None
+        }
         refined = self.refine_content(content)
         if refined["answer"] != "QUERY_FAILED":
             refined_text = refined["answer"]
+            product = best_product.show()
         refined_result = Result(
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
             answer=refined_text,
-            product=best_product.show()
+            product=product
         )
 
         return refined_result

@@ -106,11 +106,11 @@ class Processor(Path, AdvDatasets, ModernLogger):
         valid_results = []
         error_results = []
         
-        for prompt, result in zip(prompt_list, raw_result):
+        for result in raw_result:
             if result is not None and result['answer'] is not None:
                 valid_results.append(
                     Result(
-                        prompt=prompt,
+                        prompt=result['query'],
                         category=category,
                         solution_tag=solution_name,
                         content=result['answer'],
@@ -119,7 +119,7 @@ class Processor(Path, AdvDatasets, ModernLogger):
                 )
             else:
                 error_results.append({
-                    'prompt': prompt,
+                    'prompt': result['query'],
                     'category': category,
                     'solution_tag': solution_name,
                     'error': 'No answer generated',
@@ -237,4 +237,60 @@ class Processor(Path, AdvDatasets, ModernLogger):
                 n_repeats=n_repeats, 
                 max_samples=max_samples, 
                 is_saved=is_saved)
+
+
+        # filter the result of each query should be contain all answer categories
+        # if not, add remove the result of the query
+        results = self.filter_result_for_comparison(results)
         return results
+    
+    def filter_result_for_comparison(self, results: SolutionResult) -> SolutionResult:
+        """
+        Filter results to ensure each query has results from all solution methods.
+        If a query doesn't have results from all methods, remove all results for that query.
+        """
+        # Get all unique solution names
+        all_solutions = set(results.get_keys_by_attr("solution_name"))
+        
+        # Group by dataset and repeat_id, then check query completeness within each group
+        filtered_results = SolutionResult()
+        
+        # Group by dataset and repeat_id
+        dataset_repeat_groups = results.group_by_attrs(["dataSet", "repeat_id"])
+        
+        for (dataset, repeat_id), group_results in dataset_repeat_groups.items():
+            # Within this dataset+repeat group, check query completeness
+            query_solution_map = {}
+            
+            # Build map of query -> set of solutions
+            for result in group_results.get_all_results():
+                query = result.prompt
+                solution = result.solution_tag
+                
+                if query not in query_solution_map:
+                    query_solution_map[query] = set()
+                query_solution_map[query].add(solution)
+            
+            # Find valid queries that have all solutions
+            valid_queries = {
+                query for query, solutions in query_solution_map.items() 
+                if solutions == all_solutions
+            }
+            
+            # Add only valid results to filtered_results
+            for (solution_name, ds, rid), result_list in group_results.items():
+                valid_result_list = [r for r in result_list if r.prompt in valid_queries]
+                if valid_result_list:
+                    filtered_results.add_list_of_results(
+                        solution_name=solution_name,
+                        dataSet=ds,
+                        repeat_id=rid,
+                        results=valid_result_list
+                    )
+        
+        original_count = len(results.get_all_results())
+        filtered_count = len(filtered_results.get_all_results())
+        self.info(f"Filtered from {original_count} to {filtered_count} results")
+        
+        return filtered_results
+

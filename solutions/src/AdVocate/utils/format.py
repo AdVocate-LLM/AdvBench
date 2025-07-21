@@ -21,6 +21,7 @@ def Result_List2answer_product_Dict_list(results: List[Result]) -> List[Dict[str
         else:
             try:
                 valid_results.append({
+                    'query': result.get_prompt(),
                     'answer': result.get_answer(), 
                     'product': result.get_product()
                 })

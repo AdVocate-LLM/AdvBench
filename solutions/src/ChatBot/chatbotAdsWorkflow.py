@@ -59,7 +59,7 @@ class ChatbotAdsWorkflow(ParallelProcessor):
                                 
             response, product = oai.run_chat(prompt)
             
-            return {'answer': response, 'product': product}
+            return {'query': prompt, 'answer': response, 'product': product}
         
         # Use parallel processor
         return self.parallel_process(
