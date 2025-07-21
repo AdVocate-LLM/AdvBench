@@ -34,11 +34,13 @@ if __name__ == '__main__':
     chi_workflow = ChatbotAdsWorkflow(
             product_list_path="benchmarking/dataset/product/products.json",
             topic_list_path="benchmarking/dataset/product/topics.json",
-            model_name="Qwen/Qwen3-14B"
+            # model_name="Qwen/Qwen3-14B"
+            model_name="gpt-4o-mini"
     )
     advocate_workflow = AdvocateWorkflow(
             product_list_path="benchmarking/dataset/product/products.json",
-            model_name="Qwen/Qwen3-14B"
+            # model_name="Qwen/Qwen3-14B"
+            model_name="gpt-4o-mini"
     )
     # Example usage of the AdvBench
     adv_bench = AdvBench(
@@ -93,6 +95,7 @@ if __name__ == '__main__':
                     query_type="QUERY_PROMPT",
                 ),
         },
-        judge_model="Qwen/Qwen3-32B",
+        # judge_model="Qwen/Qwen3-32B",
+        judge_model="gpt-4o",
     )
     adv_bench.run()
