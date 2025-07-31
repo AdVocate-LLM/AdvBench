@@ -61,7 +61,7 @@ class ParallelProcessor(ModernLogger):
         process_func: Callable,
         workers: Optional[int] = None,
         max_retries: int = 2,
-        timeout: int = 180,
+        timeout: int = 1800,
         task_description: str = "Processing items",
         **kwargs
     ) -> List[Any]:

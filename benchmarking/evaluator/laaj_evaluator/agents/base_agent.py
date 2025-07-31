@@ -2,15 +2,19 @@ from benchmarking.utils.oracle import Oracle
 from benchmarking.utils.struct import SolutionResult, EvaluationResult
 from benchmarking.evaluator.laaj_evaluator.tools.export2csv import Export2CSV
 from typing import List, Dict, Tuple, Any
+from benchmarking.utils.logger import ModernLogger
 import os
 
-class BaseAgent:
+class BaseAgent(ModernLogger):
     def __init__(self, model:str):
+        super().__init__()
         self.model = Oracle(model)
         self.system_prompt = ''
         
     def answer(self, question:str) -> str:
         response = self.model.query(self.system_prompt, question)
+        if response.startswith('QUERY_FAILED:'):
+            self.error(f"Query failed for model {self.model.model_name} with error: {response}")
         return response
     
     def answer_multiple(self, questions:List[str]) -> List[str]:

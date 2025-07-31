@@ -330,7 +330,7 @@ class ChatbotAdsWorkflow(ParallelProcessor):
         workers: int = None,
         batch_size: int = 5,
         max_retries: int = 2,
-        timeout: int = 180
+        timeout: int = 1800
     ) -> List[Dict[str, str]]
     
     def help(self) -> None
