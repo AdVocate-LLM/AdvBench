@@ -10,42 +10,31 @@ from .base_agent import BaseAgent
 from ..tools.productRAG import productRAG
 from ..tools.injector import Injector
 from sentence_transformers import SentenceTransformer
+from ..config import *
 
 class InjectorAgent(BaseAgent):
-    # enum for productRAG
-    DEFAULT_RAG_MODEL = 'all-MiniLM-L6-v2'
-    ADS_START = "[[ADS_START]]"
-    ADS_END = "[[ADS_END]]"
-    
-    # enum for injection methods
-    QUERY_PROMPT = "QUERY_PROMPT"
-    QUERY_RESPONSE = "QUERY_RESPONSE"
-    QUERY_PROMPT_N_RESPONSE = "QUERY_PROMPT_N_RESPONSE"
-    
-    # enum for refine methods
-    REFINE_GEN_INSERT = 'REFINE_GEN_INSERT'
-    BASIC_GEN_INSERT = 'BASIC_GEN_INSERT'
     
     def __init__(self, 
                 model: str, 
                 product_list_path: str,
-                rag_model: Optional[SentenceTransformer] = None
+                rag_model: Optional[SentenceTransformer] = None,
+                score_func: str = LOG_WEIGHT
                 ) -> None:
         super().__init__(model)
         # basic settings
         self.product_list_path = product_list_path
-        self.rag_model = rag_model or SentenceTransformer(self.DEFAULT_RAG_MODEL)
+        self.rag_model = rag_model or SentenceTransformer(DEFAULT_RAG_MODEL)
         self.system_prompt = SYS_REFINE
-        
+        self.score_func = score_func
         self.INJECT_METHODS = {
-            "QUERY_PROMPT": self.QUERY_PROMPT, 
-            "QUERY_RESPONSE": self.QUERY_RESPONSE, 
-            "QUERY_PROMPT_N_RESPONSE": self.QUERY_PROMPT_N_RESPONSE
+            "QUERY_PROMPT": QUERY_PROMPT, 
+            "QUERY_RESPONSE": QUERY_RESPONSE, 
+            "QUERY_PROMPT_N_RESPONSE": QUERY_PROMPT_N_RESPONSE
         }
         
         self.REFINE_METHODS = {
-            "REFINE": self.REFINE_GEN_INSERT,
-            "BASIC": self.BASIC_GEN_INSERT
+            "REFINE": REFINE_GEN_INSERT,
+            "BASIC": BASIC_GEN_INSERT
         }
         
         # Initialize the tools
@@ -53,7 +42,7 @@ class InjectorAgent(BaseAgent):
             file_path=self.product_list_path,
             model=self.rag_model
         )
-        self.injector = Injector()
+        self.injector = Injector(score_func=self.score_func)
 
     def get_inject_methods(self) -> Dict[str, str]:
         """Get available injection methods.
@@ -95,8 +84,8 @@ class InjectorAgent(BaseAgent):
         Returns:
             Result: Refined result with injected product
         """
-        product_text = f"{self.ADS_START}{str(best_product)}{self.ADS_END}"
-        target_idx = inject_position[1]
+        product_text = f"{ADS_START}{str(best_product)}{ADS_END}"
+        target_idx = inject_position[0]
         
         # Handle single sentence case: if target_idx is out of bounds, append to the last sentence
         if target_idx >= len(sentences):
@@ -105,7 +94,7 @@ class InjectorAgent(BaseAgent):
             sentences[target_idx].sentence = f"{target_sentence} {product_text}"
         else:
             target_sentence = sentences[target_idx].to_string()
-            sentences[target_idx].sentence = f"{product_text} {target_sentence}"
+            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
         content = answer_structure2string(sentences, structure)
         
         refined_text = content
@@ -148,7 +137,7 @@ class InjectorAgent(BaseAgent):
             Result: Result with injected product
         """
         product_text = str(best_product)
-        target_idx = inject_position[1]
+        target_idx = inject_position[0]
         
         # Handle single sentence case: if target_idx is out of bounds, append to the last sentence
         if target_idx >= len(sentences):
@@ -157,7 +146,7 @@ class InjectorAgent(BaseAgent):
             sentences[target_idx].sentence = f"{target_sentence} {product_text}"
         else:
             target_sentence = sentences[target_idx].to_string()
-            sentences[target_idx].sentence = f"{product_text} {target_sentence}"
+            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
         content = answer_structure2string(sentences, structure)
         injected_result = Result(
             prompt=raw_answer.get_prompt(),
@@ -214,12 +203,12 @@ class InjectorAgent(BaseAgent):
         # Step 2: Inject the best product based on the solution
         sol_tag = f'{solution_name}_{query_type}'
         # only inject the product without optimization
-        if solution_name == self.BASIC_GEN_INSERT:
+        if solution_name == BASIC_GEN_INSERT:
             return self.create_basic_injection(
                 raw_answer, sol_tag, sentences, structure, (prev_pos, next_pos), best_product
             )
         # inject the product and optimize the content
-        elif solution_name == self.REFINE_GEN_INSERT:
+        elif solution_name == REFINE_GEN_INSERT:
             return self.create_refined_injection(
                 raw_answer, sol_tag, sentences, structure, (prev_pos, next_pos), best_product
             )
@@ -230,7 +219,7 @@ class InjectorAgent(BaseAgent):
                     solution_name: str = REFINE_GEN_INSERT,
                     batch_size=5,
                     max_retries=2,
-                    timeout=180) -> List[Result]:
+                    timeout=1800) -> List[Result]:
         """Inject products into the answers at optimal positions with optimized parallel processing.
         
         Args:

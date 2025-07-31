@@ -13,6 +13,7 @@ from sentence_transformers import SentenceTransformer
 from .agents.answer_agent import AnswerAgent
 from .agents.injector_agent import InjectorAgent
 from .utils.format import Result_List2answer_product_Dict_list
+from .config import *
 
 class AdvocateWorkflow:
     """
@@ -30,10 +31,12 @@ class AdvocateWorkflow:
                 model_name: str="gpt-4o",
                 product_list_path: str= None,
                 rag_model: Optional[SentenceTransformer] = None,
+                score_func: str = LOG_WEIGHT
                 ):
         self.model_name = model_name
         self.product_list_path = product_list_path
         self.rag_model = rag_model
+        self.score_func = score_func
         # Answer Agent
         self.answer_agent = AnswerAgent(
             model=self.model_name,
@@ -43,6 +46,7 @@ class AdvocateWorkflow:
             model=self.model_name,
             product_list_path=self.product_list_path,
             rag_model=self.rag_model,
+            score_func=self.score_func
         )
         
     def help(self):

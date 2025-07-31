@@ -3,12 +3,14 @@ from typing import Callable, List, Dict, Optional
 from benchmarking.evaluator import QuantEvaluator, LAJQualitativeEvaluator
 from .utils.struct import EvaluationResult
 from .processor import Processor, SelectProcessor
+from .utils.cache import ExperimentCache
 import os   
 from .utils.logger import ModernLogger
 from .utils.struct import SolutionResult
 from .dataset.AdvDatasets import AdvDatasets
+import time
 
-class AdvBench(ModernLogger):
+class AdvBench(ExperimentCache):
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     def __init__(self, 
@@ -18,17 +20,22 @@ class AdvBench(ModernLogger):
                 judge_model: str = 'gpt-4o-mini',
                 output_dir: str = current_dir,
                 n_repeats: int = 1, 
-                max_samples: int = 0):
-        super().__init__(name="AdvBench")
+                max_samples: int = 0,
+                tags: str = ''
+                ):
+        ModernLogger.__init__(self, name="AdvBench")
+        ExperimentCache.__init__(self)
         self.datasets = AdvDatasets()
         if not data_sets:
             self.data_sets = self.datasets.get_all_data_set_names()
         else:
             self.data_sets = data_sets
+        self.create_experiment_context()
         self.solutions = solutions
         self.best_product_selector = best_product_selector
         self.evaluate_result = EvaluationResult()
-        self.output_dir = os.path.join(output_dir, 'output')
+        self.current_time = time.strftime("%Y%m%d_%H%M%S")
+        self.output_dir = os.path.join(output_dir, 'output', f'{self.current_time}_{tags}')
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
         self.judge_model = judge_model
@@ -67,13 +74,14 @@ class AdvBench(ModernLogger):
             solution_models=self.solutions, 
             output_dir=self.output_dir
         )
-        results = processor.process()
+        results = processor.process(n_repeats=self.n_repeats)
         
         # (Optional) Save the results to the output directory as json file
         results.save(os.path.join(self.output_dir, 'results.json'))
         
         # # (Optional) load the results from the json file
         # results = SolutionResult.load(os.path.join(self.output_dir, 'results.json'))
+        # results = SolutionResult.load("/home/zhangsq/Advbench/benchmarking/output/output-gpt-4o-human/results.json")
         
         self.stage("Stage 2: Base on the evaluate_mode, Let the judge model evaluate the results")
         evaluators = self._get_all_evaluator(output_dir=output_dir, results=results)
@@ -106,7 +114,8 @@ class AdvBench(ModernLogger):
             data_sets=self.data_sets, 
             solution_models=self.solutions, 
             output_dir=self.output_dir,
-            best_product_selectors=self.best_product_selector
+            best_product_selectors=self.best_product_selector,
+            n_repeats=self.n_repeats
         )
         results = selector_processor.process()        
         # Step 2: Get the selector evaluator
@@ -125,7 +134,7 @@ class AdvBench(ModernLogger):
 
     def report(self):
         # Step 5: Save the results to the output directory as json file
-        self.evaluate_result.save_to_excel_report(os.path.join(self.output_dir, 'evaluation_result.xlsx'))
+        self.evaluate_result.save_to_excel_report(os.path.join(self.output_dir,'evaluation_result.xlsx'))
         return self
 
     def run(self):

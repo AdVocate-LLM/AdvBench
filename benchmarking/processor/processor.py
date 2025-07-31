@@ -6,8 +6,9 @@ import os
 import random
 from benchmarking.utils.struct import SolutionResult
 from benchmarking.utils.logger import ModernLogger
+from benchmarking.utils.cache import ExperimentCache
 
-class Processor(Path, AdvDatasets, ModernLogger):
+class Processor(Path, AdvDatasets, ExperimentCache):
     """
     Processor class for processing the data sets and solutions
 
@@ -48,6 +49,7 @@ class Processor(Path, AdvDatasets, ModernLogger):
         Path.__init__(self, output_dir=output_dir)
         AdvDatasets.__init__(self, data_set_names=data_sets)
         ModernLogger.__init__(self, name="Processor")
+        ExperimentCache.__init__(self)
 
         # check if the data_sets is a list of valid dataset names
         for data_name in data_sets:
@@ -172,6 +174,7 @@ class Processor(Path, AdvDatasets, ModernLogger):
         """
         results = SolutionResult()
         for repeat_id in range(n_repeats):
+            self.update_experiment_context(current_batch=repeat_id)
             results += self.call_solution_model(
                 data_name=data_name, 
                 solution_name=solution_name, 
@@ -210,8 +213,6 @@ class Processor(Path, AdvDatasets, ModernLogger):
     
     def process(
             self, 
-            data_sets: List[str]=None, 
-            solutions: List[str]=None, 
             n_repeats: int = 1, 
             max_samples: int = 0, 
             is_saved: bool = True
@@ -224,10 +225,8 @@ class Processor(Path, AdvDatasets, ModernLogger):
         Returns:
             SolutionResult: The result of the solutions
         """
-        if data_sets is None:
-            data_sets = self.get_data_set_names()
-        if solutions is None:
-            solutions = self.get_solution_names()
+        data_sets = self.get_data_set_names()
+        solutions = self.get_solution_names()
         results = SolutionResult()
         for solution_name in solutions:
             self.section(f"Using {solution_name} to process the data sets...")

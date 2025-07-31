@@ -8,7 +8,7 @@ class ParallelProcessor(ModernLogger):
     """Base class for parallel processing operations, with unified retry logic."""
 
     def __init__(self):
-        super().__init__(name="ParallelProcessor")
+        ModernLogger.__init__(self, name="ParallelProcessor")
 
     def determine_worker_count(self, workers: Optional[int] = None) -> int:
         return min((os.cpu_count() or 4) * 2, 16) if workers is None else workers

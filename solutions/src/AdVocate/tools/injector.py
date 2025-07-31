@@ -2,12 +2,22 @@ from typing import List, Tuple, Callable, Optional
 from ..utils.product import Product
 from ..utils.sentence import Sentence
 import numpy as np
+from ..config import *
 
 class Injector:
-    def __init__(self, score_func: Optional[Callable] = None):
-        self.score_func = score_func or self._default_score_func
-        
-    def _default_score_func(self, inject_flow: float, sim: float, alpha: float = 2.0, epsilon: float = 1e-6) -> float:
+    def __init__(self, score_func: str = LOG_WEIGHT):
+        self.score_func = score_func
+        if self.score_func == LOG_WEIGHT:
+            self.score_func = self._default_score_func_log_weight
+        elif self.score_func == LINEAR_WEIGHT:
+            self.score_func = self._default_score_func_linear
+        else:
+            raise ValueError(f"Invalid score function: {self.score_func}")
+    
+    def _default_score_func_linear(self, inject_flow: float, sim: float) -> float:
+        return sim - inject_flow
+    
+    def _default_score_func_log_weight(self, inject_flow: float, sim: float, alpha: float = 2.0, epsilon: float = 1e-6) -> float:
         """Default scoring function for injection position selection.
         
         Args:
@@ -30,6 +40,7 @@ class Injector:
         flow_preservation = 1 - inject_flow / (sim + epsilon)
         flow_quality = np.log(1 + alpha * sim)
         return flow_preservation * flow_quality
+    
 
     def get_best_inject_position(self, sentences: List[Sentence], sentence_flow: List[Tuple[int, int, float]], 
                             product: Product) -> Tuple[int, int, float]:

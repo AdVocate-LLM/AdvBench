@@ -2,12 +2,13 @@ from openai import OpenAI
 import os
 import logging
 from .parallel import ParallelProcessor
+from .cache import ExperimentCache
 
 # Disable OpenAI HTTP request logging
 logging.getLogger("openai").setLevel(logging.ERROR)
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
-class Oracle(ParallelProcessor):
+class Oracle(ParallelProcessor, ExperimentCache):
     # enum for model names
     MODEL_GPT4o_MINI = 'gpt-4o-mini'
     MODEL_GPT4o = 'gpt-4o'
@@ -19,7 +20,8 @@ class Oracle(ParallelProcessor):
     MODEL_MIXTRAL_8X7B = 'mixtral-8x7B'
 
     def __init__(self, model, apikey=None, base_url=None):
-        super().__init__()
+        ParallelProcessor.__init__(self)
+        ExperimentCache.__init__(self)
         self.model = model
         self.apikey = os.environ.get("OPENAI_API_KEY") if apikey is None else apikey
         self.base_url = os.environ.get("BASE_URL") if base_url is None else base_url
@@ -49,6 +51,11 @@ class Oracle(ParallelProcessor):
         Returns:
             dict: Dictionary containing the query, answer, and log probabilities.
         """
+        # Check if the query is cached
+        cached_response = self.get_cached_response(self.model, prompt_sys, prompt_user, temp, top_p)
+        if cached_response:
+            return cached_response
+
         try:
             completion = self.client.chat.completions.create(
                 model=self.model,
@@ -68,10 +75,16 @@ class Oracle(ParallelProcessor):
             
             if not query_key:
                 query_key = prompt_user 
-            return {
+            
+            result = {
                 "query": query_key,
                 "answer": response_result
             }
+            
+            # Store in cache
+            self.store_cached_response(self.model, prompt_sys, prompt_user, result, temp, top_p)
+            
+            return result
 
         except Exception as e:
             self.error(f"Query failed for problem({query_key}): due to {e}")
@@ -79,9 +92,8 @@ class Oracle(ParallelProcessor):
                 query_key = prompt_user 
             return {
                 "query": query_key,
-                "answer": "QUERY_FAILED"
+                "answer": f"QUERY_FAILED:{e}"
             }
-            raise
 
     
     def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=3000, **kwargs):
