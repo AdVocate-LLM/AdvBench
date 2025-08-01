@@ -3,20 +3,63 @@ import json
 import time
 import hashlib
 import fcntl
-from typing import Dict, Any
+import threading
+import queue
+from collections import OrderedDict
+from typing import Dict, Any, Optional
 from .logger import ModernLogger
+
+class MemoryLRUCache:
+    """
+    Thread-safe LRU cache for memory caching.
+    """
+    
+    def __init__(self, max_size: int = 1000):
+        self.max_size = max_size
+        self.cache = OrderedDict()
+        self.lock = threading.RLock()
+    
+    def get(self, key: str) -> Optional[Dict[str, Any]]:
+        with self.lock:
+            if key in self.cache:
+                # Move to end (most recently used)
+                self.cache.move_to_end(key)
+                return self.cache[key]
+            return None
+    
+    def put(self, key: str, value: Dict[str, Any]):
+        with self.lock:
+            if key in self.cache:
+                # Update existing key
+                self.cache[key] = value
+                self.cache.move_to_end(key)
+            else:
+                # Add new key
+                if len(self.cache) >= self.max_size:
+                    # Remove least recently used
+                    self.cache.popitem(last=False)
+                self.cache[key] = value
+    
+    def clear(self):
+        with self.lock:
+            self.cache.clear()
+
 
 class ExperimentCache(ModernLogger):
     """
-    Experiment cache manager that handles cache file naming and experiment context tracking.
+    Experiment cache manager with memory queue caching to reduce frequent file I/O.
     """
     
-    def __init__(self, base_dir: str = None):
+    def __init__(self, base_dir: str = None, memory_cache_size: int = 1000, 
+                 write_batch_size: int = 10, write_interval: float = 5.0):
         """
         Initialize the experiment cache manager.
         
         Args:
             base_dir: Base directory for the project. If None, will use current working directory.
+            memory_cache_size: Maximum number of items in memory cache
+            write_batch_size: Number of cache items to accumulate before writing to file
+            write_interval: Maximum time interval (seconds) between file writes
         """
         super().__init__(name="ExperimentCache")
         if base_dir is None:
@@ -26,9 +69,125 @@ class ExperimentCache(ModernLogger):
         self.cache_dir = os.path.join(base_dir, '.cache')
         self.current_file = os.path.join(self.cache_dir, '.current')
         
+        # Memory cache configuration
+        self.memory_cache_size = memory_cache_size
+        self.write_batch_size = write_batch_size
+        self.write_interval = write_interval
+        
+        # Memory cache instances (one per cache file)
+        self.memory_caches: Dict[str, MemoryLRUCache] = {}
+        self.memory_cache_lock = threading.RLock()
+        
+        # Write queue for batched file operations
+        self.write_queue = queue.Queue()
+        self.pending_writes: Dict[str, Dict[str, Dict[str, Any]]] = {}
+        self.pending_writes_lock = threading.RLock()
+        
+        # Background writer thread
+        self.writer_thread = None
+        self.writer_stop_event = threading.Event()
+        self.last_write_time = time.time()
+        
         # Ensure cache directory exists
         if not os.path.exists(self.cache_dir):
             os.makedirs(self.cache_dir)
+        
+        # Start background writer thread
+        self._start_writer_thread()
+    
+    def _get_memory_cache(self, cache_file: str) -> MemoryLRUCache:
+        """Get or create memory cache for a specific cache file."""
+        with self.memory_cache_lock:
+            if cache_file not in self.memory_caches:
+                self.memory_caches[cache_file] = MemoryLRUCache(self.memory_cache_size)
+            return self.memory_caches[cache_file]
+    
+    def _start_writer_thread(self):
+        """Start the background writer thread."""
+        if self.writer_thread is None or not self.writer_thread.is_alive():
+            self.writer_thread = threading.Thread(target=self._background_writer, daemon=True)
+            self.writer_thread.start()
+    
+    def _background_writer(self):
+        """Background thread that handles batched file writes."""
+        while not self.writer_stop_event.is_set():
+            try:
+                # Check if we should write based on time interval
+                current_time = time.time()
+                should_write_by_time = (current_time - self.last_write_time) >= self.write_interval
+                
+                # Check if we should write based on pending writes count
+                should_write_by_count = False
+                with self.pending_writes_lock:
+                    total_pending = sum(len(writes) for writes in self.pending_writes.values())
+                    should_write_by_count = total_pending >= self.write_batch_size
+                
+                if should_write_by_time or should_write_by_count:
+                    self._flush_pending_writes()
+                    self.last_write_time = current_time
+                
+                # Sleep for a short interval
+                time.sleep(0.1)
+                
+            except Exception as e:
+                self.warning(f"Background writer error: {str(e)}")
+                time.sleep(1.0)
+    
+    def _flush_pending_writes(self):
+        """Flush all pending writes to disk."""
+        with self.pending_writes_lock:
+            if not self.pending_writes:
+                return
+            
+            writes_to_process = dict(self.pending_writes)
+            self.pending_writes.clear()
+        
+        for cache_file, updates in writes_to_process.items():
+            try:
+                # Load existing cache data
+                existing_data = self._load_cache_direct(cache_file)
+                
+                # Merge with pending updates
+                existing_data.update(updates)
+                
+                # Save to file
+                self._save_cache_direct(cache_file, existing_data)
+                
+            except Exception as e:
+                self.warning(f"Failed to flush writes for {cache_file}: {str(e)}")
+                # Re-add failed writes back to pending (optional retry logic)
+                with self.pending_writes_lock:
+                    if cache_file not in self.pending_writes:
+                        self.pending_writes[cache_file] = {}
+                    self.pending_writes[cache_file].update(updates)
+    
+    def _load_cache_direct(self, cache_file: str) -> Dict[str, Any]:
+        """Direct file loading without memory cache."""
+        if not os.path.exists(cache_file):
+            return {}
+        
+        try:
+            with open(cache_file, 'r', encoding='utf-8') as f:
+                fcntl.flock(f.fileno(), fcntl.LOCK_SH)
+                try:
+                    return json.load(f)
+                finally:
+                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+        except Exception as e:
+            self.warning(f"Failed to load cache from {cache_file}: {str(e)}")
+            return {}
+    
+    def _save_cache_direct(self, cache_file: str, cache_data: Dict[str, Any]):
+        """Direct file saving without memory cache."""
+        try:
+            with open(cache_file, 'w', encoding='utf-8') as f:
+                fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+                try:
+                    json.dump(cache_data, f, ensure_ascii=False, indent=2)
+                finally:
+                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+        except Exception as e:
+            self.warning(f"Failed to save cache to {cache_file}: {str(e)}")
     
     def create_experiment_context(self, experiment_id: str = None, **context_data):
         """
@@ -144,7 +303,7 @@ class ExperimentCache(ModernLogger):
     
     def load_cache(self, cache_file: str) -> Dict[str, str]:
         """
-        Load cache from file with file locking.
+        Load cache from memory first, then file if needed.
         
         Args:
             cache_file: Path to cache file
@@ -152,12 +311,29 @@ class ExperimentCache(ModernLogger):
         Returns:
             Dictionary containing cached data
         """
+        # Get memory cache for this file
+        memory_cache = self._get_memory_cache(cache_file)
+        
+        # Check if we have the entire cache file loaded in memory
+        full_cache_key = f"__FULL_CACHE__{cache_file}"
+        cached_data = memory_cache.get(full_cache_key)
+        
+        if cached_data is not None:
+            return cached_data
+        
+        # Load from file and cache in memory
+        file_data = self._load_cache_from_file(cache_file)
+        memory_cache.put(full_cache_key, file_data)
+        
+        return file_data
+    
+    def _load_cache_from_file(self, cache_file: str) -> Dict[str, str]:
+        """Load cache directly from file with error handling."""
         if not os.path.exists(cache_file):
             return {}
         
         try:
             with open(cache_file, 'r', encoding='utf-8') as f:
-                # Use shared lock for reading
                 fcntl.flock(f.fileno(), fcntl.LOCK_SH)
                 try:
                     return json.load(f)
@@ -171,7 +347,6 @@ class ExperimentCache(ModernLogger):
                 backup_file = cache_file + f".corrupted.{int(time.time())}"
                 shutil.copy2(cache_file, backup_file)
                 self.warning(f"Backed up corrupted cache file to: {backup_file}")
-                # Remove the corrupted file
                 os.remove(cache_file)
                 self.info("Removed corrupted cache file, starting fresh")
             except Exception as backup_error:
@@ -180,22 +355,22 @@ class ExperimentCache(ModernLogger):
     
     def save_cache(self, cache_file: str, cache_data: Dict[str, str]):
         """
-        Save cache to file with file locking.
+        Save cache to memory and queue for background file writing.
         
         Args:
             cache_file: Path to cache file
             cache_data: Dictionary containing cached data
         """
-        try:
-            with open(cache_file, 'w', encoding='utf-8') as f:
-                # Use exclusive lock for writing
-                fcntl.flock(f.fileno(), fcntl.LOCK_EX)
-                try:
-                    json.dump(cache_data, f, ensure_ascii=False, indent=2)
-                finally:
-                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
-        except Exception as e:
-            self.warning(f"Failed to save cache to {cache_file}: {str(e)}")
+        # Update memory cache immediately
+        memory_cache = self._get_memory_cache(cache_file)
+        full_cache_key = f"__FULL_CACHE__{cache_file}"
+        memory_cache.put(full_cache_key, cache_data.copy())
+        
+        # Queue for background file writing
+        with self.pending_writes_lock:
+            if cache_file not in self.pending_writes:
+                self.pending_writes[cache_file] = {}
+            self.pending_writes[cache_file].update(cache_data)
     
     def cleanup_experiment_context(self):
         """
@@ -242,6 +417,53 @@ class ExperimentCache(ModernLogger):
                     self.warning(f"Failed to clear cache file {cache_file}: {str(e)}")
         
         self.info(f"Cleared {cleared_count} cache files")
+        
+        # Also clear memory caches
+        with self.memory_cache_lock:
+            for memory_cache in self.memory_caches.values():
+                memory_cache.clear()
+            self.memory_caches.clear()
+    
+    def flush_all_pending_writes(self):
+        """Force flush all pending writes to disk immediately."""
+        self._flush_pending_writes()
+    
+    def shutdown(self):
+        """Shutdown the cache manager and cleanup resources."""
+        # Stop the background writer thread
+        self.writer_stop_event.set()
+        
+        # Flush any remaining pending writes
+        self._flush_pending_writes()
+        
+        # Wait for writer thread to finish
+        if self.writer_thread and self.writer_thread.is_alive():
+            self.writer_thread.join(timeout=5.0)
+        
+        # Clear memory caches
+        with self.memory_cache_lock:
+            for memory_cache in self.memory_caches.values():
+                memory_cache.clear()
+            self.memory_caches.clear()
+        
+        self.info("Cache manager shutdown completed")
+    
+    def get_cache_stats(self) -> Dict[str, Any]:
+        """Get cache statistics for monitoring."""
+        stats = {
+            "memory_caches_count": len(self.memory_caches),
+            "pending_writes_count": 0,
+            "memory_cache_sizes": {}
+        }
+        
+        with self.pending_writes_lock:
+            stats["pending_writes_count"] = sum(len(writes) for writes in self.pending_writes.values())
+        
+        with self.memory_cache_lock:
+            for cache_file, memory_cache in self.memory_caches.items():
+                stats["memory_cache_sizes"][cache_file] = len(memory_cache.cache)
+        
+        return stats
     
     def generate_cache_key(self, model: str, prompt_sys: str, prompt_user: str, temp: float = 0.0, top_p: float = 0.9) -> str:
         """
@@ -254,7 +476,7 @@ class ExperimentCache(ModernLogger):
     
     def get_cached_response(self, model: str, prompt_sys: str, prompt_user: str, temp: float = 0.0, top_p: float = 0.9, cache_scope: str = "auto", include_batch: bool = True) -> Dict[str, Any]:
         """
-        Get cached response based on current experiment context.
+        Get cached response from memory cache first, then file cache.
         
         Args:
             model: Model name
@@ -266,16 +488,27 @@ class ExperimentCache(ModernLogger):
             include_batch: Whether to include batch information in cache filename
         """
         cache_file = self.get_cache_filename(model, cache_scope, include_batch)
-        cache_data = self.load_cache(cache_file)
-        
-        if not cache_data:
-            return {}
         cache_key = self.generate_cache_key(model, prompt_sys, prompt_user, temp, top_p)
-        return cache_data.get(cache_key, {})
+        
+        # First try memory cache for individual keys
+        memory_cache = self._get_memory_cache(cache_file)
+        cached_response = memory_cache.get(cache_key)
+        if cached_response is not None:
+            return cached_response
+        
+        # Then try loading the full cache and look for the key
+        cache_data = self.load_cache(cache_file)
+        if cache_data and cache_key in cache_data:
+            response = cache_data[cache_key]
+            # Cache this individual response in memory for faster future access
+            memory_cache.put(cache_key, response)
+            return response
+        
+        return {}
     
     def store_cached_response(self, model: str, prompt_sys: str, prompt_user: str, response: Dict[str, Any], temp: float = 0.0, top_p: float = 0.9, cache_scope: str = "auto", include_batch: bool = True):
         """
-        Store response in cache based on current experiment context.
+        Store response in memory cache immediately and queue for file writing.
         
         Args:
             model: Model name
@@ -288,9 +521,13 @@ class ExperimentCache(ModernLogger):
             include_batch: Whether to include batch information in cache filename
         """
         cache_file = self.get_cache_filename(model, cache_scope, include_batch)
-        cache_data = self.load_cache(cache_file)
-        
         cache_key = self.generate_cache_key(model, prompt_sys, prompt_user, temp, top_p)
-        cache_data[cache_key] = response
         
+        # Store in memory cache immediately for fast retrieval
+        memory_cache = self._get_memory_cache(cache_file)
+        memory_cache.put(cache_key, response)
+        
+        # Also update the full cache data in memory and queue for file writing
+        cache_data = self.load_cache(cache_file)
+        cache_data[cache_key] = response
         self.save_cache(cache_file, cache_data)

@@ -69,19 +69,19 @@ class AdvBench(ExperimentCache):
     def evaluate(self, output_dir: str=None, evaluate_matrix: List[str]=None):
         # Step 1: Get the results from the solutions
         self.stage("Stage 1: Using the solutions to process the data sets")
-        processor = Processor(
-            data_sets=self.data_sets, 
-            solution_models=self.solutions, 
-            output_dir=self.output_dir
-        )
-        results = processor.process(n_repeats=self.n_repeats)
+        # processor = Processor(
+        #     data_sets=self.data_sets, 
+        #     solution_models=self.solutions, 
+        #     output_dir=self.output_dir
+        # )
+        # results = processor.process(n_repeats=self.n_repeats)
         
-        # (Optional) Save the results to the output directory as json file
-        results.save(os.path.join(self.output_dir, 'results.json'))
+        # # (Optional) Save the results to the output directory as json file
+        # results.save(os.path.join(self.output_dir, 'results.json'))
         
         # # (Optional) load the results from the json file
         # results = SolutionResult.load(os.path.join(self.output_dir, 'results.json'))
-        # results = SolutionResult.load("/home/zhangsq/Advbench/benchmarking/output/output-gpt-4o-human/results.json")
+        results = SolutionResult.load("/Users/macbook.silan.tech/Desktop/Advbench/benchmarking/output/20250731_190811_doubao-1-5-lite-32k-250115-lmsys100-doubao-1-5-pro-32k-250115-repeat-3/results.json")
         
         self.stage("Stage 2: Base on the evaluate_mode, Let the judge model evaluate the results")
         evaluators = self._get_all_evaluator(output_dir=output_dir, results=results)

@@ -36,24 +36,26 @@ if __name__ == '__main__':
             product_list_path="benchmarking/dataset/product/products.json",
             topic_list_path="benchmarking/dataset/product/topics.json",
             # model_name="Qwen/Qwen3-14B"
-            model_name="gpt-4o-mini",
+            # model_name="gpt-4o-mini",
+            model_name="doubao-1-5-lite-32k-250115",
     )
     advocate_workflow = AdvocateWorkflow(
             product_list_path="benchmarking/dataset/product/products.json",
             # model_name="Qwen/Qwen3-14B"
-            model_name="gpt-4o-mini",
+            # model_name="gpt-4o-mini",
+            model_name="doubao-1-5-lite-32k-250115",
             score_func=LINEAR_WEIGHT,
     )
     # Example usage of the AdvBench
     adv_bench = AdvBench(
-        data_sets=["mt-benchmark-humanities"],
-        # data_sets=["lmsys100"],
+        # data_sets=["mt-benchmark-humanities"],
+        data_sets=["lmsys100"],
         solutions={
-                # "chi": 
-                #     partial(
-                #         chi_workflow.run,
-                #         solution_name="chi"
-                #     ),
+                "chi": 
+                    partial(
+                        chi_workflow.run,
+                        solution_name="chi"
+                    ),
                 "gen-insert-response": 
                     partial(
                         advocate_workflow.run,
@@ -99,8 +101,10 @@ if __name__ == '__main__':
         },
         # judge_model="Qwen/Qwen3-32B",
         # judge_model="Qwen/Qwen2.5-14B-Instruct",
-        judge_model="gpt-4o",
+        # judge_model="gpt-4o",
+        judge_model="gpt-4.1-mini",
         n_repeats=3,
-        tags="gpt-4o-mini-lmsys100-gpt-4o-repeat-3"
+        # tags="gpt-4o-mini-lmsys100-gpt-4o-repeat-3"
+        tags="doubao-1-5-lite-32k-250115-lmsys100-gpt-4.1-mini-repeat-3"
     )
     adv_bench.run()

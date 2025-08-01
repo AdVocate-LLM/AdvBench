@@ -65,7 +65,6 @@ class Oracle(ParallelProcessor, ExperimentCache):
                 ],
                 stream=False,
                 temperature=temp,
-                top_p=top_p,
             )
 
             response_result = ""
