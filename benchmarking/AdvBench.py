@@ -25,6 +25,7 @@ class AdvBench(ExperimentCache):
                 ):
         ModernLogger.__init__(self, name="AdvBench")
         ExperimentCache.__init__(self)
+        self.tags = tags
         self.datasets = AdvDatasets()
         if not data_sets:
             self.data_sets = self.datasets.get_all_data_set_names()
@@ -69,19 +70,19 @@ class AdvBench(ExperimentCache):
     def evaluate(self, output_dir: str=None, evaluate_matrix: List[str]=None):
         # Step 1: Get the results from the solutions
         self.stage("Stage 1: Using the solutions to process the data sets")
-        # processor = Processor(
-        #     data_sets=self.data_sets, 
-        #     solution_models=self.solutions, 
-        #     output_dir=self.output_dir
-        # )
-        # results = processor.process(n_repeats=self.n_repeats)
+        processor = Processor(
+            data_sets=self.data_sets, 
+            solution_models=self.solutions, 
+            output_dir=self.output_dir
+        )
+        results = processor.process(n_repeats=self.n_repeats)
         
-        # # (Optional) Save the results to the output directory as json file
-        # results.save(os.path.join(self.output_dir, 'results.json'))
+        # (Optional) Save the results to the output directory as json file
+        results.save(os.path.join(self.output_dir, 'results.json'))
         
         # # (Optional) load the results from the json file
         # results = SolutionResult.load(os.path.join(self.output_dir, 'results.json'))
-        results = SolutionResult.load("/Users/macbook.silan.tech/Desktop/Advbench/benchmarking/output/20250731_190811_doubao-1-5-lite-32k-250115-lmsys100-doubao-1-5-pro-32k-250115-repeat-3/results.json")
+        # results = SolutionResult.load("/Users/macbook.silan.tech/Documents/GitHub/AdvBench/benchmarking/output/20250731_190811_doubao-1-5-lite-32k-250115-lmsys100-doubao-1-5-pro-32k-250115-repeat-3/results.json")
         
         self.stage("Stage 2: Base on the evaluate_mode, Let the judge model evaluate the results")
         evaluators = self._get_all_evaluator(output_dir=output_dir, results=results)
@@ -106,6 +107,7 @@ class AdvBench(ExperimentCache):
             evaluation_result += evaluator.evaluate(matrix_names)
         
         self.evaluate_result += evaluation_result
+        self.evaluate_result.save(os.path.join(self.output_dir, 'evaluation_result.json'))
         return self
 
     def evaluate_the_selector(self):
@@ -134,11 +136,17 @@ class AdvBench(ExperimentCache):
 
     def report(self):
         # Step 5: Save the results to the output directory as json file
-        self.evaluate_result.save_to_excel_report(os.path.join(self.output_dir,'evaluation_result.xlsx'))
+        self.evaluate_result.save_to_excel_report(os.path.join(self.output_dir,'evaluation_result.xlsx'), title=self.tags if self.tags else "Report")
+        self.evaluate_result.average_by_batch().save_to_excel_report(os.path.join(self.output_dir,'evaluation_result_average.xlsx'), title=self.tags+"_average" if self.tags else "Report_average")
+        
+        # get with product
+        result_with_product = self.evaluate_result.fliter_only_has_product()
+        result_with_product.save_to_excel_report(os.path.join(self.output_dir,'evaluation_result_with_product.xlsx'), title=self.tags+"_with_product" if self.tags else "Report_with_product")
+        result_with_product.average_by_batch().save_to_excel_report(os.path.join(self.output_dir,'evaluation_result_with_product_average.xlsx'), title=self.tags+"_with_product_average" if self.tags else "Report_with_product_average")
         return self
 
-    def run(self):
-        self.evaluate()
+    def run(self, evaluate_matrix: List[str]=None):
+        self.evaluate(evaluate_matrix=evaluate_matrix)
         # self.evaluate_the_selector()
         self.report()
         return self

@@ -64,3 +64,29 @@ class BaseAgent(ModernLogger):
         ) for (question, response) in zip(questions, responses)]
         
         return format_questions
+    
+    def _prepare_evaluation_questions_with_products(self, 
+                                    solution: SolutionResult, 
+                                    user_prompt_template: str) -> Tuple[List, List, List, List]:
+        """Prepare questions for evaluation from solution matrices
+        
+        Args:
+            solution: SolutionResult containing questions and responses
+            user_prompt_template: Template string with {question} and {response} placeholders
+            
+        Returns:
+            format_questions: List of formatted questions
+        """
+        solution_matrices = solution._to_matrix()
+        questions = [matrix[3] for matrix in solution_matrices]
+        responses = [matrix[6] for matrix in solution_matrices]
+        products = [matrix[7] for matrix in solution_matrices]
+        
+        # Format questions for evaluation
+        format_questions = [user_prompt_template.format(
+            question=question,
+            response=response,
+            products=products
+        ) for (question, response, products) in zip(questions, responses, products)]
+        
+        return format_questions

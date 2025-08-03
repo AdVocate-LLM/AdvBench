@@ -11,7 +11,7 @@ class Report(ModernLogger):
     A class for generating formatted Excel reports from pandas DataFrames.
     """
     
-    def __init__(self, df: pd.DataFrame, output_file: str, metric_config: Dict[str, str], required_columns: List[str], color_scheme: Dict[str, Dict[str, str]]):
+    def __init__(self, df: pd.DataFrame, output_file: str, metric_config: Dict[str, str], required_columns: List[str], color_scheme: Dict[str, Dict[str, str]], title: str="Report"):
         """Initialize the Report class."""
         super().__init__(name="Report")
         self.df = df
@@ -19,6 +19,7 @@ class Report(ModernLogger):
         self.metric_config = metric_config
         self.required_columns = required_columns
         self.color_scheme = color_scheme
+        self.title = title
         
     def create_report_excel(self):
         """
@@ -90,7 +91,7 @@ class Report(ModernLogger):
         # Create a new workbook
         wb = openpyxl.Workbook()
         ws = wb.active
-        ws.title = "Report"
+        ws.title = self.title
         
         # Define styles based on color scheme
         title_font = Font(size=14, bold=True, color=self.color_scheme['title']['font_color'])
@@ -118,7 +119,7 @@ class Report(ModernLogger):
         center_align_wrap = Alignment(horizontal='center', vertical='center', wrap_text=True)
         
         # Write title
-        ws['A1'] = "Combined Report"
+        ws['A1'] = self.title
         ws.merge_cells(f'A1:{get_column_letter(len(final_cols))}1')
         title_cell = ws['A1']
         title_cell.font = title_font

@@ -279,7 +279,7 @@ class ModernLogger:
         """
         Print "File saved" with path as clickable link and emoji indicator.
         """
-        uri = Path(file_path).as_uri()
+        uri = Path(file_path).resolve().as_uri()
         # Use Rich Markup to generate linked text
         if file_name:
             self.console.print(

@@ -54,5 +54,8 @@ USER_CLICK_PRODUCTS_EVAL = """
 [Chatbot Response]
 {response}
 
+[Chatbot Advertisement in the response]
+{products}
+
 Evaluate whether users would notice and be interested in clicking any links (attached to entities) in this response and identify the primary category.
 """ 
