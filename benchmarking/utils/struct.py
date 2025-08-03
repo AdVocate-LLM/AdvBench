@@ -1,6 +1,7 @@
 import json
 import os
 from typing import Dict, List, Tuple, Any, Callable, Optional
+import matplotlib.pyplot as plt
 from collections import defaultdict
 from .result import Result
 from .report import Report
@@ -329,12 +330,15 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
                     else:
                         continue
                 eval_results.add_result(
-                    solution_name,
-                    dataSet,
-                    repeat_id,
-                    eval_matrix_label,
-                    res.get_category(),
-                    float(score)
+                    solution_name=solution_name,
+                    dataSet=dataSet,
+                    repeat_id=repeat_id,
+                    analysis_matrix=eval_matrix_label,
+                    category=res.get_category(),
+                    query=res.get_prompt(),
+                    raw_answer=res.get_raw_response(),
+                    product=res.get_product(),
+                    result=float(score)
                 )
         return eval_results
 
@@ -365,29 +369,48 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
         
         # Add each score to the evaluation result
         for score, matrix in zip(scores, matrices):
+            """
+            Convert SolutionResult to matrices
+            
+            Return: List[Tuple[str,str,str,str,str,str,str,str]]
+            - 0: solution_name
+            - 1: data_set
+            - 2: repeat_id
+            - 3: prompt
+            - 4: category
+            - 5: tag
+            - 6: raw_answer
+            - 7: product 
+            """
             solution_name = matrix[0]
             dataset = matrix[1]
             repeat_id = matrix[2]
             category = matrix[4]
+            query = matrix[3]
+            raw_answer = matrix[6]
+            product = matrix[7]
             
             evaluation_result.add_result(
-                solution_name, 
-                dataset, 
-                repeat_id, 
-                analysis_matrix, 
-                category, 
-                float(score)
+                solution_name=solution_name, 
+                dataSet=dataset, 
+                repeat_id=repeat_id, 
+                analysis_matrix=analysis_matrix, 
+                category=category, 
+                query=query,
+                raw_answer=raw_answer,
+                product=product,
+                result=float(score)
             )
         
         return evaluation_result
 
 
-class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
+class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str, str, Tuple[str, str]], float]]):
     """
     The structure of the evaluation result:
     Structure:
         [
-            ((solution_name, dataSet, repeat_id, analysis_matrix, category), float),
+            ((solution_name, dataSet, repeat_id, analysis_matrix, category, query, (raw_answer, product)), float),
             ...
         ]
     """
@@ -398,6 +421,9 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
         repeat_id: str,
         analysis_matrix: str,
         category: str,
+        query: str,
+        raw_answer: str,
+        product: str,
         result: float
     ) -> None:
         """
@@ -405,7 +431,7 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
         If the key exists, its value must not be replaced.
         We must keep all the results.
         """
-        key = (solution_name, dataSet, repeat_id, analysis_matrix, category)
+        key = (solution_name, dataSet, repeat_id, analysis_matrix, category, query, (raw_answer, product))
         # Append new result
         self.append((key, result))
 
@@ -425,7 +451,17 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
         In-place addition: merge entries from other into self.
         """
         for k, v in other:
-            self.add_result(*k, v)
+            self.add_result(
+                solution_name=k[0],
+                dataSet=k[1],
+                repeat_id=k[2],
+                analysis_matrix=k[3],
+                category=k[4],
+                query=k[5],
+                raw_answer=k[6][0],
+                product=k[6][1],
+                result=v
+            )
         return self
 
     def query_result_by_attr(
@@ -441,6 +477,7 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
             "repeat_id": 2,
             "analysis_matrix": 3,
             "category": 4,
+            "query": 5,
         }
         result = EvaluationResult()
         for key, val in self:
@@ -471,6 +508,7 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
             "repeat_id": 2,
             "analysis_matrix": 3,
             "category": 4,
+            "query": 5,
         }
         idx = idx_map.get(attr)
         if idx is None:
@@ -485,6 +523,411 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
             val: self.query_result_by_attr({attr: [val]})
             for val in self.get_keys_by_attr(attr)
         }
+    
+    def group_by_attrs(self, attrs: List[str]) -> Dict[Tuple[str, ...], "EvaluationResult"]:
+        """
+        Group the results by the specified attributes.
+        """
+        idx_map = {
+            "solution_name": 0,
+            "dataSet": 1,
+            "repeat_id": 2,
+            "analysis_matrix": 3,
+            "category": 4,
+            "query": 5,
+        }
+        
+        # Get indices for the requested attributes
+        indices = [idx_map[attr] for attr in attrs if attr in idx_map]
+        
+        grouped = {}
+        for key, val in self:
+            # Create tuple of values for the specified attributes
+            group_key = tuple(key[i] for i in indices)
+            
+            if group_key not in grouped:
+                grouped[group_key] = EvaluationResult()
+            grouped[group_key].append((key, val))
+        
+        return grouped
+    
+    def save(self, file_path: str) -> None:
+        """
+        Save the EvaluationResult to a JSON file.
+        """
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(self, f, indent=2, ensure_ascii=False)
+    
+    @classmethod
+    def load(cls, file_path: str) -> "EvaluationResult":
+        """
+        Load the EvaluationResult from a JSON file.
+        """
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return cls(json.load(f))
+    
+    def fliter_only_has_product(self) -> "EvaluationResult":
+      """
+      Filter the EvaluationResult to only keep the results with product.
+      for each batch, we only keep the query with all results have product.
+      """
+      result = EvaluationResult()
+      # group by query and batch
+      grouped = self.group_by_attrs(["query", "batch"])
+
+      for query_results in grouped.values():
+          # check if all results have product
+          if all(result[0][6][1] != {'name': None, 'url': None, 'desc': None} for result in query_results):
+              result.extend(query_results)
+      return result
+
+    
+    def average_by_batch(self) -> "EvaluationResult":
+        """
+        Average the EvaluationResult by repeat_id (batch).
+        Groups by solution_name, dataSet, analysis_matrix, category, query
+        and averages across different repeat_id values.
+        """
+        result = EvaluationResult()
+        
+        # Group by all attributes except repeat_id to average across batches
+        grouped = self.group_by_attrs(["solution_name", "dataSet", "analysis_matrix", "category", "query"])
+        
+        for group_key, group_results in grouped.items():
+            if not group_results:
+                continue
+                
+            # Calculate average score across all repeat_ids in this group
+            scores = [score for _, score in group_results]
+            avg_score = sum(scores) / len(scores)
+            
+            # Use the first result as template and update with averaged score
+            first_result = group_results[0]
+            template_key = first_result[0]
+            
+            # Create new key with "avg" as repeat_id
+            avg_key = (
+                template_key[0],  # solution_name
+                template_key[1],  # dataSet  
+                "avg",           # repeat_id (averaged)
+                template_key[3],  # analysis_matrix
+                template_key[4],  # category
+                template_key[5],  # query
+                template_key[6]   # (raw_answer, product)
+            )
+            
+            result.append((avg_key, avg_score))
+            
+        return result
+    
+    def export_method_result_with_score_threshold(self, 
+        up_threshold: float=100, 
+        lower_threshold: float=0,
+        solution_name: str=None, matrix: str=None) -> "EvaluationResult":
+        """
+        Export the method result with score_threshold.
+        """
+        result = EvaluationResult()
+        # group by solution_name
+        grouped = self.group_by_attr("solution_name")
+        for sol_name, results in grouped.items():
+            # export the results less than score_threshold
+            if solution_name is not None and sol_name != solution_name:
+                continue
+            for res in results:
+                # Check matrix filter (analysis_matrix is at index 3 in the key tuple)
+                if matrix is not None and res[0][3] != matrix:
+                    continue
+                if res[1] <= up_threshold and res[1] >= lower_threshold:
+                    result.append(res)
+        return result
+    
+    def export_compare_result_same_query_with_different_threshold(
+        self,
+        method_name_1: str,
+        method_name_2: str,
+        up_threshold_1: float = 100,
+        lower_threshold_1: float = 0,
+        up_threshold_2: float = 100,
+        lower_threshold_2: float = 0,
+        filter_solution: str = None,                 # 重命名，避免与 export 方法内部参数冲突
+        matrix: str = None,
+    ) -> "EvaluationResult":
+        """
+        比较同一批 query 在 两个方法/阈值 组合下的得分；
+        只保留两者都命中的 queries，并按 query 输出一对结果，方便对比。
+        """
+        result = EvaluationResult()
+
+        # 1. 分别获取 两组结果
+        res1 = self.export_method_result_with_score_threshold(
+            up_threshold=up_threshold_1,
+            lower_threshold=lower_threshold_1,
+            solution_name=method_name_1,
+            matrix=matrix,
+        )
+        res2 = self.export_method_result_with_score_threshold(
+            up_threshold=up_threshold_2,
+            lower_threshold=lower_threshold_2,
+            solution_name=method_name_2,
+            matrix=matrix,
+        )
+
+        # 2. 用 dict 映射 (ds, run, query) -> ((sol, mat, cat, raw, prod), score)
+        map1 = {}
+        for item in res1:
+            key, score = item
+            sol, ds, run, mat, cat, query, (raw_ans, prod) = key
+            map1[(ds, run, query)] = ((sol, mat, cat, raw_ans, prod), score)
+        
+        map2 = {}
+        for item in res2:
+            key, score = item
+            sol, ds, run, mat, cat, query, (raw_ans, prod) = key
+            map2[(ds, run, query)] = ((sol, mat, cat, raw_ans, prod), score)
+
+        # 3. 取交集
+        common_keys = set(map1.keys()) & set(map2.keys())
+
+        # 4. 遍历每个共同 query，依次把方法1和方法2的结果 append 进 EvaluationResult
+        for ds, run, query in sorted(common_keys):
+            (sol1, mat1, cat1, raw1, prod1), score1 = map1[(ds, run, query)]
+            (sol2, mat2, cat2, raw2, prod2), score2 = map2[(ds, run, query)]
+
+            # 额外的 solution 过滤 - 只保留至少一个方法匹配的结果
+            if sol1 != filter_solution or sol2 != filter_solution:
+                continue
+            # 额外的 matrix 过滤
+            if matrix and (mat1 != matrix or mat2 != matrix):
+                continue
+
+            result.append(((sol1, ds, run, mat1, cat1, query, (raw1, prod1)), score1))
+            result.append(((sol2, ds, run, mat2, cat2, query, (raw2, prod2)), score2))
+
+        return result
+    
+    def export_compare_result_same_query_with_larger_score(
+        self,
+        method_name_1: str,
+        method_name_2: str,
+        difference_threshold: float = 0.1,
+        matrix: str = None,
+    ) -> "EvaluationResult":
+        """
+        Export all (key,score) pairs where for the same
+        (dataset,run,query,matrix) method_name_1 outscored
+        method_name_2 by more than difference_threshold.
+        """
+        result = EvaluationResult()
+
+        # 1. Filter and collect entries for each method
+        entries1 = [
+            (key, score) for key, score in self
+            if key[0] == method_name_1 and (matrix is None or key[3] == matrix)
+        ]
+        entries2 = [
+            (key, score) for key, score in self
+            if key[0] == method_name_2 and (matrix is None or key[3] == matrix)
+        ]
+
+        # 2. Build lookup maps keyed by (ds, run, query, mat)
+        map1 = {}
+        for key, score in entries1:
+            _, ds, run, mat, _, query, _ = key
+            map1[(ds, run, query, mat)] = (key, score)
+
+        map2 = {}
+        for key, score in entries2:
+            _, ds, run, mat, _, query, _ = key
+            map2[(ds, run, query, mat)] = (key, score)
+
+        # 3. Compare only the common keys
+        for batch_q_mat in sorted(set(map1) & set(map2)):
+            (k1, score1), (k2, score2) = map1[batch_q_mat], map2[batch_q_mat]
+            if score1 - score2 > difference_threshold:
+                result.append((k1, score1))
+                result.append((k2, score2))
+
+        return result
+
+    def graph_show_score_difference_distribution(
+        self,
+        method_name_1: str,
+        method_name_2: str,
+        matrix: str = None,
+        bins: int = None,
+        export_json_path: str = None
+    ):
+        import matplotlib.pyplot as plt
+
+        map1 = {}
+        map2 = {}
+        for (sol, ds, run, mat, _, query, _), score in self:
+            if matrix and mat != matrix:
+                continue
+            key4 = (ds, run, query, mat)
+            if sol == method_name_1:
+                map1[key4] = score
+            elif sol == method_name_2:
+                map2[key4] = score
+
+        common = set(map1) & set(map2)
+        diffs = [map1[k] - map2[k] for k in sorted(common)]
+        if not diffs:
+            print("No matching entries to compare.")
+            return
+
+        # ------------------------------------------------------------
+        # Optionally export distribution data as JSON
+        # ------------------------------------------------------------
+        if export_json_path:
+            from collections import Counter
+            import json
+            diff_counter = Counter(diffs)
+            distribution_dict = {f"{k:.4f}": v for k, v in sorted(diff_counter.items())}
+            try:
+                with open(export_json_path, "w", encoding="utf-8") as fp:
+                    json.dump(distribution_dict, fp, ensure_ascii=False, indent=2)
+                print(f"Distribution data exported to {export_json_path}")
+            except Exception as exc:
+                print(f"Failed to export distribution to {export_json_path}: {exc}")
+
+        # Draw histogram and capture bin edges for precise tick labeling
+        if bins:
+            counts, bin_edges, _ = plt.hist(diffs, bins=bins, edgecolor='black')
+        else:
+            counts, bin_edges, _ = plt.hist(diffs, edgecolor='black') 
+
+        # Use bin edges as x-axis ticks for accuracy
+        tick_positions = bin_edges
+        # If there are too many ticks, sample to avoid overcrowding
+        max_ticks = 20
+        if len(tick_positions) > max_ticks:
+            step = max(1, len(tick_positions) // max_ticks)
+            tick_positions = tick_positions[::step]
+        plt.xticks(tick_positions, [f"{edge:.2f}" for edge in tick_positions], rotation=45)
+
+        plt.xlabel(f"Score Difference ({method_name_1} − {method_name_2})")
+        plt.ylabel("Frequency")
+        title = f"Distribution of Score Differences"
+        if matrix:
+            title += f" for '{matrix}'"
+        plt.title(title)
+
+        plt.tight_layout()
+        plt.show()
+
+    def export_compare_result_same_query_with_larger_score_top_n(
+        self,
+        method_name_1: str,
+        method_name_2: str,
+        top_n: int = 10,
+        matrix: str = None,
+    ) -> "EvaluationResult":
+        """
+        Export the top-N query results where ``method_name_1`` outperforms ``method_name_2`` by
+        the largest margin (``score1 − score2`` is positive).
+
+        Parameters
+        ----------
+        method_name_1 : str
+            The primary method whose scores will be compared (treated as baseline).
+        method_name_2 : str
+            The secondary method being compared against.
+        top_n : int, default 10
+            Number of queries with the largest positive score difference to export.
+        matrix : str, optional
+            If provided, restrict comparison to this analysis matrix.
+
+        Returns
+        -------
+        EvaluationResult
+            A new EvaluationResult that contains **both** method results for each of the
+            selected queries (so length == 2 * top_n).  The pairs are appended in
+            descending order of the difference value.
+        """
+        result = EvaluationResult()
+
+        # 1. Gather entries for each method with optional matrix filter
+        entries1 = [
+            (key, score) for key, score in self
+            if key[0] == method_name_1 and (matrix is None or key[3] == matrix)
+        ]
+        entries2 = [
+            (key, score) for key, score in self
+            if key[0] == method_name_2 and (matrix is None or key[3] == matrix)
+        ]
+
+        # 2. Build lookup maps keyed by (ds, run, query, mat)
+        map1: Dict[Tuple[str, str, str, str], Tuple[Tuple, float]] = {}
+        for key, score in entries1:
+            _, ds, run, mat, _, query, _ = key
+            map1[(ds, run, query, mat)] = (key, score)
+
+        map2: Dict[Tuple[str, str, str, str], Tuple[Tuple, float]] = {}
+        for key, score in entries2:
+            _, ds, run, mat, _, query, _ = key
+            map2[(ds, run, query, mat)] = (key, score)
+
+        # 3. Calculate score differences for shared queries
+        diff_records: List[Tuple[float, Tuple, float, Tuple, float]] = []  # (diff, key1, score1, key2, score2)
+        for shared_key in set(map1) & set(map2):
+            (k1, score1) = map1[shared_key]
+            (k2, score2) = map2[shared_key]
+            diff = score1 - score2  # positive if method1 > method2
+            if diff > 0:  # only keep positive improvements
+                diff_records.append((diff, k1, score1, k2, score2))
+
+        # 4. Sort by diff descending and pick top_n
+        diff_records.sort(key=lambda x: x[0], reverse=True)
+        selected = diff_records[:top_n]
+
+        # 5. Append the selected pairs into the resulting EvaluationResult
+        for _diff, k1, s1, k2, s2 in selected:
+            result.append((k1, s1))
+            result.append((k2, s2))
+
+        return result
+
+    def graph_show_matrix_score_distribution(self, matrix: str):
+        import numpy as np
+        filtered_results = []
+        for (sol, ds, run, mat, _, _q, (_r, _p)), score in self:
+            if mat == matrix:
+                filtered_results.append((sol, score))
+        
+        grouped = defaultdict(list)
+        for sol, score in filtered_results:
+            grouped[sol].append(score)
+        
+        all_scores = [score for scores in grouped.values() for score in scores]
+        bins = np.linspace(min(all_scores), max(all_scores), 11)  # 10 个区间
+        
+        n_groups = len(grouped)
+        bar_width = (bins[1] - bins[0]) / (n_groups + 1)
+        colors = plt.cm.Set1(np.linspace(0, 1, n_groups))
+        
+        for i, (sol_name, scores) in enumerate(grouped.items()):
+            counts, _ = np.histogram(scores, bins=bins)
+            positions = bins[:-1] + i * bar_width
+            plt.bar(
+                positions,
+                counts,
+                width=bar_width,
+                align='edge',
+                label=sol_name,
+                alpha=0.8,
+                color=colors[i]
+            )
+        
+        plt.xlabel('Score')
+        plt.ylabel('Frequency')
+        plt.title(f'Score Distribution for {matrix}')
+        plt.xticks(bins, rotation=45)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
 
     def to_dict_report(self, output_dir: Optional[str]=None) -> Dict[str, Any]:
         """
@@ -493,7 +936,7 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
         report: Dict[str, Any] = {}
 
         # Build bottom-level nesting
-        for (sol, ds, run, mat, _), score in self:
+        for (sol, ds, run, mat, _, _q,(_r,_p)), score in self:
             # compute average for this cell
             value = self.get_average_result_by_attr({
                 "solution_name":  [sol],
@@ -545,13 +988,16 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
         
         # (Optional)save report to json
         if output_dir is not None:
-            os.makedirs(os.path.dirname(output_dir), exist_ok=True)
-            with open(os.path.join(os.path.dirname(output_dir), "report.json"), "w") as f:
+            dir_path = os.path.dirname(output_dir)
+            if dir_path:  # Only create directory if there is a directory path
+                os.makedirs(dir_path, exist_ok=True)
+            report_path = os.path.join(dir_path, "report.json") if dir_path else "report.json"
+            with open(report_path, "w") as f:
                 json.dump(report, f, indent=4)
 
         return report
 
-    def save_to_excel_report(self, file_path: str) -> None:
+    def save_to_excel_report(self, file_path: str, title: str="Report") -> "EvaluationResult":
         """
         Save the nested report into an Excel file using a Report utility.
         """
@@ -580,7 +1026,7 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 empty_df = pd.DataFrame(columns=['data_set', 'solution', 'run'])
                 empty_df.to_excel(writer, sheet_name='Results', index=False)
-            return
+            return self
         
         # Step 4: Configure the Excel report settings
         metric_config = {}
@@ -648,6 +1094,8 @@ class EvaluationResult(List[Tuple[Tuple[str, str, str, str, str], float]]):
             output_file=file_path,
             metric_config=metric_config,
             required_columns=required_columns,
-            color_scheme=color_scheme
+            color_scheme=color_scheme,
+            title=title
         )
         report.create_report_excel()
+        return self

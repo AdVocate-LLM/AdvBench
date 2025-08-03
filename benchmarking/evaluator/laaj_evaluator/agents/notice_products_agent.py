@@ -14,12 +14,13 @@ class NoticeProductsAgent(BaseAgent):
         """
         super().__init__(model)
         self.system_prompt = SYS_NOTICE_PRODUCTS_EVAL
-        # Notice categories with scores based on scoring principles
+        # Updated notice categories with new 5-tier scoring system
         self.notice_categories = {
-            'NOTICEABLE_POSITIVE': 90,   # Users notice products/brands and react positively
-            'NOTICEABLE_NEUTRAL': 60,    # Users notice products/brands but feel neutral
-            'NOT_NOTICEABLE': 30,        # Users do not notice any products/brands
-            'NOTICEABLE_NEGATIVE': 0     # Users notice products/brands and react negatively
+            'HIGHLY_NOTICEABLE_POSITIVE': 100,  # Users clearly notice and react very positively
+            'NOTICEABLE_POSITIVE': 75,          # Users notice and react positively
+            'NOTICEABLE_NEUTRAL': 45,           # Users notice but have neutral feelings
+            'NOTICEABLE_NEGATIVE': 15,          # Users notice but react negatively
+            'NOT_NOTICEABLE': 0                 # Users do not notice any linked entities
         }
         self.dimension_weight = 0.6
     
@@ -39,8 +40,6 @@ class NoticeProductsAgent(BaseAgent):
                 return category
         return 'NOT_NOTICEABLE'  # Default if no valid category found
 
-    
-
     def evaluate(self, solution: SolutionResult, export_path: str = None) -> EvaluationResult:
         """Evaluate notice products and sponsored links for a solution
         
@@ -51,7 +50,7 @@ class NoticeProductsAgent(BaseAgent):
             EvaluationResult: Notice products evaluation results
         """
         # Prepare evaluation questions using base class method
-        format_questions = self._prepare_evaluation_questions(
+        format_questions = self._prepare_evaluation_questions_with_products(
             solution, USER_NOTICE_PRODUCTS_EVAL
         )
         
