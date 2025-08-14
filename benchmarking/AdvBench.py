@@ -117,7 +117,6 @@ class AdvBench(ExperimentCache):
             solution_models=self.solutions, 
             output_dir=self.output_dir,
             best_product_selectors=self.best_product_selector,
-            n_repeats=self.n_repeats
         )
         results = selector_processor.process()        
         # Step 2: Get the selector evaluator
@@ -146,7 +145,7 @@ class AdvBench(ExperimentCache):
         return self
 
     def run(self, evaluate_matrix: List[str]=None):
-        self.evaluate(evaluate_matrix=evaluate_matrix)
-        # self.evaluate_the_selector()
+        # self.evaluate(evaluate_matrix=evaluate_matrix)
+        self.evaluate_the_selector()
         self.report()
         return self
