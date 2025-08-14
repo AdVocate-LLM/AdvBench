@@ -96,7 +96,7 @@ class Advertiser:
             }
         """
         if not candidate_product_list or not candidate_product_list.get('names'):
-            return { prompt : {'name': None, 'description': None, 'url': None, 'category': None}}
+            return {prompt: {'name': None, 'description': None, 'url': None, 'category': None}}
         
         # ROUND 1: Select the most relevant category
         categories = candidate_product_list.get('categories', [])
@@ -155,10 +155,10 @@ class Advertiser:
                     
                     if original_idx is not None:
                         return {prompt: {
-                            'name': selected_name if selected_name else candidate_product_list['names'][fall_back_index],
-                            'description': candidate_product_list.get('descs', candidate_product_list.get('descs', [None])[fall_back_index])[original_idx],
-                            'url': candidate_product_list.get('urls', candidate_product_list.get('urls', [None])[fall_back_index])[original_idx] ,
-                            'category': candidate_product_list.get('categories', candidate_product_list.get('categories', [None])[fall_back_index])[original_idx]
+                            'name': selected_name or candidate_product_list['names'][fall_back_index],
+                            'description': candidate_product_list.get('descs', candidate_product_list.get('descs', [None])[fall_back_index])[original_idx] or candidate_product_list.get('descs', [None])[fall_back_index],
+                            'url': candidate_product_list.get('urls', candidate_product_list.get('urls', [None])[fall_back_index])[original_idx] or candidate_product_list.get('urls', [None])[fall_back_index],
+                            'category': candidate_product_list.get('categories', candidate_product_list.get('categories', [None])[fall_back_index])[original_idx] or candidate_product_list.get('categories', [None])[fall_back_index]
                         }}
         
         # Fallback to direct selection if category-based selection fails
@@ -191,8 +191,14 @@ class Advertiser:
             except (ValueError, IndexError):
                 pass
         
-        # Fallback to None if no match found
-        return {prompt: {'name': None, 'description': None, 'url': None, 'category': None}}
+        # Fallback to random selection if no match found
+        random_idx = random.randint(0, len(candidate_product_list['names']) - 1)
+        return {prompt: {
+            'name': candidate_product_list['names'][random_idx],
+            'description': candidate_product_list.get('descs', [None])[random_idx] if random_idx < len(candidate_product_list.get('descs', [])) else None,
+            'url': candidate_product_list.get('urls', [None])[random_idx] if random_idx < len(candidate_product_list.get('urls', [])) else None,
+            'category': candidate_product_list.get('categories', [None])[random_idx] if random_idx < len(candidate_product_list.get('categories', [])) else None
+        }}
 
     def set_sys_prompt(self, product=None, profile=None):
         kwargs = {}
