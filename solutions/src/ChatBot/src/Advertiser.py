@@ -117,7 +117,7 @@ class Advertiser:
         
         if not category_matches:
             # Fallback: use the first category if no match
-            target_category = unique_categories[0] if unique_categories else None
+            target_category = unique_categories[0]
         else:
             target_category = category_matches[0]
         
@@ -125,6 +125,9 @@ class Advertiser:
         if target_category:
             # Filter products that belong to the selected category
             filtered_indices = [i for i, cat in enumerate(categories) if cat == target_category]
+
+            # Fallback if no products selected in the end we use the first product in flitered_indices
+            fall_back_index = filtered_indices[0]
             
             if filtered_indices:
                 filtered_names = [candidate_product_list['names'][i] for i in filtered_indices]
@@ -152,10 +155,10 @@ class Advertiser:
                     
                     if original_idx is not None:
                         return {prompt: {
-                            'name': selected_name,
-                            'description': candidate_product_list.get('descs', [None])[original_idx] if original_idx < len(candidate_product_list.get('descs', [])) else None,
-                            'url': candidate_product_list.get('urls', [None])[original_idx] if original_idx < len(candidate_product_list.get('urls', [])) else None,
-                            'category': candidate_product_list.get('categories', [None])[original_idx] if original_idx < len(candidate_product_list.get('categories', [])) else None
+                            'name': selected_name if selected_name else candidate_product_list['names'][fall_back_index],
+                            'description': candidate_product_list.get('descs', candidate_product_list.get('descs', [None])[fall_back_index])[original_idx],
+                            'url': candidate_product_list.get('urls', candidate_product_list.get('urls', [None])[fall_back_index])[original_idx] ,
+                            'category': candidate_product_list.get('categories', candidate_product_list.get('categories', [None])[fall_back_index])[original_idx]
                         }}
         
         # Fallback to direct selection if category-based selection fails
