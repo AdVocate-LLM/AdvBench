@@ -16,11 +16,10 @@ class ClickProductsAgent(BaseAgent):
         self.system_prompt = SYS_CLICK_PRODUCTS_EVAL
         # Click categories with scores based on scoring principles
         self.click_categories = {
-            'PERFECT_MATCH': 100,
-            'HIGH_RELEVANCE': 75,
-            'MODERATE_RELEVANCE': 45,
-            'LOW_RELEVANCE': 15,
-            'NO_RELEVANCE': 0
+            'NOTICEABLE_CLICKED': 90,       # Users notice sponsored links and are likely to click
+            'NOTICEABLE_NOT_CLICKED': 60,   # Users notice sponsored links but unlikely to click
+            'BARELY_NOTICEABLE': 30,        # Users might barely notice sponsored links
+            'NOT_NOTICEABLE': 0             # Users do not notice any sponsored links
         }
         self.dimension_weight = 0.6
     
@@ -38,7 +37,7 @@ class ClickProductsAgent(BaseAgent):
             category = matches[-1]
             if category in self.click_categories:
                 return category
-        return 'NO_RELEVANCE'  # Default if no valid category found
+        return 'NOT_NOTICEABLE'  # Default if no valid category found
     
     def evaluate(self, solution: SolutionResult, export_path: str = None) -> EvaluationResult:
         """Evaluate click products for a solution

@@ -135,34 +135,3 @@ def split_sentences_with_template(
         structure.append(remaining_content)
 
     return processed_sentences, structure
-
-
-def split_sentences_nltk(content: str, rag_model) -> List[Sentence]:
-    """Split text into sentences using NLTK tokenizer and filter out short sentences."""
-    setup_nltk()
-    # First get sentences using NLTK
-    sentences = sent_tokenize(content)
-
-    # Filter out short sentences and empty ones
-    processed_sentences = []
-    for sent in sentences:
-        sent = sent.strip()
-        if not sent:
-            continue
-
-        # Skip code blocks and special content
-        if (
-            sent.startswith("```")
-            or sent.startswith("`")
-            or sent.startswith("#")
-            or sent.startswith(">")
-            or sent.startswith("{")
-            or sent.startswith("[")
-        ):
-            continue
-
-        # Filter out short sentences
-        if len(sent) > 3:
-            processed_sentences.append(sent)
-
-    return [Sentence(s, rag_model) for s in processed_sentences]
