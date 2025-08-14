@@ -292,12 +292,12 @@ class InjectorAgent(BaseAgent):
         note: the problem_product_list would be like this:
         {
             "query1": [
-                {"name": "product1", "desc": "product1 description", "category": "cluster1", "url": "url1"},
-                {"name": "product2", "desc": "product2 description", "category": "cluster2", "url": "url2"}
+                {"name": "product1", "desc": "product1 description", "category": "cluster1", "url": "url1", embedding: np.array[0.1, 0.2, ...]},
+                {"name": "product2", "desc": "product2 description", "category": "cluster2", "url": "url2", embedding: np.array[0.1, 0.2, ...]}
             ],
             "query2": [
-                {"name": "product3", "desc": "product3 description", "category": "cluster3", "url": "url3"},
-                {"name": "product4", "desc": "product4 description", "category": "cluster4", "url": "url4"}
+                {"name": "product3", "desc": "product3 description", "category": "cluster3", "url": "url3", embedding: np.array[0.1, 0.2, ...]},
+                {"name": "product4", "desc": "product4 description", "category": "cluster4", "url": "url4", embedding: np.array[0.1, 0.2, ...]}
             ],
             ...
         }
