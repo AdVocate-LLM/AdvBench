@@ -2,12 +2,41 @@ import os
 import json
 import time
 import hashlib
-import fcntl
 import threading
 import queue
 from collections import OrderedDict
 from typing import Dict, Any, Optional
 from .logger import ModernLogger
+
+# Cross-platform file locking
+try:
+    import fcntl  # type: ignore
+    _USE_FCNTL = True
+except Exception:  # pragma: no cover - Windows environments
+    fcntl = None  # type: ignore
+    _USE_FCNTL = False
+    try:
+        import portalocker  # type: ignore
+    except Exception:  # pragma: no cover
+        portalocker = None  # type: ignore
+
+def _lock_shared(file_obj):
+    if _USE_FCNTL and fcntl is not None:
+        fcntl.flock(file_obj.fileno(), fcntl.LOCK_SH)
+    elif 'portalocker' in globals() and portalocker is not None:
+        portalocker.lock(file_obj, portalocker.LOCK_SH)
+
+def _lock_exclusive(file_obj):
+    if _USE_FCNTL and fcntl is not None:
+        fcntl.flock(file_obj.fileno(), fcntl.LOCK_EX)
+    elif 'portalocker' in globals() and portalocker is not None:
+        portalocker.lock(file_obj, portalocker.LOCK_EX)
+
+def _lock_release(file_obj):
+    if _USE_FCNTL and fcntl is not None:
+        fcntl.flock(file_obj.fileno(), fcntl.LOCK_UN)
+    elif 'portalocker' in globals() and portalocker is not None:
+        portalocker.unlock(file_obj)
 
 class MemoryLRUCache:
     """
@@ -168,11 +197,11 @@ class ExperimentCache(ModernLogger):
         
         try:
             with open(cache_file, 'r', encoding='utf-8') as f:
-                fcntl.flock(f.fileno(), fcntl.LOCK_SH)
+                _lock_shared(f)
                 try:
                     return json.load(f)
                 finally:
-                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+                    _lock_release(f)
         except Exception as e:
             self.warning(f"Failed to load cache from {cache_file}: {str(e)}")
             return {}
@@ -181,11 +210,11 @@ class ExperimentCache(ModernLogger):
         """Direct file saving without memory cache."""
         try:
             with open(cache_file, 'w', encoding='utf-8') as f:
-                fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+                _lock_exclusive(f)
                 try:
                     json.dump(cache_data, f, ensure_ascii=False, indent=2)
                 finally:
-                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+                    _lock_release(f)
         except Exception as e:
             self.warning(f"Failed to save cache to {cache_file}: {str(e)}")
     
@@ -334,11 +363,11 @@ class ExperimentCache(ModernLogger):
         
         try:
             with open(cache_file, 'r', encoding='utf-8') as f:
-                fcntl.flock(f.fileno(), fcntl.LOCK_SH)
+                _lock_shared(f)
                 try:
                     return json.load(f)
                 finally:
-                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+                    _lock_release(f)
         except Exception as e:
             self.warning(f"Failed to load cache from {cache_file}: {str(e)}")
             # Try to backup the corrupted file and create a new one
