@@ -3,6 +3,7 @@ from .processor import Processor
 from benchmarking.dataset import AdvDatasets
 from benchmarking.utils.result import Result
 from benchmarking.utils.struct import SolutionResult
+import random
 
 class SelectProcessor(Processor):
     """
@@ -79,55 +80,62 @@ class SelectProcessor(Processor):
         Returns:
             SolutionResult: the solution result with best product information
         """
-        # Get solution function and best product selector
-        best_product_selector_fn = self.get_best_product_selector(solution_name)
+        # get result
+        solution_fn = self.get_best_product_selector(solution_name)
         
-        # Combine results with best product information
-        results = []
-        prompt_list = self.dataset.get_query_list()
+        solution_result = SolutionResult()
         problem_product_list, query_clusters = self.dataset.build_query_candidate_product_list()
         
         # Call the best product selector with the problem_product_list
-        best_product_lists = best_product_selector_fn(
-            problem_product_list=problem_product_list,
+        raw_result = solution_fn(
+            problem_list=problem_product_list,
         )
+        # Filter out results where answer is None
+        valid_results = []
+        error_results = []
         
-        if isinstance(best_product_lists, dict):
-        # Process results for each query
-            for prompt, best_product in best_product_lists.items():  
-                results.append(
+        for result in raw_result:
+            if result is not None and result['answer'] is not None:
+                valid_results.append(
                     Result(
-                        prompt=prompt,
-                        category=best_product['category'],
+                        prompt=result['query'],
+                        category=result['product']["category"],
                         solution_tag=solution_name,
-                        content=f"{best_product['name']}--{best_product['description']}",
-                        product={
-                            "name": best_product['name'],
-                            "description": best_product['description'],
-                            "url": best_product['url'],
-                            "category": best_product['category']
-                        }
+                        content=result['answer'],
+                        product=result['product']
                     )
                 )
+            else:
+                error_results.append({
+                    'prompt': result['query'],
+                    'category': result['product']["category"],
+                    'solution_tag': solution_name,
+                    'error': 'No answer generated',
+                    'product': result['product']
+                })
         
-        # Create solution result
-        solution_result = SolutionResult()
-        
-        # Add results to solution result
         solution_result.add_list_of_results(
             solution_name=solution_name,
             dataSet=data_name,
             repeat_id=str(repeat_id),
-            results=results
+            results=valid_results
         )
         
-        # Save results if requested
+        # Save error results if any
+        if error_results:
+            output_path = self.get_store_path_for_solution_dataset_repeat(solution_name, data_name, repeat_id)    
+            error_file_path = output_path + '/errors.json'
+            import json
+            import os
+            os.makedirs(output_path, exist_ok=True)
+            with open(error_file_path, 'w') as f:
+                json.dump(error_results, f, indent=2)
+            
         if is_saved:
             output_path = self.get_store_path_for_solution_dataset_repeat(solution_name, data_name, repeat_id)    
             result_file_path = output_path + '/result.json'
-            # Save the result
+            # save the result
             solution_result.save(result_file_path)
-            self.info(f"Results saved to: {result_file_path}")
 
         return solution_result
     
@@ -160,7 +168,7 @@ class SelectProcessor(Processor):
         for solution_name in solutions:
             self.section(f"Using {solution_name} to process the data sets...")
             results += self.process_repeat(
-                data_name="best_product_selector", 
+                data_name="sa_dataset", 
                 solution_name=solution_name, 
                 n_repeats=n_repeats, 
                 max_samples=max_samples, 

@@ -3,6 +3,7 @@ from .src.Config import args1, args2
 from typing import List, Dict
 from solutions.src.AdVocate.utils.parallel import ParallelProcessor
 from .src.Advertiser import Advertiser
+from .src.API import OpenAIAPI
 
 class ChatbotAdsWorkflow(ParallelProcessor):
     COMPETITOR_NAME = 'chi'

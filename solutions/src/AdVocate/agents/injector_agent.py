@@ -239,6 +239,7 @@ class InjectorAgent(BaseAgent):
                     raw_answers: List[Result],
                     query_type: str = QUERY_RESPONSE,
                     solution_name: str = REFINE_GEN_INSERT,
+                    problem_product_list: Optional[Dict[str, List[Dict]]]=None
                     ) -> List[Result]:
         """Inject products into the answers at optimal positions with optimized parallel processing.
         
@@ -262,8 +263,16 @@ class InjectorAgent(BaseAgent):
         embedded_queries_st = [embedding[0] for embedding in embedding_list]
         embedded_st_structures = [embedding[1] for embedding in embedding_list]
         # Step 1: get the suitable products for the query
-        product_rag = self._get_product_rag()
-        for embedded_query, embedded_query_st in zip(embedded_queries, embedded_queries_st):
+        if problem_product_list is None:
+            product_rag = self._get_product_rag()
+        for embedded_query, embedded_query_st, raw_answer in zip(embedded_queries, embedded_queries_st, raw_answers):
+            if problem_product_list is not None:
+                # Use a specialized product RAG for this query's product list
+                product_rag = productRAG(
+                    file_path=None,
+                    product_list=problem_product_list.get(raw_answer.get_prompt(), []),
+                    model=self.rag_model
+                )
             products = product_rag.query(np.array(embedded_query[1]), top_k=5)
             sentence_flow = get_adjacent_sentence_similarities(embedded_query_st)
             best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
