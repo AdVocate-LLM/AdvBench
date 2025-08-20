@@ -2,7 +2,6 @@ from ..utils.result import Result
 from ..utils.sentence import Sentence
 from ..utils.product import Product
 from ..utils.functions import get_adjacent_sentence_similarities
-from ..utils.format import answer_structure2string
 from typing import List, Tuple, Optional, Dict, Union
 from ..prompt.injector_prompts import SYS_REFINE, USER_REFINE
 from .base_agent import BaseAgent
@@ -28,6 +27,8 @@ class InjectorAgent(BaseAgent):
         self.rag_model = Embedding(model_name=rag_model)
         self.system_prompt = SYS_REFINE
         self.score_func = score_func
+        # Cache for product RAG instances to avoid repeated initialization
+        self._product_rag_cache = None
         self.INJECT_METHODS = {
             "QUERY_PROMPT": QUERY_PROMPT, 
             "QUERY_RESPONSE": QUERY_RESPONSE, 
@@ -39,6 +40,15 @@ class InjectorAgent(BaseAgent):
             "BASIC": BASIC_GEN_INSERT
         }
         self.injector = Injector(score_func=self.score_func)
+
+    def _get_product_rag(self) -> 'productRAG':
+        """Get or create cached productRAG instance."""
+        if self._product_rag_cache is None:
+            self._product_rag_cache = productRAG(
+                file_path=self.product_list_path,
+                model=self.rag_model
+            )
+        return self._product_rag_cache
 
     def get_inject_methods(self) -> Dict[str, str]:
         """Get available injection methods.
@@ -55,11 +65,24 @@ class InjectorAgent(BaseAgent):
             content (str): The content to be refined
             
         Returns:
-            str: Refined text
+            Dict: Refined response
         """
         usr_refine_ass = USER_REFINE.format(ori_text=content)
         response = self.answer(usr_refine_ass)
         return response
+    
+    def refine_contents_batch(self, contents: List[str]) -> List[Dict]:
+        """Batch refine multiple contents using the language model for better performance.
+        
+        Args:
+            contents (List[str]): List of contents to be refined
+            
+        Returns:
+            List[Dict]: List of refined responses
+        """
+        user_prompts = [USER_REFINE.format(ori_text=content) for content in contents]
+        responses = self.answer_multiple(user_prompts)
+        return responses
 
     def create_refined_injection(self, 
                             raw_answer: Result,
@@ -73,25 +96,27 @@ class InjectorAgent(BaseAgent):
         Args:
             raw_answer (Result): Original answer
             sentences (List[Sentence]): List of sentences
-            structure (List[Union[str, int]]): Structure of the answer
-            inject_position (Tuple[int, int]): Position to inject the product
+            structure (List[Union[str, int]]): Structure of the answer (not used, kept for compatibility)
+            inject_position (Tuple[int, int]): Position to inject the product between sentences
             best_product (Product): Product to inject
             
         Returns:
             Result: Refined result with injected product
         """
         product_text = f"{ADS_START}{str(best_product)}{ADS_END}"
-        target_idx = inject_position[0]
+        prev_pos, next_pos = inject_position
         
-        # Handle single sentence case: if target_idx is out of bounds, append to the last sentence
-        if target_idx >= len(sentences):
-            target_idx = len(sentences) - 1
-            target_sentence = sentences[target_idx].to_string()
-            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
-        else:
-            target_sentence = sentences[target_idx].to_string()
-            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
-        content = answer_structure2string(sentences, structure)
+        # Build content by concatenating sentences with product injection
+        content_parts = []
+        for i, sentence in enumerate(sentences):
+            content_parts.append(sentence.to_string())
+            # After the prev_pos sentence, insert the product
+            if i == prev_pos:
+                content_parts.append(" ")  # Add space before product
+                content_parts.append(product_text)
+                content_parts.append(" ")  # Add space after product
+        
+        content = "".join(content_parts)
         
         refined_text = content
         product={
@@ -125,25 +150,27 @@ class InjectorAgent(BaseAgent):
         Args:
             raw_answer (Result): Original answer
             sentences (List[Sentence]): List of sentences
-            structure (List[Union[str, int]]): Structure of the answer
-            inject_position (Tuple[int, int]): Position to inject the product
+            structure (List[Union[str, int]]): Structure of the answer (not used, kept for compatibility)
+            inject_position (Tuple[int, int]): Position to inject the product between sentences (sentence indices)
             best_product (Product): Product to inject
             
         Returns:
             Result: Result with injected product
         """
-        product_text = str(best_product)
-        target_idx = inject_position[0]
+        product_text = best_product.ad_content()
+        prev_pos, next_pos = inject_position
         
-        # Handle single sentence case: if target_idx is out of bounds, append to the last sentence
-        if target_idx >= len(sentences):
-            target_idx = len(sentences) - 1
-            target_sentence = sentences[target_idx].to_string()
-            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
-        else:
-            target_sentence = sentences[target_idx].to_string()
-            sentences[target_idx].sentence = f"{target_sentence} {product_text}"
-        content = answer_structure2string(sentences, structure)
+        # Build content by concatenating sentences with product injection
+        content_parts = []
+        for i, sentence in enumerate(sentences):
+            content_parts.append(sentence.to_string())
+            # After the prev_pos sentence, insert the product
+            if i == prev_pos:
+                content_parts.append(" ")  # Add space before product
+                content_parts.append(product_text)
+                content_parts.append(" ")  # Add space after product
+        
+        content = "".join(content_parts)
         injected_result = Result(
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
@@ -187,10 +214,7 @@ class InjectorAgent(BaseAgent):
         # Step 0: Get the question based on the method
         query = self.get_query_text(raw_answer, query_type)
         # Step 1: Get the best product
-        product_rag = productRAG(
-            file_path=self.product_list_path,
-            model=self.rag_model
-        )
+        product_rag = self._get_product_rag()
         products = product_rag.query(query, top_k=5)
         # convert the sentences to sentences
         sentences, structure = SentenceEmbedding(raw_answer.get_answer(), self.rag_model).embed()[0]
@@ -228,19 +252,17 @@ class InjectorAgent(BaseAgent):
         """
         
         suitable_products = []
+        inject_positions = []
         # Step 0: preprocess the answer
-        # base on query_type, get the query
         query_texts = [self.get_query_text(raw_answer, query_type) for raw_answer in raw_answers]
-        sentence_embedding = SentenceEmbedding(query_texts, self.rag_model)
+        answer_texts = [raw_answer.get_answer() for raw_answer in raw_answers]
+        sentence_embedding = SentenceEmbedding(answer_texts, self.rag_model)
         embedding_list = sentence_embedding.embed()
         embedded_queries = self.rag_model.encode_all(text_list=query_texts)
         embedded_queries_st = [embedding[0] for embedding in embedding_list]
         embedded_st_structures = [embedding[1] for embedding in embedding_list]
         # Step 1: get the suitable products for the query
-        product_rag = productRAG(
-            file_path=self.product_list_path,
-            model=self.rag_model
-        )
+        product_rag = self._get_product_rag()
         for embedded_query, embedded_query_st in zip(embedded_queries, embedded_queries_st):
             products = product_rag.query(np.array(embedded_query[1]), top_k=5)
             sentence_flow = get_adjacent_sentence_similarities(embedded_query_st)
@@ -248,19 +270,56 @@ class InjectorAgent(BaseAgent):
                 embedded_query_st, sentence_flow, products
             )
             suitable_products.append(best_product)
+            inject_positions.append((prev_pos, next_pos))
         # Step 2: Inject the best product based on the solution
         sol_tag = f'{solution_name}_{query_type}'
         injected_results: List[Result] = []
-        for raw_answer, best_product, embedded_query_st, embedded_structure in zip(raw_answers, suitable_products, embedded_queries_st, embedded_st_structures):            # only inject the product without optimization
-            if solution_name == BASIC_GEN_INSERT:
+        
+        if solution_name == BASIC_GEN_INSERT:
+            # Basic injection without refinement
+            for raw_answer, best_product, embedded_query_st, embedded_structure, inject_pos in zip(raw_answers, suitable_products, embedded_queries_st, embedded_st_structures, inject_positions):
                 injected_results.append(self.create_basic_injection(
-                    raw_answer, sol_tag, embedded_query_st, embedded_structure, (prev_pos, next_pos), best_product
+                    raw_answer, sol_tag, embedded_query_st, embedded_structure, inject_pos, best_product
                 ))
-            # inject the product and optimize the content
-            elif solution_name == REFINE_GEN_INSERT:
-                injected_results.append(self.create_refined_injection(
-                    raw_answer, sol_tag, embedded_query_st, embedded_structure, (prev_pos, next_pos), best_product
+        elif solution_name == REFINE_GEN_INSERT:
+            # Batch process refined injections for better performance
+            # First, create all injected contents
+            injected_contents = []
+            for raw_answer, best_product, embedded_query_st, inject_pos in zip(raw_answers, suitable_products, embedded_queries_st, inject_positions):
+                prev_pos, next_pos = inject_pos
+                product_text = f"{ADS_START}{str(best_product)}{ADS_END}"
+                
+                # Build content by concatenating sentences with product injection
+                content_parts = []
+                for i, sentence in enumerate(embedded_query_st):
+                    content_parts.append(sentence.to_string())
+                    if i == prev_pos:
+                        content_parts.append(" ")
+                        content_parts.append(product_text)
+                        content_parts.append(" ")
+                
+                content = "".join(content_parts)
+                injected_contents.append(content)
+            
+            # Batch refine all contents at once
+            refined_responses = self.refine_contents_batch(injected_contents)
+            
+            # Create Result objects with refined content
+            for idx, (raw_answer, best_product, refined) in enumerate(zip(raw_answers, suitable_products, refined_responses)):
+                refined_text = injected_contents[idx]  # Default to non-refined
+                product_info = {"name": None, "category": None, "desc": None, "url": None}
+                
+                if refined.get("answer") != "QUERY_FAILED":
+                    refined_text = refined["answer"]
+                    product_info = best_product.show()
+                
+                injected_results.append(Result(
+                    prompt=raw_answer.get_prompt(),
+                    solution_tag=sol_tag,
+                    answer=refined_text,
+                    product=product_info
                 ))
+        
         return injected_results
 
     def get_suitable_product(self, raw_answers: List[Result], problem_product_list: Dict[str, List[Dict]], query_type: str = "QUERY_RESPONSE"):
@@ -291,14 +350,15 @@ class InjectorAgent(BaseAgent):
         """
         suitable_products = {}
         # Step 0: preprocess the answer
-        # base on query_type, get the query
         queries = [raw_answer.get_prompt() for raw_answer in raw_answers]
         query_texts = [self.get_query_text(raw_answer, query_type) for raw_answer in raw_answers]
-        sentence_embedding = SentenceEmbedding(query_texts, self.rag_model)
+        answer_texts = [raw_answer.get_answer() for raw_answer in raw_answers]
+        sentence_embedding = SentenceEmbedding(answer_texts, self.rag_model)
         embedding_list = sentence_embedding.embed()
         embedded_queries = self.rag_model.encode_all(text_list=query_texts)
         embedded_queries_st = [embedding[0] for embedding in embedding_list]
         for query, embedded_query, embedded_query_st in zip(queries, embedded_queries, embedded_queries_st):
+            # Use a specialized product RAG for this query's product list
             product_rag = productRAG(
                 file_path=None,
                 product_list=problem_product_list.get(query, []),
@@ -312,3 +372,9 @@ class InjectorAgent(BaseAgent):
             suitable_products[query] = best_product.to_dict()
     
         return suitable_products
+    
+    def cleanup(self):
+        """Clean up resources including cached product RAG instance."""
+        if self._product_rag_cache is not None:
+            self._product_rag_cache.shutdown()
+            self._product_rag_cache = None
