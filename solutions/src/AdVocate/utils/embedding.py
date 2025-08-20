@@ -58,6 +58,14 @@ class Embedding(ParallelProcessor):
             self.sentence_model = SentenceTransformer(model_path)
             self.client = None
             self.async_client = None
+        elif model_name.startswith('text-embedding-'):
+            # Initialize OpenAI clients (both sync and async)
+            api_key = os.getenv("OPENAI_API_KEY")
+            base_url = os.getenv("BASE_URL")
+            
+            self.client = OpenAI(api_key=api_key, base_url=base_url)
+            self.async_client = AsyncOpenAI(api_key=api_key, base_url=base_url)
+            self.sentence_model = None
         else:
             # Initialize OpenAI clients (both sync and async)
             api_key = api_key or os.getenv("EMBEDDING_API_KEY")
@@ -237,7 +245,8 @@ class Embedding(ParallelProcessor):
             process_func=process_func,
             max_retries=max_retries,
             timeout=timeout,
-            task_description="🔢 Embedding batches"
+            task_description="Text Embedding",
+            hide_progress=True,        
         )
 
         # Merge all batch results into a single dictionary

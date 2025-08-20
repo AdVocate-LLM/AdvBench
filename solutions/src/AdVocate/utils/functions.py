@@ -166,20 +166,9 @@ class SentenceEmbedding:
                 results.append(Sentence(sentence=_s, embedding=np.array(emb, dtype=float)))
                 global_idx += 1
 
-            # Build structure as cumulative end indices in the original raw text
-            raw_text = self.raw_results[i]
-            end_indices: List[int] = []
-            search_pos = 0
-            for s in sentences_i:
-                idx = raw_text.find(s, search_pos)
-                if idx == -1:
-                    # Fallback: approximate using previous end or 0 plus len(s)
-                    prev_end = end_indices[-1] if end_indices else 0
-                    end_indices.append(prev_end + len(s))
-                else:
-                    end_idx = idx + len(s)
-                    end_indices.append(end_idx)
-                    search_pos = end_idx
+            # Build structure as sentence indices (much faster than character position search)
+            # Since we now use sentence indices directly in injection, we don't need character positions
+            end_indices: List[int] = list(range(len(sentences_i)))
 
             structure = end_indices
             output.append((results, structure))

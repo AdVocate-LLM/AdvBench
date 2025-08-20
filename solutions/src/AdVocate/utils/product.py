@@ -50,4 +50,8 @@ class Product:
 
     def __str__(self) -> str:
         desc = self.description.rstrip('.')
-        return f"{self.name}: {desc} (website: {self.url})."
+        return f"{self.name}: {desc}."
+    
+    def ad_content(self) -> str:
+        """Generate ad content for the product."""
+        return f"{self.name}:{self.description}({self.url})."

@@ -12,12 +12,12 @@ class productRAG(ModernLogger):
         super().__init__(name="productRAG")
         self.model = model  # Initialize model first
         self.file_path = file_path
-        self.cache = ExperimentCache(enable_disk=False)
+        self.cache = ExperimentCache(enable_disk=True)  # Enable disk caching for persistence
         
         # Generate cache key based on file path/product_list and model name
-        # Use model hash to avoid file name too long issues
-        model_str = str(model)
-        model_hash = hashlib.md5(model_str.encode()).hexdigest()[:8]  # Use first 8 chars of hash
+        # Use model config and name to create a stable hash
+        model_config_str = f"{model.model_name}_{model.model_config}"
+        model_hash = hashlib.md5(model_config_str.encode()).hexdigest()[:8]  # Use first 8 chars of hash
         
         if product_list is not None:
             # Generate cache key for product_list based on its content
@@ -96,8 +96,8 @@ class productRAG(ModernLogger):
             return
         
         # Get cache file for this model using short model hash
-        model_str = str(self.model)
-        model_hash = hashlib.md5(model_str.encode()).hexdigest()[:8]
+        model_config_str = f"{self.model.model_name}_{self.model.model_config}"
+        model_hash = hashlib.md5(model_config_str.encode()).hexdigest()[:8]
         cache_file = self.cache.get_cache_filename(model_hash, "global", False)
         cached_embeddings = self.cache.load_cache(cache_file)
         
@@ -145,9 +145,9 @@ class productRAG(ModernLogger):
             }
             cached_embeddings[product_key] = json.dumps(embedding_data)
         
-        # Save updated cache
+        # Save updated cache with retry mechanism
         if products_to_index:
-            self.cache.save_cache(cache_file, cached_embeddings)
+            self._save_cache_with_retry(cache_file, cached_embeddings)
         
     def query(self, query_embedding: np.ndarray, top_k: int = 5) -> List[Product]:
         """Query the indexed products and return top_k most similar products"""
@@ -167,3 +167,30 @@ class productRAG(ModernLogger):
                 except Exception as e:
                     self.error(f"Failed to re-index product {product.name}: {e}")
         return sorted(self.products, key=lambda x: x.query(query_embedding), reverse=True)[:top_k]
+    
+    def _save_cache_with_retry(self, cache_file: str, cached_embeddings: dict, max_retries: int = 3):
+        """Save cache with retry mechanism for better reliability in concurrent scenarios."""
+        import time
+        
+        for attempt in range(max_retries):
+            try:
+                self.cache.save_cache(cache_file, cached_embeddings)
+                self.info(f"Successfully saved cache on attempt {attempt + 1}")
+                return
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = (attempt + 1) * 0.1  # Progressive backoff
+                    self.warning(f"Cache save attempt {attempt + 1} failed: {e}. Retrying in {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    self.error(f"Failed to save cache after {max_retries} attempts: {e}")
+                    raise
+    
+    def flush_cache(self):
+        """Force flush all pending cache writes to disk."""
+        self.cache.flush_all_pending_writes()
+    
+    def shutdown(self):
+        """Shutdown the productRAG and ensure all caches are persisted."""
+        self.flush_cache()
+        self.cache.shutdown()

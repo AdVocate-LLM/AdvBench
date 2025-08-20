@@ -145,7 +145,7 @@ class AdvBench(ExperimentCache):
         return self
 
     def run(self, evaluate_matrix: List[str]=None):
-        # self.evaluate(evaluate_matrix=evaluate_matrix)
-        self.evaluate_the_selector()
+        self.evaluate(evaluate_matrix=evaluate_matrix)
+        # self.evaluate_the_selector()
         self.report()
         return self

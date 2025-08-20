@@ -48,7 +48,7 @@ if __name__ == '__main__':
     )
     # Example usage of the AdvBench
     adv_bench = AdvBench(
-        # data_sets=["mt-benchmark-humanities"],
+        data_sets=["mt-benchmark-humanities"],
         # data_sets=["lmsys100"],
         solutions={
                 "chi": 
@@ -104,9 +104,9 @@ if __name__ == '__main__':
         # judge_model="gpt-4o",
         judge_model="gpt-4.1-mini",
         # n_repeats=3,
-        n_repeats=3,
+        n_repeats=1,
         # tags="gpt-4o-mini-lmsys100-gpt-4o-repeat-3"
-        tags="doubao-1-5-lite-32k-250115-lmsys100-gpt-4.1-mini-repeat-3"
+        tags="8-20"
         # tags="test-evaluate-result-click-products"
     )
     # adv_bench.run(evaluate_matrix=["notice_products_evaluation"])
