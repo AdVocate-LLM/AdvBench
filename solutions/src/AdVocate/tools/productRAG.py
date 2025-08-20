@@ -175,7 +175,6 @@ class productRAG(ModernLogger):
         for attempt in range(max_retries):
             try:
                 self.cache.save_cache(cache_file, cached_embeddings)
-                self.info(f"Successfully saved cache on attempt {attempt + 1}")
                 return
             except Exception as e:
                 if attempt < max_retries - 1:

@@ -32,6 +32,3 @@ class OpenAIChatSession:
             if self.verbose:
                 print(f"Error in run_chat: {str(e)}")
             raise
-    
-    def get_product(self, prompt: str, candid_product_list: List[Dict[str, str]]):
-        self.advertiser.select_product(prompt, candid_product_list)
