@@ -1,7 +1,7 @@
 from ..utils.result import Result
 from ..utils.sentence import Sentence
 from ..utils.product import Product
-from ..utils.functions import get_adjacent_sentence_similarities, split_sentences_with_template
+from ..utils.functions import get_adjacent_sentence_similarities
 from ..utils.format import answer_structure2string
 from typing import List, Tuple, Optional, Dict, Union
 from ..prompt.injector_prompts import SYS_REFINE, USER_REFINE
@@ -9,21 +9,23 @@ from .base_agent import BaseAgent
 # import tools for injector agent
 from ..tools.productRAG import productRAG
 from ..tools.injector import Injector
-from sentence_transformers import SentenceTransformer
+from ..utils.embedding import Embedding
+from ..utils.functions import SentenceEmbedding
 from ..config import *
+import numpy as np
 
 class InjectorAgent(BaseAgent):
     
     def __init__(self, 
                 model: str, 
                 product_list_path: str,
-                rag_model: Optional[SentenceTransformer] = None,
+                rag_model: str,
                 score_func: str = LOG_WEIGHT
                 ) -> None:
         super().__init__(model)
         # basic settings
         self.product_list_path = product_list_path
-        self.rag_model = rag_model or SentenceTransformer(DEFAULT_RAG_MODEL)
+        self.rag_model = Embedding(model_name=rag_model)
         self.system_prompt = SYS_REFINE
         self.score_func = score_func
         self.INJECT_METHODS = {
@@ -36,12 +38,6 @@ class InjectorAgent(BaseAgent):
             "REFINE": REFINE_GEN_INSERT,
             "BASIC": BASIC_GEN_INSERT
         }
-        
-        # Initialize the tools
-        self.product_rag = productRAG(
-            file_path=self.product_list_path,
-            model=self.rag_model
-        )
         self.injector = Injector(score_func=self.score_func)
 
     def get_inject_methods(self) -> Dict[str, str]:
@@ -191,11 +187,13 @@ class InjectorAgent(BaseAgent):
         # Step 0: Get the question based on the method
         query = self.get_query_text(raw_answer, query_type)
         # Step 1: Get the best product
-        products = self.product_rag.query(query, top_k=5)
+        product_rag = productRAG(
+            file_path=self.product_list_path,
+            model=self.rag_model
+        )
+        products = product_rag.query(query, top_k=5)
         # convert the sentences to sentences
-        sentences, structure = split_sentences_with_template(raw_answer.get_answer(), self.rag_model)
-        # sentences = split_sentences_nltk(raw_answer.get_answer())
-        # structure = [i for i in range(len(sentences))]
+        sentences, structure = SentenceEmbedding(raw_answer.get_answer(), self.rag_model).embed()[0]
         sentence_flow = get_adjacent_sentence_similarities(sentences)
         best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
             sentences, sentence_flow, products
@@ -217,67 +215,53 @@ class InjectorAgent(BaseAgent):
                     raw_answers: List[Result],
                     query_type: str = QUERY_RESPONSE,
                     solution_name: str = REFINE_GEN_INSERT,
-                    batch_size=5,
-                    max_retries=2,
-                    timeout=1800) -> List[Result]:
+                    ) -> List[Result]:
         """Inject products into the answers at optimal positions with optimized parallel processing.
         
         Args:
             raw_answers (List[Result]): List of raw answers
             query_type (str): Type of query to use | QUERY_PROMPT, QUERY_RESPONSE, QUERY_PROMPT_N_RESPONSE
             solution_name (str): Name of the solution to use | BASIC_GEN_INSERT, REFINE_GEN_INSERT
-            batch_size (int): Size of batches for improved performance.
-            max_retries (int): Maximum retry attempts for failed injections.
-            timeout (int): Timeout in seconds for each process.
             
         Returns:
             List[Result]: List of results with injected products
         """
-        # Use the parallel processor base class
-        def process_func(raw_answer, query_type=query_type, solution_name=solution_name):
-            result = self.inject_products_single(raw_answer, query_type, solution_name)
-            if result is None:
-                self.error(f"Failed to inject product for {raw_answer.get_prompt()}")
-                return None
-            else:
-                return result
         
-        return self.parallel_process(
-            items=raw_answers,
-            process_func=process_func,
-            workers=None,
-            batch_size=batch_size,
-            max_retries=max_retries,
-            timeout=timeout,
-            task_description="Injecting products"
-        )
-    
-    def _get_inject_product(self, raw_answer, query_type, product_list:List[Dict]):
-        """
-        Get the suitable products for the problem.
-
-        Returns:
-            List[str]: the suitable products for the problem
-        """
-        # Step 0: Get the rag model
-        rag_model = self.rag_model
+        suitable_products = []
+        # Step 0: preprocess the answer
+        # base on query_type, get the query
+        query_texts = [self.get_query_text(raw_answer, query_type) for raw_answer in raw_answers]
+        sentence_embedding = SentenceEmbedding(query_texts, self.rag_model)
+        embedding_list = sentence_embedding.embed()
+        embedded_queries = self.rag_model.encode_all(text_list=query_texts)
+        embedded_queries_st = [embedding[0] for embedding in embedding_list]
+        embedded_st_structures = [embedding[1] for embedding in embedding_list]
+        # Step 1: get the suitable products for the query
         product_rag = productRAG(
-            file_path=None,
-            product_list=product_list,
-            model=rag_model
+            file_path=self.product_list_path,
+            model=self.rag_model
         )
-        # Step 0: Get the question based on the method
-        query = self.get_query_text(raw_answer, query_type)
-        # Step 1: Get the best product
-        products = product_rag.query(query, top_k=5)
-        # convert the sentences to sentences
-        sentences, structure = split_sentences_with_template(raw_answer.get_answer(), self.rag_model)
-        # structure = [i for i in range(len(sentences))]
-        sentence_flow = get_adjacent_sentence_similarities(sentences)
-        best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
-            sentences, sentence_flow, products
-        )
-        return best_product
+        for embedded_query, embedded_query_st in zip(embedded_queries, embedded_queries_st):
+            products = product_rag.query(np.array(embedded_query[1]), top_k=5)
+            sentence_flow = get_adjacent_sentence_similarities(embedded_query_st)
+            best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
+                embedded_query_st, sentence_flow, products
+            )
+            suitable_products.append(best_product)
+        # Step 2: Inject the best product based on the solution
+        sol_tag = f'{solution_name}_{query_type}'
+        injected_results: List[Result] = []
+        for raw_answer, best_product, embedded_query_st, embedded_structure in zip(raw_answers, suitable_products, embedded_queries_st, embedded_st_structures):            # only inject the product without optimization
+            if solution_name == BASIC_GEN_INSERT:
+                injected_results.append(self.create_basic_injection(
+                    raw_answer, sol_tag, embedded_query_st, embedded_structure, (prev_pos, next_pos), best_product
+                ))
+            # inject the product and optimize the content
+            elif solution_name == REFINE_GEN_INSERT:
+                injected_results.append(self.create_refined_injection(
+                    raw_answer, sol_tag, embedded_query_st, embedded_structure, (prev_pos, next_pos), best_product
+                ))
+        return injected_results
 
     def get_suitable_product(self, raw_answers: List[Result], problem_product_list: Dict[str, List[Dict]], query_type: str = "QUERY_RESPONSE"):
         """
@@ -306,13 +290,25 @@ class InjectorAgent(BaseAgent):
             Dict[str, Dict[str, str]]: Dict of query and suitable products for the query
         """
         suitable_products = {}
-        
-        for raw_answer in raw_answers:
-            best_product = self._get_inject_product(
-                raw_answer=raw_answer, 
-                query_type=query_type, 
-                product_list=problem_product_list[raw_answer.get_prompt()]
+        # Step 0: preprocess the answer
+        # base on query_type, get the query
+        queries = [raw_answer.get_prompt() for raw_answer in raw_answers]
+        query_texts = [self.get_query_text(raw_answer, query_type) for raw_answer in raw_answers]
+        sentence_embedding = SentenceEmbedding(query_texts, self.rag_model)
+        embedding_list = sentence_embedding.embed()
+        embedded_queries = self.rag_model.encode_all(text_list=query_texts)
+        embedded_queries_st = [embedding[0] for embedding in embedding_list]
+        for query, embedded_query, embedded_query_st in zip(queries, embedded_queries, embedded_queries_st):
+            product_rag = productRAG(
+                file_path=None,
+                product_list=problem_product_list.get(query, []),
+                model=self.rag_model
             )
-            suitable_products[raw_answer.get_prompt()] = best_product.to_dict()
+            products = product_rag.query(np.array(embedded_query[1]), top_k=5)
+            sentence_flow = get_adjacent_sentence_similarities(embedded_query_st)
+            best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
+                embedded_query_st, sentence_flow, products
+            )
+            suitable_products[query] = best_product.to_dict()
     
         return suitable_products

@@ -9,7 +9,6 @@ Version:
     - 0.1.0: Initial version
 """
 from typing import List, Optional, Dict
-from sentence_transformers import SentenceTransformer
 from .agents.answer_agent import AnswerAgent
 from .agents.injector_agent import InjectorAgent
 from .utils.format import Result_List2answer_product_Dict_list
@@ -30,7 +29,8 @@ class AdvocateWorkflow:
     def __init__(self, 
                 model_name: str="gpt-4o",
                 product_list_path: str= None,
-                rag_model: Optional[SentenceTransformer] = None,
+                rag_model: str = "Sentence-Transformers/all-MiniLM-L6-v2",
+                # rag_model: str = "Qwen/Qwen3-Embedding-8B",
                 score_func: str = LOG_WEIGHT
                 ):
         self.model_name = model_name
