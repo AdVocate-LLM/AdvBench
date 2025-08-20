@@ -33,6 +33,7 @@ class ParallelProcessor(ModernLogger):
         task_description: str = "Processing items",
         max_retries: int = 2,
         timeout: int = 18000,
+        hide_progress: bool = False,
         **kwargs
     ) -> List[Any]:
         # handle empty up front
@@ -52,7 +53,10 @@ class ParallelProcessor(ModernLogger):
         # progress setup
         completed = 0
         lock = threading.Lock()
-        progress, task_id = self.progress(total_items, task_description)
+        if not hide_progress:
+            progress, task_id = self.progress(total_items, task_description)
+        else:
+            progress, task_id = self.tmp_progress(total_items, task_description)
 
         def update_progress():
             nonlocal completed
@@ -103,6 +107,7 @@ class ParallelProcessor(ModernLogger):
         max_retries: int = 2,
         timeout: int = 18000,
         task_description: str = "Processing items",
+        hide_progress: bool = False,
         **kwargs
     ) -> List[Any]:
         workers = self.determine_worker_count(workers)
@@ -115,5 +120,6 @@ class ParallelProcessor(ModernLogger):
             task_description=task_description,
             max_retries=max_retries,
             timeout=timeout,
+            hide_progress=hide_progress,
             **kwargs
         )

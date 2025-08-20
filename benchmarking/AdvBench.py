@@ -14,7 +14,7 @@ class AdvBench(ExperimentCache):
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     def __init__(self, 
-                solutions: List[Dict[str, Callable]], 
+                solutions: Optional[List[Dict[str, Callable]]]=None, 
                 data_sets: Optional[List[str]]=None,
                 best_product_selector: Optional[List[Dict[str, Callable]]]=None,
                 judge_model: str = 'gpt-4o-mini',
@@ -34,6 +34,12 @@ class AdvBench(ExperimentCache):
         self.create_experiment_context()
         self.solutions = solutions
         self.best_product_selector = best_product_selector
+        self._generate_insert_mode = False
+        self._select_mode = False
+        if solutions:
+            self._generate_insert_mode = True
+        if best_product_selector:
+            self._select_mode = True
         self.evaluate_result = EvaluationResult()
         self.current_time = time.strftime("%Y%m%d_%H%M%S")
         self.output_dir = os.path.join(output_dir, 'output', f'{self.current_time}_{tags}')
@@ -65,28 +71,45 @@ class AdvBench(ExperimentCache):
             'QuantEvaluator': QuantEvaluator(output_dir=output_dir, results=results),
             'LAJQualitativeEvaluator': LAJQualitativeEvaluator(output_dir=output_dir, results=results, judge_model=self.judge_model)
         }
-        return self.evaluators        
+        return self.evaluators
 
-    def evaluate(self, output_dir: str=None, evaluate_matrix: List[str]=None):
+    def process_results(self)-> SolutionResult:
+        gen_results = SolutionResult()
+        select_results = SolutionResult()
         # Step 1: Get the results from the solutions
         self.stage("Stage 1: Using the solutions to process the data sets")
-        processor = Processor(
-            data_sets=self.data_sets, 
-            solution_models=self.solutions, 
-            output_dir=self.output_dir
-        )
-        results = processor.process(n_repeats=self.n_repeats)
-        
+        if self._generate_insert_mode:
+            processor = Processor(
+                data_sets=self.data_sets, 
+                solution_models=self.solutions, 
+                output_dir=self.output_dir
+            )
+            gen_results += processor.process(n_repeats=self.n_repeats)
+        if self._select_mode:
+            selector_processor = SelectProcessor(
+                data_sets=self.data_sets, 
+                solution_models=self.solutions, 
+                output_dir=self.output_dir,
+                best_product_selectors=self.best_product_selector,
+            )
+            select_results += selector_processor.process(n_repeats=self.n_repeats) 
         # (Optional) Save the results to the output directory as json file
-        results.save(os.path.join(self.output_dir, 'results.json'))
-        
+        all_results = gen_results + select_results
+        all_results.save(os.path.join(self.output_dir, 'results.json'))
         # # (Optional) load the results from the json file
         # results = SolutionResult.load(os.path.join(self.output_dir, 'results.json'))
         # results = SolutionResult.load("/Users/macbook.silan.tech/Documents/GitHub/AdvBench/benchmarking/output/20250731_190811_doubao-1-5-lite-32k-250115-lmsys100-doubao-1-5-pro-32k-250115-repeat-3/results.json")
-        
+        return gen_results, select_results
+     
+
+    def evaluate(self, 
+                 gen_results:SolutionResult=SolutionResult(),
+                 select_results:SolutionResult=SolutionResult(), 
+                 evaluate_matrix: List[str]=None):
         self.stage("Stage 2: Base on the evaluate_mode, Let the judge model evaluate the results")
-        evaluators = self._get_all_evaluator(output_dir=output_dir, results=results)
-        
+        # Step 1: basic evaluation
+        all_results = gen_results + select_results
+        evaluators = self._get_all_evaluator(output_dir=self.output_dir, results=all_results)
         # Step 3: Group the evaluate_matrix by the evaluator
         evaluator_matrix_map = {}
 
@@ -107,30 +130,19 @@ class AdvBench(ExperimentCache):
             evaluation_result += evaluator.evaluate(matrix_names)
         
         self.evaluate_result += evaluation_result
-        self.evaluate_result.save(os.path.join(self.output_dir, 'evaluation_result.json'))
-        return self
 
-    def evaluate_the_selector(self):
-        # Step 1: Get the selector processor
-        selector_processor = SelectProcessor(
-            data_sets=self.data_sets, 
-            solution_models=self.solutions, 
-            output_dir=self.output_dir,
-            best_product_selectors=self.best_product_selector,
-        )
-        results = selector_processor.process()        
-        # Step 2: Get the selector evaluator
-        from .evaluator.selector_evaluator import SelectEvaluator
-        selector_evaluator = SelectEvaluator(
-            output_dir=self.output_dir,
-            best_product_selectors=self.best_product_selector,
-            results=results
-        )
-        
-        # Step 3: Evaluate the results
-        evaluation_result = selector_evaluator.evaluate(["product_selection_accuracy"])
-        
-        self.evaluate_result += evaluation_result
+        if len(select_results) > 0:
+            from .evaluator.selector_evaluator import SelectEvaluator
+            selector_evaluator = SelectEvaluator(
+                output_dir=self.output_dir,
+                best_product_selectors=self.best_product_selector,
+                results=select_results
+            )
+            # Step 3: Evaluate the results
+            evaluation_result = selector_evaluator.evaluate(["product_selection_accuracy"])
+            self.evaluate_result += evaluation_result
+
+        self.evaluate_result.save(os.path.join(self.output_dir, 'evaluation_result.json'))
         return self
 
     def report(self):
@@ -145,7 +157,7 @@ class AdvBench(ExperimentCache):
         return self
 
     def run(self, evaluate_matrix: List[str]=None):
-        # self.evaluate(evaluate_matrix=evaluate_matrix)
-        self.evaluate_the_selector()
+        gen_results, select_results = self.process_results()
+        self.evaluate(gen_results, select_results, evaluate_matrix=evaluate_matrix)
         self.report()
         return self

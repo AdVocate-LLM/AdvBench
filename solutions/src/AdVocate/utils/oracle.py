@@ -21,7 +21,7 @@ class Oracle(ParallelProcessor, ExperimentCache):
 
     def __init__(self, model, apikey=None, base_url=None):
         ParallelProcessor.__init__(self)
-        ExperimentCache.__init__(self)
+        ExperimentCache.__init__(self, enable_disk=False)
         self.model = model
         self.apikey = os.environ.get("OPENAI_API_KEY") if apikey is None else apikey
         self.base_url = os.environ.get("BASE_URL") if base_url is None else base_url
