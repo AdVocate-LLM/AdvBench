@@ -74,32 +74,75 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             solution_name=solution_name  # Pass solution_name as a keyword argument
         )
     
-    def get_best_product(self, problem_product_list: dict[str, dict[str, list[str]]], workers=None, batch_size=5, max_retries=2, timeout=3000)->Dict[str, Dict[str, str]]:
+    def get_best_product(self, problem_list: dict[str, dict[str, list[str]]], solution_name: str, workers=None, batch_size=5, max_retries=2, timeout=3000) -> List[Dict[str, str]]:
         """
-        Get the best product for the problem.
+        Get the best product for the problem and generate response.
 
+        Args:
+            problem_list (dict[str, dict[str, list[str]]]): Dictionary of prompts and candidate products
+            solution_name (str): Name of the solution to use (chi or control)
+            workers (int): Number of workers for parallel processing
+            batch_size (int): Size of batches for improved performance
+            max_retries (int): Maximum retry attempts for failed operations
+            timeout (int): Timeout in seconds for each process
+            
         Returns:
-            Dict[str, Dict[str, str]]: the suitable products for the queries
+            List[Dict[str, str]]: List of results with queries, answers and products (same format as run method)
         """
-        def _select_product(item, **kwargs):
+        def _select_product_and_generate(item, **kwargs):
             prompt, candidate_product_list = item
-            # Create an advertiser instance for product selection
+            solution_name = kwargs.get('solution_name')
+            
+            # Determine mode and demographics based on solution name
+            if solution_name == self.COMPETITOR_NAME:
+                mode = args1['mode']
+                demographics = args1['demos']
+                ad_freq = args1['ad_freq']
+            elif solution_name == self.CONTROL_NAME:
+                mode = args2['mode'] 
+                demographics = args2['demos']
+                ad_freq = args2['ad_freq']
+            else:
+                raise ValueError(f"Unknown solution name: {solution_name}")
+            
+            # Create an advertiser instance for product selection and response generation
             advertiser = Advertiser(product_list_path=self.product_list_path, 
                                   topic_list_path=self.topic_list_path,
-                                  model=self.model_name)
-            return advertiser.select_product(prompt, candidate_product_list)
+                                  model=self.model_name,
+                                  mode=mode,
+                                  ad_freq=ad_freq,
+                                  demographics=demographics)
+            
+            # Select the best product from candidates
+            selection_result = advertiser.select_product(prompt, candidate_product_list)
+            selected_product = selection_result.get(prompt, {'name': None, 'description': None, 'url': None})
+            
+            # Set the selected product in advertiser
+            advertiser.product = {
+                'name': selected_product.get('name'),
+                'url': selected_product.get('url'), 
+                'desc': selected_product.get('description')
+            }
+            
+            # Set system prompt with the selected product
+            advertiser.set_sys_prompt(advertiser.product, demographics)
+            advertiser.chat_history.add_message(role='system', content=advertiser.system_prompt)
+            advertiser.chat_history.add_message(role='user', content=prompt)
+            
+            # Generate response using the API with the chat history
+            api = OpenAIAPI(model=self.model_name)
+            response, _ = api.handle_response(chat_history=advertiser.chat_history())
+            
+            return {'query': prompt, 'answer': response, 'product': selected_product}
         
-        selections = self.parallel_process(
-            items=list(problem_product_list.items()),
-            process_func=_select_product,
+        # Use parallel processor
+        return self.parallel_process(
+            items=list(problem_list.items()),
+            process_func=_select_product_and_generate,
             workers=workers,
             batch_size=batch_size,
             max_retries=max_retries,
             timeout=timeout,
-            task_description=f"Selecting products",
+            task_description=f"Selecting products and generating responses with {solution_name}",
+            solution_name=solution_name
         )
-        best_product_list = {}
-        for selection in selections:
-            for prompt, product in selection.items():
-                best_product_list[prompt] = product
-        return best_product_list
