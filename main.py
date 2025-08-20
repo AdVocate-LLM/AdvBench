@@ -50,12 +50,40 @@ if __name__ == '__main__':
     adv_bench = AdvBench(
         data_sets=["mt-benchmark-humanities"],
         # data_sets=["lmsys100"],
-
+        solutions={
+                "chi": 
+                    partial(
+                        chi_workflow.run,
+                        solution_name="chi"
+                    ),
+                "gen-insert-response": 
+                    partial(
+                        advocate_workflow.run,
+                        query_type="QUERY_RESPONSE",
+                        solution_name="BASIC_GEN_INSERT"
+                    )
+                ,
+                "gen-insert-refine-response": 
+                    partial(
+                        advocate_workflow.run,
+                        query_type="QUERY_RESPONSE",
+                        solution_name="REFINE_GEN_INSERT"
+                    )
+                ,
+                "gen-insert-refine-prompt": 
+                    partial(
+                        advocate_workflow.run,
+                        query_type="QUERY_PROMPT",
+                        solution_name="REFINE_GEN_INSERT"
+                    )
+                ,
+        },
         best_product_selector={
-            #"chi": 
-            #    partial(
-            #        chi_workflow.get_best_product,
-            #    ),
+            "chi": 
+                partial(
+                    chi_workflow.get_best_product,
+                    solution_name="chi"
+                ),
             "gen-insert-response": 
                 partial(
                     advocate_workflow.run,

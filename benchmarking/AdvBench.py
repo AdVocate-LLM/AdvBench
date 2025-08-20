@@ -92,7 +92,7 @@ class AdvBench(ExperimentCache):
                 output_dir=self.output_dir,
                 best_product_selectors=self.best_product_selector,
             )
-            select_resultsresults += selector_processor.process(n_repeats=self.n_repeats) 
+            select_results += selector_processor.process(n_repeats=self.n_repeats) 
         # (Optional) Save the results to the output directory as json file
         all_results = gen_results + select_results
         all_results.save(os.path.join(self.output_dir, 'results.json'))
@@ -157,6 +157,7 @@ class AdvBench(ExperimentCache):
         return self
 
     def run(self, evaluate_matrix: List[str]=None):
-        self.evaluate(self.process_results(), evaluate_matrix=evaluate_matrix)
+        gen_results, select_results = self.process_results()
+        self.evaluate(gen_results, select_results, evaluate_matrix=evaluate_matrix)
         self.report()
         return self
