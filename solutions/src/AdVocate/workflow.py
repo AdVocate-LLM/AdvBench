@@ -8,8 +8,7 @@ The workflow is composed of two stages:
 Version:
     - 0.1.0: Initial version
 """
-from typing import List, Optional, Dict
-from sentence_transformers import SentenceTransformer
+from typing import List, Union, Dict
 from .agents.answer_agent import AnswerAgent
 from .agents.injector_agent import InjectorAgent
 from .utils.format import Result_List2answer_product_Dict_list
@@ -30,7 +29,9 @@ class AdvocateWorkflow:
     def __init__(self, 
                 model_name: str="gpt-4o",
                 product_list_path: str= None,
-                rag_model: Optional[SentenceTransformer] = None,
+                #rag_model: str = "Sentence-Transformers/all-MiniLM-L6-v2",
+                rag_model: str = 'text-embedding-3-small',
+                #rag_model: str = "Qwen/Qwen3-Embedding-8B",
                 score_func: str = LOG_WEIGHT
                 ):
         self.model_name = model_name
@@ -63,7 +64,7 @@ class AdvocateWorkflow:
         print("    - workflow = Workflow(model_name, product_list_path, rag_model)")
         print("    - workflow.run(problem_list, category, query_type, solution_name)")
     
-    def run(self, problem_list: List[str], query_type: str, solution_name: str):
+    def run(self, problem_list: Union[List[str]| dict[str, dict[str, list[str]]]], query_type: str, solution_name: str):
         """
         Run the workflow.
         - Stage 1: answer agent give the raw_answer
@@ -76,33 +77,24 @@ class AdvocateWorkflow:
             List[Dict[str, str]]: the injected_answer
         """
         # Stage 1: answer agent give the raw_answer
+        _problem_list = problem_list
+        if isinstance(problem_list, Dict):
+            problem_list = list(problem_list.keys())
         raw_answer = self.answer_agent.raw_answer(problem_list)
+        
         # Stage 2: injector agent give the injected_answer
-        injected_answer = self.injector_agent.inject_products(raw_answer, query_type, solution_name)
+        if isinstance(_problem_list, Dict):
+            injected_answer = self.injector_agent.inject_products(
+                raw_answer, 
+                query_type, 
+                solution_name, 
+                problem_product_list=_problem_list)
+        else:
+            injected_answer = self.injector_agent.inject_products(raw_answer, query_type, solution_name)
         
         return Result_List2answer_product_Dict_list(injected_answer)
     
-    def get_best_product(self, 
-                            problem_product_list: dict[str, dict[str, list[str]]], 
-                            query_type: str = "QUERY_RESPONSE")->Dict[str, Dict[str, str]]:
-        """
-        Get the best product for the problem.
-
-        Args:
-            solution_name: Name of the solution to use (BASIC_GEN_INSERT, REFINE_GEN_INSERT)
-            problem_product_list: Dict of problem and product list
-            query_type: Type of query to use (QUERY_PROMPT, QUERY_RESPONSE, QUERY_PROMPT_N_RESPONSE)
-
-        Returns:
-            Dict[str, Product]: the suitable products for the query
-        """
-        # Stage 1: answer agent give the raw_answer
-        raw_answer = self.answer_agent.raw_answer(list(problem_product_list.keys()))
-        # Stage 2: injector agent give the injected_answer
-        best_product = self.injector_agent.get_suitable_product(
-            raw_answers=raw_answer, 
-            problem_product_list=problem_product_list,
-            query_type=query_type
-        )
-
-        return best_product
+    def cleanup(self):
+        """Clean up resources in all agents."""
+        if hasattr(self.injector_agent, 'cleanup'):
+            self.injector_agent.cleanup()

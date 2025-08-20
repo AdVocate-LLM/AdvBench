@@ -91,3 +91,49 @@ def get_cosine_similarity(embedding1: Optional[np.ndarray], embedding2: Optional
         return 0.0
         
     return dot_product / norm_product
+
+from benchmarking.utils.embedding import Embedding
+class SentenceEmbedding(Embedding):
+    """Class to handle sentence embeddings"""
+    def __init__(self, raw_results: List[str],
+                 model_name: str = 'Qwen/Qwen3-Embedding-8B'):
+        super().__init__(model_name=model_name)
+        self.raw_results = raw_results
+        self.splited_result: List[List[str]] = [
+            self._split_raw_result(r) for r in raw_results
+        ]
+
+    def _split_raw_result(self, raw_result: str) -> List[str]:
+        """Split a raw result into sentences"""
+        return split_sentences_nltk(raw_result)
+
+    def _get_all_sentences(self) -> List[str]:
+        """Flatten to a list of sentences (preserves original order with duplicates)."""
+        return [s for group in self.splited_result for s in group]
+
+    def embed(self, dim: int | None = None) -> List[List[Sentence]]:
+        """
+        Generate embeddings for all sentences in raw_results,
+        grouping them per original raw result order (order & duplicates preserved).
+        """
+        all_sentences = self._get_all_sentences()
+        if not all_sentences:
+            return [[] for _ in self.splited_result]
+
+        dim = dim or self.model_config['default_dim']
+
+        embeddings_map = self.encode_all(all_sentences, dim=dim)
+        embeddings_list = [embeddings_map[s] for s in all_sentences]
+
+        grouped: List[List[Sentence]] = []
+        cursor = 0
+        for sentences_in_one in self.splited_result:
+            group: List[Sentence] = []
+            for _ in sentences_in_one:
+                emb = embeddings_list[cursor]
+                group.append(Sentence(sentence=all_sentences[cursor],
+                                      embedding=np.array(emb, dtype=float)))
+                cursor += 1
+            grouped.append(group)
+
+        return grouped

@@ -82,25 +82,17 @@ def setup_nltk(nltk_data_dir: Optional[str] = None) -> None:
             logging.info(f"NLTK corpus '{package}' not found. Downloading…")
             nltk.download(package, quiet=True)
     _nltk_initialized = True
-
-
-def split_sentences_with_template(
-    content: str, rag_model:SentenceTransformer
-) -> Tuple[List[Sentence], List[Union[str, int]]]:
-    """Split text into sentences and non-sentence parts while preserving structure."""
+    
+def split_sentences_nltk(content: str) -> List[str]:
+    """Split text into sentences using NLTK tokenizer and filter out short sentences."""
     setup_nltk()
+    # First get sentences using NLTK
+    sentences = sent_tokenize(content)
 
-    # Use PunktSentenceTokenizer directly to get spans
-    tokenizer = PunktSentenceTokenizer()
-    spans = list(tokenizer.span_tokenize(content))
-
-    # Process content and build structure
+    # Filter out short sentences and empty ones
     processed_sentences = []
-    structure = []
-    last_end = 0
-
-    for start, end in spans:
-        sent = content[start:end].strip()
+    for sent in sentences:
+        sent = sent.strip()
         if not sent:
             continue
 
@@ -117,21 +109,67 @@ def split_sentences_with_template(
 
         # Filter out short sentences
         if len(sent) > 3:
-            # Add preceding non-sentence content
-            preceding_content = content[last_end:start]
-            if preceding_content:
-                structure.append(preceding_content)
+            processed_sentences.append(sent)
 
-            # Add sentence index
-            sentence_obj = Sentence(sent, rag_model)
-            processed_sentences.append(sentence_obj)
-            structure.append(len(processed_sentences) - 1)
+    return processed_sentences
 
-            last_end = end
+from ..utils.embedding import Embedding
+class SentenceEmbedding:
+    """Class to handle sentence embeddings"""
 
-    # Add remaining non-sentence content after last sentence
-    remaining_content = content[last_end:]
-    if remaining_content:
-        structure.append(remaining_content)
+    def __init__(self, raw_results: List[str],
+                emb_model: Embedding):
+        self.emb_model = emb_model
+        self.raw_results = raw_results
+        self.splited_result: List[List[str]] = [
+            self._split_raw_result(raw_result) for raw_result in raw_results
+        ]
 
-    return processed_sentences, structure
+    def _split_raw_result(self, raw_result: str) -> List[str]:
+        """Split a raw result into sentences"""
+        return split_sentences_nltk(raw_result)
+    
+    def _get_all_sentences(self) -> List[str]:
+        """Transform splited_result into a list of sentences"""
+        return [sentence for raw_result in self.splited_result for sentence in raw_result]
+
+    def embed(self) -> List[Tuple[List[Sentence], List[int]]]:
+        """
+        Generate embeddings for all sentences in raw_results,
+        grouping them per original raw result order.
+
+        :param sentences: unused; embeddings are generated from raw_results
+        :return: List of lists of tuple(Sentence, List[int])
+        """
+        # Flatten all sentences and compute embeddings in a batch
+        all_sentences = self._get_all_sentences()
+        # Encode while preserving order (avoid key collisions for duplicate sentences)
+        if all_sentences:
+            embeddings_map = self.emb_model.encode_all(all_sentences)
+            embeddings_list = [embedding[1] for embedding in embeddings_map]
+        else:
+            embeddings_list = []
+
+        output: List[Tuple[List[Sentence], List[int]]] = []
+        global_idx = 0
+        for i in range(len(self.splited_result)):
+            sentences_i = self.splited_result[i]
+
+            # Build Sentence objects with embeddings in original order
+            results: List[Sentence] = []
+            for _s in sentences_i:
+                if global_idx < len(embeddings_list):
+                    emb = embeddings_list[global_idx]
+                else:
+                    exit()
+                    emb = [0.0] * self.emb_model.model_config['default_dim']
+                results.append(Sentence(sentence=_s, embedding=np.array(emb, dtype=float)))
+                global_idx += 1
+
+            # Build structure as sentence indices (much faster than character position search)
+            # Since we now use sentence indices directly in injection, we don't need character positions
+            end_indices: List[int] = list(range(len(sentences_i)))
+
+            structure = end_indices
+            output.append((results, structure))
+        return output

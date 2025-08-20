@@ -2,20 +2,22 @@ from typing import Dict, Optional
 import numpy as np
 from .functions import get_cosine_similarity
 class Product:
-    def __init__(self, name: str, description: str, category: str, url: str, model, embedding: Optional[np.ndarray] = None):
+    def __init__(self, name: str, description: str, category: str, url: str, embedding: Optional[np.ndarray] = None):
         self.name = name
         self.category = category
         self.description = description
         self.url = url
-        self.model = model
         self.embedding = embedding
-
-    def index(self):
-        if self.embedding is None:
-            self.embedding = self.model.encode(str(self), show_progress_bar=False, convert_to_numpy=True)
+        self.has_embedding = embedding is not None
 
     def query(self, query_embedding:np.ndarray):
+        if not self.has_embedding:
+            raise ValueError("Embedding not found for product")
         return get_cosine_similarity(self.embedding, query_embedding)
+    
+    def update_embedding(self, embedding: np.ndarray):
+        self.embedding = embedding
+        self.has_embedding = True
 
     def show(self):
         return {
@@ -48,4 +50,8 @@ class Product:
 
     def __str__(self) -> str:
         desc = self.description.rstrip('.')
-        return f"{self.name}: {desc} (website: {self.url})."
+        return f"{self.name}: {desc}."
+    
+    def ad_content(self) -> str:
+        """Generate ad content for the product."""
+        return f"{self.name}:{self.description}({self.url})."

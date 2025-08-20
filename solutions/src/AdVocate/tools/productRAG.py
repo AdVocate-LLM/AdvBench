@@ -1,22 +1,23 @@
 from ..utils.product import Product
 from ..utils.logger import ModernLogger
 from ..utils.cache import ExperimentCache
+from ..utils.embedding import Embedding
 import json
 import hashlib
 import numpy as np
 from typing import List, Dict, Optional
 
 class productRAG(ModernLogger):
-    def __init__(self, file_path: str, model, product_list: Optional[Dict] = None):
+    def __init__(self, file_path: str, model: Embedding, product_list: Optional[Dict] = None):
         super().__init__(name="productRAG")
         self.model = model  # Initialize model first
         self.file_path = file_path
-        self.cache = ExperimentCache()
+        self.cache = ExperimentCache(enable_disk=True)  # Enable disk caching for persistence
         
         # Generate cache key based on file path/product_list and model name
-        # Use model hash to avoid file name too long issues
-        model_str = str(model)
-        model_hash = hashlib.md5(model_str.encode()).hexdigest()[:8]  # Use first 8 chars of hash
+        # Use model config and name to create a stable hash
+        model_config_str = f"{model.model_name}_{model.model_config}"
+        model_hash = hashlib.md5(model_config_str.encode()).hexdigest()[:8]  # Use first 8 chars of hash
         
         if product_list is not None:
             # Generate cache key for product_list based on its content
@@ -45,8 +46,7 @@ class productRAG(ModernLogger):
                         product_dict['name'], 
                         product_dict['description'], 
                         product_dict['category'], 
-                        product_dict['url'], 
-                        self.model
+                        product_dict['url']
                     ))
         
         # Check if product_list has the expected flat structure
@@ -56,7 +56,7 @@ class productRAG(ModernLogger):
                                 product_list['descs'], 
                                 product_list['categories'], 
                                 product_list['urls']):
-                products.append(Product(name, desc, category, url, self.model))
+                products.append(Product(name, desc, category, url))
         
         # Handle nested dictionary format (category-based structure)
         elif isinstance(product_list, dict):
@@ -69,7 +69,7 @@ class productRAG(ModernLogger):
                     # Ensure all lists have the same length
                     min_length = min(len(names), len(descs), len(urls))
                     for i in range(min_length):
-                        products.append(Product(names[i], descs[i], category, urls[i], self.model))
+                        products.append(Product(names[i], descs[i], category, urls[i]))
         
         return products
 
@@ -96,8 +96,8 @@ class productRAG(ModernLogger):
             return
         
         # Get cache file for this model using short model hash
-        model_str = str(self.model)
-        model_hash = hashlib.md5(model_str.encode()).hexdigest()[:8]
+        model_config_str = f"{self.model.model_name}_{self.model.model_config}"
+        model_hash = hashlib.md5(model_config_str.encode()).hexdigest()[:8]
         cache_file = self.cache.get_cache_filename(model_hash, "global", False)
         cached_embeddings = self.cache.load_cache(cache_file)
         
@@ -113,6 +113,7 @@ class productRAG(ModernLogger):
                     embedding_data = json.loads(cached_embeddings[product_key])
                     if embedding_data.get('embedding') is not None:
                         product.embedding = np.array(embedding_data['embedding'])
+                        product.has_embedding = True
                         products_loaded_from_cache += 1
                     else:
                         self.warning(f"Cached embedding for {product.name} is None, will re-index")
@@ -123,43 +124,32 @@ class productRAG(ModernLogger):
             else:
                 products_to_index.append(product)
         
-            
+        # If no products to index, return
         if not products_to_index:
             return
+
+        # Create embedding for products that need indexing
+        embedding_array: List[str] = []
+        for product in products_to_index:
+            embedding_array.append(product.__str__())
         
-        # Create progress bar for products that need indexing
-        progress, task_id = self.tmp_progress(total=len(products_to_index), description="Indexing new products")
+        embedding_map = self.model.encode_all(text_list=embedding_array)
+        for product, product_embedding in zip(products_to_index, embedding_map):
+            if product_embedding[0] != product.__str__():
+                exit()
+            product.update_embedding(np.array(product_embedding[1], dtype=np.float32))
+            product_key = hashlib.md5(str(product).encode()).hexdigest()
+            embedding_data = {
+                'name': product.name,
+                'embedding': product.embedding.tolist()
+            }
+            cached_embeddings[product_key] = json.dumps(embedding_data)
         
-        with progress:
-            for product in products_to_index:
-                try:
-                    # Generate embedding
-                    product.index()
-                    
-                    # Verify embedding was created successfully
-                    if product.embedding is None:
-                        self.error(f"Product {product.name} embedding is None after indexing")
-                        progress.update(task_id, advance=1)  # type: ignore
-                        continue
-                    
-                    # Cache the embedding
-                    product_key = hashlib.md5(str(product).encode()).hexdigest()
-                    embedding_data = {
-                        'name': product.name,
-                        'embedding': product.embedding.tolist()
-                    }
-                    cached_embeddings[product_key] = json.dumps(embedding_data)
-                    
-                    progress.update(task_id, advance=1)  # type: ignore
-                except Exception as e:
-                    self.error(f"Failed to index product {product.name}: {e}")
-                    progress.update(task_id, advance=1)  # type: ignore
-        
-        # Save updated cache
+        # Save updated cache with retry mechanism
         if products_to_index:
-            self.cache.save_cache(cache_file, cached_embeddings)
+            self._save_cache_with_retry(cache_file, cached_embeddings)
         
-    def query(self, query: str, top_k: int = 5) -> List[Product]:
+    def query(self, query_embedding: np.ndarray, top_k: int = 5) -> List[Product]:
         """Query the indexed products and return top_k most similar products"""
         if not self.products:
             self.warning("No products available for querying")
@@ -176,6 +166,30 @@ class productRAG(ModernLogger):
                         self.error(f"Failed to create embedding for {product.name}")
                 except Exception as e:
                     self.error(f"Failed to re-index product {product.name}: {e}")
-            
-        query_embedding = self.model.encode(query, show_progress_bar=False, convert_to_numpy=True)
         return sorted(self.products, key=lambda x: x.query(query_embedding), reverse=True)[:top_k]
+    
+    def _save_cache_with_retry(self, cache_file: str, cached_embeddings: dict, max_retries: int = 3):
+        """Save cache with retry mechanism for better reliability in concurrent scenarios."""
+        import time
+        
+        for attempt in range(max_retries):
+            try:
+                self.cache.save_cache(cache_file, cached_embeddings)
+                return
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = (attempt + 1) * 0.1  # Progressive backoff
+                    self.warning(f"Cache save attempt {attempt + 1} failed: {e}. Retrying in {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    self.error(f"Failed to save cache after {max_retries} attempts: {e}")
+                    raise
+    
+    def flush_cache(self):
+        """Force flush all pending cache writes to disk."""
+        self.cache.flush_all_pending_writes()
+    
+    def shutdown(self):
+        """Shutdown the productRAG and ensure all caches are persisted."""
+        self.flush_cache()
+        self.cache.shutdown()
