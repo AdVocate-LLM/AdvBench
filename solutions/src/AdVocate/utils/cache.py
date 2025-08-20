@@ -80,7 +80,8 @@ class ExperimentCache(ModernLogger):
     """
     
     def __init__(self, base_dir: str = None, memory_cache_size: int = 1000, 
-                 write_batch_size: int = 10, write_interval: float = 5.0):
+                 write_batch_size: int = 10, write_interval: float = 5.0,
+                 enable_disk: bool = True):
         """
         Initialize the experiment cache manager.
         
@@ -97,6 +98,9 @@ class ExperimentCache(ModernLogger):
         self.base_dir = base_dir
         self.cache_dir = os.path.join(base_dir, '.cache')
         self.current_file = os.path.join(self.cache_dir, '.current')
+        
+        # Whether disk I/O is enabled (memory-only if False)
+        self.enable_disk = enable_disk
         
         # Memory cache configuration
         self.memory_cache_size = memory_cache_size
@@ -121,8 +125,9 @@ class ExperimentCache(ModernLogger):
         if not os.path.exists(self.cache_dir):
             os.makedirs(self.cache_dir)
         
-        # Start background writer thread
-        self._start_writer_thread()
+        # Start background writer thread only when disk is enabled
+        if self.enable_disk:
+            self._start_writer_thread()
     
     def _get_memory_cache(self, cache_file: str) -> MemoryLRUCache:
         """Get or create memory cache for a specific cache file."""
@@ -164,6 +169,8 @@ class ExperimentCache(ModernLogger):
     
     def _flush_pending_writes(self):
         """Flush all pending writes to disk."""
+        if not self.enable_disk:
+            return
         with self.pending_writes_lock:
             if not self.pending_writes:
                 return
@@ -192,6 +199,8 @@ class ExperimentCache(ModernLogger):
     
     def _load_cache_direct(self, cache_file: str) -> Dict[str, Any]:
         """Direct file loading without memory cache."""
+        if not self.enable_disk:
+            return {}
         if not os.path.exists(cache_file):
             return {}
         
@@ -208,6 +217,8 @@ class ExperimentCache(ModernLogger):
     
     def _save_cache_direct(self, cache_file: str, cache_data: Dict[str, Any]):
         """Direct file saving without memory cache."""
+        if not self.enable_disk:
+            return
         try:
             with open(cache_file, 'w', encoding='utf-8') as f:
                 _lock_exclusive(f)
@@ -358,6 +369,8 @@ class ExperimentCache(ModernLogger):
     
     def _load_cache_from_file(self, cache_file: str) -> Dict[str, str]:
         """Load cache directly from file with error handling."""
+        if not self.enable_disk:
+            return {}
         if not os.path.exists(cache_file):
             return {}
         
@@ -395,11 +408,12 @@ class ExperimentCache(ModernLogger):
         full_cache_key = f"__FULL_CACHE__{cache_file}"
         memory_cache.put(full_cache_key, cache_data.copy())
         
-        # Queue for background file writing
-        with self.pending_writes_lock:
-            if cache_file not in self.pending_writes:
-                self.pending_writes[cache_file] = {}
-            self.pending_writes[cache_file].update(cache_data)
+        # Queue for background file writing (skip if disk disabled)
+        if self.enable_disk:
+            with self.pending_writes_lock:
+                if cache_file not in self.pending_writes:
+                    self.pending_writes[cache_file] = {}
+                self.pending_writes[cache_file].update(cache_data)
     
     def cleanup_experiment_context(self):
         """
@@ -460,14 +474,15 @@ class ExperimentCache(ModernLogger):
     def shutdown(self):
         """Shutdown the cache manager and cleanup resources."""
         # Stop the background writer thread
-        self.writer_stop_event.set()
-        
-        # Flush any remaining pending writes
-        self._flush_pending_writes()
-        
-        # Wait for writer thread to finish
-        if self.writer_thread and self.writer_thread.is_alive():
-            self.writer_thread.join(timeout=5.0)
+        if self.enable_disk:
+            self.writer_stop_event.set()
+            
+            # Flush any remaining pending writes
+            self._flush_pending_writes()
+            
+            # Wait for writer thread to finish
+            if self.writer_thread and self.writer_thread.is_alive():
+                self.writer_thread.join(timeout=5.0)
         
         # Clear memory caches
         with self.memory_cache_lock:

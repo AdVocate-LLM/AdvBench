@@ -82,3 +82,105 @@ def setup_nltk(nltk_data_dir: Optional[str] = None) -> None:
             logging.info(f"NLTK corpus '{package}' not found. Downloading…")
             nltk.download(package, quiet=True)
     _nltk_initialized = True
+    
+def split_sentences_nltk(content: str) -> List[str]:
+    """Split text into sentences using NLTK tokenizer and filter out short sentences."""
+    setup_nltk()
+    # First get sentences using NLTK
+    sentences = sent_tokenize(content)
+
+    # Filter out short sentences and empty ones
+    processed_sentences = []
+    for sent in sentences:
+        sent = sent.strip()
+        if not sent:
+            continue
+
+        # Skip code blocks and special content
+        if (
+            sent.startswith("```")
+            or sent.startswith("`")
+            or sent.startswith("#")
+            or sent.startswith(">")
+            or sent.startswith("{")
+            or sent.startswith("[")
+        ):
+            continue
+
+        # Filter out short sentences
+        if len(sent) > 3:
+            processed_sentences.append(sent)
+
+    return processed_sentences
+
+from ..utils.embedding import Embedding
+class SentenceEmbedding:
+    """Class to handle sentence embeddings"""
+
+    def __init__(self, raw_results: List[str],
+                emb_model: Embedding):
+        self.emb_model = emb_model
+        self.raw_results = raw_results
+        self.splited_result: List[List[str]] = [
+            self._split_raw_result(raw_result) for raw_result in raw_results
+        ]
+
+    def _split_raw_result(self, raw_result: str) -> List[str]:
+        """Split a raw result into sentences"""
+        return split_sentences_nltk(raw_result)
+    
+    def _get_all_sentences(self) -> List[str]:
+        """Transform splited_result into a list of sentences"""
+        return [sentence for raw_result in self.splited_result for sentence in raw_result]
+
+    def embed(self) -> List[Tuple[List[Sentence], List[int]]]:
+        """
+        Generate embeddings for all sentences in raw_results,
+        grouping them per original raw result order.
+
+        :param sentences: unused; embeddings are generated from raw_results
+        :return: List of lists of tuple(Sentence, List[int])
+        """
+        # Flatten all sentences and compute embeddings in a batch
+        all_sentences = self._get_all_sentences()
+        # Encode while preserving order (avoid key collisions for duplicate sentences)
+        if all_sentences:
+            embeddings_map = self.emb_model.encode_all(all_sentences)
+            embeddings_list = [embedding[1] for embedding in embeddings_map]
+        else:
+            embeddings_list = []
+
+        output: List[Tuple[List[Sentence], List[int]]] = []
+        global_idx = 0
+        for i in range(len(self.splited_result)):
+            sentences_i = self.splited_result[i]
+
+            # Build Sentence objects with embeddings in original order
+            results: List[Sentence] = []
+            for _s in sentences_i:
+                if global_idx < len(embeddings_list):
+                    emb = embeddings_list[global_idx]
+                else:
+                    exit()
+                    emb = [0.0] * self.emb_model.model_config['default_dim']
+                results.append(Sentence(sentence=_s, embedding=np.array(emb, dtype=float)))
+                global_idx += 1
+
+            # Build structure as cumulative end indices in the original raw text
+            raw_text = self.raw_results[i]
+            end_indices: List[int] = []
+            search_pos = 0
+            for s in sentences_i:
+                idx = raw_text.find(s, search_pos)
+                if idx == -1:
+                    # Fallback: approximate using previous end or 0 plus len(s)
+                    prev_end = end_indices[-1] if end_indices else 0
+                    end_indices.append(prev_end + len(s))
+                else:
+                    end_idx = idx + len(s)
+                    end_indices.append(end_idx)
+                    search_pos = end_idx
+
+            structure = end_indices
+            output.append((results, structure))
+        return output
