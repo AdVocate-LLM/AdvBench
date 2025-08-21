@@ -48,9 +48,9 @@ if __name__ == '__main__':
     )
     # Example usage of the AdvBench
     adv_bench = AdvBench(
-        # data_sets=["mt-benchmark-humanities"],
+        data_sets=["mt-benchmark-humanities"],
         # data_sets=["lmsys100"],
-        data_sets=["mt-benchmark-humanities", "lmsys100"],
+        # data_sets=["mt-benchmark-humanities", "lmsys100"],
         solutions={
                 "chi": 
                     partial(
@@ -79,42 +79,42 @@ if __name__ == '__main__':
                     )
                 ,
         },
-        best_product_selector={
-            "chi": 
-                partial(
-                    chi_workflow.get_best_product,
-                    solution_name="chi"
-                ),
-            "gen-insert-response": 
-                partial(
-                    advocate_workflow.run,
-                    query_type="QUERY_RESPONSE",
-                    solution_name="BASIC_GEN_INSERT"
-                )
-            ,
-            "gen-insert-refine-response": 
-                partial(
-                    advocate_workflow.run,
-                    query_type="QUERY_RESPONSE",
-                    solution_name="REFINE_GEN_INSERT"
-                )
-            ,
-            "gen-insert-refine-prompt": 
-                partial(
-                    advocate_workflow.run,
-                    query_type="QUERY_PROMPT",
-                    solution_name="REFINE_GEN_INSERT"
-                )
-            ,
-        },
+        # best_product_selector={
+        #     "chi": 
+        #         partial(
+        #             chi_workflow.get_best_product,
+        #             solution_name="chi"
+        #         ),
+        #     "gen-insert-response": 
+        #         partial(
+        #             advocate_workflow.run,
+        #             query_type="QUERY_RESPONSE",
+        #             solution_name="BASIC_GEN_INSERT"
+        #         )
+        #     ,
+        #     "gen-insert-refine-response": 
+        #         partial(
+        #             advocate_workflow.run,
+        #             query_type="QUERY_RESPONSE",
+        #             solution_name="REFINE_GEN_INSERT"
+        #         )
+        #     ,
+        #     "gen-insert-refine-prompt": 
+        #         partial(
+        #             advocate_workflow.run,
+        #             query_type="QUERY_PROMPT",
+        #             solution_name="REFINE_GEN_INSERT"
+        #         )
+        #     ,
+        # },
         # judge_model="Qwen/Qwen3-32B",
         # judge_model="Qwen/Qwen2.5-14B-Instruct",
         # judge_model="gpt-4o",
         judge_model="gpt-4.1-mini",
         # n_repeats=3,
-        n_repeats=2,
+        n_repeats=1,
         # tags="gpt-4o-mini-lmsys100-gpt-4o-repeat-3"
-        tags="8-20"
+        tags="8-20-gpt-4o-mini-repeat-1"
         # tags="test-evaluate-result-click-products"
     )
     # adv_bench.run(evaluate_matrix=["notice_products_evaluation"])

@@ -177,7 +177,8 @@ class InjectorAgent(BaseAgent):
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
             answer=content,
-            product=best_product.show()
+            product=best_product.show(),
+            price=raw_answer.get_price()
         )
         return injected_result
     
