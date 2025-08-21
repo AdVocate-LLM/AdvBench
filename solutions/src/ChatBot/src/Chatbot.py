@@ -23,10 +23,11 @@ class OpenAIChatSession:
             message, _price = self.oai_api.handle_response(
                 chat_history=self.advertiser.chat_history()
             )
-            price['in_token'] += _price['in_token']
-            price['out_token'] += _price['out_token']
-            price['price'] += _price['price']
-            # advertiser.chat_history stores the system prompt which instructs the LLM to embed ads in the next assistant message
+            price = {
+                'in_token': price['in_token'] + _price['in_token'],
+                'out_token': price['out_token'] + _price['out_token'],
+                'price': price['price'] + _price['price']
+            }
 
             return message, product, price
             

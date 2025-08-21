@@ -73,33 +73,33 @@ class AdvBench(ExperimentCache):
         return self.evaluators
 
     def process_results(self)-> SolutionResult:
-        # gen_results = SolutionResult()
-        # select_results = SolutionResult()
-        # # Step 1: Get the results from the solutions
-        # self.stage("Stage 1: Using the solutions to process the data sets")
-        # if self._generate_insert_mode:
-        #     processor = Processor(
-        #         data_sets=self.data_sets, 
-        #         solution_models=self.solutions, 
-        #         output_dir=self.output_dir
-        #     )
-        #     gen_results += processor.process(n_repeats=self.n_repeats)
-        # if self._select_mode:
-        #     selector_processor = SelectProcessor(
-        #         data_sets=self.data_sets, 
-        #         solution_models=self.solutions, 
-        #         output_dir=self.output_dir,
-        #         best_product_selectors=self.best_product_selector,
-        #     )
-        #     select_results += selector_processor.process(n_repeats=self.n_repeats) 
-        # # (Optional) Save the results to the output directory as json file
-        # all_results = gen_results + select_results
-        # all_results.save(os.path.join(self.output_dir, 'results.json'))
-        # # (Optional) load the results from the json file
+        gen_results = SolutionResult()
+        select_results = SolutionResult()
+        # Step 1: Get the results from the solutions
+        self.stage("Stage 1: Using the solutions to process the data sets")
+        if self._generate_insert_mode:
+            processor = Processor(
+                data_sets=self.data_sets, 
+                solution_models=self.solutions, 
+                output_dir=self.output_dir
+            )
+            gen_results += processor.process(n_repeats=self.n_repeats)
+        if self._select_mode:
+            selector_processor = SelectProcessor(
+                data_sets=self.data_sets, 
+                solution_models=self.solutions, 
+                output_dir=self.output_dir,
+                best_product_selectors=self.best_product_selector,
+            )
+            select_results += selector_processor.process(n_repeats=self.n_repeats) 
+        # (Optional) Save the results to the output directory as json file
+        all_results = gen_results + select_results
+        all_results.save(os.path.join(self.output_dir, 'results.json'))
+        # (Optional) load the results from the json file
         # results = SolutionResult.load(os.path.join(self.output_dir, 'results.json'))
-        results = SolutionResult.load(os.path.join(self.output_dir, '/Users/macbook.silan.tech/Documents/GitHub/AdvBench/benchmarking/output/20250821_085337_8-20/results.json'))
-        gen_results = results.query_result_by_attr(filters={"dataSet": ["mt-benchmark-humanities","lmsys100"]})
-        select_results = results.query_result_by_attr(filters={"dataSet": ["sa_dataset"]})
+        # results = SolutionResult.load(os.path.join(self.output_dir, '/Users/macbook.silan.tech/Documents/GitHub/AdvBench/benchmarking/output/20250821_085337_8-20/results.json'))
+        # gen_results = results.query_result_by_attr(filters={"dataSet": ["mt-benchmark-humanities","lmsys100"]})
+        # select_results = results.query_result_by_attr(filters={"dataSet": ["sa_dataset"]})
         return gen_results, select_results
      
 
