@@ -1,3 +1,4 @@
+from curses import raw
 from ..utils.result import Result
 from ..utils.sentence import Sentence
 from ..utils.product import Product
@@ -133,7 +134,8 @@ class InjectorAgent(BaseAgent):
             prompt=raw_answer.get_prompt(),
             solution_tag=sol_tag,
             answer=refined_text,
-            product=product
+            product=product,
+            price=refined["price"]
         )
 
         return refined_result
@@ -326,64 +328,12 @@ class InjectorAgent(BaseAgent):
                     prompt=raw_answer.get_prompt(),
                     solution_tag=sol_tag,
                     answer=refined_text,
-                    product=product_info
+                    product=product_info,
+                    price={
+                        "in_token": refined["price"]["in_token"]+raw_answer.get_price()["in_token"],
+                        "out_token": refined["price"]["out_token"]+raw_answer.get_price()["out_token"],
+                        "price": refined["price"]["price"]+raw_answer.get_price()["price"]
+                    }
                 ))
         
         return injected_results
-
-    def get_suitable_product(self, raw_answers: List[Result], problem_product_list: Dict[str, List[Dict]], query_type: str = "QUERY_RESPONSE"):
-        """
-        Get the suitable products for the problem.
-
-        Args:
-            raw_answers (List[Result]): List of raw answer results
-            solution_name (str): Name of the solution to use (BASIC_GEN_INSERT, REFINE_GEN_INSERT)
-            problem_product_list (Dict[str, List[Dict]]): Dict of problem and product list
-            query_type (str): Type of query to use (QUERY_PROMPT, QUERY_RESPONSE, QUERY_PROMPT_N_RESPONSE)
-
-        note: the problem_product_list would be like this:
-        {
-            "query1": [
-                {"name": "product1", "desc": "product1 description", "category": "cluster1", "url": "url1", embedding: np.array[0.1, 0.2, ...]},
-                {"name": "product2", "desc": "product2 description", "category": "cluster2", "url": "url2", embedding: np.array[0.1, 0.2, ...]}
-            ],
-            "query2": [
-                {"name": "product3", "desc": "product3 description", "category": "cluster3", "url": "url3", embedding: np.array[0.1, 0.2, ...]},
-                {"name": "product4", "desc": "product4 description", "category": "cluster4", "url": "url4", embedding: np.array[0.1, 0.2, ...]}
-            ],
-            ...
-        }
-
-        Returns:
-            Dict[str, Dict[str, str]]: Dict of query and suitable products for the query
-        """
-        suitable_products = {}
-        # Step 0: preprocess the answer
-        queries = [raw_answer.get_prompt() for raw_answer in raw_answers]
-        query_texts = [self.get_query_text(raw_answer, query_type) for raw_answer in raw_answers]
-        answer_texts = [raw_answer.get_answer() for raw_answer in raw_answers]
-        sentence_embedding = SentenceEmbedding(answer_texts, self.rag_model)
-        embedding_list = sentence_embedding.embed()
-        embedded_queries = self.rag_model.encode_all(text_list=query_texts)
-        embedded_queries_st = [embedding[0] for embedding in embedding_list]
-        for query, embedded_query, embedded_query_st in zip(queries, embedded_queries, embedded_queries_st):
-            # Use a specialized product RAG for this query's product list
-            product_rag = productRAG(
-                file_path=None,
-                product_list=problem_product_list.get(query, []),
-                model=self.rag_model
-            )
-            products = product_rag.query(np.array(embedded_query[1]), top_k=5)
-            sentence_flow = get_adjacent_sentence_similarities(embedded_query_st)
-            best_product, prev_pos, next_pos, disrupt = self.injector.get_best_inject_product(
-                embedded_query_st, sentence_flow, products
-            )
-            suitable_products[query] = best_product.to_dict()
-    
-        return suitable_products
-    
-    def cleanup(self):
-        """Clean up resources including cached product RAG instance."""
-        if self._product_rag_cache is not None:
-            self._product_rag_cache.shutdown()
-            self._product_rag_cache = None

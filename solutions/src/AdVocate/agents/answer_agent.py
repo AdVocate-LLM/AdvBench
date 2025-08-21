@@ -16,7 +16,7 @@ class AnswerAgent(BaseAgent):
         _idx=1
         for a in answers:
             if a and "QUERY_FAILED:" not in a["answer"]:
-                results.append(Result(prompt=a["query"], answer=a["answer"]))
+                results.append(Result(prompt=a["query"], answer=a["answer"], price=a["price"]))
             else:
                 self.error(f"Query failed for problem(with index {_idx}): {a['query']}, error: {a['answer']}")
             _idx += 1

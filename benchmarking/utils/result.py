@@ -11,13 +11,15 @@ class Result:
     - solution_tag: the solution tag
     - content: the content
     - product: the product
+    - price: the price
     """
     def __init__(self, 
                 prompt: str, 
                 category: str, 
                 solution_tag: str, 
                 content: Union[str, Sentence, List[Sentence]] = None,
-                product: Optional[Dict] = None):
+                product: Optional[Dict] = None,
+                price: Optional[Dict] = None):
         """
         Initialize the result object
         
@@ -33,7 +35,8 @@ class Result:
         self.category = category
         self.solution_tag = solution_tag
         self.product = product
-        
+        self.price = price if price else {'in_token': 0, 'out_token': 0, 'price': 0}
+
         if content is None:
             raise ValueError("Content must be provided")
             
@@ -115,6 +118,14 @@ class Result:
         """
         return self.category
     
+    def get_price(self) -> Dict:
+        """Get the price
+        
+        Returns:
+            Dict: the price
+        """
+        return self.price
+    
     def get_ad_indices(self) -> List[int]:
         """Get the ad index position
         Returns:
@@ -187,7 +198,8 @@ class Result:
                 'category': the category,
                 'solution': the solution tag,
                 'content': the content,
-                'product': the product
+                'product': the product,
+                'price': the price
             }
         """
         return {
@@ -195,7 +207,8 @@ class Result:
             'category': self.category,
             'solution': self.solution_tag,
             'content': self.raw_content,
-            'product': self.product
+            'product': self.product,
+            'price': self.price
         }
     
     def __str__(self) -> str:

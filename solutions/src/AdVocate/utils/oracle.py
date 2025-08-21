@@ -3,12 +3,13 @@ import os
 import logging
 from .parallel import ParallelProcessor
 from .cache import ExperimentCache
+from benchmarking.tools import ModelPricing
 
 # Disable OpenAI HTTP request logging
 logging.getLogger("openai").setLevel(logging.ERROR)
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
-class Oracle(ParallelProcessor, ExperimentCache):
+class Oracle(ParallelProcessor, ExperimentCache, ModelPricing):
     # enum for model names
     MODEL_GPT4o_MINI = 'gpt-4o-mini'
     MODEL_GPT4o = 'gpt-4o'
@@ -22,6 +23,7 @@ class Oracle(ParallelProcessor, ExperimentCache):
     def __init__(self, model, apikey=None, base_url=None):
         ParallelProcessor.__init__(self)
         ExperimentCache.__init__(self, enable_disk=False)
+        ModelPricing.__init__(self)
         self.model = model
         self.apikey = os.environ.get("OPENAI_API_KEY") if apikey is None else apikey
         self.base_url = os.environ.get("BASE_URL") if base_url is None else base_url
@@ -77,7 +79,8 @@ class Oracle(ParallelProcessor, ExperimentCache):
             
             result = {
                 "query": query_key,
-                "answer": response_result
+                "answer": response_result,
+                "price": self.price_of(prompt_user, response_result, self.model)
             }
             
             # Store in cache
@@ -91,7 +94,8 @@ class Oracle(ParallelProcessor, ExperimentCache):
                 query_key = prompt_user 
             return {
                 "query": query_key,
-                "answer": f"QUERY_FAILED:{e}"
+                "answer": f"QUERY_FAILED:{e}",
+                "price": {'in_token': 0, 'out_token': 0, 'price': 0}
             }
 
     

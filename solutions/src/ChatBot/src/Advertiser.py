@@ -48,9 +48,12 @@ class Advertiser:
             return None
         
         profile = self.profile
-        topic = self.topics.find_topic(prompt)
+        topic, price = self.topics.find_topic(prompt)
         if topic:
-            product = self.products.assign_relevant_product(prompt, topic, profile)
+            product, _price = self.products.assign_relevant_product(prompt, topic, profile)
+            price['in_token'] += _price['in_token']
+            price['out_token'] += _price['out_token']
+            price['price'] += _price['price']
             if self.verbose: print('product: ', product)
             idx = self.products()[topic]['names'].index(product)
             product = {'name': self.products()[topic]['names'][idx], 'url': self.products()[topic]['urls'][idx], 'desc': None}
@@ -62,13 +65,13 @@ class Advertiser:
             product = {'name': None, 'url': None, 'desc': None}
         self.product = product
         self.topic = topic
-        
+        self.price = price
 
         self.set_sys_prompt(self.product, profile)
         self.chat_history.add_message(role='system', content=self.system_prompt)
         self.chat_history.add_message(role='user', content=prompt)
         if self.verbose: print(self.chat_history())
-        return self.product
+        return self.product, self.price
     
     def select_product(self, prompt: str, candidate_product_list: List[Dict[str, str]])->Dict[str, str]:
         """
@@ -96,7 +99,7 @@ class Advertiser:
             }
         """
         if not candidate_product_list or not candidate_product_list.get('names'):
-            return {prompt: {'name': None, 'description': None, 'url': None, 'category': None}}
+            return {prompt: {'name': None, 'description': None, 'url': None, 'category': None}, 'price': {'in_token': 0, 'out_token': 0, 'price': 0}}
         
         # ROUND 1: Select the most relevant category
         categories = candidate_product_list.get('categories', [])
@@ -110,7 +113,7 @@ class Advertiser:
         # Use llm to select the best category for this prompt
         category_prompt = f"Respond with the product category that is most relevant to this user prompt. You are only allowed to reply with exactly that category. The available categories are: {unique_categories}"
         
-        selected_category, _ = self.oai_api.handle_response(category_prompt, prompt)
+        selected_category, price = self.oai_api.handle_response(category_prompt, prompt)
         
         # Find the best matching category using difflib
         category_matches = difflib.get_close_matches(selected_category.strip(), unique_categories, n=1)
@@ -139,8 +142,13 @@ class Advertiser:
                     'descs': filtered_descs
                 }
                 
-                selected_product, _ = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**product_kwargs), prompt)
-                
+                selected_product, _price = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**product_kwargs), prompt)
+                price = {
+                    'in_token': _price['in_token'] + price['in_token'],
+                    'out_token': _price['out_token'] + price['out_token'],
+                    'price': _price['price'] + price['price']
+                }
+
                 # Find the best match within the filtered products
                 product_matches = difflib.get_close_matches(selected_product.strip(), filtered_names, n=1)
                 
@@ -159,7 +167,7 @@ class Advertiser:
                             'description': candidate_product_list.get('descs', candidate_product_list.get('descs', [None])[fall_back_index])[original_idx] or candidate_product_list.get('descs', [None])[fall_back_index],
                             'url': candidate_product_list.get('urls', candidate_product_list.get('urls', [None])[fall_back_index])[original_idx] or candidate_product_list.get('urls', [None])[fall_back_index],
                             'category': candidate_product_list.get('categories', candidate_product_list.get('categories', [None])[fall_back_index])[original_idx] or candidate_product_list.get('categories', [None])[fall_back_index]
-                        }}
+                        }, 'price': price}
         
         # Fallback to direct selection if category-based selection fails
         return self._direct_product_selection(prompt, candidate_product_list)
@@ -172,7 +180,7 @@ class Advertiser:
         }
         
         # Get the most relevant product using OpenAI API
-        message, _ = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**kwargs), prompt)
+        message, price = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**kwargs), prompt)
         
         # Find the best match using difflib
         matches = difflib.get_close_matches(message, candidate_product_list['names'], n=1)
@@ -187,7 +195,7 @@ class Advertiser:
                     'description': candidate_product_list.get('descs', [None])[idx] if idx < len(candidate_product_list.get('descs', [])) else None,
                     'url': candidate_product_list.get('urls', [None])[idx] if idx < len(candidate_product_list.get('urls', [])) else None,
                     'category': candidate_product_list.get('categories', [None])[idx] if idx < len(candidate_product_list.get('categories', [])) else None
-                }}
+                }, 'price': price}
             except (ValueError, IndexError):
                 pass
         
@@ -198,7 +206,7 @@ class Advertiser:
             'description': candidate_product_list.get('descs', [None])[random_idx] if random_idx < len(candidate_product_list.get('descs', [])) else None,
             'url': candidate_product_list.get('urls', [None])[random_idx] if random_idx < len(candidate_product_list.get('urls', [])) else None,
             'category': candidate_product_list.get('categories', [None])[random_idx] if random_idx < len(candidate_product_list.get('categories', [])) else None
-        }}
+        }, 'price': price}
 
     def set_sys_prompt(self, product=None, profile=None):
         kwargs = {}
@@ -220,19 +228,6 @@ class Advertiser:
                 self.system_prompt = SYS_INTEREST_DESC.format(**kwargs)
             else:
                 self.system_prompt = SYS_INTEREST.format(**kwargs)
-
-    def check_relevance(self, new_prompt:str, product:dict):
-        kwargs = {'product': product['name'], 'desc': product['desc'], 'prompt': new_prompt}
-        message, _ = self.oai_api.handle_response(SYS_CHECK_RELEVANCE, USER_CHECK_RELEVANCE.format(**kwargs))
-        match = 10
-        numbers = re.findall(r'\d+', message)
-        if len(numbers) > 0:
-            match = int(numbers[0])
-        if int(match) > 4:
-            return True
-        else:
-            print('LOW RELEVANCE: {}'.format(message))
-            return False
 
     def change_ad_frequency(self, freq):
         self.ad_freq = freq

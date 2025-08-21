@@ -3,7 +3,6 @@ from .processor import Processor
 from benchmarking.dataset import AdvDatasets
 from benchmarking.utils.result import Result
 from benchmarking.utils.struct import SolutionResult
-import random
 
 class SelectProcessor(Processor):
     """
@@ -102,7 +101,8 @@ class SelectProcessor(Processor):
                         category=result['product']["category"],
                         solution_tag=solution_name,
                         content=result['answer'],
-                        product=result['product']
+                        product=result['product'],
+                        price=result['price']
                     )
                 )
             else:

@@ -116,7 +116,8 @@ class Processor(Path, AdvDatasets, ExperimentCache):
                         category=category,
                         solution_tag=solution_name,
                         content=result['answer'],
-                        product=result['product']
+                        product=result['product'],
+                        price=result['price']
                     )
                 )
             else:

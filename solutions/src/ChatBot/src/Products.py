@@ -20,20 +20,21 @@ class Products:
 
     def assign_relevant_product(self, prompt:str, topic:str, profile:str):
         kwargs = {}
+        price = {'in_token': 0, 'out_token': 0, 'price': 0}
         if profile:
             kwargs['profile'] = profile
             kwargs['products'] = self.products[topic]['names']
             kwargs['descs'] = self.products[topic]['descs']
-            message, _ = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT_USER.format(**kwargs), prompt)
+            message, price = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT_USER.format(**kwargs), prompt)
         else:
             kwargs['products'] = self.products[topic]['names']
             kwargs['descs'] = self.products[topic]['descs']
-            message, _ = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**kwargs), prompt)
+            message, price = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**kwargs), prompt)
         matches = difflib.get_close_matches(message, self.products[topic]['names'], n=1)
         if len(matches) > 0:
             self.current_product = matches[0]
-            return self.current_product
-        return self.assign_random_product(topic)
+            return self.current_product, price
+        return self.assign_random_product(topic), price
     
     def assign_random_product(self, topic:str):
         if topic:
@@ -62,7 +63,7 @@ class Products:
     def populate_products(self):
         for topic, val in self.products.items():
             kwargs = {'topic': topic}
-            message, _ = self.oai_api.handle_response(SYS_PRODUCTS, USER_PRODUCTS.format(**kwargs))
+            message, price = self.oai_api.handle_response(SYS_PRODUCTS, USER_PRODUCTS.format(**kwargs))
             names = []
             urls = []
             descs = []
