@@ -58,9 +58,9 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             else:
                 raise ValueError(f"Unknown solution name: {solution_name}")
                                 
-            response, product = oai.run_chat(prompt)
+            response, product, price = oai.run_chat(prompt)
             
-            return {'query': prompt, 'answer': response, 'product': product}
+            return {'query': prompt, 'answer': response, 'product': product, 'price': price}
         
         # Use parallel processor
         return self.parallel_process(
@@ -116,7 +116,8 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             # Select the best product from candidates
             selection_result = advertiser.select_product(prompt, candidate_product_list)
             selected_product = selection_result.get(prompt, {'name': None, 'description': None, 'url': None})
-            
+            selected_product_price = selection_result.get('price', {'in_token': 0, 'out_token': 0, 'price': 0})
+
             # Set the selected product in advertiser
             advertiser.product = {
                 'name': selected_product.get('name'),
@@ -131,9 +132,14 @@ class ChatbotAdsWorkflow(ParallelProcessor):
             
             # Generate response using the API with the chat history
             api = OpenAIAPI(model=self.model_name)
-            response, _ = api.handle_response(chat_history=advertiser.chat_history())
+            response, price = api.handle_response(chat_history=advertiser.chat_history())
             
-            return {'query': prompt, 'answer': response, 'product': selected_product}
+            return {'query': prompt, 'answer': response, 'product': selected_product, 
+            'price': {
+                'in_token': selected_product_price['in_token'] + price['in_token'],
+                'out_token': selected_product_price['out_token'] + price['out_token'],
+                'price': selected_product_price['price'] + price['price']
+            }}
         
         # Use parallel processor
         return self.parallel_process(

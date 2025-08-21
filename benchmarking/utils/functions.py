@@ -92,7 +92,7 @@ def get_cosine_similarity(embedding1: Optional[np.ndarray], embedding2: Optional
         
     return dot_product / norm_product
 
-from benchmarking.utils.embedding import Embedding
+from .embedding import Embedding
 class SentenceEmbedding(Embedding):
     """Class to handle sentence embeddings"""
     def __init__(self, raw_results: List[str],

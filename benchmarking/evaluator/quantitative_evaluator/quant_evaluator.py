@@ -26,7 +26,11 @@ class QuantEvaluator(BaseEvaluator):
         "local_flow", 
         "global_coherence", 
         "ad_transition_similarity", 
-        "ad_content_alignment"]
+        "ad_content_alignment",
+        "in_token",
+        "out_token",
+        "price"
+    ]
     
     def __init__(self, 
                 output_dir: str,
@@ -47,7 +51,8 @@ class QuantEvaluator(BaseEvaluator):
             Callable: The metrics for the given matrix name.
         """
         if matrix_name == "has_ad":
-            return 100 if response.get_product()["name"] != None else 0
+            product = response.get_product()
+            return 100 if product is not None and product["name"] is not None else 0
         elif matrix_name == "local_flow":
             # args: adjacent_similarities: List[Tuple[int, int, float]]
             return evaluate_local_flow(response.get_adjacent_sentence_similarities())
@@ -60,6 +65,12 @@ class QuantEvaluator(BaseEvaluator):
         elif matrix_name == "ad_content_alignment":
             # args: sentences: List[Sentence], ad_indices: List[int]
             return evaluate_ad_content_alignment(response.get_sentences(), response.get_ad_indices())
+        elif matrix_name == "in_token":
+            return response.get_price()["in_token"]
+        elif matrix_name == "out_token":
+            return response.get_price()["out_token"]
+        elif matrix_name == "price":
+            return response.get_price()["price"]
         else:
             raise ValueError(f"Invalid matrix name: {matrix_name}")
     

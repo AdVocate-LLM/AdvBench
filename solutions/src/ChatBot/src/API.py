@@ -1,9 +1,11 @@
 import os
 from openai import OpenAI
+from benchmarking.tools import ModelPricing
 
 
-class OpenAIAPI:
+class OpenAIAPI(ModelPricing):
     def __init__(self, model, max_tries:int=5, verbose:bool=False):
+        super().__init__()
         openai_key = os.getenv('OPENAI_API_KEY')
         base_url = os.getenv('BASE_URL')
         self.client = OpenAI(api_key=openai_key, base_url=base_url)
@@ -57,8 +59,7 @@ class OpenAIAPI:
                                     message = item.message.content
                 if include_role:
                     message = {'content': message, 'role': 'assistant'}
-                return message, response
-            
+                return message, self.price_of(sum([len(c['content']) for c in chat]), message, self.model)
 
             except Exception as e:
                 print(e)

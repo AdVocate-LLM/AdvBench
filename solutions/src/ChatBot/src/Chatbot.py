@@ -1,6 +1,5 @@
 from .API import OpenAIAPI
 from .Advertiser import Advertiser
-from typing import List, Dict
 
 class OpenAIChatSession:
     '''
@@ -19,16 +18,19 @@ class OpenAIChatSession:
             
         try:
             # First get the product from advertiser
-            product = self.advertiser.parse(prompt)
+            product, price = self.advertiser.parse(prompt)
             
-            message, response = self.oai_api.handle_response(
+            message, _price = self.oai_api.handle_response(
                 chat_history=self.advertiser.chat_history()
             )
+            price['in_token'] += _price['in_token']
+            price['out_token'] += _price['out_token']
+            price['price'] += _price['price']
             # advertiser.chat_history stores the system prompt which instructs the LLM to embed ads in the next assistant message
 
-            return message, product
+            return message, product, price
             
         except Exception as e:
             if self.verbose:
                 print(f"Error in run_chat: {str(e)}")
-            raise
+            return f"QUERY_FAILED:{e}", None, {'in_token': 0, 'out_token': 0, 'price': 0}
