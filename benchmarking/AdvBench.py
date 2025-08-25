@@ -61,6 +61,9 @@ class AdvBench(ExperimentCache):
         self.info(f"the number of repeats is: {self.n_repeats}")
         self.info(f"the maximum number of samples is: {self.max_samples}")
         self.info(f"the data sets are: {self.data_sets}")
+        self.info(f"the methods we want to evaluate(general task) are: {self.solutions.keys()}")
+        if self.best_product_selector:
+            self.info(f"the methods we want to evaluate(product selection) are: {self.best_product_selector.keys()}")
         self.info("ok, let's start the evaluation!")
         
     def _get_all_evaluator(self, output_dir: str=None, results: EvaluationResult=None):

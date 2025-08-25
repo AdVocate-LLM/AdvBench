@@ -29,9 +29,9 @@ class AdvocateWorkflow:
     def __init__(self, 
                 model_name: str="gpt-4o",
                 product_list_path: str= None,
-                rag_model: str = "Sentence-Transformers/all-MiniLM-L6-v2",
-                # rag_model: str = 'text-embedding-3-small',
-                #rag_model: str = "Qwen/Qwen3-Embedding-8B",
+                # rag_model: str = "Sentence-Transformers/all-MiniLM-L6-v2",
+                rag_model: str = 'text-embedding-3-small',
+                # rag_model: str = "Qwen/Qwen3-Embedding-8B",
                 score_func: str = LOG_WEIGHT
                 ):
         self.model_name = model_name
