@@ -139,9 +139,6 @@ class SA_Dataset(ModernLogger):
         if missing_cols:
             raise ValueError(f"Missing required columns in {name}: {missing_cols}")
 
-        if df.empty:
-            warnings.warn(f"Dataset {name} is empty")
-
     @property
     def query_id_to_text(self) -> Dict[int, str]:
         """Lazy load query ID to text mapping"""

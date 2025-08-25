@@ -77,8 +77,8 @@ class ExperimentCache(ModernLogger):
         else:
             self.dc_cache = None  # type: ignore
 
-        if write_batch_size or write_interval:
-            self.info("Using diskcache; write batching parameters are ignored.")
+        # if write_batch_size or write_interval:
+        #     self.info("Using diskcache; write batching parameters are ignored.")
 
 
     def _ns_index_key(self, namespace: str) -> str:

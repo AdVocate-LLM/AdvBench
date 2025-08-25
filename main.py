@@ -43,79 +43,82 @@ if __name__ == '__main__':
             product_list_path="benchmarking/dataset/product/products.json",
             # model_name="Qwen/Qwen3-14B"
             # model_name="gpt-4o-mini",
+            rag_model="text-embedding-3-small",
             model_name="doubao-1-5-lite-32k-250115",
             score_func=LINEAR_WEIGHT,
+            # score_func=LOG_WEIGHT,
     )
     # Example usage of the AdvBench
     adv_bench = AdvBench(
-        data_sets=["mt-benchmark-humanities"],
+        # data_sets=["mt-benchmark-humanities"],
         # data_sets=["lmsys100"],
         # data_sets=["mt-benchmark-humanities", "lmsys100"],
         solutions={
-                "chi": 
-                    partial(
-                        chi_workflow.run,
-                        solution_name="chi"
-                    ),
-                "gen-insert-response": 
-                    partial(
-                        advocate_workflow.run,
-                        query_type="QUERY_RESPONSE",
-                        solution_name="BASIC_GEN_INSERT"
-                    )
-                ,
-                "gen-insert-refine-response": 
-                    partial(
-                        advocate_workflow.run,
-                        query_type="QUERY_RESPONSE",
-                        solution_name="REFINE_GEN_INSERT"
-                    )
-                ,
-                "gen-insert-refine-prompt": 
-                    partial(
-                        advocate_workflow.run,
-                        query_type="QUERY_PROMPT",
-                        solution_name="REFINE_GEN_INSERT"
-                    )
-                ,
+                # "chi": 
+                #     partial(
+                #         chi_workflow.run,
+                #         solution_name="chi"
+                #     ),
+                # "gen-insert-response": 
+                #     partial(
+                #         advocate_workflow.run,
+                #         query_type="QUERY_RESPONSE",
+                #         solution_name="BASIC_GEN_INSERT"
+                #     )
+                # ,
+                # "gen-insert-refine-response": 
+                #     partial(
+                #         advocate_workflow.run,
+                #         query_type="QUERY_RESPONSE",
+                #         solution_name="REFINE_GEN_INSERT"
+                #     )
+                # ,
+                # "gen-insert-refine-prompt": 
+                #     partial(
+                #         advocate_workflow.run,
+                #         query_type="QUERY_PROMPT",
+                #         solution_name="REFINE_GEN_INSERT"
+                #     )
+                # ,
         },
-        # best_product_selector={
-        #     "chi": 
-        #         partial(
-        #             chi_workflow.get_best_product,
-        #             solution_name="chi"
-        #         ),
-        #     "gen-insert-response": 
-        #         partial(
-        #             advocate_workflow.run,
-        #             query_type="QUERY_RESPONSE",
-        #             solution_name="BASIC_GEN_INSERT"
-        #         )
-        #     ,
-        #     "gen-insert-refine-response": 
-        #         partial(
-        #             advocate_workflow.run,
-        #             query_type="QUERY_RESPONSE",
-        #             solution_name="REFINE_GEN_INSERT"
-        #         )
-        #     ,
-        #     "gen-insert-refine-prompt": 
-        #         partial(
-        #             advocate_workflow.run,
-        #             query_type="QUERY_PROMPT",
-        #             solution_name="REFINE_GEN_INSERT"
-        #         )
-        #     ,
-        # },
+        best_product_selector={
+            "chi": 
+                partial(
+                    chi_workflow.get_best_product,
+                    solution_name="chi"
+                ),
+            "gen-insert-response": 
+                partial(
+                    advocate_workflow.run,
+                    query_type="QUERY_RESPONSE",
+                    solution_name="BASIC_GEN_INSERT"
+                )
+            ,
+            "gen-insert-refine-response": 
+                partial(
+                    advocate_workflow.run,
+                    query_type="QUERY_RESPONSE",
+                    solution_name="REFINE_GEN_INSERT"
+                )
+            ,
+            "gen-insert-refine-prompt": 
+                partial(
+                    advocate_workflow.run,
+                    query_type="QUERY_PROMPT",
+                    solution_name="REFINE_GEN_INSERT"
+                )
+            ,
+        },
         # judge_model="Qwen/Qwen3-32B",
         # judge_model="Qwen/Qwen2.5-14B-Instruct",
         # judge_model="gpt-4o",
         judge_model="gpt-4.1-mini",
-        # n_repeats=3,
-        n_repeats=1,
+        n_repeats=3,
+        # n_repeats=1,
         # tags="gpt-4o-mini-lmsys100-gpt-4o-repeat-3"
-        tags="8-20-gpt-4o-mini-repeat-1"
+        # tags="8-22-GIR-doubao-1-5-lite-32k-250115-all-MiniLM-L6-v2-linear_weight-gpt-4.1-mini-fix-sa-dataset"
         # tags="test-evaluate-result-click-products"
+        tags="8-25-ALL-doubao-1-5-lite-32k-250115-text-embedding-3-small-linear_weight-gpt-4.1-mini-repeat-3"
     )
     # adv_bench.run(evaluate_matrix=["notice_products_evaluation"])
     adv_bench.run()

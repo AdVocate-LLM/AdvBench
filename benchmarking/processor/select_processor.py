@@ -164,7 +164,6 @@ class SelectProcessor(Processor):
         results = SolutionResult()
         if solutions is None:
             solutions = self.get_solution_names()
-        print(solutions)
         for solution_name in solutions:
             self.section(f"Using {solution_name} to process the data sets...")
             results += self.process_repeat(
