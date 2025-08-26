@@ -89,14 +89,44 @@ class Oracle(ParallelProcessor, ExperimentCache, ModelPricing):
             return result
 
         except Exception as e:
-            self.error(f"Query failed for problem({query_key}): due to {e}")
-            if not query_key:
-                query_key = prompt_user 
-            return {
-                "query": query_key,
-                "answer": f"QUERY_FAILED:{e}",
-                "price": {'in_token': 0, 'out_token': 0, 'price': 0}
-            }
+            try:
+                completion = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": prompt_sys},
+                        {"role": "user", "content": prompt_user},
+                    ],
+                    stream=False,
+                )
+
+                response_result = ""
+                # for chunk in stream:
+                if completion.choices[0].message and completion.choices[0].message.content:
+                    response_result = completion.choices[0].message.content
+                
+                if not query_key:
+                    query_key = prompt_user 
+                
+                result = {
+                    "query": query_key,
+                    "answer": response_result,
+                    "price": self.price_of(prompt_user, response_result, self.model)
+                }
+                
+                # Store in cache
+                self.store_cached_response(self.model, prompt_sys, prompt_user, result, temp, top_p)
+                
+                return result
+
+            except Exception as e:
+                self.error(f"Query failed for problem({query_key}): due to {e}")
+                if not query_key:
+                    query_key = prompt_user 
+                return {
+                    "query": query_key,
+                    "answer": f"QUERY_FAILED:{e}",
+                    "price": {'in_token': 0, 'out_token': 0, 'price': 0}
+                }
 
     
     def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=3000, **kwargs):

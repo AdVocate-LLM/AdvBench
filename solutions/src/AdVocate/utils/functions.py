@@ -113,7 +113,7 @@ def split_sentences_nltk(content: str) -> List[str]:
 
     return processed_sentences
 
-from ..utils.embedding import Embedding
+from .embedding import Embedding
 class SentenceEmbedding:
     """Class to handle sentence embeddings"""
 

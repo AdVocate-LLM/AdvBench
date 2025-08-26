@@ -1,8 +1,7 @@
 from .base_agent import BaseAgent
-from ..utils.oracle import Oracle
 from ..utils.result import Result
 from typing import List
-from ..prompt.answer_prompt import RAW_ANSWER
+from ..prompt.answer_prompt import RAW_ANSWER, SEARCH_ANSWER
 
 
 class AnswerAgent(BaseAgent):
@@ -10,7 +9,11 @@ class AnswerAgent(BaseAgent):
         super().__init__(model)
         self.system_prompt = RAW_ANSWER
         
-    def raw_answer(self, problem_list: List[str]) -> List[Result]:
+    def raw_answer(self, problem_list: List[str], is_search=False) -> List[Result]:
+        if is_search:
+            self.system_prompt = SEARCH_ANSWER
+        else:
+            self.system_prompt = RAW_ANSWER
         answers = self.answer_multiple(problem_list)
         results = []
         _idx=1

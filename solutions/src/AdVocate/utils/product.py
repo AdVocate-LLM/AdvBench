@@ -54,4 +54,4 @@ class Product:
     
     def ad_content(self) -> str:
         """Generate ad content for the product."""
-        return f"{self.name}:{self.description}({self.url})."
+        return f"![{self.name}]({self.url}):{self.description}."

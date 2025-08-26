@@ -25,5 +25,9 @@ USER_REFINE = """
 [Start of the target text]
 {ori_text}
 [End of the target text]
-Now, please generate the refined version following the instructions.
+You must keep the product name and URL as![product name](url):description.
+You must keep the original name and URL exactly as given and appear in the refined text.
+You can adjust the surrounding context to make the ad snippet fit naturally into the flow, without altering other unrelated content.
+You can refine the description to make it more fluent and natural.
+Now, please generate the refined version following the response.
 """

@@ -78,9 +78,11 @@ class AdvocateWorkflow:
         """
         # Stage 1: answer agent give the raw_answer
         _problem_list = problem_list
+        _is_search = False
         if isinstance(problem_list, Dict):
             problem_list = list(problem_list.keys())
-        raw_answer = self.answer_agent.raw_answer(problem_list)
+            _is_search = True
+        raw_answer = self.answer_agent.raw_answer(problem_list, is_search=_is_search)
         
         # Stage 2: injector agent give the injected_answer
         if isinstance(_problem_list, Dict):

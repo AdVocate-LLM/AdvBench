@@ -26,7 +26,7 @@ class ParallelProcessor(ModernLogger):
     # ---------------- Worker and batching helpers ----------------
     def determine_worker_count(self, workers: Optional[int] = None) -> int:
         # For I/O bound tasks, default to 2x CPU cores (max 32)
-        default_workers = min((os.cpu_count() or 4) * 2, 32)
+        default_workers = min((os.cpu_count() or 4) * 2, 128)
         return default_workers if workers is None else max(1, int(workers))
 
     def create_batches(self, items: List[Any], batch_size: int) -> List[Tuple[List[int], List[Any]]]:
