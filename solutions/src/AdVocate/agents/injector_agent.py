@@ -1,4 +1,3 @@
-from curses import raw
 from ..utils.result import Result
 from ..utils.sentence import Sentence
 from ..utils.product import Product
@@ -299,7 +298,7 @@ class InjectorAgent(BaseAgent):
             injected_contents = []
             for raw_answer, best_product, embedded_query_st, inject_pos in zip(raw_answers, suitable_products, embedded_queries_st, inject_positions):
                 prev_pos, next_pos = inject_pos
-                product_text = f"{ADS_START}{str(best_product)}{ADS_END}"
+                product_text = f"{ADS_START}{str(best_product.ad_content())}{ADS_END}"
                 
                 # Build content by concatenating sentences with product injection
                 content_parts = []

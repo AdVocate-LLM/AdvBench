@@ -387,87 +387,59 @@ class SA_Dataset(ModernLogger):
                       {"name": "product_name", "url": "product_url", "desc": "product_description"}
 
         Returns:
-            Float score (1.0 for relevant, 0.0 for not relevant) or None if not found
+            Float score (100.0 for relevant, 0.0 for not relevant) or None if not found
         """
         if not query.strip() or not selection or not isinstance(selection, dict):
-            return None
+            self.error(f"query or selection is empty for query: {query}")
+            return 0.0
 
-        # Get all candidate products for the query using the new format
-        candidate_results, query_cluster = self.get_candidate_product_by_query(
-            query, exact_match=True
-        )
+        selection_name = selection.get("name", "").strip()
+        if not selection_name:
+            self.error(f"selection_name is empty for query: {query}")
+            return 0.0
 
-        if not candidate_results:
-            return None
+        # Find the exact query in the dataset
+        matching_query = self.queries_df[
+            self.queries_df["query_text"].str.lower() == query.lower()
+        ]
+        
+        if matching_query.empty:
+            self.error(f"matching_query is empty for query: {query}")
+            return 0.0
 
-        # Extract selection fields
-        selection_name = selection.get("name", "").lower()
-        selection_url = selection.get("url", "").lower()
-        selection_desc = selection.get("desc", "").lower()
+        query_id = matching_query.iloc[0]["query_id"]
+        
+        # Find the query_idx in the final dataset
+        query_mapping = self.final_dataset_df[
+            self.final_dataset_df["original_query_id"] == query_id
+        ]
+        
+        if query_mapping.empty:
+            self.error(f"query_mapping is empty for query_id: {query_id}")
+            return 0.0
 
-        # Find the query in results
-        for query_text, products in candidate_results.items():
-            # Try to match selection with products
-            for product in products:
-                product_name = product.get("name", "").lower()
-                product_url = product.get("url", "").lower()
-                product_desc = product.get("desc", "").lower()
+        query_idx = query_mapping.iloc[0]["query_idx"]
+        
+        # Get all products for this specific query_idx and find exact match
+        query_products = self.final_dataset_df[
+            self.final_dataset_df["query_idx"] == query_idx
+        ]
 
-                # Check multiple ways to match the selection
-                matches = [
-                    # Exact match by name
-                    selection_name == product_name,
-                    # Partial match by name
-                    selection_name and selection_name in product_name,
-                    # Partial match by description
-                    selection_desc and selection_desc in product_desc,
-                    # Match by URL
-                    selection_url and selection_url in product_url,
-                    # Cross-field matches
-                    selection_name and selection_name in product_desc,
-                    selection_desc and selection_desc in product_name,
-                ]
+        for _, row in query_products.iterrows():
+            product_id = row["original_product_id"]
+            
+            if product_id not in self.product_id_to_info:
+                continue
+                
+            prod_info = self.product_id_to_info[product_id]
+            prod_title = prod_info.get("ad_title", "").strip()
+            
+            # Strict exact match by product name
+            if selection_name.lower() == prod_title.lower():
+                return float(row["label"]) * 100.0
 
-                if any(matches):
-                    # Find this product in the final dataset to get its label
-                    matching_query = self.queries_df[
-                        self.queries_df["query_text"] == query_text
-                    ]
-                    if not matching_query.empty:
-                        query_id = matching_query.iloc[0]["query_id"]
-                        query_mapping = self.final_dataset_df[
-                            self.final_dataset_df["original_query_id"] == query_id
-                        ]
-                        if not query_mapping.empty:
-                            query_idx = query_mapping.iloc[0]["query_idx"]
-
-                            # Find the specific product in the dataset
-                            for _, row in self.final_dataset_df[
-                                self.final_dataset_df["query_idx"] == query_idx
-                            ].iterrows():
-                                product_id = row["original_product_id"]
-                                if product_id in self.product_id_to_info:
-                                    prod_info = self.product_id_to_info[product_id]
-                                    prod_title = prod_info.get("ad_title", "").lower()
-                                    prod_description = prod_info.get(
-                                        "ad_description", ""
-                                    ).lower()
-
-                                    # Check if this is the matching product
-                                    product_matches = [
-                                        selection_name == prod_title,
-                                        selection_name and selection_name in prod_title,
-                                        selection_desc
-                                        and selection_desc in prod_description,
-                                        selection_name
-                                        and selection_name in prod_description,
-                                        selection_desc and selection_desc in prod_title,
-                                    ]
-
-                                    if any(product_matches):
-                                        return float(row["label"]) * 100
-
-        self.error(f"No match found for query: {query}, selection: {selection}")
+        # No exact match found - this should be treated as an error
+        self.error(f"No exact match found for product name '{selection_name}' in query '{query}' candidate products")
         return 0.0
 
     def get_product_by_id(self, product_id: int) -> Optional[Dict[str, Any]]:

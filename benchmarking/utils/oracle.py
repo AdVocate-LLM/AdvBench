@@ -73,7 +73,27 @@ class Oracle(ParallelProcessor):
             return response_result
 
         except Exception as e:
-            return f"QUERY_FAILED:{str(e)}"
+            try:
+                completion = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": prompt_sys},
+                        {"role": "user", "content": prompt_user},
+                    ],
+                    stream=False,
+                )
+
+                response_result = ""
+                # for chunk in stream:
+                if completion.choices[0].message and completion.choices[0].message.content:
+                    response_result = completion.choices[0].message.content
+                
+                if not query_key:
+                    query_key = prompt_user 
+                return response_result
+
+            except Exception as e:
+                return f"QUERY_FAILED:{str(e)}"
     
     def query_all(self, prompt_sys, prompt_user_all, workers=None, temp=0.0, top_p=0.9, query_key_list=[], batch_size=10, max_retries=2, timeout=3000, **kwargs):
         """
