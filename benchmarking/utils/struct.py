@@ -283,7 +283,8 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
                     category=result_data.get('category', ''),
                     solution_tag=result_data.get('solution', ''),
                     content=result_data.get('content', ''),
-                    product=result_data.get('product', '')
+                    product=result_data.get('product', ''),
+                    price=result_data.get('price', {'in_token': 0, 'out_token': 0, 'price': 0})
                 )
                 # Set additional attributes from the JSON
                 result.raw_content = result_data.get('content', '')
