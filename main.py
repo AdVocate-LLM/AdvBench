@@ -43,6 +43,7 @@ if __name__ == '__main__':
             product_list_path="benchmarking/dataset/product/products.json",
             # model_name="gpt-4o-mini",
             rag_model="text-embedding-3-small",
+            # rag_model="Sentence-Transformers/all-MiniLM-L6-v2",
             model_name="doubao-1-5-lite-32k-250115",
             score_func=LINEAR_WEIGHT,
             # score_func=LOG_WEIGHT,
@@ -109,6 +110,7 @@ if __name__ == '__main__':
             ,
         },
         # judge_model="gpt-5-mini",
+        # judge_model="kimi-k2",
         # judge_model="gpt-4o",
         judge_model="gpt-4.1-mini",
         # judge_model="qwen3-32b",
@@ -118,7 +120,7 @@ if __name__ == '__main__':
         # tags="gpt-4o-mini-lmsys100-gpt-4o-repeat-3"
         # tags="8-22-GIR-doubao-1-5-lite-32k-250115-all-MiniLM-L6-v2-linear_weight-gpt-4.1-mini-fix-sa-dataset"
         # tags="test-evaluate-result-click-products"
-        tags="8-26-ALL-doubao-1-5-lite-32k-250115-text-embedding-3-small-linear_weight-gpt-4.1-mini-repeat-1"
+        tags="8-27-ALL-text-embedding-3-small-Linear_weight-gpt-4.1-mini-repeat-3"
     )
     # adv_bench.run(evaluate_matrix=["notice_products_evaluation"])
     adv_bench.run()

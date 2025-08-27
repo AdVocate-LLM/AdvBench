@@ -34,35 +34,50 @@ def setup_nltk(nltk_data_dir: Optional[str] = None) -> None:
     _nltk_initialized = True
 
 def split_sentences_nltk(content: str) -> List[str]:
-    """Split text into sentences using NLTK tokenizer and filter out short sentences."""
-    setup_nltk()
-    # First get sentences using NLTK
-    sentences = sent_tokenize(content)
+    """
+    Split text into sentences using NLTK while treating newlines as hard boundaries.
+    - Newlines are preserved and always attached to the *previous* sentence.
+    - Consecutive newlines (\\n\\n) are preserved as-is.
+    - Short sentences (<=3 visible chars) are filtered out.
+    """
 
-    # Filter out short sentences and empty ones
-    processed_sentences = []
-    for sent in sentences:
-        sent = sent.strip()
-        if not sent:
+    if not content:
+        return []
+
+    # Normalize line endings
+    text = content.replace("\r\n", "\n").replace("\r", "\n")
+
+    # Split by newlines but keep them
+    # Example: "A.\n\nB." -> ["A.", "\n\n", "B."]
+    parts = re.split(r'(\n+)', text)
+
+    results: List[str] = []
+    buffer = ""  # current sentence being built
+
+    for part in parts:
+        if not part:
             continue
 
-        # Skip code blocks and special content
-        if (
-            sent.startswith("```")
-            or sent.startswith("`")
-            or sent.startswith("#")
-            or sent.startswith(">")
-            or sent.startswith("{")
-            or sent.startswith("[")
-        ):
+        if part.startswith("\n"):
+            # newline chunk: always append to buffer
+            buffer += part
             continue
 
-        # Filter out short sentences
-        if len(sent) > 3:
-            processed_sentences.append(sent)
+        # tokenize the text chunk (without newlines)
+        sentences = sent_tokenize(part)
+        for sent in sentences:
+            if buffer:  # flush previous buffer first
+                if len(buffer.strip()) > 3:
+                    results.append(buffer)
+                buffer = ""
 
-    return processed_sentences
+            buffer = sent  # start a new sentence
 
+    # flush last buffer
+    if buffer and len(buffer.strip()) > 3:
+        results.append(buffer)
+
+    return results
     
         
 def get_cosine_similarity(embedding1: Optional[np.ndarray], embedding2: Optional[np.ndarray]) -> float:
