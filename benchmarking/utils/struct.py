@@ -3,6 +3,7 @@ import os
 from typing import Dict, List, Tuple, Any, Callable, Optional
 import matplotlib.pyplot as plt
 from collections import defaultdict
+from .functions import SentenceEmbedding
 from .result import Result
 from .report import Report
 import pandas as pd
@@ -230,7 +231,26 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
         if idx is None:
             return []
         return list({key[idx] for key in self.keys()})
-    
+
+    def embedding_all_results(self) -> "SolutionResult":
+        """
+        Embed all the results in the SolutionResult.
+        """
+        # extract all the results from the value of the SolutionResult
+        results = [result for results in self.values() for result in results]
+        # extract raw_content from each result
+        raw_contents = [result.raw_content for result in results]
+        # embed all the results
+        sentence_embedding = SentenceEmbedding(raw_contents)
+        List_of_sentences = sentence_embedding.embed()
+        # update the results
+        idx = 0
+        for result_list in self.values():
+            for res in result_list:
+                res.update_content(List_of_sentences[idx])
+                idx += 1
+        return self
+        
     def save(self, file_path: str) -> None:
         """
         Save the SolutionResult to a JSON file.
@@ -282,14 +302,12 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
                     prompt=result_data.get('prompt', ''),
                     category=result_data.get('category', ''),
                     solution_tag=result_data.get('solution', ''),
-                    content=result_data.get('content', ''),
+                    raw_content=result_data.get('content', ''),
                     product=result_data.get('product', ''),
                     price=result_data.get('price', {'in_token': 0, 'out_token': 0, 'price': 0})
                 )
                 # Set additional attributes from the JSON
-                result.raw_content = result_data.get('content', '')
                 result.logprobs = result_data.get('logprobs', None)
-                result.product = result_data.get('product', None)
                 
                 solution_result.add_result(
                     solution_name=solution_name, 
@@ -298,7 +316,8 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
                     result=result
                 )
         
-        return solution_result
+        # Embed all results once after loading all data
+        return solution_result.embedding_all_results()
     
     def self_evaluated_with_matrix_by_fn(
         self,

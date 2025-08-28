@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 import asyncio
 from openai import OpenAI, AsyncOpenAI
 from sentence_transformers import SentenceTransformer
@@ -58,6 +58,14 @@ class Embedding(ParallelProcessor):
             self.sentence_model = SentenceTransformer(model_path)
             self.client = None
             self.async_client = None
+        elif model_name.startswith('text-embedding-'):
+            # Initialize OpenAI clients (both sync and async)
+            api_key = os.getenv("OPENAI_API_KEY")
+            base_url = os.getenv("BASE_URL")
+            
+            self.client = OpenAI(api_key=api_key, base_url=base_url)
+            self.async_client = AsyncOpenAI(api_key=api_key, base_url=base_url)
+            self.sentence_model = None
         else:
             # Initialize OpenAI clients (both sync and async)
             api_key = api_key or os.getenv("EMBEDDING_API_KEY")
@@ -103,7 +111,9 @@ class Embedding(ParallelProcessor):
         Returns:
             Cleaned text
         """
-        return text.replace("\n", " ").strip()
+        # Keep original text to maintain consistency with previous implementation
+        # Only strip leading/trailing whitespace
+        return text.strip()
     
     def _create_batch_embedding(self, text_batch: List[str], dim: int) -> Dict[str, List[float]]:
         """
@@ -191,8 +201,8 @@ class Embedding(ParallelProcessor):
                 
             return embeddings
     
-    def encode_all(self, text_list: List[str], dim: int, 
-                   batch_size: int = None, max_retries: int = 3, timeout: int = 300) -> Dict[str, List[float]]:
+    def encode_all(self, text_list: List[str], dim: int=None, 
+                   batch_size: int = None, max_retries: int = 3, timeout: int = 300) -> List[Tuple[str, List[float]]]:
         """
         Generate embeddings for all texts using highly optimized concurrent processing.
 
@@ -210,6 +220,7 @@ class Embedding(ParallelProcessor):
             ValueError: If input parameters are invalid.
         """
         # Validate inputs
+        dim = dim or self.model_config['default_dim']
         self._validate_inputs(text_list, dim)
 
         # Keep all texts (no deduplication) to ensure 1:1 mapping with product_ids
@@ -222,9 +233,6 @@ class Embedding(ParallelProcessor):
 
         # Split texts into batches for concurrent processing
         text_batches = [unique_texts[i:i + batch_size] for i in range(0, len(unique_texts), batch_size)]
-
-        self.highlight(f"🚀 HIGH-PERFORMANCE EMBEDDING: {len(unique_texts)} texts → {len(text_batches)} batches")
-        self.info(f"📊 Batch size: {batch_size} | Model: {self.model_name} | Dim: {dim}")
 
         # Prepare items for parallel processing: each item is a batch of texts
         batch_items = text_batches
@@ -239,7 +247,8 @@ class Embedding(ParallelProcessor):
             process_func=process_func,
             max_retries=max_retries,
             timeout=timeout,
-            task_description="🔢 Embedding batches"
+            task_description="Text Embedding",
+            hide_progress=True,        
         )
 
         # Merge all batch results into a single dictionary
@@ -248,17 +257,16 @@ class Embedding(ParallelProcessor):
             if batch_result and isinstance(batch_result, dict):
                 all_embeddings.update(batch_result)
 
-        self.success(f"✅ Generated embeddings for {len(all_embeddings)} texts using high-performance concurrent processing")
-
         # Return embeddings in original order (including duplicates)
-        result = {}
+        result: List[Tuple[str, List[float]]] = []
         for text in text_list:
             if text in all_embeddings:
-                result[text] = all_embeddings[text]
+                result.append((text, all_embeddings[text]))
             else:
                 self.warning(f"Missing embedding for text: {text[:50]}...")
-                result[text] = [0.0] * dim
-
+                result.append((text, [0.0] * dim))
+                exit()
+                
         return result
     
     def _create_batch_embedding_with_retry(self, text_batch: List[str], dim: int, max_retries: int = 3) -> Dict[str, List[float]]:
@@ -283,12 +291,13 @@ class Embedding(ParallelProcessor):
                 return self._create_batch_embedding(text_batch, dim)
             except Exception as e:
                 if attempt == max_retries:
+                    exit()
                     self.error(f"Failed to create batch embedding after {max_retries} retries: {e}")
                     return {text: [0.0] * dim for text in text_batch}
                 else:
                     self.warning(f"Batch embedding attempt {attempt + 1} failed, retrying: {e}")
                     time.sleep(0.5 * (2 ** attempt))  # Exponential backoff
-        
+        exit()
         return {text: [0.0] * dim for text in text_batch}
     
     async def _create_batch_embedding_async_with_retry(self, text_batch: List[str], dim: int, max_retries: int = 3) -> Dict[str, List[float]]:
@@ -314,6 +323,7 @@ class Embedding(ParallelProcessor):
             except Exception as e:
                 if attempt == max_retries:
                     self.error(f"Failed to create async batch embedding after {max_retries} retries: {e}")
+                    exit()
                     return {text: [0.0] * dim for text in text_batch}
                 else:
                     self.warning(f"Async batch embedding attempt {attempt + 1} failed, retrying: {e}")
