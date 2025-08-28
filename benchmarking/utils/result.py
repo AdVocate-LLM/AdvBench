@@ -1,5 +1,5 @@
-from typing import List, Tuple, Optional, Dict, Any, Union
-from benchmarking.utils.functions import split_sentences_nltk, get_cosine_similarity
+from typing import List, Tuple, Optional, Dict, Any
+from benchmarking.utils.functions import get_cosine_similarity
 from benchmarking.utils.sentence import Sentence
 
 class Result:
@@ -17,9 +17,11 @@ class Result:
                 prompt: str, 
                 category: str, 
                 solution_tag: str, 
-                content: Union[str, Sentence, List[Sentence]] = None,
+                content: Optional[List[Sentence]] = None,
                 product: Optional[Dict] = None,
-                price: Optional[Dict] = None):
+                price: Optional[Dict] = None,
+                raw_content: Optional[str] = None,
+                ):
         """
         Initialize the result object
         
@@ -36,32 +38,29 @@ class Result:
         self.solution_tag = solution_tag
         self.product = product
         self.price = price if price else {'in_token': 0, 'out_token': 0, 'price': 0}
+        self.raw_content = raw_content
+        self.need_update = False
+        self.content = content
+        
+        # Initialize these attributes to empty values first
+        self.adjacent_sentence_similarities = []
+        self.ad_indices = []
 
-        if content is None:
-            raise ValueError("Content must be provided")
-            
-        # According to the type of content, initialize the content and sentences
-        if isinstance(content, str):
-            self.raw_content = content
-            self.sentences = [Sentence(s) for s in split_sentences_nltk(content)]
-        elif isinstance(content, Sentence):
-            self.raw_content = content.to_string()
-            self.sentences = [Sentence(s) for s in split_sentences_nltk(content.to_string())]
-        elif isinstance(content, list) and all(isinstance(s, Sentence) for s in content):
-            self.sentences = content
-            self.raw_content = " ".join(s.to_string() for s in content)
-        else:
-            print("content: ", content)
-            print("type(content): ", type(content))
-            raise TypeError("Content must be a string, Sentence object, or list of Sentence objects")
+        if raw_content is not None and content is None:
+            self.need_update = True
+                
+        if not self.need_update and self.content is not None:
+            self.adjacent_sentence_similarities = self.calculate_adjacent_sentence_similarities()
+            self.ad_indices = self.retrieve_ad_indices()
         
-        # Create content as a Sentence object for backward compatibility
-        self.content = Sentence(self.raw_content)
-        
-        self.metrics = None
+    def update_content(self, content: List[Sentence]) -> None:
+        """Update the result
+        """
+        self.content = content
         self.adjacent_sentence_similarities = self.calculate_adjacent_sentence_similarities()
         self.ad_indices = self.retrieve_ad_indices()
-        
+        self.need_update = False
+
     def get_product(self) -> Dict:
         """Get the product
         
@@ -108,7 +107,7 @@ class Result:
         Returns:
             List[Sentence]: the sentences
         """
-        return self.sentences
+        return self.content
     
     def get_category(self) -> str:
         """Get the category
@@ -146,7 +145,7 @@ class Result:
             List[int]: the ad index position
         
         Note:
-            If the product is not provided, the ad index position is None.
+            If the product is not provided, the ad index position is empty list.
         For example:
             The output of the model is:
             ```
@@ -156,9 +155,11 @@ class Result:
             The ad index position is [1]. Because the second sentence is the ad.
         """
         if self.product is None or self.product.get('name') is None:
-            return None
-        ad_indices = {i for i, sent in enumerate(self.sentences) 
-                    if any(self.product.get(key) in sent.sentence for key in ['name', 'url'])}
+            return []
+        if self.content is None:
+            return []
+        ad_indices = {i for i, sent in enumerate(self.content) 
+                    if any(self.product.get(key) in sent.sentence for key in ['name', 'url'] if self.product.get(key))}
         return list(ad_indices)
     
     def calculate_adjacent_sentence_similarities(self) -> List[Tuple[int, int, float]]:
@@ -177,12 +178,14 @@ class Result:
             ```
             The similarity between adjacent sentences is [(0, 1, 0.95)].
         """
+        if self.content is None or len(self.content) < 2:
+            return []
         return [
             (i, i + 1, get_cosine_similarity(
-                self.sentences[i].embedding,
-                self.sentences[i + 1].embedding
+                self.content[i].embedding,
+                self.content[i + 1].embedding
             ))
-            for i in range(len(self.sentences) - 1)
+            for i in range(len(self.content) - 1)
         ]
 
     def to_json(self) -> Dict[str, Any]:

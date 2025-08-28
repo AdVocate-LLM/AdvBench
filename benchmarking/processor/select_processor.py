@@ -100,7 +100,7 @@ class SelectProcessor(Processor):
                         prompt=result['query'],
                         category=result['product']["category"],
                         solution_tag=solution_name,
-                        content=result['answer'],
+                        raw_content=result['answer'],
                         product=result['product'],
                         price=result['price']
                     )
@@ -172,4 +172,6 @@ class SelectProcessor(Processor):
                 n_repeats=n_repeats, 
                 max_samples=max_samples, 
                 is_saved=is_saved)
+            
+        results = self.filter_result_for_comparison(results).embedding_all_results()
         return results

@@ -113,7 +113,7 @@ if __name__ == '__main__':
         # judge_model="kimi-k2",
         # judge_model="gpt-4o",
         judge_model="gpt-4.1-mini",
-        # judge_model="qwen3-32b",
+        # judge_model="qwen-max",
         # judge_model="claude-3-5-haiku-20241022",
         # n_repeats=3,
         n_repeats=3,
@@ -123,4 +123,5 @@ if __name__ == '__main__':
         tags="8-27-ALL-text-embedding-3-small-Linear_weight-gpt-4.1-mini-repeat-3"
     )
     # adv_bench.run(evaluate_matrix=["notice_products_evaluation"])
+    # adv_bench.run(["ad_transition_similarity","ad_content_alignment","local_flow","global_coherence","has_ad"])
     adv_bench.run()

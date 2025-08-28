@@ -115,7 +115,7 @@ class Processor(Path, AdvDatasets, ExperimentCache):
                         prompt=result['query'],
                         category=category,
                         solution_tag=solution_name,
-                        content=result['answer'],
+                        raw_content=result['answer'],
                         product=result['product'],
                         price=result['price']
                     )
