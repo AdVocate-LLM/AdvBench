@@ -241,7 +241,7 @@ class Processor(Path, AdvDatasets, ExperimentCache):
 
         # filter the result of each query should be contain all answer categories
         # if not, add remove the result of the query
-        results = self.filter_result_for_comparison(results)
+        results = self.filter_result_for_comparison(results).embedding_all_results()
         return results
     
     def filter_result_for_comparison(self, results: SolutionResult) -> SolutionResult:
