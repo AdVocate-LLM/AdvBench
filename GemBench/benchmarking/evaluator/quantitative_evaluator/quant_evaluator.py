@@ -2,7 +2,7 @@ from functools import partial
 from ..base_evaluator import BaseEvaluator
 from ...utils.result import Result
 from ...utils.struct import SolutionResult, EvaluationResult
-from .quant_matix import (
+from .quant_matrics import (
     evaluate_local_flow,
     evaluate_global_coherence,
     evaluate_ad_transition_similarity,

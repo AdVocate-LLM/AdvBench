@@ -167,7 +167,7 @@ class SelectProcessor(Processor):
         for solution_name in solutions:
             self.section(f"Using {solution_name} to process the data sets...")
             results += self.process_repeat(
-                data_name="sa_dataset", 
+                data_name="CA_Prod", 
                 solution_name=solution_name, 
                 n_repeats=n_repeats, 
                 max_samples=max_samples, 

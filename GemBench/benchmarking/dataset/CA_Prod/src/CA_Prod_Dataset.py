@@ -7,7 +7,7 @@ from .utils.logger import ModernLogger
 DEFAULT_DATASET_PATH = Path(__file__).parent / "dataset"
 
 
-class SA_Dataset(ModernLogger):
+class CA_Prod(ModernLogger):
     """
     Ad Evaluation Dataset class for handling TSV-based product-query evaluation data.
 

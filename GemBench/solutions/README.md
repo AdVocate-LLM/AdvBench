@@ -239,7 +239,7 @@ from functools import partial
 
 # Initialize comprehensive benchmark
 adv_bench = AdvBench(
-    data_sets=["mt-benchmark-humanities"],
+    data_sets=["MT-Human"],
     solutions={
         "chi": partial(
             ChatbotAdsWorkflow(

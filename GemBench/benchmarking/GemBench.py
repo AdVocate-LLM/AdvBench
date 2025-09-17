@@ -60,7 +60,7 @@ class GemBench(ExperimentCache):
         self.info(f"the output directory is: {self.output_dir}")
         self.info(f"the number of repeats is: {self.n_repeats}")
         self.info(f"the maximum number of samples is: {self.max_samples}")
-        self.info(f"the data sets are: {self.data_sets}")
+        self.info(f"the data sets are: {self.data_sets+["CA_Prod"] if best_product_selector else self.data_sets}")
         self.info(f"the methods we want to evaluate(general task) are: {self.solutions.keys()}")
         if self.best_product_selector:
             self.info(f"the methods we want to evaluate(product selection) are: {self.best_product_selector.keys()}")
@@ -100,9 +100,9 @@ class GemBench(ExperimentCache):
         all_results.save(os.path.join(self.output_dir, 'results.json'))
         # (Optional) load the results from the json file
         # results = SolutionResult.load(os.path.join(self.output_dir, 'results.json'))
-        # results = SolutionResult.load(os.path.join(self.output_dir, '/Users/macbook.silan.tech/Documents/GitHub/GemBench/benchmarking/output/20250821_085337_8-20/results.json'))
-        # gen_results = results.query_result_by_attr(filters={"dataSet": ["mt-benchmark-humanities","lmsys100"]})
-        # select_results = results.query_result_by_attr(filters={"dataSet": ["sa_dataset"]})
+        # results = SolutionResult.load(os.path.join(self.output_dir, '<the path to output>/output/20250821_085337_8-20/results.json'))
+        # gen_results = results.query_result_by_attr(filters={"dataSet": ["MT-Human","LM-Market"]})
+        # select_results = results.query_result_by_attr(filters={"dataSet": ["CA_Prod"]})
         return gen_results, select_results
      
 

@@ -1,11 +1,10 @@
 # from benchmarking.evaluator.laaj_evaluator.compare_evaluate import run_llm_evaluation
-from solutions.src.AdVocate import AdvocateWorkflow
-from solutions.src.ChatBot import ChatbotAdsWorkflow
-from benchmarking import GemBench
+from GemBench import AdvocateWorkflow
+from GemBench import ChatbotAdsWorkflow
+from GemBench import GemBench
 from dotenv import load_dotenv
 from functools import partial
-from solutions.src.AdVocate.config import *
-from solutions.src.AdVocate.utils.functions import split_sentences_nltk
+from GemBench import split_sentences_nltk
 
 load_dotenv()
 

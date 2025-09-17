@@ -5,12 +5,12 @@ This document provides comprehensive examples for using the SA (Advertisement Se
 ## Quick Start
 
 ```python
-from SA_dataset.src.Ad_Eval_Dataset import Ad_Eval_Dataset
+from CA_Prod.src.Ad_Eval_Dataset import Ad_Eval_Dataset
 
 # Initialize the dataset
 dataset = Ad_Eval_Dataset()
 print(dataset)
-# Output: Ad_Eval_Dataset(queries=120, products=1847, clusters=6, pairs=12120, path='SA_dataset/src/dataset')
+# Output: Ad_Eval_Dataset(queries=120, products=1847, clusters=6, pairs=12120, path='CA_Prod/src/dataset')
 ```
 
 ## Core API Functions
@@ -170,8 +170,8 @@ for product in kitchen_products[:3]:
 ### Dataset Validation
 
 ```python
-# Validate dataset integrity
-validation_report = dataset.validate_dataset_integrity()
+# Validate dataset naturalness
+validation_report = dataset.validate_dataset_naturalness()
 
 if validation_report['valid']:
     print("✅ Dataset validation passed!")
@@ -387,4 +387,4 @@ print(f"Dataset loaded with {stats['total_evaluation_pairs']:,} pairs")
 print(f"Average relevance rate: {stats['relevance_ratio']:.1%}")
 ```
 
-This documentation provides comprehensive examples for using the SA_dataset API effectively for advertisement selection benchmarking and evaluation tasks.
+This documentation provides comprehensive examples for using the CA_Prod API effectively for advertisement selection benchmarking and evaluation tasks.

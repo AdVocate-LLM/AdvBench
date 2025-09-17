@@ -24,22 +24,20 @@ def read_requirements():
 
 setup(
     name="gembench",
-    version="0.1.0",
+    version="1.0.0",
     description="A comprehensive framework for detecting and mitigating adversarial ad injection in LLMs",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    author="GemBench Team: Silan Hu, Shiqi Zhang and Yiming Shi",
+    author="GemBench Team",
     url="https://github.com/AdVocate-LLM/GemBench",
     packages=find_packages(),
-    # 如果目录是 GemBench 而不是 gembench，可以使用：
-    # package_dir={'gembench': 'GemBench'},
     include_package_data=True,
     package_data={
         "gembench.benchmarking": [
             "dataset/product/*.json",
-            "dataset/mt-benchmark/*.json",
-            "dataset/lmsys/*.json",
-            "dataset/SA_dataset/src/dataset/*.tsv",
+            "dataset/MT-Human/*.json",
+            "dataset/LM-Market/*.json",
+            "dataset/CA_Prod/src/dataset/*.tsv",
         ]
     },
     install_requires=read_requirements(),

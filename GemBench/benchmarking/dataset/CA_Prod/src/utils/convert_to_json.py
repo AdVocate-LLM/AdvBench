@@ -287,8 +287,8 @@ def main():
     random.seed(42)
     
     # Define paths
-    dataset_dir = '/Users/macbook.silan.tech/Documents/GitHub/GemBench-dataset/Eval_dataset/src/dataset'
-    output_dir = '/Users/macbook.silan.tech/Documents/GitHub/GemBench-dataset/Eval_dataset/src/utils/outputs'
+    dataset_dir = '<path to dataset>/GemBench-dataset/Eval_dataset/src/dataset'
+    output_dir = '<path to dataset>/GemBench-dataset/Eval_dataset/src/utils/outputs'
     
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
