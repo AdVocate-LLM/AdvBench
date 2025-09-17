@@ -1,11 +1,8 @@
-from benchmarking.utils.struct import EvaluationResult
+from GemBench import EvaluationResult
 
 
 if __name__ == "__main__":
-    # evaluation_result = EvaluationResult.load("/Users/macbook.silan.tech/Documents/GitHub/GemBench/benchmarking/output/20250801_150535_test-evaluate-result/evaluation_result.json")
-    # evaluation_result = EvaluationResult.load("/Users/macbook.silan.tech/Documents/GitHub/GemBench/benchmarking/output/20250801_171533_test-evaluate-result-click-products/evaluation_result.json")
-    # evaluation_result = EvaluationResult.load("/Users/macbook.silan.tech/Documents/GitHub/GemBench/benchmarking/output/20250801_185815_test-evaluate-result-click-products/evaluation_result.json")
-    evaluation_result = EvaluationResult.load("/Users/macbook.silan.tech/Documents/GitHub/GemBench/benchmarking/output/20250801_204002_test-evaluate-result-click-products/evaluation_result.json")
+    evaluation_result = EvaluationResult.load("<path to output>/output/20250801_204002_test-evaluate-result-click-products/evaluation_result.json")
     # evaluation_result = evaluation_result.fliter_only_has_product()
     # evaluation_result = evaluation_result.average_by_batch()
     # evaluation_result.save_to_excel_report("evaluation_with_product.xlsx","evaluation_with_product")

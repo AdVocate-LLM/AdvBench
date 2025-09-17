@@ -3,7 +3,7 @@ from .agents.trust_agent import TrustAgent
 from .agents.accuracy_agent import AccuracyAgent
 from .agents.personality_agent import PersonalityAgent
 from .agents.notice_products_agent import NoticeProductsAgent
-from .agents.integrity_agent import IntegrityAgent
+from .agents.naturalness_agent import NaturalnessAgent
 from .agents.click_products_agent import ClickProductsAgent
 from ...utils.struct import SolutionResult, EvaluationResult
 from typing import List, Any
@@ -15,9 +15,9 @@ class LAJQualitativeEvaluator(BaseEvaluator):
     This evaluator implements the Qualitative Evaluation Ontology:
     1. User Satisfaction
        - Accuracy (Response relevance and accuracy to users - whether responses directly answer questions)
-       - Integrity (Content integrity related to advertisements)
+       - naturalness (Content naturalness related to advertisements)
        - Personality (Personality traits exhibited by the chatbot)
-       - Trustworthiness (Whether users trust the chatbot's responses)
+       - Trust (Whether users trust the chatbot's responses)
     2. User Engagement
        - Ad Notice (Whether users will notice products or brands)
        - Ad Click (Whether users will click products or brands)
@@ -25,7 +25,7 @@ class LAJQualitativeEvaluator(BaseEvaluator):
     
     ANALYSIS_MATRIXES = [
         "accuracy_evaluation",
-        "integrity_evaluation",
+        "naturalness_evaluation",
         "personality_evaluation",
         "trust_evaluation",
         "notice_products_evaluation",
@@ -50,7 +50,7 @@ class LAJQualitativeEvaluator(BaseEvaluator):
         self.accuracy_agent = AccuracyAgent(judge_model)
         self.personality_agent = PersonalityAgent(judge_model)
         self.notice_products_agent = NoticeProductsAgent(judge_model)
-        self.integrity_agent = IntegrityAgent(judge_model)
+        self.naturalness_agent = NaturalnessAgent(judge_model)
         self.click_products_agent = ClickProductsAgent(judge_model)
         
     def get_analysis_matrixes(self) -> List[str]:
@@ -75,11 +75,11 @@ class LAJQualitativeEvaluator(BaseEvaluator):
         # ├── 1. User Satisfaction
         # │   ├── 1.1 Accuracy
         # │   │   └── Response relevance and accuracy to users (whether responses directly answer questions)
-        # │   ├── 1.2 Integrity
-        # │   │   └── Content integrity related to advertisements
+        # │   ├── 1.2 Naturalness
+        # │   │   └── Content naturalness related to advertisements
         # │   ├── 1.3 Personality
         # │   │   └── Personality traits exhibited by the chatbot
-        # │   └── 1.4 Trustworthiness
+        # │   └── 1.4 Trust
         # │       └── Whether users trust the chatbot's responses
         # └── 2. User Engagement
         #     ├── 2.1 Ad Notice
@@ -91,7 +91,7 @@ class LAJQualitativeEvaluator(BaseEvaluator):
             "accuracy_evaluation": lambda sol: self.accuracy_agent.evaluate(sol, self.output_dir if is_saved else None),
             "personality_evaluation": lambda sol: self.personality_agent.evaluate(sol, self.output_dir if is_saved else None),
             "notice_products_evaluation": lambda sol: self.notice_products_agent.evaluate(sol, self.output_dir if is_saved else None),
-            "integrity_evaluation": lambda sol: self.integrity_agent.evaluate(sol, self.output_dir if is_saved else None),
+            "naturalness_evaluation": lambda sol: self.naturalness_agent.evaluate(sol, self.output_dir if is_saved else None),
             "click_products_evaluation": lambda sol: self.click_products_agent.evaluate(sol, self.output_dir if is_saved else None),
         }
         

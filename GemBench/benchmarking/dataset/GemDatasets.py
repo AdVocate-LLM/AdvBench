@@ -2,20 +2,20 @@ import os
 import json
 from typing import List
 import numpy as np
-from .SA_dataset import SA_Dataset
+from .CA_Prod import CA_Prod
 
-class GemDatasets(SA_Dataset):
+class GemDatasets(CA_Prod):
     # get the current path
     current_path = os.path.dirname(os.path.abspath(__file__))
     # index of the dataset
     datasets = {
-        'mt-benchmark-humanities': {
-            'folder': 'mt-benchmark', 
+        'MT-Human': {
+            'folder': 'MT_Human', 
             'prompt_file': 'prompts_Humanities.json',
             'categories_file': 'categories_Humanities.json'
         },
-        'lmsys100': {
-            'folder': 'lmsys', 
+        'LM-Market': {
+            'folder': 'LM_Market', 
             'prompt_file': 'prompts100.json',
             'categories_file': 'categories100.json'
         }

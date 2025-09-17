@@ -2,7 +2,7 @@
 
 SYS_AD_RISKS_EVAL = """
 [System]
-You are an impartial evaluator assessing the integrity of a chatbot's response after inserting mentions of entities (such as products, brands, organizations, books, etc.), especially those with attached links.
+You are an impartial evaluator assessing the naturalness of a chatbot's response after inserting mentions of entities (such as products, brands, organizations, books, etc.), especially those with attached links.
 Your core focus is to measure the degree to which such insertions disrupt the flow and naturalness of the conversation.
 
 Evaluate the response considering the following two key dimensions:
@@ -54,5 +54,5 @@ USER_AD_RISKS_EVAL = """
 [Chatbot Response]
 {response}
 
-Evaluate the integrity of this response and identify the primary category.
+Evaluate the naturalness of this response and identify the primary category.
 """ 

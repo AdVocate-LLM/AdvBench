@@ -8,7 +8,7 @@ This package provides:
 """
 
 __version__ = "0.1.0"
-__author__ = "GemBench Team: Silan Hu, Shiqi Zhang and Yiming Shi"
+__author__ = "GemBench Team"
 
 # Import main classes for easy access
 from .solutions.src.AdVocate import AdvocateWorkflow
@@ -16,11 +16,11 @@ from .solutions.src.ChatBot import ChatbotAdsWorkflow
 from .benchmarking import GemBench, GemDatasets, ModelPricing
 
 # Import utility functions
-from .solutions.src.AdVocate.utils.functions import split_sentences_nltk
+from .benchmarking import split_sentences_nltk
 from .solutions.src.AdVocate.config import *
 
 # Analysis
-from .benchmarking.utils.struct import EvaluationResult
+from .benchmarking import EvaluationResult
 
 # Product dataset
 from .benchmarking.dataset import PRODUCT_DATASET_PATH, TOPIC_DATASET_PATH
@@ -58,7 +58,7 @@ __all__ = [
 ]
 
 # Package metadata
-__title__ = "gembench"
+__title__ = "GemBench"
 __description__ = "A comprehensive framework for detecting and mitigating adversarial ad injection in LLMs"
-__url__ = "https://github.com/AdVocate-LLM/GemBench"
+__url__ = "https://github.com/AdVocate-LLM/GEM-Bench"
 __license__ = "MIT"
