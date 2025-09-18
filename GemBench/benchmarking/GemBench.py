@@ -49,17 +49,18 @@ class GemBench(ExperimentCache):
         self.max_samples = max_samples
         self.banner(
             project_name="GemBench",
-            title="Welcome to our evaluation system",
+            title="Welcome to GEM-Bench",
             description=(
-                "- This is a evaluation system that can evaluate the quality of Gemersarial LLM responses with multiple metrics,\n"
-                "- Includes high-quality benchmark datasets, evaluation frameworks,\n"
-                "- And configurable ad injection strategies."
+                "- The first comprehensive benchmark for evaluating ad-injected responses (AIR) in Generative Engine Marketing (GEM),\n"
+                "- Includes curated datasets across chatbot and search scenarios,\n"
+                "- Provides an evaluation framework with a metric ontology for user satisfaction and engagement,\n"
+                "- Supports baseline solutions within an extensible multi-agent framework."
             )
         )
         self.info(f"the judge model is: {self.judge_model}")
         self.info(f"the output directory is: {self.output_dir}")
         self.info(f"the number of repeats is: {self.n_repeats}")
-        self.info(f"the maximum number of samples is: {self.max_samples}")
+        self.info(f"the maximum number of samples is: {self.max_samples if self.max_samples > 0 else 'all'}")
         self.info(f"the data sets are: {self.data_sets+["CA_Prod"] if best_product_selector else self.data_sets}")
         self.info(f"the methods we want to evaluate(general task) are: {self.solutions.keys()}")
         if self.best_product_selector:

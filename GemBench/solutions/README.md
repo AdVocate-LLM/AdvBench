@@ -11,7 +11,7 @@ This directory contains comprehensive solutions for detecting and mitigating adv
 - [Project Structure](#project-structure)
 - [Installation & Setup](#installation--setup)
 - [AdVocate Framework](#advocate-framework)
-- [ChatBot Framework](#chatbot-framework)
+- [AdChat Framework](#chatbot-framework)
 - [Getting Started](#getting-started)
 - [Usage Examples](#usage-examples)
 - [Integration with AdvBench](#integration-with-advbench)
@@ -48,8 +48,8 @@ solutions/
 │   │   ├── utils/         # Helper utilities
 │   │   └── workflow.py    # Main workflow orchestrator
 │   │
-│   └── ChatBot/           # Chatbot-based ad injection framework
-│       ├── src/           # ChatBot core implementation
+│   └── AdChat/           # Chatbot-based ad injection framework
+│       ├── src/           # AdChat core implementation
 │       ├── chatbotAdsWorkflow.py  # Main workflow
 │       └── __init__.py
 │
@@ -127,9 +127,9 @@ injected_answer = injector_agent.inject_products(
 )
 ```
 
-## 💬 ChatBot Framework
+## 💬 AdChat Framework
 
-ChatBot provides a comparative framework for analyzing different ad injection strategies in conversational AI systems. This serves as a competitor baseline in the AdvBench evaluation suite.
+AdChat provides a comparative framework for analyzing different ad injection strategies in conversational AI systems. This serves as a competitor baseline in the AdvBench evaluation suite.
 
 ### Key Components
 
@@ -156,8 +156,8 @@ python main.py
 ### Basic Import Setup
 
 ```python
-from solutions.src.AdVocate.workflow import AdvocateWorkflow
-from solutions.src.ChatBot.chatbotAdsWorkflow import ChatbotAdsWorkflow
+from solutions.src.AdVocate.workflow import AdLLMWorkflow
+from solutions.src.AdChat.chatbotAdsWorkflow import AdChatWorkflow
 ```
 
 **Note**: Make sure you're running from the project root directory to ensure proper module imports.
@@ -167,10 +167,10 @@ from solutions.src.ChatBot.chatbotAdsWorkflow import ChatbotAdsWorkflow
 ### AdVocate Workflow
 
 ```python
-from solutions.src.AdVocate.workflow import AdvocateWorkflow
+from solutions.src.AdVocate.workflow import AdLLMWorkflow
 
 # Initialize AdVocate workflow with proper paths
-advocate = AdvocateWorkflow(
+advocate = AdLLMWorkflow(
     model_name="gpt-4o",
     product_list_path="benchmarking/dataset/product/products.json",
     rag_model=None  # Uses default all-MiniLM-L6-v2
@@ -187,13 +187,13 @@ results = advocate.run(
 print(results)
 ```
 
-### ChatBot Workflow
+### AdChat Workflow
 
 ```python
-from solutions.src.ChatBot.chatbotAdsWorkflow import ChatbotAdsWorkflow
+from solutions.src.AdChat.chatbotAdsWorkflow import AdChatWorkflow
 
-# Initialize ChatBot workflow with proper paths
-chatbot = ChatbotAdsWorkflow(
+# Initialize AdChat workflow with proper paths
+chatbot = AdChatWorkflow(
     product_list_path="benchmarking/dataset/product/products.json",
     topic_list_path="benchmarking/dataset/product/topics.json",
     model_name="gpt-4o"
@@ -233,8 +233,8 @@ The Solutions framework integrates seamlessly with the AdvBench benchmarking sys
 
 ```python
 from benchmarking import AdvBench
-from solutions.src.AdVocate.workflow import AdvocateWorkflow
-from solutions.src.ChatBot.chatbotAdsWorkflow import ChatbotAdsWorkflow
+from solutions.src.AdVocate.workflow import AdLLMWorkflow
+from solutions.src.AdChat.chatbotAdsWorkflow import AdChatWorkflow
 from functools import partial
 
 # Initialize comprehensive benchmark
@@ -242,7 +242,7 @@ adv_bench = AdvBench(
     data_sets=["MT-Human"],
     solutions={
         "chi": partial(
-            ChatbotAdsWorkflow(
+            AdChatWorkflow(
                 product_list_path="benchmarking/dataset/product/products.json",
                 topic_list_path="benchmarking/dataset/product/topics.json",
                 model_name="gpt-4o-mini"
@@ -250,7 +250,7 @@ adv_bench = AdvBench(
             solution_name="chi"
         ),
         "gen-insert-refine-response": partial(
-            AdvocateWorkflow(
+            AdLLMWorkflow(
                 product_list_path="benchmarking/dataset/product/products.json",
                 model_name="gpt-4o-mini"
             ).run,
@@ -291,10 +291,10 @@ Both frameworks support comprehensive evaluation through:
 
 ## 🔧 API Reference
 
-### AdvocateWorkflow
+### AdLLMWorkflow
 
 ```python
-class AdvocateWorkflow:
+class AdLLMWorkflow:
     def __init__(
         self, 
         model_name: str = "gpt-4o",
@@ -312,10 +312,10 @@ class AdvocateWorkflow:
     def help(self) -> None
 ```
 
-### ChatbotAdsWorkflow
+### AdChatWorkflow
 
 ```python
-class ChatbotAdsWorkflow(ParallelProcessor):
+class AdChatWorkflow(ParallelProcessor):
     def __init__(
         self,
         product_list_path: str,

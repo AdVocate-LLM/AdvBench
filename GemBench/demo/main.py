@@ -1,5 +1,5 @@
-from GemBench import AdvocateWorkflow
-from GemBench import ChatbotAdsWorkflow
+from GemBench import AdLLMWorkflow
+from GemBench import AdChatWorkflow
 from GemBench import GemBench
 from dotenv import load_dotenv
 from functools import partial
@@ -9,8 +9,8 @@ from GemBench import PRODUCT_DATASET_PATH, TOPIC_DATASET_PATH
 load_dotenv()
 
 if __name__ == '__main__':    
-    # Example usage of the AdvocateWorkflow
-    # answer=AdvocateWorkflow(
+    # Example usage of the AdLLMWorkflow
+    # answer=AdLLMWorkflow(
     #     product_list_path="benchmarking/dataset/product/products.json",
     #     model_name="gpt-4o"
     #     ).run(
@@ -20,8 +20,8 @@ if __name__ == '__main__':
     #     )
     # print(answer)
     
-    # # Example usage of the ChatbotAdsWorkflow
-    # answer = ChatbotAdsWorkflow(
+    # # Example usage of the AdChatWorkflow
+    # answer = AdChatWorkflow(
     #     product_list_path="benchmarking/dataset/product/products.json",
     #     topic_list_path="benchmarking/dataset/product/topics.json",
     #     model_name="gpt-4o"
@@ -32,14 +32,14 @@ if __name__ == '__main__':
     # print(answer)
 
     # initialize the methods workflow
-    chi_workflow = ChatbotAdsWorkflow(
+    chi_workflow = AdChatWorkflow(
             product_list_path=PRODUCT_DATASET_PATH,
             topic_list_path=TOPIC_DATASET_PATH,
             # model_name="Qwen/Qwen3-14B"
             # model_name="gpt-4o-mini",
             model_name="doubao-1-5-lite-32k-250115",
     )
-    advocate_workflow = AdvocateWorkflow(
+    advocate_workflow = AdLLMWorkflow(
             product_list_path=PRODUCT_DATASET_PATH,
             # model_name="gpt-4o-mini",
             rag_model="text-embedding-3-small",

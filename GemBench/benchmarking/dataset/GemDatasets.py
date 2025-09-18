@@ -11,13 +11,13 @@ class GemDatasets(CA_Prod):
     datasets = {
         'MT-Human': {
             'folder': 'MT_Human', 
-            'prompt_file': 'prompts_Humanities.json',
-            'categories_file': 'categories_Humanities.json'
+            'prompt_file': 'prompts.json',
+            'categories_file': 'categories.json'
         },
         'LM-Market': {
             'folder': 'LM_Market', 
-            'prompt_file': 'prompts100.json',
-            'categories_file': 'categories100.json'
+            'prompt_file': 'prompts.json',
+            'categories_file': 'categories.json'
         }
     }
     def __init__(self,data_set_names: List[str]=None):
