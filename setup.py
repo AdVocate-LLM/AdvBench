@@ -29,7 +29,7 @@ setup(
     long_description=read_readme(),
     long_description_content_type="text/markdown",
     author="GemBench Team",
-    url="https://github.com/AdVocate-LLM/GemBench",
+    url="https://github.com/Generative-Engine-Marketing/GEM-Bench",
     packages=find_packages(),
     include_package_data=True,
     package_data={
@@ -59,8 +59,8 @@ setup(
     ],
     keywords="llm adversarial ad-injection benchmark machine-learning",
     project_urls={
-        "Bug Reports": "https://github.com/AdVocate-LLM/GemBench/issues",
-        "Source": "https://github.com/AdVocate-LLM/GemBench",
-        "Documentation": "https://github.com/AdVocate-LLM/GemBench/blob/main/README.md",
+        "Bug Reports": "https://github.com/Generative-Engine-Marketing/GEM-Bench/issues",
+        "Source": "https://github.com/Generative-Engine-Marketing/GEM-Bench",
+        "Documentation": "https://github.com/Generative-Engine-Marketing/GEM-Bench/blob/main/README.md",
     },
 )

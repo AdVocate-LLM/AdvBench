@@ -4,7 +4,7 @@ Solutions package for GemBench
 This package contains implementations for detecting and mitigating adversarial ad injection in LLMs.
 """
 
-from .src import AdvocateWorkflow
-from .src import ChatbotAdsWorkflow
+from .src import AdLLMWorkflow
+from .src import AdChatWorkflow
 
-__all__ = ["AdvocateWorkflow", "ChatbotAdsWorkflow"]
+__all__ = ["AdLLMWorkflow", "AdChatWorkflow"]

@@ -1,6 +1,6 @@
 # from benchmarking.evaluator.laaj_evaluator.compare_evaluate import run_llm_evaluation
-from GemBench import AdvocateWorkflow
-from GemBench import ChatbotAdsWorkflow
+from GemBench import AdLLMWorkflow
+from GemBench import AdChatWorkflow
 from GemBench import GemBench
 from dotenv import load_dotenv
 from functools import partial
@@ -9,8 +9,8 @@ from GemBench import split_sentences_nltk
 load_dotenv()
 
 if __name__ == '__main__':    
-    # Example usage of the AdvocateWorkflow
-    # answer=AdvocateWorkflow(
+    # Example usage of the AdLLMWorkflow
+    # answer=AdLLMWorkflow(
     #     product_list_path="benchmarking/dataset/product/products.json",
     #     model_name="gpt-4o"
     #     ).run(

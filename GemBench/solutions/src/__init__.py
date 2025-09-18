@@ -2,7 +2,7 @@
 Source code implementations for GemBench solutions
 """
 
-from .AdVocate import AdvocateWorkflow
-from .ChatBot import ChatbotAdsWorkflow
+from .AdLLM import AdLLMWorkflow
+from .AdChat import AdChatWorkflow
 
-__all__ = ["AdvocateWorkflow", "ChatbotAdsWorkflow"]
+__all__ = ["AdLLMWorkflow", "AdChatWorkflow"]
