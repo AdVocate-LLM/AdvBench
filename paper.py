@@ -29,26 +29,26 @@ if __name__ == '__main__':
         # data_sets=["LM-Market"],
         # data_sets=["MT-Human", "LM-Market"],
         solutions={
-                "chi": 
+                "Ad-Chat": 
                     partial(
                         chi_workflow.run,
                         solution_name="chi"
                     ),
-                "gen-insert-response": 
+                "GI-R": 
                     partial(
                         advocate_workflow.run,
                         query_type="QUERY_RESPONSE",
                         solution_name="BASIC_GEN_INSERT"
                     )
                 ,
-                "gen-insert-refine-response": 
+                "GIR-R": 
                     partial(
                         advocate_workflow.run,
                         query_type="QUERY_RESPONSE",
                         solution_name="REFINE_GEN_INSERT"
                     )
                 ,
-                "gen-insert-refine-prompt": 
+                "GIR-P": 
                     partial(
                         advocate_workflow.run,
                          query_type="QUERY_PROMPT",
@@ -57,42 +57,42 @@ if __name__ == '__main__':
                 ,
         },
         best_product_selector={
-            "chi": 
+            "Ad-Chat": 
                 partial(
-                    chi_workflow.get_best_product,
+                    chi_workflow.run,
                     solution_name="chi"
                 ),
-            "gen-insert-response": 
+            "GI-R": 
                 partial(
                     advocate_workflow.run,
                     query_type="QUERY_RESPONSE",
                     solution_name="BASIC_GEN_INSERT"
                 )
             ,
-            "gen-insert-refine-response": 
+            "GIR-R": 
                 partial(
                     advocate_workflow.run,
                     query_type="QUERY_RESPONSE",
                     solution_name="REFINE_GEN_INSERT"
                 )
             ,
-            "gen-insert-refine-prompt": 
+            "GIR-P": 
                 partial(
                     advocate_workflow.run,
-                    query_type="QUERY_PROMPT",
-                    solution_name="REFINE_GEN_INSERT"
-                )
+                        query_type="QUERY_PROMPT",
+                        solution_name="REFINE_GEN_INSERT"
+                    )
             ,
         },
         # judge_model="kimi-k2",
         judge_model="gpt-4.1-mini",
         # judge_model="qwen-max",
         # judge_model="claude-3-5-haiku-20241022",
-        # n_repeats=3,
-        n_repeats=1,
+        n_repeats=3,
+        # n_repeats=1,
         # tags="gpt-4o-mini-LM-Market-gpt-4o-repeat-3"
         # tags="test-evaluate-result-click-products"
-        tags="8-27-ALL-text-embedding-3-small-Linear_weight-gpt-4.1-mini-repeat-3"
+        tags="8-18-ALL-text-embedding-3-small-Linear_weight-gpt-4.1-mini-repeat-3"
     )
     # adv_bench.run(evaluate_matrix=["notice_products_evaluation"])
     # adv_bench.run(["ad_transition_similarity","ad_content_alignment","local_flow","global_coherence","has_ad"])
