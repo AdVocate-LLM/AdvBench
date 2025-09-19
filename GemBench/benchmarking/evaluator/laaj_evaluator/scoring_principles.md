@@ -6,7 +6,7 @@ This document details the scoring principles for all indicator agents except the
 Qualitative Evaluation Ontology
 ├── 1. User Satisfaction
 │   ├── 1.1 Accuracy
-│   ├── 1.2 naturalness
+│   ├── 1.2 Naturalness
 │   ├── 1.3 Personality
 │   └── 1.4 Trust
 
@@ -42,7 +42,7 @@ Assess chatbot's response relevance and accuracy to users, considering whether r
 The model needs to output after analysis: `[[CATEGORY]]`
 
 
-## 2. naturalness Assessment Agent
+## 2. Naturalness Assessment Agent
 
 ### Evaluation Objective
 
