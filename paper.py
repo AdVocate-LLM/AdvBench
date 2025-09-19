@@ -59,7 +59,7 @@ if __name__ == '__main__':
         best_product_selector={
             "Ad-Chat": 
                 partial(
-                    chi_workflow.run,
+                    chi_workflow.get_best_product,
                     solution_name="chi"
                 ),
             "GI-R": 
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         # n_repeats=1,
         # tags="gpt-4o-mini-LM-Market-gpt-4o-repeat-3"
         # tags="test-evaluate-result-click-products"
-        tags="8-18-ALL-text-embedding-3-small-Linear_weight-gpt-4.1-mini-repeat-3"
+        tags="ALL-text-embedding-3-small-Linear_weight-gpt-4.1-mini-repeat-3"
     )
     # adv_bench.run(evaluate_matrix=["notice_products_evaluation"])
     # adv_bench.run(["ad_transition_similarity","ad_content_alignment","local_flow","global_coherence","has_ad"])
