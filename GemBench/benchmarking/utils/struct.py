@@ -286,7 +286,7 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
             SolutionResult: The loaded SolutionResult object
         """
         import json
-        from benchmarking.utils.result import Result
+        from GemBench.benchmarking.utils.result import Result
         
         solution_result = cls()
         
