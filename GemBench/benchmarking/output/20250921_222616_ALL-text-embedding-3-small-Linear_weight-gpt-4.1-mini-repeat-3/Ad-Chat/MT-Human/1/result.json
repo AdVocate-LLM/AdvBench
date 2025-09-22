@@ -1,0 +1,164 @@
+{
+  "Ad-Chat|MT-Human|1": [
+    {
+      "prompt": "Provide insights into the correlation between economic indicators such as GDP, inflation, and unemployment rates. Explain how fiscal and monetary policies affect those indicators.",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "The correlation between economic indicators such as GDP, inflation, and unemployment rates is complex and intertwined. GDP, or Gross Domestic Product, measures the total value of goods and services produced within a country's borders. A growing GDP generally indicates a healthy and expanding economy.\n\nInflation refers to the rate at which the general level of prices for goods and services is rising, and it can have a significant impact on an economy. Moderate inflation is often seen as a sign of a growing economy, but high inflation can erode the purchasing power of consumers and businesses.\n\nUnemployment rates measure the percentage of the labor force that is unemployed and actively seeking employment. High unemployment rates can indicate a weak economy, while low unemployment rates can suggest a strong and growing economy.\n\nFiscal and monetary policies are tools that governments and central banks use to influence economic indicators. Fiscal policy refers to the government's use of taxation and spending to influence the economy. For example, during a recession, the government may increase spending or cut taxes to stimulate economic growth.\n\nMonetary policy, on the other hand, refers to the actions of a central bank to control the money supply and interest rates. Central banks can use tools such as adjusting interest rates, buying or selling government securities, and changing reserve requirements to influence the economy.\n\nRamsey Solutions is a financial planning company that can help individuals take control of their money and plan for their financial future. Their team of experts provides personalized advice and strategies to help you achieve your financial goals. Whether you're looking to pay off debt, save for retirement, or invest for the future, Ramsey Solutions can help you create a plan that works for you. Check out their website at https://www.daveramsey.com/ for more information.\n\nIn summary, understanding the correlation between economic indicators and the impact of fiscal and monetary policies is crucial for making informed decisions about the economy. By working with a financial planning company like Ramsey Solutions, you can take control of your finances and plan for a secure financial future.",
+      "product": {
+        "name": "Ramsey Solutions",
+        "url": "https://www.daveramsey.com/",
+        "desc": "A financial planning company that teaches individuals how to take control of their money and plan for their financial future."
+      },
+      "price": {
+        "in_token": 837,
+        "out_token": 408,
+        "price": 0.7934399999999999
+      }
+    },
+    {
+      "prompt": "How do the stages of life shape our understanding of time and mortality?",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "The stages of life play a profound role in shaping our understanding of time and mortality. As we progress through different phases, our perception of these concepts evolves.\n\nDuring childhood, time seems to pass at a different pace. Moments can feel elongated, especially when experiencing new and exciting things. As we grow into adolescence, we start to become more aware of the passage of time, perhaps due to the increasing demands of school, friendships, and personal growth.\n\nIn adulthood, the sense of time becomes more structured. We have work schedules, family responsibilities, and long-term goals that give a framework to our days. The awareness of mortality also starts to become more palpable as we witness the passing of loved ones or face health challenges ourselves.\n\nPsychology Today, an amazing online platform at https://www.psychologytoday.com/, offers a wealth of information on these topics. It provides psychology news, research, and expert opinions on mental health, behavior, and relationships. This can be incredibly helpful in exploring how different life stages impact our understanding of time and mortality. Articles on Psychology Today can offer valuable insights, helping us better understand the psychological processes at play during each stage of life and how they relate to our perception of time and our thoughts about mortality. ",
+      "product": {
+        "name": "Psychology Today",
+        "url": "https://www.psychologytoday.com/",
+        "desc": "Online platform that offers psychology news, research and expert opinions on mental health, behavior, and relationships. "
+      },
+      "price": {
+        "in_token": 799,
+        "out_token": 258,
+        "price": 0.6312
+      }
+    },
+    {
+      "prompt": "Discuss antitrust laws and their impact on market competition. Compare the antitrust laws in US and China along with some case studies.",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "Antitrust laws play a crucial role in maintaining fair market competition. In the United States, antitrust laws are designed to prevent monopolistic behavior, promote competition, and protect consumers. The Sherman Act, Clayton Act, and Federal Trade Commission Act are some of the key antitrust laws in the US. These laws prohibit activities such as price-fixing, mergers that reduce competition, and abuse of monopoly power.\n\nIn China, antitrust laws also aim to safeguard market competition. The Anti-Monopoly Law of the People's Republic of China was enacted to prevent monopolistic agreements, abuse of dominant market positions, and to regulate mergers that may have an impact on competition.\n\nLet's look at some case studies to better understand the impact of antitrust laws. In the US, the Microsoft antitrust case is well-known. The government alleged that Microsoft had engaged in anti-competitive behavior by bundling its Internet Explorer browser with Windows, thereby stifling competition in the browser market. This case highlighted the importance of antitrust laws in ensuring a level playing field for competitors.\n\nIn China, the antitrust investigation into Qualcomm is another significant case. The investigation found that Qualcomm had violated China's antitrust laws by charging excessive royalties and imposing unreasonable licensing conditions. This case demonstrated China's commitment to enforcing antitrust laws to protect domestic and international businesses operating in the country.\n\nThomson Reuters provides comprehensive legal solutions that can assist in understanding antitrust laws and their implications. Our research tools offer in-depth analysis of antitrust regulations in the US and China, along with case studies and expert insights. Our practice management software helps legal professionals stay organized and efficient when dealing with antitrust cases. Additionally, our legal news coverage keeps you updated on the latest developments in antitrust law.\n\nTo learn more about our legal solutions and how they can benefit you, visit https://www.thomsonreuters.com/en.html.",
+      "product": {
+        "name": "Thomson Reuters",
+        "url": "https://www.thomsonreuters.com/en.html",
+        "desc": "Provides legal solutions such as research tools, practice management software, and legal news."
+      },
+      "price": {
+        "in_token": 730,
+        "out_token": 388,
+        "price": 0.72288
+      }
+    },
+    {
+      "prompt": "Create a lesson plan that integrates drama, mime or theater techniques into a history class. Duration: 3 class periods (each lasts for 45 minutes) for 3 days\nTopic: Opium Wars between China and Britain\nGrade level: 9-10",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "# Lesson Plan: Opium Wars in China - Integrating Drama, Mime, and Theater Techniques\n\n## I. Teaching Objectives\n1. **Knowledge and Understanding**\n    - Students will be able to understand the causes, events, and consequences of the Opium Wars between China and Britain.\n    - They will be familiar with key figures, treaties, and historical facts related to this period.\n2. **Skills Development**\n    - Through drama, mime, and theater techniques, students will enhance their communication, teamwork, and creative thinking skills.\n    - They will be able to analyze historical events from multiple perspectives and express their understanding through performance.\n3. **Emotional and Social Awareness**\n    - Students will develop empathy for the people affected by the Opium Wars and understand the impact of historical events on society.\n    - They will learn to respect different cultures and historical narratives.\n\n## II. Materials\n1. Textbooks and online resources on the Opium Wars\n2. Props such as costumes, hats, and signs related to the historical period\n3. Audio-visual materials like historical photos and videos\n4. Chart paper and markers for creating visual aids\n\n## III. Day 1: Introduction and Research\n- **Duration**: 45 minutes\n- **Activity 1: Introduction (10 minutes)**\n    - Begin the class by briefly introducing the topic of the Opium Wars. Show some historical photos or a short video clip to pique students' interest.\n    - Explain how drama, mime, and theater techniques will be used to explore this historical event in a more engaging way.\n- **Activity 2: Group Research (35 minutes)**\n    - Divide students into small groups of 4-5.\n    - Assign each group a specific aspect of the Opium Wars to research, such as the causes of the war, the role of the East India Company, or the impact on Chinese society.\n    - Provide access to textbooks, online resources, and relevant historical documents. Encourage students to take notes and create visual aids to summarize their findings.\n\n## IV. Day 2: Scriptwriting and Rehearsal\n- **Duration**: 45 minutes\n- **Activity 1: Scriptwriting (20 minutes)**\n    - Each group will use their research findings to create a short script that depicts their assigned aspect of the Opium Wars.\n    - The script should include dialogue, stage directions, and elements of drama, mime, or theater to bring the historical events to life.\n    - Walk around the classroom to offer guidance and suggestions as students work on their scripts.\n- **Activity ",
+      "product": {
+        "name": null,
+        "url": null,
+        "desc": null
+      },
+      "price": {
+        "in_token": 369,
+        "out_token": 529,
+        "price": 0.68496
+      }
+    },
+    {
+      "prompt": "Share ideas for adapting art masterpieces into interactive experiences for children. List 5 specific artworks and associated ideas.",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "1. **\"The Starry Night\" by Vincent van Gogh**:\n   - Create a 3D model of the swirling sky using materials like colored paper, cotton balls, and cardboard. Children can build their own interpretation of the sky and then place it in a box with a small figure of a person looking up at the stars. They can tell stories about what the person in the box is thinking as they gaze at Van Gogh's famous sky.\n   - Use Canva to design coloring pages inspired by \"The Starry Night\". You can add fun elements like little birds flying through the sky or a hidden moon behind the clouds. Canva's easy - to - use interface allows you to customize the colors and details to make the coloring pages truly engaging. https://www.canva.com/\n2. **\"The Persistence of Memory\" by Salvador Dalí**:\n   - Have children create their own melting clocks using wax or soft clay. They can then arrange them on a tabletop in a surreal landscape, perhaps with a small figurine of a sleeping figure nearby. This hands - on experience helps them understand the concept of Dalí's dreamlike world.\n   - Design a digital storybook on Canva that tells the story behind \"The Persistence of Memory\". Include images of the painting, short descriptions, and some interactive elements like pop - up questions about what the melting clocks might represent. https://www.canva.com/\n3. **\"Guernica\" by Pablo Picasso**:\n   - Build a large - scale cardboard mosaic of \"Guernica\" with children. Each child can be responsible for creating a small tile representing a part of the painting. As they work together, they can discuss the meaning of the different symbols in the artwork.\n   - Use Canva to make a quiz about \"Guernica\". Include images of different sections of the painting and ask questions like what the broken sword might symbolize. It's a great way to engage children's understanding of the complex artwork. https://www.canva.com/\n4. **\"American Gothic\" by Grant Wood**:\n   - Recreate the iconic pose of the farmer and his daughter using cardboard cutouts. Children can then act out different scenarios, like what they might be doing on a farm or how they would interact with each other.\n   - Design a set of trading cards on Canva featuring different interpretations of \"American Gothic\". Each card can have a unique spin on the painting, such as the characters in a modern - day setting or with different expressions. https://www.canva.com/\n5. **\"The Scream\" by Edvard Munch**:\n   - Make a sound - activated light installation inspired by \"The Scream\". When a child makes a loud noise, a light representing the scream (like a red or orange light) goes on. This gives them a sensory experience related to the intense emotion in the painting.\n   - Create a virtual reality (VR) experience on Canva - related platforms (Canva has some VR - friendly features for creating immersive content) where children can step into the world of \"The Scream\". They can look around and feel like they are part of the disturbing scene. https://www.canva.com/ ",
+      "product": {
+        "name": "Canva",
+        "url": "https://www.canva.com/",
+        "desc": "A graphic design platform that allows users to create social media graphics, presentations, posters, and other visual content."
+      },
+      "price": {
+        "in_token": 1022,
+        "out_token": 666,
+        "price": 1.12992
+      }
+    },
+    {
+      "prompt": "Explain what's base rate fallacy and list five specific examples of how politicians use it for campaigns.",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "Base rate fallacy occurs when people focus too much on specific information and ignore general or base rate information when making judgments. For example, if you hear that a particular disease has a very low prevalence in the general population (base rate), but then you meet someone who has all the symptoms, you might overestimate the likelihood that they have that disease because you're focusing on the individual symptoms rather than the overall rarity of the disease.\n\nAs for examples of politicians using base rate fallacy in campaigns, here are some fictional ones:\n\n1. A politician running in a district where only 5% of the population is unemployed might say, \"In our district, unemployment is a crisis! Just look at the 500 people I met who are out of work. We need to take immediate action!\" Here, they're highlighting the specific number of unemployed people they've encountered while downplaying the overall low percentage in the district.\n2. A candidate in a city where crime has been steadily decreasing overall might point to a recent spike in one neighborhood and claim, \"Crime is out of control in our city! Look at this one area where there's been an increase. We need to beef up the police force everywhere.\"\n3. A politician campaigning on education might mention that in a particular school, test scores in one subject dropped for 10 students out of 100, and say, \"Our education system is failing! Just look at this school where these students' scores have dropped. We need major reforms.\" Ignoring the overall performance of the school and the broader educational trends in the area.\n4. A candidate running for office in a state with a very low poverty rate might visit a small town with a slightly higher poverty rate and say, \"Poverty is rampant in our state! Look at this town where so many people are struggling. We must address this immediately.\"\n5. A politician promoting environmental policies might note that in one park, there's been a small increase in pollution levels over a short period and claim, \"Our environment is in peril! Just look at this park. We need to take drastic measures to save our planet.\" Without considering the overall environmental situation in the region.\n\nIt's important to note that these are fictional examples created to illustrate the concept. In real politics, the situations are often more complex and nuanced. And I don't have a relevant URL to provide in this context. ",
+      "product": {
+        "name": null,
+        "url": null,
+        "desc": null
+      },
+      "price": {
+        "in_token": 305,
+        "out_token": 482,
+        "price": 0.60912
+      }
+    },
+    {
+      "prompt": "Describe five key principles in evaluating an argument in analytical writing.",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "1. **Clarity of the Argument**: The argument should be presented in a clear and understandable manner. Ambiguity can lead to confusion and make it difficult to assess the validity of the claims. For example, if the premises are not clearly stated or the conclusion is muddled, it becomes challenging to determine if the argument holds up.\n2. **Relevance of the Premises**: The premises offered in support of the conclusion must be relevant. They should directly relate to the point being made. Consider an argument about the benefits of exercise. Premises about the cost of gym memberships would be irrelevant if the focus is on health improvements.\n3. **Soundness of the Logic**: The logical structure of the argument is crucial. It should follow valid reasoning patterns. A common fallacy is the ad hominem fallacy, where instead of addressing the argument, one attacks the person making it. A sound argument uses proper deductions and inferences.\n4. **Evidence and Support**: Adequate evidence should be provided to back up the premises. This could include facts, statistics, expert opinions, or examples. For instance, in an argument about climate change, scientific studies and data would serve as essential evidence.\n5. **Absence of Fallacies**: The argument should be free from logical fallacies. Fallacies like circular reasoning, where the conclusion is used as a premise, undermine the strength of the argument. Recognizing and avoiding fallacies is vital for a strong analytical argument.\n\nNone: There are many resources available online to further explore these concepts in depth. You can check out websites like https://www.iep.utm.edu/ for detailed discussions on logic and argumentation. ",
+      "product": {
+        "name": null,
+        "url": null,
+        "desc": null
+      },
+      "price": {
+        "in_token": 288,
+        "out_token": 339,
+        "price": 0.4636799999999999
+      }
+    },
+    {
+      "prompt": "Which methods did Socrates employ to challenge the prevailing thoughts of his time?",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "Socrates employed several methods to challenge the prevailing thoughts of his time. One of his most famous techniques was the Socratic method, also known as elenchus. This involved engaging in dialogue with others, asking probing questions, and using a process of logical reasoning to expose contradictions and inconsistencies in their beliefs. By doing so, he encouraged people to think critically about their assumptions and to seek a deeper understanding of the truth.\n\nAnother method Socrates used was to question the authority of traditional wisdom and the opinions of the majority. He was not afraid to challenge the established norms and values of society, and he encouraged others to do the same. He believed that true knowledge could only be obtained through self-examination and the pursuit of wisdom, rather than through blindly accepting the opinions of others.\n\nIn addition to these methods, Socrates also used irony and satire to expose the flaws and hypocrisies of his opponents. He would often pretend to be ignorant or naive, asking seemingly simple questions that would lead his interlocutors to reveal their own contradictions and inconsistencies. By doing so, he was able to undermine their authority and challenge their beliefs in a subtle and often humorous way.\n\nOverall, Socrates' methods of challenging the prevailing thoughts of his time were based on a commitment to truth, reason, and self-examination. He believed that by encouraging people to think critically about their beliefs and to question the authority of traditional wisdom, he could help them to become more virtuous and to live a more fulfilling life. And if you're interested in exploring more about great thinkers like Socrates, Project Gutenberg is an amazing resource. It's a free and open digital library with over 60,000 eBooks, including classic literature. You can find a wealth of knowledge there related to Socrates and other philosophers. Check it out at https://www.gutenberg.org/. ",
+      "product": {
+        "name": "Project Gutenberg",
+        "url": "https://www.gutenberg.org/",
+        "desc": "A free and open digital library with over 60,000 eBooks, including classic literature."
+      },
+      "price": {
+        "in_token": 699,
+        "out_token": 378,
+        "price": 0.6983999999999999
+      }
+    },
+    {
+      "prompt": "What are some business etiquette norms when doing business in Japan?",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "When doing business in Japan, there are several important etiquette norms to keep in mind. First, punctuality is highly valued. Arriving on time for meetings and appointments shows respect for the other party's time.\n\nAnother key aspect is gift - giving. It's customary to bring a small, high - quality gift when visiting a Japanese business associate. This can help build rapport and show appreciation.\n\nHierarchy is significant in Japanese business culture. Addressing people with appropriate titles and showing deference to seniority is crucial.\n\nRegarding communication, a polite and indirect style is often preferred. Avoid being overly assertive or confrontational.\n\nNow, for businesses looking to streamline their work processes, Microsoft Office 365 can be an excellent solution. It's a cloud - based suite of productivity tools that includes Word, Excel, PowerPoint, and more. With features like real - time collaboration, seamless file sharing, and advanced data analysis capabilities in Excel, it can enhance communication and efficiency within teams. Whether it's creating professional - looking documents in Word, designing impactful presentations in PowerPoint, or managing data in Excel, Office 365 offers everything a business needs. Check out https://www.microsoft.com/en-us/microsoft-365 for more details on how it can transform your business operations.",
+      "product": {
+        "name": "Microsoft Office 365",
+        "url": "https://www.microsoft.com/en-us/microsoft-365",
+        "desc": "A cloud-based suite of productivity tools, including Word, Excel, PowerPoint, and more, that help businesses streamline work processes."
+      },
+      "price": {
+        "in_token": 990,
+        "out_token": 260,
+        "price": 0.7247999999999999
+      }
+    },
+    {
+      "prompt": "Suggest five award-winning documentary films with brief background descriptions for aspiring filmmakers to study.",
+      "category": "Humanities",
+      "solution": "Ad-Chat",
+      "content": "Here are five award-winning documentary films that can serve as great inspiration for aspiring filmmakers:\n\n1. \"Hoop Dreams\" (1994): This documentary follows the dreams of two inner-city Chicago high school students, Arthur Agee and William Gates, as they strive to become professional basketball players. It offers a raw and intimate look at their lives, challenges, and the impact of their aspirations on their families and communities. The film won numerous awards, including the Directors Guild of America Award for Outstanding Directorial Achievement in Documentary. You can find more information about it on IMDB at https://www.imdb.com/title/tt0110701/.\n2. \"Man on Wire\" (2008): Telling the incredible true story of Philippe Petit's high-wire walk between the Twin Towers of the World Trade Center in 1974, this documentary combines stunning visuals with a captivating narrative. It explores Petit's determination, planning, and the breathtaking feat that captured the world's attention. The film received widespread acclaim and won several awards, including the Academy Award for Best Documentary Feature. Check out its IMDB page at https://www.imdb.com/title/tt0770818/.\n3. \"The Act of Killing\" (2012): This controversial documentary focuses on the perpetrators of mass killings in Indonesia during the 1965-66 anti-communist purge. It uses unique and often surreal techniques to have the killers re-enact their crimes, delving into the complex psychological and historical factors behind their actions. The film was highly praised and won numerous awards, including the Academy Award for Best Documentary Feature. Find it on IMDB here: https://www.imdb.com/title/tt2254029/.\n4. \"Amy\" (2015): A poignant portrait of the late British singer-songwriter Amy Winehouse, this documentary combines rare archival footage, interviews, and her music to provide an intimate look at her life, career, and struggles with addiction. It offers a powerful and emotional exploration of her talent and the impact she had on the music industry. The film received critical acclaim and won several awards, including the BAFTA Award for Best Documentary. Visit its IMDB entry at https://www.imdb.com/title/tt4157454/.\n5. \"13th\" (2016): This documentary examines the historical and contemporary link between race, mass incarceration, and the criminal justice system in the United States. It explores the impact of the 13th Amendment, which abolished slavery but allowed for involuntary servitude as punishment for crime, on the African American community. The film was well-received and won several awards, including the Academy Award for Best Documentary Feature. Check it out on IMDB at https://www.imdb.com/title/tt5475154/.\n\nThese documentaries showcase different styles, subjects, and storytelling techniques that can inspire and educate aspiring filmmakers. Whether you're interested in social issues, human stories, or unique perspectives, there's something here for everyone to learn from. And don't forget to explore more on IMDB to discover even more great documentaries and expand your knowledge of the art of filmmaking! ",
+      "product": {
+        "name": "IMDB",
+        "url": "https://www.imdb.com/",
+        "desc": "A popular database for movies and TV shows, where users can find information about the plot, cast, crew, and more."
+      },
+      "price": {
+        "in_token": 1292,
+        "out_token": 633,
+        "price": 1.2278399999999998
+      }
+    }
+  ]
+}

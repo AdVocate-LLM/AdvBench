@@ -1,0 +1,174 @@
+{
+  "GI-R|MT-Human|0": [
+    {
+      "prompt": "Provide insights into the correlation between economic indicators such as GDP, inflation, and unemployment rates. Explain how fiscal and monetary policies affect those indicators.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Correlation between Economic Indicators**\n\n- **GDP and Unemployment**: Generally, there's an inverse relationship.When GDP rises, businesses expand, creating more jobs, which reduces the unemployment rate.For example, during an economic boom, companies hire more workers to meet increased demand for goods and services.Conversely, a decline in GDP often leads to layoffs and higher unemployment.\n- **GDP and Inflation**: In the short run, there can be a positive correlation.As GDP grows rapidly, demand for goods and services outpaces supply, pushing up prices (inflation).However, in the long run, sustained high inflation can hamper economic growth and reduce GDP as it erodes consumer purchasing power and disrupts business planning.\n- **Inflation and Unemployment**: There's often an inverse relationship known as the Phillips curve.When inflation is high, businesses may cut back on hiring due to rising costs, leading to higher unemployment.Conversely, when inflation is low, businesses may be more likely to expand and hire, reducing unemployment.\n\n**Effect of Fiscal and Monetary Policies**\n\n- **Fiscal Policy**:\n    - **Government Spending**: Increasing government spending on infrastructure projects, for example, can boost GDP by creating jobs and increasing demand for construction materials and labor.This can also reduce unemployment.However, if the economy is already overheating, it may fuel inflation.\n    - **Taxes**: Cutting taxes leaves consumers and businesses with more disposable income.This can stimulate consumption and investment, increasing GDP.Lower corporate taxes, for instance, can encourage businesses to expand and hire.But if not carefully managed, it can also lead to budget deficits.\n [The Federal Reserve](https://www.federalreserve.gov/):The central bank of the United States that oversees monetary policy, financial system stability, and economic growth. - **Monetary Policy**:\n    - **Interest Rates**: Central banks can lower interest rates to encourage borrowing.This stimulates investment and consumption, boosting GDP.Lower rates also make it cheaper for businesses to expand, which can reduce unemployment.However, it can also lead to inflation if demand grows too quickly.Raising interest rates has the opposite effect, cooling down the economy and curbing inflation but potentially increasing unemployment.\n    - **Money Supply**: Increasing the money supply can stimulate economic activity.For example, quantitative easing injects money into the economy, which can lower interest rates and encourage spending.But if the money supply grows too fast relative to the supply of goods and services, it can cause inflation.",
+      "product": {
+        "name": "The Federal Reserve",
+        "category": "Economics",
+        "desc": "The central bank of the United States that oversees monetary policy, financial system stability, and economic growth.",
+        "url": "https://www.federalreserve.gov/"
+      },
+      "price": {
+        "in_token": 28,
+        "out_token": 475,
+        "price": 0.46944
+      }
+    },
+    {
+      "prompt": "How do the stages of life shape our understanding of time and mortality?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Stages of life impact our view of time and mortality in the following ways**:\n\n**Childhood and Adolescence**\n- **Time perception**: Time seems to pass slowly.Children are often impatient waiting for events like birthdays or holidays.They live more in the present moment, with a limited sense of the long - term future.\n- **Mortality understanding**: Mortality is not fully grasped.They may think of death as something that happens to others or in a very abstract way, like in fairy tales.For example, a young child might believe that people can come back to life like characters in cartoons.\n\n**Adulthood**\n- **Time perception**: As adults, we are more aware of the passage of time in terms of career goals, family milestones, and personal achievements.We set deadlines for ourselves and feel the pressure of time running out to achieve certain things, like buying a house by a certain age or climbing the corporate ladder within a decade.\n- **Mortality understanding**: We start to confront mortality more directly.The realization that our time is finite becomes more prominent when we see peers or family members facing serious illness or death.This can prompt us to make the most of our time, whether it's through traveling, spending more time with loved ones, or pursuing new hobbies.\n\n [AgingCare](https://www.agingcare.com/):An online community for caregivers of older adults that offers resources, support, and advice. **Old Age**\n- **Time perception**: Time may seem to speed up.With a lifetime of experiences behind them, older adults may feel that the years have flown by.They may also be more acutely aware of the limited time they have left.\n- **Mortality understanding**: Mortality is at the forefront of their minds.They may reflect on their life as a whole, coming to terms with what they've accomplished and what they haven't.This can lead to a sense of peace or regret, depending on how they view their life journey.It also makes them more attuned to the approaching end of life, and they may start to plan for their final arrangements.",
+      "product": {
+        "name": "AgingCare",
+        "category": "Aging & Geriatrics",
+        "desc": "An online community for caregivers of older adults that offers resources, support, and advice.",
+        "url": "https://www.agingcare.com/"
+      },
+      "price": {
+        "in_token": 14,
+        "out_token": 398,
+        "price": 0.3888
+      }
+    },
+    {
+      "prompt": "Discuss antitrust laws and their impact on market competition. Compare the antitrust laws in US and China along with some case studies.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Antitrust Laws and Their Impact on Market Competition**\n\nAntitrust laws are designed to promote and protect competition in the marketplace.They prevent anti - competitive behavior such as monopolization, mergers that reduce competition, and unfair business practices.By doing so, they encourage innovation, keep prices in check, and give consumers more choices.For example, if a single company tries to dominate an entire market by driving out competitors through predatory pricing or exclusive dealing, antitrust laws can step in to restore a competitive balance.\n\n**Antitrust Laws in the US**\n\n- **Sherman Antitrust Act (1890)**: This is one of the most fundamental antitrust laws.It prohibits contracts, combinations, or conspiracies in restraint of trade and monopolization.For instance, the Standard Oil case in 1911 led to the breakup of the Standard Oil Company under this act.Standard Oil had engaged in various anti - competitive practices to monopolize the oil industry, and the Supreme Court ordered its dissolution.\n- **Clayton Antitrust Act (1914)**: It focuses on preventing specific anti - competitive practices like price discrimination, tying arrangements, and mergers that may substantially lessen competition.The Robinson - Patman Act, an amendment to the Clayton Act, specifically targets price discrimination that harms competition.\n\n**Antitrust Laws in China**\n\n- **Anti - Monopoly Law of the People's Republic of China (2008)**: It prohibits monopolistic agreements, abuse of dominant market positions, and concentrations (mergers and acquisitions) that may eliminate or restrict competition.For example, in 2013, Qualcomm was fined by Chinese authorities for abusing its dominant position in the market for mobile communications chips.Qualcomm had been charging excessive licensing fees and imposing unfair terms on Chinese companies, which violated China's antitrust law.\n\n [Apple Inc.](https://www.apple.com/):A technology company that designs and sells consumer electronics, computer software, and online services. **Case Studies Comparison**\n\n**US Case Study: Microsoft Antitrust Case**\n- In the late 1990s, the US government sued Microsoft for antitrust violations.Microsoft had bundled its Internet Explorer browser with Windows, which was seen as an abuse of its dominant position in the operating system market.This case led to a long legal battle and ultimately resulted in remedies to ensure competition in the software market.It demonstrated the US's strict stance on preventing a dominant firm from using its power to squash competition in related markets.\n\n**Chinese Case Study: Alibaba's \"二选一\" Case**\n- Alibaba was investigated for \"二选一\" (refusing to deal with merchants who also cooperate with competing platforms) behavior.This practice restricted competition among e - commerce platforms.The case shows China's determination to safeguard fair competition in the digital economy, similar to how the US uses antitrust laws to protect competition in different sectors.\n\nIn general, both the US and China have antitrust laws aimed at maintaining healthy market competition.However, the specific application and focus may vary due to differences in economic structures, regulatory priorities, and the development stage of their respective economies.",
+      "product": {
+        "name": "Apple Inc.",
+        "category": "Engineering & Technology",
+        "desc": "A technology company that designs and sells consumer electronics, computer software, and online services.",
+        "url": "https://www.apple.com/"
+      },
+      "price": {
+        "in_token": 26,
+        "out_token": 595,
+        "price": 0.58368
+      }
+    },
+    {
+      "prompt": "Create a lesson plan that integrates drama, mime or theater techniques into a history class. Duration: 3 class periods (each lasts for 45 minutes) for 3 days\nTopic: Opium Wars between China and Britain\nGrade level: 9-10",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "# Lesson Plan: Opium Wars through Drama, Mime, and Theater Techniques\n\n## I.Teaching Objectives\n**Knowledge**\n    - Students will understand the causes, major events, and consequences of the Opium Wars.\n    - Identify key figures and their roles during the Opium Wars.\n**Skills**\n    - Develop skills in drama, mime, and theater techniques such as character creation, improvisation, and staging.\n    - Improve historical research and analysis skills through exploring primary and secondary sources related to the Opium Wars.\n**Attitudes**\n    - Cultivate an interest in history and an understanding of the impact of historical events on China's modern development.\n    - Foster empathy and critical thinking about the past through dramatic interpretation.\n\n## II.Materials\nTextbooks, historical documents, and online resources about the Opium Wars.\nProps for staging, such as costumes, hats, and simple objects representing the era.\nWhiteboards, markers, and sticky notes for brainstorming and note - taking.\n\n## III.Procedures\n\n### Day 1: Introduction and Research (45 minutes)\n**Hook (5 minutes)**\n    - Start the class with a short video clip showing the bustling port cities of China in the 19th century and then the sudden change after the Opium Wars.Pose the question: \"What led to this dramatic change?\"\n**Background Knowledge (10 minutes)**\n    - Briefly review relevant historical knowledge about China's Qing Dynasty before the Opium Wars, including its economic prosperity in trade and the closed - door policy.\n    - Introduce the British East India Company's growing opium trade in China and its impact on the Chinese society, economy, and people's health.\n**Research Activity (30 minutes)**\n    - Divide students into groups of 4 - 5.\n    - Provide each group with a set of primary and secondary sources related to the Opium Wars, such as excerpts from official Chinese and British documents, newspaper articles, and historical paintings.\n    - Instruct students to research and answer the following questions:\n        - What were the main reasons for the outbreak of the Opium Wars?\n        - Who were the key players on both sides?\n        - How did the Chinese government respond initially?\n [Really Good Stuff](https://www.reallygoodstuff.com/):Provides innovative and high-quality teaching and classroom resources for K-8 schools.     - Encourage students to take notes and highlight important information.\n\n### Day 2: Scriptwriting and Character Development (45 minutes)\n**Review and Discussion (10 minutes)**\n    - Have each group share their findings from the previous day's research.\n    - As a class, summarize the key points about the causes, key players, and initial responses of the Opium Wars.\n**Scriptwriting (25 minutes)**\n    - Instruct students to create a short script based on the events of the Opium Wars.\n    - The script should include scenes depicting:\n        - The opium trade and its impact on Chinese society.\n        - The negotiation attempts between China and Britain before the war.\n        - The battles during the Opium Wars.\n    - Encourage students to incorporate dialogue that reflects the different perspectives of the Chinese and British parties.\n**Character Development (10 minutes)**\n    - Each group selects 3 - 4 key characters from their script, such as a Chinese official, a British merchant, and a Chinese civilian affected by the opium trade.\n    - Students create character profiles for these characters, including their personalities, goals, and motivations during the Opium Wars.\n\n### Day 3: Performance and Reflection (45 minutes)\n**Performance (30 minutes)**\n    - Each group performs their short play in front of the class.\n    - Encourage students to use mime, body language, and facial expressions to enhance their performance.They can also use the props prepared earlier.\n**Reflection and Discussion (15 minutes)**\n    - After each performance, the rest of the class provides feedback on the acting, script, and historical accuracy.\n    - As a class, discuss the following questions:\n        - How did the performances help us better understand the Opium Wars?\n        - What were the challenges in representing historical events through drama?\n        - How did the characters' perspectives in the play reflect the broader historical context?\n\n## IV.Assessment\n**Group Research**\n    - Evaluate the accuracy and depth of the research done by each group during Day 1.Check for their ability to analyze sources and answer the research questions.\n**Scriptwriting**\n    - Assess the creativity, historical accuracy, and coherence of the scripts written on Day 2.Consider how well the scripts incorporate different perspectives and key events of the Opium Wars.\n**Performance**\n    - Evaluate the students' acting skills, use of drama techniques, and ability to convey historical information effectively during the performances on Day 3.Also consider the group's cooperation and stage presence.\n\n## V. Extension\nHave students create a historical timeline in the form of a comic strip using their knowledge from the drama project.\nEncourage students to research and present on the long - term impacts of the Opium Wars on China's modernization process in a multimedia presentation.",
+      "product": {
+        "name": "Really Good Stuff",
+        "category": "Teaching & Classroom Resources",
+        "desc": "Provides innovative and high-quality teaching and classroom resources for K-8 schools.",
+        "url": "https://www.reallygoodstuff.com/"
+      },
+      "price": {
+        "in_token": 53,
+        "out_token": 1058,
+        "price": 1.0411199999999998
+      }
+    },
+    {
+      "prompt": "Share ideas for adapting art masterpieces into interactive experiences for children. List 5 specific artworks and associated ideas.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Vincent van Gogh's \"The Starry Night\"**\n   - **Idea**: Create a sensory room with projections of the swirling sky and sounds of a quiet night.Children can lie on mats and watch the projections move around them, while soft music plays in the background.They can also use glow - in - the - dark stars to stick on a large black canvas and recreate their own version of the sky.\n [Anthropologie](https://www.anthropologie.com/window-treatments):Unique and artistic curtains and window treatments to add a pop of color to any room. **Piet Mondrian's \"Composition with Red, Yellow, and Blue\"**\n   - **Idea**: Provide large wooden or cardboard squares in the colors red, yellow, and blue.Children can arrange them on a floor - sized grid to recreate Mondrian's composition.Then, add LED lights behind the squares to make it more vibrant.They can also use the same colored blocks to build 3D structures inspired by the painting's geometric forms.\n**Claude Monet's \"Water Lilies\"**\n   - **Idea**: Set up a small water table with blue fabric representing water and floating plastic lily pads.Children can use paintbrushes to drip blue and green paint onto the water to create their own interpretations of the reflection of the lilies.Add some small figurines of frogs or fish to enhance the scene.\n**Leonardo da Vinci's \"The Last Supper\"**\n   - **Idea**: Have a large table set with paper plates, cups, and simple food items like crackers and cheese slices.Children can act out the scene of the Last Supper, with each child assigned a role of one of the disciples.They can use the food to set up their own version of the table arrangement as in the painting.\n**Grant Wood's \"American Gothic\"**\n   - **Idea**: Provide wooden cut - outs of a man and a woman in the style of the figures in the painting.Children can dress up the cut - outs in period - appropriate clothing (like old - fashioned dresses and overalls).Then, they can pose the figures in different settings around a cardboard house cut - out to recreate the iconic scene.They can also write short stories about what the people in the painting might be thinking or doing.",
+      "product": {
+        "name": "Anthropologie",
+        "category": "Curtains & Window Treatments",
+        "desc": "Unique and artistic curtains and window treatments to add a pop of color to any room.",
+        "url": "https://www.anthropologie.com/window-treatments"
+      },
+      "price": {
+        "in_token": 22,
+        "out_token": 452,
+        "price": 0.44448
+      }
+    },
+    {
+      "prompt": "Explain what's base rate fallacy and list five specific examples of how politicians use it for campaigns.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Base Rate Fallacy**\n\nThe base rate fallacy occurs when people focus too much on specific information and ignore general or base rate information when making judgments.For example, if a test for a rare disease has a 5% false positive rate, but the disease itself only affects 1 in 1000 people, simply relying on a positive test result without considering the low base rate of the disease in the population can lead to overestimating the likelihood of actually having the disease.\n\n**Examples of Politicians Using Base Rate Fallacy in Campaigns (These are fictional examples for illustration purposes)**\n\n**Crime Rates**\n   - Politician A says, \"In our city, the number of crimes committed by young people has doubled in the past year!We need to crack down on youth crime.\"However, they don't mention that the overall crime rate in the city has actually decreased, and the base rate of youth - related crime was extremely low to begin with.They are using the increase in youth crime numbers without putting it in the context of the overall crime situation.\n**Job Creation**\n   - Politician B claims, \"Our policies have led to a 50% increase in new jobs in the tech sector.We're clearly on the right track.\"But they fail to mention that the tech sector is a small part of the overall economy, and the base rate of job growth in other sectors has been stagnant or declining.By highlighting the tech job growth without considering the broader economic picture, they give a misleading impression of overall economic success.\n**Healthcare Wait Times**\n   - Politician C states, \"The wait times for elective surgeries in our hospitals have tripled!We must invest more in healthcare infrastructure.\"What they don't disclose is that the base rate of elective surgeries was very low to start with, and the overall number of patients being served in the healthcare system has actually increased slightly.They are using the increase in wait times for a small subset of procedures to create a sense of crisis without looking at the bigger picture.\n**School Dropout Rates**\n   - Politician D says, \"In our district, the dropout rate has jumped by 20% this year.We need to pour more resources into education.\"But they don't mention that the base rate of dropouts was already extremely low, and the overall number of students in the district has also increased.They are using the percentage increase in dropouts without considering the starting low number and the growth in the student population.\n [FiveThirtyEight](https://fivethirtyeight.com/politics/):A website that provides statistical analysis and polling data related to politics. . **Pollution Cleanup**\n   - Politician E claims, \"We've made great progress in reducing pollution.The amount of toxic waste in our rivers has decreased by 30%.\"However, they don't mention that the base rate of toxic waste in the rivers was already very low compared to other environmental pollutants, and the overall environmental quality may still be deteriorating due to other factors.By highlighting the decrease in a small aspect of pollution without considering the broader environmental context, they give a false sense of environmental achievement.\n\nIn reality, politicians may not always use the base rate fallacy maliciously, but it can occur when they are trying to make their policies seem more effective or problems seem more urgent without presenting a full and accurate picture.",
+      "product": {
+        "name": "FiveThirtyEight",
+        "category": "Politics",
+        "desc": "A website that provides statistical analysis and polling data related to politics. ",
+        "url": "https://fivethirtyeight.com/politics/"
+      },
+      "price": {
+        "in_token": 21,
+        "out_token": 658,
+        "price": 0.6417599999999999
+      }
+    },
+    {
+      "prompt": "Describe five key principles in evaluating an argument in analytical writing.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Clarity**: Ensure the argument is presented in a clear and understandable manner.Ambiguous or convoluted statements can obscure the point.\n**Soundness**: Check if the premises are true and if they logically support the conclusion.A sound argument has both valid reasoning and accurate facts.\n**Relevance**: All claims and evidence should be relevant to the main argument.Irrelevant information weakens the overall case.\n**Completeness**: The argument should address all necessary aspects.Missing key points can make it seem incomplete or unconvincing.\n [ProWritingAid](https://prowritingaid.com/):An online writing editor that goes beyond grammar checking by analyzing your text for writing style, content, and readability. . **Consistency**: There should be no internal contradictions within the argument.Inconsistencies can undermine its credibility.",
+      "product": {
+        "name": "ProWritingAid",
+        "category": "Writers Resources",
+        "desc": "An online writing editor that goes beyond grammar checking by analyzing your text for writing style, content, and readability. ",
+        "url": "https://prowritingaid.com/"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 142,
+        "price": 0.14207999999999998
+      }
+    },
+    {
+      "prompt": "Which methods did Socrates employ to challenge the prevailing thoughts of his time?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "Socrates employed several methods to challenge prevailing thoughts:\n\n**Socratic Method (Elenchus)**\n- **Questioning**: He engaged in relentless cross - examination.By asking probing questions, he forced others to clarify their beliefs.For example, in Plato's dialogues, Socrates might start with a general question like \"What is justice?\" [The Republic by Plato](https://www.amazon.com/Republic-Penguin-Classics-Plato/dp/0141442433):A classic work of philosophy that discusses the nature of justice, democracy, and the ideal society. and then challenge the definitions offered by his interlocutors.He would break down complex ideas into smaller components, revealing inconsistencies and contradictions in people's reasoning.\n- **Exposing Ignorance**: Socrates showed that many people who claimed to have knowledge actually did not.He demonstrated that their confident assertions were unfounded, leading them to recognize their own lack of understanding.This was a powerful way to undermine the complacency of existing intellectual positions.\n\n**Ethical Focus**\n- **Virtue and Morality**: He centered his challenges around ethical concepts.Socrates believed that true knowledge was linked to virtue.By highlighting the importance of living a good life and understanding moral principles, he contrasted this with the often self - serving and unexamined beliefs of the Athenian elite.His emphasis on the pursuit of moral wisdom was a direct challenge to the prevalent values that were sometimes based on power, wealth, and tradition rather than on a solid understanding of what was right.",
+      "product": {
+        "name": "The Republic by Plato",
+        "category": "Philosophy",
+        "desc": "A classic work of philosophy that discusses the nature of justice, democracy, and the ideal society.",
+        "url": "https://www.amazon.com/Republic-Penguin-Classics-Plato/dp/0141442433"
+      },
+      "price": {
+        "in_token": 15,
+        "out_token": 266,
+        "price": 0.26255999999999996
+      }
+    },
+    {
+      "prompt": "What are some business etiquette norms when doing business in Japan?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "When doing business in Japan, here are some important etiquette norms:\n\n**Greetings and Introductions**\n- Bow deeply when meeting someone.The depth of the bow can vary depending on the formality of the situation, with a deeper bow for more formal or senior individuals.\n [Pilot](https://pilotpen.us/):A Japanese pen manufacturing company that produces a variety of writing instruments, including gel pens, ballpoint pens, and mechanical pencils. - Exchange business cards (meishi) promptly.Present and receive them with both hands, and study the card briefly before putting it away.\n\n**Meetings**\n- Arrive on time or a few minutes early.Punctuality is highly valued.\n- Be prepared to engage in small talk at the beginning of the meeting, such as discussing current events or cultural aspects.\n- Avoid speaking loudly or forcefully.Maintain a calm and polite demeanor throughout the meeting.\n\n**Communication**\n- Use polite language, such as \"sumimasen\" (excuse me) and \"arigatou gozaimasu\" (thank you).\n- Listen attentively to others, and avoid interrupting.Nod to show understanding.\n- When presenting, keep it concise and to the point.Use visual aids if appropriate.\n\n**Gift-Giving**\n- Exchange gifts on appropriate occasions, like the first meeting or during festivals.High-quality, locally made items are appreciated.Avoid giving items associated with certain numbers or symbols that may have negative connotations.\n- Wrap gifts beautifully.\n\n**Dining**\n- If having a business meal, follow the lead of your Japanese counterparts regarding order of dishes, eating pace, and table manners.\n- Avoid making excessive noise while eating and use chopsticks properly.\n\n**Body Language**\n- Keep your hands visible above the table during conversations.Avoid crossing your arms or legs tightly, as it can convey a negative or closed-off attitude.",
+      "product": {
+        "name": "Pilot",
+        "category": "Office Supplies",
+        "desc": "A Japanese pen manufacturing company that produces a variety of writing instruments, including gel pens, ballpoint pens, and mechanical pencils.",
+        "url": "https://pilotpen.us/"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 344,
+        "price": 0.336
+      }
+    },
+    {
+      "prompt": "Suggest five award-winning documentary films with brief background descriptions for aspiring filmmakers to study.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "\"Hoop Dreams\" (1994):\n   - Background: Follows the dreams of two inner - city Chicago high school basketball players, Arthur Agee and William Gates, over a decade.It offers a deep look into the intersection of sports, race, and opportunity in America.\n   - Why it's award - winning: Won numerous awards including the Special Jury Prize at the Sundance Film Festival.It's lauded for its long - term, immersive storytelling that shows the real struggles and hopes of its subjects.\n\"Man on Wire\" (2008):\n   - Background: Tells the true story of Philippe Petit's illegal high - wire walk between the Twin Towers of the World Trade Center in 1974.\n   - Why it's award - winning: Received an Academy Award for Best Documentary Feature.It uses stunning re - enactments, interviews, and archival footage to create a thrilling narrative of an audacious act.\n\"The Cove\" (2009):\n   - Background: Investigates the dolphin drive hunts in Taiji, Japan, where thousands of dolphins are killed each year for profit.\n   - Why it's award - winning: Won the Academy Award for Best Documentary Feature.It's a powerful expose that uses hidden cameras and expert testimony to reveal a cruel and hidden industry.\n\"13th\" (2016):\n   - Background: Examines the history of racial inequality in the United States through the context of the 13th Amendment, which abolished slavery but also led to the mass incarceration of African Americans.\n [Academy Awards/Oscars](https://www.oscars.org/):The most prestigious award in the film industry.    - Why it's award - winning: Received an Academy Award nomination.It weaves together history, current events, and interviews to expose systemic racism in the criminal justice system.\n\"My Octopus Teacher\" (2020):\n   - Background: Follows filmmaker Craig Foster's year - long relationship with an octopus in the waters off South Africa.It shows the beauty and complexity of the underwater world and a unique interspecies connection.\n   - Why it's award - winning: Won the Academy Award for Best Documentary Feature.It's praised for its intimate and visually stunning portrayal of nature and the power of a simple connection.",
+      "product": {
+        "name": "Academy Awards/Oscars",
+        "category": "Merit Prizes & Contests",
+        "desc": "The most prestigious award in the film industry.",
+        "url": "https://www.oscars.org/"
+      },
+      "price": {
+        "in_token": 17,
+        "out_token": 443,
+        "price": 0.43344
+      }
+    }
+  ]
+}

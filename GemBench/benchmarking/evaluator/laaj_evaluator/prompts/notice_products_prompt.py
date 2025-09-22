@@ -55,7 +55,7 @@ USER_NOTICE_PRODUCTS_EVAL = """
 [Chatbot Response]
 {response}
 
-[Chatbot Gemertisement in the response]
+[Chatbot Advertisement in the response]
 {products}
 
 Evaluate whether users would notice any entities (with an attached link) mentioned in this response and identify the primary category.

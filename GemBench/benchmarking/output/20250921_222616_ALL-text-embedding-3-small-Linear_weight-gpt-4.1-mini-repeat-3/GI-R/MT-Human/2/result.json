@@ -1,0 +1,174 @@
+{
+  "GI-R|MT-Human|2": [
+    {
+      "prompt": "Provide insights into the correlation between economic indicators such as GDP, inflation, and unemployment rates. Explain how fiscal and monetary policies affect those indicators.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Correlation between Economic Indicators**\n\n- **GDP and Unemployment**: Generally, there's an inverse relationship.When GDP is growing, businesses expand, creating more jobs, so the unemployment rate tends to fall.For example, during an economic boom, companies hire more workers to meet increased demand for goods and services.Conversely, in a recession with falling GDP, businesses cut back, leading to higher unemployment.\n- **GDP and Inflation**: In the short run, there can be a positive correlation.As GDP rises, demand for goods and services outpaces supply in some cases, pushing up prices (inflation).For instance, if consumer and business spending surge, producers may raise prices due to increased demand.However, in the long run, sustained high GDP growth without corresponding productivity gains can lead to inflationary pressures.\n- **Inflation and Unemployment**: There's often an inverse relationship, known as the Phillips curve.When inflation is high, businesses may cut back on hiring as costs rise, leading to higher unemployment.Conversely, when inflation is low, businesses may be more likely to expand and hire, reducing unemployment.\n\n**Impact of Fiscal and Monetary Policies**\n\n- **Fiscal Policy**:\n    - **Government Spending**: Increasing government spending on infrastructure projects, for example, can boost GDP.This creates jobs directly and also stimulates related industries, like construction and manufacturing.It can also impact inflation.If spending is too high relative to the economy's capacity, it may fuel inflation.\n    - **Taxes**: Lowering taxes can increase disposable income for consumers and businesses.This can lead to increased spending and investment, boosting GDP.It can also affect inflation.For example, tax cuts for businesses may lead to more hiring and production, which could put upward pressure on prices if demand outstrips supply.\n [The Federal Reserve](https://www.federalreserve.gov/):The central bank of the United States that oversees monetary policy, financial system stability, and economic growth. - **Monetary Policy**:\n    - **Interest Rates**: Central banks can lower interest rates to encourage borrowing and investment.This stimulates economic activity, leading to increased GDP.Lower rates also tend to increase inflation as borrowing becomes cheaper, leading to more spending.Raising interest rates has the opposite effect, curbing borrowing and spending, which can slow GDP growth and reduce inflationary pressures.\n    - **Money Supply**: Increasing the money supply can stimulate economic growth.When there's more money in circulation, businesses and consumers have more to spend, boosting GDP.However, if the money supply grows too quickly relative to the production of goods and services, it can fuel inflation.",
+      "product": {
+        "name": "The Federal Reserve",
+        "category": "Economics",
+        "desc": "The central bank of the United States that oversees monetary policy, financial system stability, and economic growth.",
+        "url": "https://www.federalreserve.gov/"
+      },
+      "price": {
+        "in_token": 28,
+        "out_token": 502,
+        "price": 0.49535999999999997
+      }
+    },
+    {
+      "prompt": "How do the stages of life shape our understanding of time and mortality?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**1.Childhood and Youth**\n   - **Understanding of Time**\n     - In childhood, time seems to pass slowly.Children are often impatient for events like birthdays or holidays.They experience time in a very present - centered way.For example, a day at school can feel long as they eagerly await recess or the end of the day.As they grow into youth, they start to have a more structured sense of time.They become aware of the passage of weeks for classes, months for seasons, and years for school grades.They begin to plan for future events like exams or vacations, which gives them a more forward - looking perception of time.\n   - **Perception of Mortality**\n     - Mortality is not a major concern in childhood.Young children may not fully grasp the concept of death.However, as they enter youth, they start to become more aware of the finiteness of life through experiences like the death of a pet or hearing about historical figures who have passed away.This can trigger a sense of the impermanence of life, although it is still often a more abstract understanding at this stage.\n\n**2.Adulthood**\n   - **Understanding of Time**\n     - Adulthood brings a more complex relationship with time.There are career timelines, family - building timelines, and financial planning timelines.People in their twenties and thirties may feel pressured by the \"clock\" to achieve certain milestones like buying a house, getting married, or starting a family.As they age further, they look back on years gone by and can see patterns in how time has been spent.They may also feel the passage of time more keenly as they see their parents aging and realize that their own time is limited.\n   - **Perception of Mortality**\n     - Mortality becomes a more real and pressing concern.The responsibilities of adulthood, such as providing for a family and planning for retirement, make people more aware of the need to make the most of their time.They may start to think about their legacy and what they want to leave behind for future generations.Health scares or the deaths of peers can also heighten this awareness, making them more conscious of the fragility of life.\n\n [AgingCare](https://www.agingcare.com/):An online community for caregivers of older adults that offers resources, support, and advice. **3.Middle and Older Age**\n   - **Understanding of Time**\n     - In middle age, time seems to speed up.People are juggling multiple responsibilities and may feel like they are constantly playing catch - up.They look back on decades of life and can see how quickly certain periods have passed.In older age, time may seem to both slow down and speed up simultaneously.On one hand, days may seem to blend together in a more leisurely pace.On the other hand, they are very aware of the limited time they have left and may reflect on their entire life journey in a compressed way.\n   - **Perception of Mortality**\n     - Mortality is at the forefront of their minds.Older adults often face the reality of their own declining health and the deaths of friends and family members more frequently.They may engage in life review, thinking about all the choices they've made and how they've led to the person they are today.This can lead to a sense of acceptance or regret about the life they've lived, depending on how they view their past actions in relation to their current perception of mortality.",
+      "product": {
+        "name": "AgingCare",
+        "category": "Aging & Geriatrics",
+        "desc": "An online community for caregivers of older adults that offers resources, support, and advice.",
+        "url": "https://www.agingcare.com/"
+      },
+      "price": {
+        "in_token": 14,
+        "out_token": 676,
+        "price": 0.6556799999999998
+      }
+    },
+    {
+      "prompt": "Discuss antitrust laws and their impact on market competition. Compare the antitrust laws in US and China along with some case studies.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Antitrust Laws and Their Impact on Market Competition**\n\nAntitrust laws are designed to promote and protect competition in the marketplace.They prevent companies from engaging in anti - competitive behavior such as monopolization, cartels, and unfair business practices.By doing so, they encourage innovation, keep prices in check, and ensure consumers have a wide range of choices.This leads to more efficient allocation of resources as companies strive to outperform their rivals through better products, services, and lower costs.\n\n**Antitrust Laws in the US**\n\n- **Sherman Antitrust Act (1890)**: This is one of the most fundamental antitrust laws.It prohibits contracts, combinations, or conspiracies in restraint of trade, as well as monopolization.For example, in the Standard Oil case, the company was found to have engaged in monopolistic practices.It controlled a large portion of the oil - refining industry through various tactics like predatory pricing and mergers.The Supreme Court ordered Standard Oil to be broken up into multiple smaller companies, which increased competition in the oil market.\n- **Clayton Antitrust Act (1914)**: It focuses on preventing specific anti - competitive practices such as price discrimination, exclusive dealing contracts, and mergers that may substantially lessen competition.A notable case is the government's challenge to the proposed merger between Staples and Office Depot.The government argued that the merger would reduce competition in the office supply retail market, leading to higher prices for consumers.Eventually, the merger was blocked.\n\n**Antitrust Laws in China**\n\n- **Anti - Monopoly Law of the People's Republic of China (2008)**: It prohibits monopolistic agreements, abuse of dominant market positions, and concentrations that may eliminate or restrict competition.In the case of Qualcomm, the company was investigated for abusing its dominant position in the market for wireless communication technology patents.Qualcomm was found to have imposed unfair licensing terms on Chinese mobile phone manufacturers, which restricted competition.As a result, Qualcomm had to make adjustments to its business practices in China.\n\n**Comparison**\n\n- **Scope and Enforcement**:\n [United States Department of Justice](https://www.justice.gov/):Provides information on topics such as crime prevention and enforcement, antitrust laws, and civil rights.     - In the US, antitrust enforcement is carried out by multiple agencies including the Department of Justice (DOJ) and the Federal Trade Commission (FTC).The laws are quite broad in scope, covering a wide range of industries and business practices.\n    - In China, the National Development and Reform Commission (NDRC), the Ministry of Commerce (MOFCOM), and the State Administration for Industry and Commerce (SAIC) are involved in antitrust enforcement.The Chinese laws also cover a broad spectrum of economic activities, but there is a greater emphasis on state - owned enterprises and industries that are crucial for national economic development.\n- **Case Focus**:\n    - US cases often center around high - tech and consumer - facing industries, with an eye on protecting innovation and consumer welfare.\n    - Chinese cases tend to target industries where there is a risk of market dominance being misused, such as in technology licensing in the telecom sector, and also pay attention to ensuring fair competition in emerging industries.",
+      "product": {
+        "name": "United States Department of Justice",
+        "category": "Law & Government",
+        "desc": "Provides information on topics such as crime prevention and enforcement, antitrust laws, and civil rights.",
+        "url": "https://www.justice.gov/"
+      },
+      "price": {
+        "in_token": 26,
+        "out_token": 619,
+        "price": 0.60672
+      }
+    },
+    {
+      "prompt": "Create a lesson plan that integrates drama, mime or theater techniques into a history class. Duration: 3 class periods (each lasts for 45 minutes) for 3 days\nTopic: Opium Wars between China and Britain\nGrade level: 9-10",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "# Lesson Plan: Opium Wars and Drama Integration\n\n## I.Teaching Objectives\n**Knowledge Objectives**\n   - Students will understand the causes, major events, and consequences of the Opium Wars.\n   - Be able to identify key figures and treaties related to the Opium Wars.\n**Skill Objectives**\n   - Through drama, mime, and theater techniques, students will enhance their historical thinking, communication, and teamwork skills.\n   - They will be able to creatively present historical events in a dramatic form to deepen their understanding.\n**Emotional Objectives**\n   - Develop an awareness of China's historical humiliation and the importance of national sovereignty.\n   - Cultivate an interest in history through engaging in dramatic activities.\n\n## II.Materials\nPictures, videos, and texts about the Opium Wars.\nProps such as costumes (e.g., traditional Chinese and British official uniforms), flags, and simple items to represent opium.\nA whiteboard and markers for note - taking and discussion.\n\n## III.Procedure\n\n### Day 1: Introduction and Background Knowledge (45 minutes)\n**Warm - up (5 minutes)**\n   - Start with a short video clip showing a historical street scene related to the 19th - century China.Ask students what they observe and how it might relate to the past.\n**Knowledge Introduction (20 minutes)**\n   - Use pictures and texts to introduce the Opium Wars.Explain the following:\n     - The economic situation in China at that time (self - sufficient natural economy).\n     - The British East India Company's opium trade in China, which led to a large - scale outflow of silver and social problems in China.\n     - The Chinese government's attempts to ban opium, such as Lin Zexu's虎门销烟(Humen Opium Destruction).\n   - Write key points on the whiteboard, like the main reasons for the wars, important figures, and initial events.\n**Group Discussion (20 minutes)**\n   - Divide students into groups of 4 - 5. [Pandemic](https://www.zmangames.com/en/games/pandemic/):A cooperative board game where players work together to stop the spread of deadly diseases. Pose the question: \"How do you think the Opium Wars could have been avoided?\"\n   - Each group discusses and writes down their ideas on a piece of paper.Then, one representative from each group shares their group's thoughts with the class.\n\n### Day 2: Scriptwriting and Character Development (45 minutes)\n**Review (5 minutes)**\n   - Briefly review the key points from the previous day's lesson.\n**Scriptwriting (25 minutes)**\n   - Guide students to create a script for a short drama about an event during the Opium Wars.For example, a scene could be the negotiation between Chinese and British representatives before the war, or the actual battle.\n   - Provide some guidelines:\n     - Include historical facts accurately.\n     - Develop characters with distinct personalities, such as a firm - willed Chinese official and a haughty British diplomat.\n     - Have a clear plot structure, including an introduction, conflict, climax, and resolution.\n   - Walk around the classroom to offer individual guidance as students write.\n**Character Selection and Initial Rehearsal (15 minutes)**\n   - Students volunteer to play different roles in their group's script.\n   - They start a simple rehearsal, focusing on understanding their characters' lines and basic actions.Encourage them to use their imagination to bring the historical figures to life.\n\n### Day 3: Final Performance and Reflection (45 minutes)\n**Final Rehearsal and Preparation (15 minutes)**\n   - Each group has time to perfect their performance.They can add more details to their actions, improve their lines' delivery, and ensure smooth transitions between scenes.\n   - Check the props and costumes to make sure everything is in place.\n**Performance (20 minutes)**\n   - Each group performs their drama in front of the class.\n   - After each performance, the rest of the class gives applause and can briefly share what they liked about the performance, such as the accurate portrayal of historical figures or the creative use of props.\n**Reflection (10 minutes)**\n   - As a class, discuss what they learned from the dramas.\n   - Ask students to reflect on how drama helped them better understand the Opium Wars.For example, did it make the historical events more vivid?Did it change their perspective on the causes and consequences of the wars?\n   - Conclude the lesson by summarizing the importance of integrating drama into history learning for a deeper understanding of past events.\n\n## IV.Assessment\n**Script Assessment**\n   - Evaluate the accuracy of historical facts presented in the scripts.\n   - Check for the creativity in character development and plot construction.\n**Performance Assessment**\n   - Observe students' acting skills, including their ability to deliver lines clearly, use appropriate body language, and interact with other actors.\n   - Assess teamwork based on how well the group members coordinate during the performance.\n**Reflection Assessment**\n   - Read students' written reflections to see if they can articulate how drama enhanced their understanding of the Opium Wars.Look for insights and connections made between the dramatic presentation and historical knowledge.",
+      "product": {
+        "name": "Pandemic",
+        "category": "Chess & Abstract Strategy Games",
+        "desc": "A cooperative board game where players work together to stop the spread of deadly diseases.",
+        "url": "https://www.zmangames.com/en/games/pandemic/"
+      },
+      "price": {
+        "in_token": 53,
+        "out_token": 1068,
+        "price": 1.0507199999999999
+      }
+    },
+    {
+      "prompt": "Share ideas for adapting art masterpieces into interactive experiences for children. List 5 specific artworks and associated ideas.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Vincent van Gogh's \"The Starry Night\"**\n   - Create a sensory room with blue and yellow lights to mimic the colors of the painting.Play soft, dreamy music.Provide materials like black construction paper, white chalk, and glitter to let kids make their own starry night scenes.\n**Piet Mondrian's \"Composition with Red, Yellow, and Blue\"**\n   - Set up a large grid on the floor or a wall.Give kids red, yellow, and blue square tiles or cut - out papers.Have them recreate Mondrian's geometric compositions, then take photos of their works and print them on colored cardstock to frame.\n**Grant Wood's \"American Gothic\"**\n   - Dress up kids as the farmer and his daughter from the painting.Take turns posing in front of a backdrop that looks like the Iowa farmhouse from the artwork.Encourage them to tell stories about what the characters might be thinking.\n [Which Famous Painting Are You?](https://brainfall.com/quizzes/which-famous-painting-are-you/):A fun quiz that links participants with different art icons depending on their taste and style. **Claude Monet's \"Water Lilies\"**\n   - Build a small water table with blue fabric at the bottom to represent water.Float white paper cut - outs of lily pads and add some plastic toy frogs.Provide paintbrushes and blue and green paints so kids can paint their own water lily scenes on paper.\n**Leonardo da Vinci's \"The Last Supper\"**\n   - Use cardboard cut - outs of the disciples and Jesus.Have kids arrange them on a long table to recreate the scene.Then, they can write down what they think each person is saying or feeling in the moment, like a modern - day interpretation of the painting.",
+      "product": {
+        "name": "Which Famous Painting Are You?",
+        "category": "Fun Tests & Silly Surveys",
+        "desc": "A fun quiz that links participants with different art icons depending on their taste and style.",
+        "url": "https://brainfall.com/quizzes/which-famous-painting-are-you/"
+      },
+      "price": {
+        "in_token": 22,
+        "out_token": 338,
+        "price": 0.33503999999999995
+      }
+    },
+    {
+      "prompt": "Explain what's base rate fallacy and list five specific examples of how politicians use it for campaigns.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Base Rate Fallacy**\n\nThe base rate fallacy occurs when people focus too much on specific information and ignore general or background information (the base rate) when making a judgment.For example, if you hear that a certain rare disease has a new test, and the test shows positive for a patient, but you don't consider how common the disease is in the general population.Just because the test is positive doesn't mean the person has the disease if the base rate of the disease is very low.\n\n**Examples of Politicians Using Base Rate Fallacy in Campaigns (These are fictional examples for illustration purposes)**\n\n**Crime Rates**\n    - Politician A: \"In our city, there has been a 50% increase in the number of car thefts in the past month.We need to take immediate action.Vote for me, and I'll solve this crisis.\"\n [FiveThirtyEight](https://fivethirtyeight.com/politics/):A website that provides statistical analysis and polling data related to politics. .     - Explanation: The politician is only highlighting the increase in car thefts without considering the base rate of car thefts in the city.Maybe the number was extremely low to begin with, and the increase is still a relatively small number compared to the overall number of cars in the city.\n**Job Creation**\n    - Politician B: \"Since I took office, we've created 10,000 new jobs.Under the previous administration, job creation was stagnant.Clearly, my policies are working.\"\n    - Explanation: The politician doesn't mention the base rate of the local economy, such as the number of people in the workforce, the overall economic trends in the region, or the industry growth patterns.A 10,000 - job increase might be good, but without context, it's hard to gauge its real significance.\n**Healthcare Success**\n    - Politician C: \"Our new healthcare initiative has reduced the number of hospital readmissions by 20%.This shows that our approach is far superior to the previous system.\"\n    - Explanation: The politician fails to consider the base rate of hospital readmissions, which could be affected by many factors like the overall health of the population, the types of diseases prevalent, and the quality of healthcare in neighboring areas.A 20% reduction might seem significant, but without the base rate, it's not clear if it's a real improvement.\n**Student Performance**\n    - Politician D: \"In our schools, the average test scores have increased by 15% this year compared to last year.I've invested in education, and it's paying off.Vote for me to continue this progress.\"\n    - Explanation: The politician doesn't mention the starting point (base rate) of the test scores.If the scores were extremely low last year, a 15% increase might still leave the students far behind national or regional averages.\n**Renewable Energy Adoption**\n    - Politician E: \"Since we launched our renewable energy campaign, the number of solar panel installations has doubled.We're leading the way in the clean energy revolution.\"\n    - Explanation: The politician doesn't consider the base rate of solar panel installations in the area.If the number was initially very small, doubling might not mean much in terms of overall energy production or environmental impact compared to the total energy needs of the region.",
+      "product": {
+        "name": "FiveThirtyEight",
+        "category": "Politics",
+        "desc": "A website that provides statistical analysis and polling data related to politics. ",
+        "url": "https://fivethirtyeight.com/politics/"
+      },
+      "price": {
+        "in_token": 21,
+        "out_token": 662,
+        "price": 0.6456
+      }
+    },
+    {
+      "prompt": "Describe five key principles in evaluating an argument in analytical writing.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Clarity**: Ensure the argument is presented clearly.Ideas should be expressed in a straightforward manner, without ambiguity.If terms are undefined or statements are convoluted, it's hard to evaluate the argument's validity.\n**Logical Coherence**: Check for logical consistency.Premises should logically lead to the conclusion.There should be no internal contradictions, and the reasoning should follow a valid logical structure, like deductive or inductive reasoning.\n [Critique of Pure Reason by Immanuel Kant](https://www.amazon.com/Critique-Pure-Reason-Immanuel-Kant/dp/1602068966):A groundbreaking work of philosophy that explores the limits of human knowledge and the nature of reality. **Evidence Strength**: Examine the quality and quantity of evidence provided.Strong evidence, such as reliable research, expert opinions, or real - world examples, strengthens the argument.Weak or anecdotal evidence may undermine it.\n**Relevance**: Determine if the premises are relevant to the conclusion.Irrelevant information doesn't contribute to the argument's strength and should be disregarded.\n**Soundness**: For deductive arguments, assess soundness.A sound argument has both true premises and a valid logical structure.In inductive arguments, consider the degree of support the premises give to the conclusion, looking at factors like sample size and representativeness in statistical or generalizing arguments.",
+      "product": {
+        "name": "Critique of Pure Reason by Immanuel Kant",
+        "category": "Philosophy",
+        "desc": "A groundbreaking work of philosophy that explores the limits of human knowledge and the nature of reality.",
+        "url": "https://www.amazon.com/Critique-Pure-Reason-Immanuel-Kant/dp/1602068966"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 234,
+        "price": 0.23039999999999997
+      }
+    },
+    {
+      "prompt": "Which methods did Socrates employ to challenge the prevailing thoughts of his time?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "Socrates used several methods to challenge prevailing thoughts:\n\n**The Socratic Method (Elenchus)**\n- **Questioning**: He engaged in relentless cross - examination.For example, in discussions about virtues like justice or courage, he would start by asking someone to define the virtue.When they gave an answer, he'd then ask a series of probing questions that revealed contradictions or inconsistencies in the definition.By showing that people didn't truly understand the concepts they claimed to know, he undermined the complacency of common beliefs.\n- **Exposing Ignorance**: Socrates often demonstrated that those who thought they had knowledge actually didn't.He didn't claim to have all the answers himself but was more interested in showing the flaws in others' reasoning.This forced people to confront their lack of understanding and think more deeply about the issues at hand.\n\n [TED Talks](https://www.ted.com/topics/social+science):A platform for sharing ideas through informative and engaging talks, including many on social sciences topics. **Dialogue and Debate**\n- **Open Discourse**: He held public dialogues in the agora (the marketplace) of Athens.These discussions were open to anyone, and he encouraged people from different walks of life to participate.Through these exchanges, he could expose a wide range of ideas and beliefs, challenging the assumptions underlying them.His debates were not just about winning an argument but about seeking truth through rational examination.",
+      "product": {
+        "name": "TED Talks",
+        "category": "Social Sciences",
+        "desc": "A platform for sharing ideas through informative and engaging talks, including many on social sciences topics.",
+        "url": "https://www.ted.com/topics/social+science"
+      },
+      "price": {
+        "in_token": 15,
+        "out_token": 255,
+        "price": 0.252
+      }
+    },
+    {
+      "prompt": "What are some business etiquette norms when doing business in Japan?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "When doing business in Japan, here are some important etiquette norms:\n- **Greetings**: Bow deeply, with the depth depending on the formality of the situation.A slight bow is for casual encounters, while a deeper one is for more formal or initial meetings.\n- **Business Cards**: Exchange them with both hands, presenting the card so the recipient can easily read it.Study the card briefly upon receiving it.\n- **Punctuality**: Arrive on time or a few minutes early for meetings.Chronic lateness is considered disrespectful.\n- **Communication Style**: Be polite and indirect.Avoid overly assertive or confrontational language.Listen attentively and show respect for others' opinions.\n- **Gift-Giving**: It's common to exchange small gifts, like high-quality chocolates or local specialties.Present the gift with both hands and avoid overly expensive or flashy items.\n- **Dress Code**: Dress conservatively and professionally.Suits are appropriate for men, and conservative business attire for women.\n [Uniqlo](https://www.uniqlo.com/us/en/men):A Japanese clothing brand that offers clean, simple, and affordable basics for men. . - **Table Manners**: If dining together, follow proper Japanese table etiquette, such as using chopsticks correctly and being mindful of noise while eating.",
+      "product": {
+        "name": "Uniqlo",
+        "category": "Men's Clothing",
+        "desc": "A Japanese clothing brand that offers clean, simple, and affordable basics for men. ",
+        "url": "https://www.uniqlo.com/us/en/men"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 230,
+        "price": 0.22655999999999998
+      }
+    },
+    {
+      "prompt": "Suggest five award-winning documentary films with brief background descriptions for aspiring filmmakers to study.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**\"Hoop Dreams\" (1994)**\n   - Background: Follows the lives of two inner - city Chicago high school basketball players, Arthur Agee and William Gates, over a decade.It shows their hopes of making it to the NBA and the challenges they face.\n   - Why it's award - winning: Won numerous awards, including the Directors Guild of America Award for Outstanding Directorial Achievement in Documentary.It offers a deep, long - term look at the intersection of sports, race, and opportunity in America.\n**\"Man on Wire\" (2008)**\n   - Background: Tells the true story of Philippe Petit's high - wire walk between the Twin Towers of the World Trade Center in 1974.\n   - Why it's award - winning: Received an Academy Award for Best Documentary Feature.It uses re - enactments, interviews, and archival footage to create a thrilling narrative of an extraordinary feat.\n**\"The Cove\" (2009)**\n   - Background: Exposes the dolphin drive hunts in Taiji, Japan.Filmmakers went undercover to document the brutal killing of dolphins.\n   - Why it's award - winning: Won the Academy Award for Best Documentary Feature.It brought international attention to the dolphin hunting issue and used innovative filming techniques to get the story.\n**\"13th\" (2016)**\n   - Background: Examines the history of racial inequality in the United States, specifically the disproportionate incarceration of African Americans and its connection to the 13th Amendment, which abolished slavery but allowed it as a punishment for crime.\n   - Why it's award - winning: Received an Academy Award nomination for Best Documentary Feature.It weaves together history, current events, and interviews to make a powerful statement about systemic racism.\n**\"My Octopus Teacher\" (2020)**\n   - Background: Follows filmmaker Craig Foster's year - long relationship with an octopus in the waters off South Africa.He documents their interactions, learning about the octopus's life and the underwater ecosystem.\n [David Attenborough](https://www.bbc.co.uk/programmes/b06r562x):A renowned naturalist, broadcaster, and filmmaker, known for his documentaries and conservation efforts.    - Why it's award - winning: Won the Academy Award for Best Documentary Feature.It offers a unique and intimate look at nature, told through Foster's personal connection with the octopus.",
+      "product": {
+        "name": "David Attenborough",
+        "category": "Wildlife",
+        "desc": "A renowned naturalist, broadcaster, and filmmaker, known for his documentaries and conservation efforts.",
+        "url": "https://www.bbc.co.uk/programmes/b06r562x"
+      },
+      "price": {
+        "in_token": 17,
+        "out_token": 462,
+        "price": 0.45167999999999997
+      }
+    }
+  ]
+}

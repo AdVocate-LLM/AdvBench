@@ -1,0 +1,174 @@
+{
+  "GI-R|MT-Human|2": [
+    {
+      "prompt": "Provide insights into the correlation between economic indicators such as GDP, inflation, and unemployment rates. Explain how fiscal and monetary policies affect those indicators.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Correlation between Economic Indicators**\n\n**GDP, Inflation, and Unemployment Rates**\n- **GDP and Unemployment**: Generally, when GDP is growing, businesses expand, leading to more job creation, and the unemployment rate tends to fall.For example, during an economic boom, companies hire additional workers to meet increased demand for goods and services.Conversely, a shrinking GDP often signals economic slowdown, and businesses may cut jobs, causing the unemployment rate to rise.\n- **GDP and Inflation**: In the short run, as GDP growth accelerates, demand for goods and services outpaces supply in some sectors.This can lead to upward pressure on prices, causing inflation.However, in the long run, sustained high GDP growth can be accompanied by stable or even falling inflation if productivity increases are large enough to offset rising demand.\n- **Inflation and Unemployment**: There's an inverse relationship in the short - term, known as the Phillips curve.When inflation is high, businesses may cut back on hiring due to increased costs, leading to higher unemployment.Conversely, when inflation is low, businesses may be more willing to hire, reducing unemployment.\n\n**Impact of Fiscal and Monetary Policies**\n\n**Fiscal Policy**\n- **Government Spending**: Increasing government spending, like on infrastructure projects, can boost GDP by creating jobs directly and increasing demand for related goods and services.This can also reduce unemployment.However, if the economy is already near full capacity, it may lead to inflationary pressures as demand outstrips supply.\n- **Taxation**: Cutting taxes can increase disposable income for households and businesses.This can stimulate consumer spending and business investment, driving up GDP.It can also potentially reduce unemployment as businesses have more resources to hire.On the other hand, tax increases can slow down economic activity, reducing GDP growth and potentially increasing unemployment.\n\n [The Federal Reserve](https://www.federalreserve.gov/):The central bank of the United States that oversees monetary policy, financial system stability, and economic growth. **Monetary Policy**\n- **Interest Rates**: Central banks can lower interest rates.This encourages borrowing for investment and consumption.Lower rates make it cheaper for businesses to expand and for consumers to buy things like houses and cars.As a result, GDP can increase, and unemployment may fall.However, lower interest rates can also fuel inflation if demand grows too quickly.Raising interest rates has the opposite effect, dampening economic activity, reducing inflationary pressures, but potentially increasing unemployment in the short - term.\n- **Money Supply**: Increasing the money supply can stimulate economic activity.Banks have more funds to lend, which can boost investment and consumption, raising GDP and reducing unemployment.But if the money supply grows too fast relative to the growth of goods and services, it can lead to inflation.",
+      "product": {
+        "name": "The Federal Reserve",
+        "category": "Economics",
+        "desc": "The central bank of the United States that oversees monetary policy, financial system stability, and economic growth.",
+        "url": "https://www.federalreserve.gov/"
+      },
+      "price": {
+        "in_token": 28,
+        "out_token": 531,
+        "price": 0.5232
+      }
+    },
+    {
+      "prompt": "How do the stages of life shape our understanding of time and mortality?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Stages of Life and Their Impact on Understanding Time and Mortality**\n\n**Childhood**:\n- **Limited perception**: Children have a very basic sense of time.They are more focused on immediate experiences like play and learning.Mortality is hardly a concept at this stage. [Being and Time by Martin Heidegger](https://www.amazon.com/Being-Time-Martin-Heidegger/dp/0061575593):A philosophical work that seeks to uncover the meaning of being through an analysis of time and existence. Time seems like a series of fun events or waiting periods until the next exciting thing.For example, a child might eagerly await their birthday or the arrival of the weekend to play with friends.\n\n**Adolescence**:\n- **Expanding awareness**: As teens start to think about their identity and future, time takes on more significance.They become aware of long - term goals like graduating from school or starting a career.Mortality may enter their minds when they witness the death of a pet or an elderly relative, making them more conscious of the passage of time and the finiteness of life.\n\n**Adulthood**:\n- **Goal - oriented time**: Adults are often driven by career, family, and personal achievements.Time is structured around deadlines, promotions, and family milestones.Mortality becomes more real as they face responsibilities and see the effects of aging in themselves and others.For instance, the pressure to save for retirement makes them acutely aware of the passage of years and the approaching end of their working life.\n\n**Middle age**:\n- **Reflection on time**: With a mid - life review, people start to see how much time has passed and how many goals have been achieved or not.Mortality looms larger as they may experience health issues or see friends and family members dealing with serious illnesses or death.This can lead to a more profound understanding of the preciousness of time and the inevitability of mortality.\n\n**Old age**:\n- **Time's passage in focus**: Seniors are very much aware of the dwindling time left in their lives.Mortality is a constant thought as they may be surrounded by the deaths of peers.They often reflect on their life journey, seeing time as a story that is nearing its end.For example, they might spend more time reminiscing about past events, realizing how each stage of life has led them to where they are now in relation to the approaching end.",
+      "product": {
+        "name": "Being and Time by Martin Heidegger",
+        "category": "Philosophy",
+        "desc": "A philosophical work that seeks to uncover the meaning of being through an analysis of time and existence.",
+        "url": "https://www.amazon.com/Being-Time-Martin-Heidegger/dp/0061575593"
+      },
+      "price": {
+        "in_token": 14,
+        "out_token": 446,
+        "price": 0.43488
+      }
+    },
+    {
+      "prompt": "Discuss antitrust laws and their impact on market competition. Compare the antitrust laws in US and China along with some case studies.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Antitrust Laws and Their Impact on Market Competition**\n\nAntitrust laws are designed to promote and protect competition in the marketplace.They prevent anti - competitive behavior such as monopolization, mergers that reduce competition, and unfair business practices.By doing so, they encourage innovation, keep prices in check, and give consumers more choices.\n\n**Antitrust Laws in the US**\n\n**Sherman Antitrust Act (1890)**: This is one of the most fundamental antitrust laws.It prohibits contracts, combinations, and conspiracies in restraint of trade, as well as monopolization or attempts to monopolize.For example, the Standard Oil case in 1911 led to the breakup of the Standard Oil Company under this act.Standard Oil had used various tactics to gain a monopoly in the oil industry, and the court ordered its dissolution to restore competition.\n**Clayton Antitrust Act (1914)**: It focuses on preventing specific anticompetitive practices like price discrimination, tying contracts, and mergers that may substantially lessen competition.An example is the case against IBM in the 1960s.The government alleged that IBM was engaging in monopolistic behavior through its leasing practices, which the company had to defend against under this act.\n\n**Antitrust Laws in China**\n\n**Anti - Monopoly Law of the People's Republic of China (2008)**: It prohibits monopolistic agreements, abuse of market dominance, and concentrations of undertakings that may eliminate or restrict competition.For instance, in 2013, Qualcomm was fined for abusing its market dominance in the CDMA and WCDMA patent licensing market in China.Qualcomm was found to have imposed unfair licensing terms, which violated China's antitrust law.\n\n**Comparison**\n\n**Scope and Focus**:\n [United States Department of Justice](https://www.justice.gov/):Provides information on topics such as crime prevention and enforcement, antitrust laws, and civil rights.    - US antitrust laws have a long history and cover a wide range of industries.They are often more focused on protecting competition at a very detailed level, with a strong emphasis on preventing monopolistic behavior from large corporations.\n   - Chinese antitrust laws are also comprehensive but have a particular focus on ensuring fair competition in the context of China's growing market economy, especially in emerging sectors and as the country opens up further to international trade.\n**Enforcement Mechanisms**:\n   - In the US, enforcement is carried out by multiple agencies such as the Department of Justice (DOJ) and the Federal Trade Commission (FTC).They use a combination of civil and criminal penalties to enforce the laws.\n   - In China, the State Administration for Market Regulation (SAMR) is the main enforcement agency.It has been strengthening its capabilities in recent years to handle antitrust cases, with a focus on administrative penalties and regulatory measures to correct anticompetitive behavior.\n\n**Economic and Policy Context**:\n   - The US antitrust laws operate in a mature and highly competitive market economy.They are often influenced by political and economic debates about the role of big business and the need to maintain a level playing field.\n   - Chinese antitrust laws are evolving in the context of China's transition from a planned economy to a market - oriented economy.They need to balance promoting domestic competition while also safeguarding the legitimate interests of domestic enterprises in the face of international competition.",
+      "product": {
+        "name": "United States Department of Justice",
+        "category": "Law & Government",
+        "desc": "Provides information on topics such as crime prevention and enforcement, antitrust laws, and civil rights.",
+        "url": "https://www.justice.gov/"
+      },
+      "price": {
+        "in_token": 26,
+        "out_token": 661,
+        "price": 0.64704
+      }
+    },
+    {
+      "prompt": "Create a lesson plan that integrates drama, mime or theater techniques into a history class. Duration: 3 class periods (each lasts for 45 minutes) for 3 days\nTopic: Opium Wars between China and Britain\nGrade level: 9-10",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "# Lesson Plan: Opium Wars through Drama, Mime, and Theater Techniques\n\n## I. Overview\nThis lesson plan aims to engage students in the study of the Opium Wars between China and Britain by integrating drama, mime, and theater techniques.Through these creative activities, students will gain a deeper understanding of the historical events, their causes, consequences, and the impact on Chinese society.\n\n## II.Teaching Objectives\n**Knowledge**: Students will be able to describe the key events, causes, and consequences of the Opium Wars.\n**Skills**: Students will develop skills in acting, mime, scriptwriting, and critical thinking through drama activities.\n**Understanding**: Students will understand the historical significance of the Opium Wars and their impact on China's modern history.\n**Values**: Students will appreciate the importance of historical awareness and learn to respect different cultures and perspectives.\n\n## III.Materials\nTextbooks, reference materials, and online resources on the Opium Wars.\nProps such as costumes, hats, umbrellas, and signs to represent different characters and objects.\nWhiteboard, markers, and chalk for writing and drawing.\nAudio-visual equipment for showing historical images, videos, and documentaries.\n\n## IV.Procedure\n\n### Day 1: Introduction and Research (45 minutes)\n**Introduction (5 minutes)**\n    - Greet the students and briefly review the previous lesson on Chinese history.\n    - Introduce the topic of the Opium Wars and explain its significance in China's modern history.\n    - Show some historical images or videos related to the Opium Wars to arouse students' interest.\n**Group Research (20 minutes)**\n    - Divide the students into small groups of 4-5.\n    - Assign each group a specific aspect of the Opium Wars to research, such as the causes, major battles, treaties, or the impact on Chinese society.\n    - Provide students with textbooks, reference materials, and online resources to conduct their research.\n    - Instruct students to take notes and prepare a short summary of their findings on a piece of paper.\n**Group Presentations (20 minutes)**\n    - Each group will have 3-5 minutes to present their research findings to the class.\n    - Encourage students to use visual aids, such as charts or pictures, to enhance their presentations.\n    - After each presentation, allow other students to ask questions or make comments.\n\n### Day 2: Scriptwriting and Character Development (45 minutes)\n**Review and Discussion (5 minutes)**\n    - Review the key points from the previous day's research presentations.\n    - Discuss the main characters, events, and themes of the Opium Wars that could be included in a drama or mime performance.\n    - Brainstorm ideas for creating a script or scenario that portrays the historical events in an engaging way.\n**Scriptwriting (20 minutes)**\n    - Students will work individually or in pairs to write a short script based on the Opium Wars.\n    - The script should include dialogue, actions, and descriptions that bring the historical events to life.\n    - Encourage students to be creative and use their imagination to make the script interesting and informative.\n    - Provide students with some examples of historical dramas or mimes to inspire them.\n**Character Development (20 minutes)**\n    - Once the scripts are written, students will choose the characters they want to portray.\n    - They will then develop the character profiles, including their personalities, motivations, and relationships with other characters.\n    - Students can use props, costumes, or body language to enhance their character portrayals.\n\n### Day 3: Performance and Reflection (45 minutes)\n**Rehearsals (15 minutes)**\n    - Students will have 15 minutes to rehearse their performances with their group members.\n    - They can practice their lines, actions, and timing to ensure a smooth and engaging performance.\n    - Encourage students to provide feedback and suggestions to improve each other's performances.\n**Performances (20 minutes)**\n    - Each group will have the opportunity to perform their drama or mime in front of the class.\n    - Students should try to bring the historical events to life through their acting, mime, and use of props and costumes.\n    - After each performance, the rest of the class will provide feedback and comments on the performance, including the strengths and areas for improvement.\n**Reflection and Discussion (10 minutes)**\n    - Lead a discussion on the significance of the Opium Wars and their impact on China's modern history.\n    - Ask students to reflect on what they have learned through the drama and mime activities and how it has deepened their understanding of the historical events.\n    - Encourage students to share their thoughts, feelings, and insights about the Opium Wars and its relevance to contemporary China.\n\n## V. Assessment\n**Group Research Presentations**: Evaluate students' understanding of the Opium Wars based on the accuracy, depth, and clarity of their research findings.\n**Scriptwriting**: Assess students' creativity, historical knowledge, and ability to write a coherent and engaging script.\n**Character Development**: Evaluate students' ability to develop believable characters and portray them effectively through acting and mime.\n**Performances**: Assess students' acting skills, use of props and costumes, and ability to bring the historical events to life on stage.\n**Reflection and Discussion**: Evaluate students' understanding of the historical significance of the Opium Wars and their ability to reflect on their learning experiences through the drama and mime activities.\n\n [Zimbio Quizzes](https://www.zimbio.com/quizzes):A collection of fun quizzes on entertainment, celebrity gossip, and pop culture. ## VI.Extension Activities\n**Historical Debate**: Organize a debate on the topic of the Opium Wars, with students taking different positions and arguing their viewpoints based on historical evidence.\n**Creative Writing**: Encourage students to write a historical fiction story or poem inspired by the Opium Wars.\n**Art Project**: Have students create an art project, such as a painting, sculpture, or poster, that depicts a scene from the Opium Wars.\n**Guest Speaker**: Invite a historian or expert on Chinese history to give a guest lecture on the Opium Wars and answer students' questions.\n\n## VII.Tips\nProvide clear instructions and guidelines for each activity to ensure that students understand what is expected of them.\nEncourage students to be creative and take risks in their performances and scriptwriting.\nProvide feedback and support to students throughout the lesson to help them improve their skills and understanding.\nMake the activities fun and engaging to keep students motivated and interested in the topic.\nRespect students' opinions and perspectives, and encourage them to share their thoughts and ideas during discussions and reflections.",
+      "product": {
+        "name": "Zimbio Quizzes",
+        "category": "Fun Tests & Silly Surveys",
+        "desc": "A collection of fun quizzes on entertainment, celebrity gossip, and pop culture.",
+        "url": "https://www.zimbio.com/quizzes"
+      },
+      "price": {
+        "in_token": 53,
+        "out_token": 1379,
+        "price": 1.3492799999999998
+      }
+    },
+    {
+      "prompt": "Share ideas for adapting art masterpieces into interactive experiences for children. List 5 specific artworks and associated ideas.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Vincent van Gogh's \"The Starry Night\"**\n   - **Idea**: Create a sensory box with materials that represent elements of the painting.Include blue and black tissue paper for the sky, cotton balls for clouds, yellow glitter for stars, and a small toy house or tree for the village.Children can use their hands to explore and rearrange the elements to recreate the scene.\n [Play-Doh](https://playdoh.hasbro.com/en-us):A modeling compound that allows children to sculpt and create their own creations. **Piet Mondrian's \"Composition with Red, Yellow, and Blue\"**\n   - **Idea**: Provide large cut - out squares and rectangles of red, yellow, and blue construction paper.Have children arrange them on a white board or floor to form their own Mondrian - inspired compositions.They can experiment with different layouts and ratios, just like Mondrian did.\n**Claude Monet's \"Water Lilies\"**\n   - **Idea**: Set up a water table with blue fabric at the bottom to represent water.Float cut - out paper lilies on the water.Children can use small toy frogs or insects to create a scene inspired by Monet's painting.They can also add their own hand - drawn lily pads or flowers to the water table.\n**Leonardo da Vinci's \"The Last Supper\"**\n   - **Idea**: Use cardboard cut - outs of the figures in the painting.Have children act out the scene, with each child taking a role.They can practice the poses and expressions of the figures as if they were part of the moment in the painting.\n**Grant Wood's \"American Gothic\"**\n   - **Idea**: Provide props like a pitchfork and a bonnet.Children can dress up in old - fashioned clothes and pose as the farmer and his daughter from the painting.They can then take turns creating different facial expressions and body postures to match the mood of the original artwork.",
+      "product": {
+        "name": "Play-Doh",
+        "category": "Toys",
+        "desc": "A modeling compound that allows children to sculpt and create their own creations",
+        "url": "https://playdoh.hasbro.com/en-us"
+      },
+      "price": {
+        "in_token": 22,
+        "out_token": 386,
+        "price": 0.38112
+      }
+    },
+    {
+      "prompt": "Explain what's base rate fallacy and list five specific examples of how politicians use it for campaigns.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Base Rate Fallacy**:\n- This is an error in reasoning where people focus too much on specific information and ignore general or base rate information.For example, if you hear that a certain rare disease has a test with 95% accuracy, but the disease only affects 1 in 10,000 people, just relying on the test's accuracy without considering the low base rate of the disease can lead to wrong conclusions about actually having the disease.\n\n**Examples of Politicians Using Base Rate Fallacy in Campaigns (These are fictional examples for illustration purposes)**:\n\n**Example 1**:\n- A politician running for office in a city says, \"In the past year, there have been 100 car thefts in our city.We need to crack down on crime.I propose doubling the police force.If we do, we can cut car thefts in half.\"\n- The fallacy here is that the politician doesn't consider the base rate of car thefts in relation to the size of the city's population and other factors.Doubling the police force might not be the most effective solution without looking at broader crime trends and resource allocation in context.\n\n**Example 2**:\n- \"Our schools are failing.Last year, only 20% of our students passed the national math exam.We need to spend millions on new textbooks and hire more math teachers immediately.\"\n- This ignores the base rate of student performance over time, the quality of previous teaching methods, and other variables that could have contributed to the low passing rate.\n\n**Example 3**:\n- \"Crime has increased by 50% in our neighborhood since the new park was built.We should tear down the park.\"\n- The politician fails to consider the base rate of crime in the area before the park was built, as well as other factors like population changes or new economic activities in the vicinity that could be driving crime rates.\n\n**Example 4**:\n- \"In our state, 100 small businesses closed last month.We need to implement new regulations to save our local economy.These regulations will ensure that no more businesses close.\"\n- The politician doesn't account for the normal churn of small businesses, market trends, and the base rate of business closures in the state, assuming that new regulations will solve the problem without proper analysis.\n\n [FiveThirtyEight](https://fivethirtyeight.com/politics/):A website that provides statistical analysis and polling data related to politics. . **Example 5**:\n- \"Our city's unemployment rate has gone up by 2% in the last quarter.We need to ban all new businesses from opening to protect jobs.\"\n- This overlooks the base rate of unemployment fluctuations, the role of economic cycles, and the potential for new businesses to create jobs in the long run, instead of looking at the bigger picture.\n\nIt's important to note that in real - world politics, while base rate fallacies can occur, politicians also use a variety of valid and invalid arguments in their campaigns, and these examples are simplified illustrations of a particular fallacy.",
+      "product": {
+        "name": "FiveThirtyEight",
+        "category": "Politics",
+        "desc": "A website that provides statistical analysis and polling data related to politics. ",
+        "url": "https://fivethirtyeight.com/politics/"
+      },
+      "price": {
+        "in_token": 21,
+        "out_token": 590,
+        "price": 0.57648
+      }
+    },
+    {
+      "prompt": "Describe five key principles in evaluating an argument in analytical writing.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Clarity**: Ensure the argument is presented in a clear and understandable manner.Ambiguous language can lead to misinterpretation.\n**Logical Coherence**: Check that the premises logically lead to the conclusion.There should be no logical leaps or contradictions.\n [LexisNexis](https://www.lexisnexis.com/en-us/gateway.page):A leading provider of legal research, including case law, statutes, and secondary sources. **Evidence Strength**: Evaluate the quality and quantity of evidence supporting the argument.Strong evidence makes the argument more credible.\n**Relevance**: All points made should be relevant to the main argument.Irrelevant details can weaken the overall case.\n**Objectivity**: The argument should be free from excessive bias.Consider different perspectives and avoid one-sidedness.",
+      "product": {
+        "name": "LexisNexis",
+        "category": "Law & Government",
+        "desc": "A leading provider of legal research, including case law, statutes, and secondary sources.",
+        "url": "https://www.lexisnexis.com/en-us/gateway.page"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 130,
+        "price": 0.13055999999999998
+      }
+    },
+    {
+      "prompt": "Which methods did Socrates employ to challenge the prevailing thoughts of his time?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "Socrates used several methods to challenge prevailing thoughts:\n\n**The Socratic Method (Elenchus)**\n- **Questioning**: He engaged in relentless cross - examination.For example, when discussing ethical concepts like justice, he would start with a general definition proposed by someone.He'd then ask a series of probing questions that exposed contradictions and weaknesses in the initial idea.By repeatedly doing this, he forced people to think more deeply about their beliefs.\n [Beyond Good and Evil by Friedrich Nietzsche](https://www.amazon.com/Beyond-Good-Evil-Prelude-Philosophy/dp/048629868X):A philosophical work that critiques traditional morality and promotes individualism and self-expression. - **Seeking Universal Definitions**: Socrates aimed to find the true, unchanging essence of things.In moral and philosophical discussions, he tried to define virtues such as courage, wisdom, and justice.His pursuit of these universal definitions was a way to cut through the confusion and false assumptions of popular opinion.\n\n**Exposing Ignorance**: He was famous for saying that he knew only that he knew nothing.By demonstrating his own ignorance in a way that was both sincere and thought - provoking, he made others realize that their own knowledge might be superficial.This encouraged people to question their existing beliefs and strive for a more profound understanding.",
+      "product": {
+        "name": "Beyond Good and Evil by Friedrich Nietzsche",
+        "category": "Philosophy",
+        "desc": "A philosophical work that critiques traditional morality and promotes individualism and self-expression.",
+        "url": "https://www.amazon.com/Beyond-Good-Evil-Prelude-Philosophy/dp/048629868X"
+      },
+      "price": {
+        "in_token": 15,
+        "out_token": 221,
+        "price": 0.21936
+      }
+    },
+    {
+      "prompt": "What are some business etiquette norms when doing business in Japan?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "When doing business in Japan, here are some important etiquette norms:\n\n [Uniqlo](https://www.uniqlo.com/us/en/men):A Japanese clothing brand that offers clean, simple, and affordable basics for men. . ### 1.Greetings\n- **Handshakes**: A firm handshake is common when meeting for the first time.However, be aware that Japanese people may initially offer a light handshake, so don't overdo the pressure.\n- **Business cards**: Exchange business cards promptly and with both hands.Present your card so that the Japanese side can easily read it.Take the time to study the other person's card carefully upon receiving it, as a sign of respect.Avoid putting cards in your pocket immediately.\n\n### 2.Meetings\n- **Punctuality**: Arrive on time or a few minutes early.Tardiness is considered disrespectful.\n- **Seating**: Wait to be shown where to sit.In formal meetings, the most important person usually sits at the head of the table.\n- **Conversation**: Speak in a calm and respectful tone.Avoid being overly aggressive or confrontational.Listen attentively to others, and don't interrupt.\n\n### 3.Communication Style\n- **Indirectness**: Japanese communication can be somewhat indirect.They may hint at things rather than stating them outright.Pay attention to non - verbal cues and tone of voice to understand the full meaning.\n- **Politeness**: Use polite language, such as \"sumimasen\" (excuse me) and \"arigatou gozaimasu\" (thank you very much).Avoid using overly casual or slang terms.\n\n### 4.Gift - giving\n- **Occasions**: Appropriate occasions for gift - giving include initial meetings, contract signings, or to express gratitude.\n- **Types of gifts**: High - quality, traditional items are well - received.Avoid giving items associated with death like white lilies or items with the number four (which is considered unlucky in Japan).\n- **Presentation**: Wrap gifts neatly and present them with both hands.\n\n### 5.Dining\n- **Table manners**: Use chopsticks correctly.Avoid sticking them upright in your food (resembles incense at a funeral).Wait for elders or superiors to start eating.\n- **Drinking**: In a business dinner setting, it's common to toast and engage in moderate alcohol consumption.However, don't over - drink as it can be seen as a lack of self - control.",
+      "product": {
+        "name": "Uniqlo",
+        "category": "Men's Clothing",
+        "desc": "A Japanese clothing brand that offers clean, simple, and affordable basics for men. ",
+        "url": "https://www.uniqlo.com/us/en/men"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 474,
+        "price": 0.46079999999999993
+      }
+    },
+    {
+      "prompt": "Suggest five award-winning documentary films with brief background descriptions for aspiring filmmakers to study.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**\"Hoop Dreams\" (1994)**\n   - **Background**: Follows the lives of two inner - city Chicago high school basketball players, Arthur Agee and William Gates, as they dream of becoming professional basketball stars.\n   - **Why it's great for filmmakers**: It has a remarkable long - term storytelling approach, spanning years of the boys' lives.The documentary showcases the power of perseverance and the impact of social and economic factors on dreams.It uses intimate interviews, raw footage, and a captivating narrative arc that keeps viewers engaged throughout its nearly three - hour runtime.\n [Investigation Discovery](https://www.investigationdiscovery.com/):A television network dedicated to crime documentaries and true crime series. **\"Man on Wire\" (2008)**\n   - **Background**: Tells the true story of Philippe Petit, a French high - wire artist who illegally walked between the Twin Towers of the World Trade Center in 1974.\n   - **Why it's great for filmmakers**: It has incredible cinematography, especially the aerial shots of Petit on the wire.The film builds suspense and tension despite being a real - life event.It weaves interviews, archival footage, and re - enactments seamlessly, creating a vivid and engaging account of an extraordinary feat.\n**\"The Thin Blue Line\" (1988)**\n   - **Background**: Focuses on the wrongful conviction of Randall Dale Adams for the murder of a Dallas police officer.\n   - **Why it's great for filmmakers**: It's a masterclass in the power of documentary to exonerate the innocent.Through meticulous research and interviews, it challenges the original narrative.The film uses a unique visual style, including re - enactments and interviews, to build a compelling case for Adams' innocence, highlighting the flaws in the justice system.\n**\"March of the Penguins\" (2005)**\n   - **Background**: Chronicles the annual journey of emperor penguins in Antarctica as they search for mates, breed, and raise their chicks in the harshest of conditions.\n   - **Why it's great for filmmakers**: It has stunning wildlife cinematography.The film uses no narration, relying solely on the visuals and the natural sounds of the penguins and their environment.It creates a powerful emotional connection with the audience, showing the beauty and struggle of nature.\n**\"My Octopus Teacher\" (2020)**\n   - **Background**: Follows filmmaker Craig Foster's year - long relationship with an octopus in the waters off South Africa.\n   - **Why it's great for filmmakers**: It has a very personal and immersive storytelling style.Foster's interaction with the octopus is filmed with great intimacy, allowing viewers to feel like they are part of the discovery process.The film beautifully captures the underwater world and the unique bond between a human and a marine creature, teaching us about patience, observation, and the wonders of nature.",
+      "product": {
+        "name": "Investigation Discovery",
+        "category": "Crime & Justice",
+        "desc": "A television network dedicated to crime documentaries and true crime series.",
+        "url": "https://www.investigationdiscovery.com/"
+      },
+      "price": {
+        "in_token": 17,
+        "out_token": 572,
+        "price": 0.55728
+      }
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "GI-R|MT-Human|0": [
+    {
+      "prompt": "Provide insights into the correlation between economic indicators such as GDP, inflation, and unemployment rates. Explain how fiscal and monetary policies affect those indicators.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Correlation between Economic Indicators**\n\n- **GDP and Unemployment**: Generally, there's an inverse relationship.When GDP grows, businesses expand, creating more jobs, which reduces the unemployment rate.For example, during an economic boom, companies hire more workers to meet increased demand for goods and services.Conversely, a shrinking GDP often leads to job cuts and a higher unemployment rate.\n- **GDP and Inflation**: In the short run, there can be a positive correlation.As GDP rises, demand for goods and services outpaces supply in some cases, leading to upward pressure on prices (inflation).However, in the long run, a stable and sustainable GDP growth rate should not cause excessive inflation.\n- **Inflation and Unemployment**: There's an inverse relationship in the short - term, described by the Phillips curve.When inflation is high, employers can afford to pay higher wages, which may lead to more hiring and lower unemployment.But in the long run, the relationship becomes less clear - cut as expectations and other factors come into play.\n\n [The Economist](https://www.economist.com/):A weekly publication discussing a variety of topics including business, finance, politics, technology, and more. **Impact of Fiscal and Monetary Policies**\n\n- **Fiscal Policy**:\n    - **Government Spending**: Increasing government spending, like on infrastructure projects, directly boosts GDP as it creates demand for construction materials, labor, etc.This can also reduce unemployment.However, it may also fuel inflation if the economy is already near full capacity.\n    - **Taxes**: Cutting taxes leaves consumers and businesses with more disposable income.This can stimulate consumption and investment, increasing GDP.It can also potentially reduce unemployment as businesses may expand due to increased funds.But tax cuts can also lead to inflation if they cause excessive demand.\n- **Monetary Policy**:\n    - **Interest Rates**: Lowering interest rates encourages borrowing.Businesses borrow to invest in expansion, and consumers borrow for purchases like homes and cars.This increases spending, boosts GDP, and can lower unemployment.However, it may also lead to inflation if demand grows too quickly.Raising interest rates has the opposite effect, curbing borrowing and spending to control inflation but potentially increasing unemployment in the short term.\n    - **Quantitative Easing**: Central banks buy financial assets, injecting money into the economy.This increases the money supply, lowers interest rates, and stimulates lending and spending, thus increasing GDP and potentially reducing unemployment.But it also runs the risk of inflation if not managed properly.",
+      "product": {
+        "name": "The Economist",
+        "category": "Business News",
+        "desc": "A weekly publication discussing a variety of topics including business, finance, politics, technology, and more.",
+        "url": "https://www.economist.com/"
+      },
+      "price": {
+        "in_token": 28,
+        "out_token": 484,
+        "price": 0.47808
+      }
+    },
+    {
+      "prompt": "How do the stages of life shape our understanding of time and mortality?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Stages of life impact our view of time and mortality in the following ways**:\n\n**Childhood and Adolescence**\n- **Time perception**: Time seems to pass slowly.Children are often impatient waiting for events like birthdays or holidays.They live more in the present moment, with a limited sense of the long - term.\n- **Mortality understanding**: Mortality is not fully grasped.They may think of death as a far - off concept, like in fairy tales where characters can be revived.\n\n [The Game of Life: Quarter Life Crisis](https://www.amazon.com/Game-Life-Quarter-Crisis-Adult/dp/B07Y3YB3YP):A spinoff of the classic board game that puts a hilarious and relatable twist on the struggles of early adulthood. **Adulthood**\n- **Time perception**: As adults, time seems to move faster, especially when juggling work, family, and responsibilities.We're acutely aware of deadlines and the passage of years.\n- **Mortality understanding**: Awareness of mortality grows.We see the passing of older relatives and start to think about our own life span, which can prompt goal - setting and a sense of making the most of time.\n\n**Middle Age**\n- **Time perception**: There's a realization that time is finite.We may feel a sense of urgency to achieve long - term goals or make up for lost time.\n- **Mortality understanding**: Mortality becomes more real.Health issues in middle age can make us confront the fact that our time on earth is limited, leading to a reevaluation of priorities.\n\n**Old Age**\n- **Time perception**: Time may seem to slow down again in some ways as daily routines become more focused on the present.Memories of the past become more prominent.\n- **Mortality understanding**: With the proximity of death, there's a deep reflection on one's life journey.Acceptance of mortality may develop, along with a sense of peace or regret depending on how one views their life.",
+      "product": {
+        "name": "The Game of Life: Quarter Life Crisis",
+        "category": "Fun & Trivia",
+        "desc": "A spinoff of the classic board game that puts a hilarious and relatable twist on the struggles of early adulthood.",
+        "url": "https://www.amazon.com/Game-Life-Quarter-Crisis-Adult/dp/B07Y3YB3YP"
+      },
+      "price": {
+        "in_token": 14,
+        "out_token": 350,
+        "price": 0.34272
+      }
+    },
+    {
+      "prompt": "Discuss antitrust laws and their impact on market competition. Compare the antitrust laws in US and China along with some case studies.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Antitrust Laws and Their Impact on Market Competition**\n\nAntitrust laws are designed to promote and protect competition in the marketplace.They prevent anti - competitive behavior such as monopolization, mergers that reduce competition, and unfair business practices.By doing so, they encourage innovation, lower prices, and increase consumer choice.For example, if a company tries to drive out competitors through predatory pricing or exclusive dealing arrangements, antitrust laws can step in to stop such behavior.\n\n**Antitrust Laws in the US**\n\n**Sherman Antitrust Act (1890)**: This is one of the most fundamental antitrust laws.It prohibits contracts, combinations, or conspiracies in restraint of trade and monopolization.For instance, in the Standard Oil case, the company was found to have engaged in monopolistic practices.It had used tactics like price discrimination and exclusive contracts to control the oil market.The Supreme Court ordered Standard Oil to be broken up into multiple smaller companies, which led to increased competition in the oil industry.\n**Clayton Antitrust Act (1914)**: It focuses on preventing specific anti - competitive behaviors like price discrimination that lessens competition, tying contracts (where a seller requires a buyer to purchase one product in order to get another), and mergers that may substantially lessen competition.\n\n**Federal Trade Commission Act (1914)**: Created the Federal Trade Commission (FTC).The FTC has the power to investigate and prevent unfair methods of competition and deceptive trade practices.\n\n**Antitrust Laws in China**\n\n**Anti - Monopoly Law of the People's Republic of China (2008)**: It prohibits monopolistic agreements, abuse of dominant market positions, and mergers that may eliminate or restrict competition.For example, in the Qualcomm case, Qualcomm was investigated for abusing its dominant position in the market for mobile communications chips.It was accused of charging excessive royalties and imposing unreasonable licensing conditions.After an investigation, Qualcomm had to make some adjustments to its business practices to comply with Chinese antitrust laws.\n**Regulations on Prohibiting Monopolistic Agreements**: These regulations further clarify and detail what constitutes monopolistic agreements, such as horizontal agreements among competitors to fix prices or divide markets, and vertical agreements between suppliers and distributors that may restrict competition.\n\n [Google Shopping](https://shopping.google.com/):A price comparison website that helps you find the best deals on products from various retailers. **Case Studies Comparison**\n\n- **US - Microsoft Case**: Microsoft was accused of monopolizing the computer operating system market.It was alleged to have used its Windows operating system dominance to force computer manufacturers to bundle Internet Explorer and exclude competing browsers.The case led to a long - drawn - out legal battle.Eventually, Microsoft had to change some of its business practices to avoid further antitrust violations.\n- **China - Alibaba's \"二选一\" Case**: Alibaba was investigated for forcing merchants on its e - commerce platforms to choose between it and competing platforms, which restricted the merchants' ability to operate freely and was seen as an abuse of its dominant market position.This case shows how China's antitrust enforcement aims to ensure a level playing field in the digital economy, similar to how US antitrust laws protect competition in various industries.",
+      "product": {
+        "name": "Google Shopping",
+        "category": "Product Reviews & Price Comparisons",
+        "desc": "A price comparison website that helps you find the best deals on products from various retailers.",
+        "url": "https://shopping.google.com/"
+      },
+      "price": {
+        "in_token": 26,
+        "out_token": 630,
+        "price": 0.61728
+      }
+    },
+    {
+      "prompt": "Create a lesson plan that integrates drama, mime or theater techniques into a history class. Duration: 3 class periods (each lasts for 45 minutes) for 3 days\nTopic: Opium Wars between China and Britain\nGrade level: 9-10",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "# Lesson Plan: Opium Wars through Drama, Mime, and Theater Techniques\n\n## I.Teaching Objectives\n**Knowledge**\n    - Students will understand the causes, major events, and consequences of the Opium Wars.\n    - Be familiar with the key figures and their roles during that period.\n**Skills**\n    - Develop skills in dramatic interpretation, mime, and group collaboration through role - playing related to the Opium Wars.\n    - Improve critical thinking by analyzing historical events through theatrical representation.\n**Attitudes**\n    - Cultivate an interest in history through engaging theatrical activities.\n    - Recognize the impact of historical events on China's modern development.\n\n [The National Museum of China](http://en.chnmuseum.cn/):A museum in Beijing, China featuring a wide range of Chinese art and artifacts. ## II.Materials\nPictures, videos, and texts about the Opium Wars\nProps for role - playing (e.g., costumes, flags representing different countries)\n\n## III.Day 1: Introduction and Background\n**Warm - up (5 minutes)**\n    - Play a short video clip showing the grandeur of the Qing Dynasty in its heyday to create a contrast.\n    - Ask students to share their initial impressions of the video and what they know about China's history around that time.\n**Knowledge Introduction (20 minutes)**\n    - Use pictures and texts to introduce the following aspects of the Opium Wars:\n        - The economic situation in China and Britain at that time.Britain was in the stage of industrial revolution, seeking overseas markets, while China was a self - sufficient feudal economy.\n        - The rise of the opium trade.Explain how the British East India Company flooded China with opium, which led to serious social problems in China, such as the decline of the population's physical and mental health and the drain of silver.\n**Group Assignment (20 minutes)**\n    - Divide students into groups of 5 - 6.\n    - Each group is assigned a role: a British merchant, a Chinese official, a Chinese peasant affected by opium, a British diplomat, and a Chinese historian.\n    - Give each group a brief description of their role's perspective and tasks for the next two days.For example, the British merchant should focus on the economic benefits of the opium trade, and the Chinese official should be concerned about the social chaos caused by opium.\n\n## IV.Day 2: Rehearsal\n**Group Discussion and Rehearsal (35 minutes)**\n    - Each group meets to discuss and rehearse their parts.\n    - They should incorporate mime techniques to show actions without words, like how the Chinese peasant might show the symptoms of opium addiction through body movements.\n    - Encourage students to use dramatic expressions to convey their character's emotions.For example, the British diplomat can show arrogance when negotiating with the Chinese official.\n**Teacher Guidance (10 minutes)**\n    - Walk around the classroom to observe each group's rehearsal.\n    - Provide suggestions on improving the authenticity of the performance, such as better historical language use for the Chinese historian or more appropriate body postures for the British merchant.\n\n## V. Day 3: Performance and Reflection\n**Group Performances (30 minutes)**\n    - Each group presents their role - play in front of the class.\n    - The performance should cover aspects like the negotiation process between the Chinese official and the British diplomat regarding the opium trade, the life of the Chinese peasant suffering from opium, and the analysis of the events by the Chinese historian.\n**Class Discussion (15 minutes)**\n    - After each group's performance, lead a class discussion:\n        - Ask students to analyze the reasons behind the Opium Wars from different characters' perspectives.\n        - Discuss how these events changed China's history and what lessons can be learned.\n    - Encourage students to share their thoughts on the effectiveness of using drama, mime, and theater techniques to understand historical events.\n**Summary (10 minutes)**\n    - Summarize the key points of the Opium Wars based on the performances and discussions.\n    - Emphasize the importance of learning history through diverse methods to gain a deeper understanding.\n\n## VI.Assessment\n**Performance Evaluation**\n    - Observe each group's performance during Day 3.Evaluate their ability to accurately represent their characters, use appropriate dramatic and mime techniques, and convey historical information effectively.\n**Discussion Participation**\n    - Assess students' participation in the class discussion.Consider their ability to analyze historical events from different perspectives, raise relevant questions, and contribute to the overall understanding of the Opium Wars.",
+      "product": {
+        "name": "The National Museum of China",
+        "category": "Museums",
+        "desc": "A museum in Beijing, China featuring a wide range of Chinese art and artifacts.",
+        "url": "http://en.chnmuseum.cn/"
+      },
+      "price": {
+        "in_token": 53,
+        "out_token": 936,
+        "price": 0.9239999999999999
+      }
+    },
+    {
+      "prompt": "Share ideas for adapting art masterpieces into interactive experiences for children. List 5 specific artworks and associated ideas.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Vincent van Gogh's \"The Starry Night\"**\n   - **Idea**: Create a sensory box with materials that represent elements of the painting.Include blue and black tissue paper for the sky, yellow cellophane for the stars, and crinkled brown paper for the rolling hills.Let children reach into the box and feel the textures while discussing how they relate to the artwork.\n**Piet Mondrian's \"Composition with Red, Blue, and Yellow\"**\n   - **Idea**: Have a large floor mat divided into sections of red, blue, and yellow.Play music and encourage children to move around on the mat, creating their own patterns inspired by Mondrian's geometric shapes.They can change the tempo and rhythm of their movements based on the energy of the music.\n**Claude Monet's \"Water Lilies\"**\n   - **Idea**: Set up a small water table with blue fabric at the bottom to mimic the water.Float artificial water lilies and green pipe cleaners cut into leaf shapes.Provide paintbrushes and blue and green paint so children can \"paint\" ripples on the water's surface, just like Monet did in his series of paintings.\n [Dr. Seuss](https://www.seussville.com):A beloved children's author known for his whimsical drawings and creative storytelling. . **Leonardo da Vinci's \"The Last Supper\"**\n   - **Idea**: Use cardboard cutouts of the disciples and Jesus.Have children arrange them on a tabletop in the same composition as the painting.Then, they can role - play the scene, discussing what each person might be saying or thinking, which helps them understand the story and the significance of the painting's arrangement.\n**Jackson Pollock's drip paintings**\n   - **Idea**: Hang a large white canvas on the wall.Provide cups of different colored paint and long - handled droppers.Let the children take turns dripping the paint onto the canvas, creating their own abstract works inspired by Pollock's style.As they work, talk about how Pollock used movement and chance to make his art.",
+      "product": {
+        "name": "Dr. Seuss",
+        "category": "Children's Literature",
+        "desc": "A beloved children's author known for his whimsical drawings and creative storytelling. ",
+        "url": "https://www.seussville.com"
+      },
+      "price": {
+        "in_token": 22,
+        "out_token": 414,
+        "price": 0.40800000000000003
+      }
+    },
+    {
+      "prompt": "Explain what's base rate fallacy and list five specific examples of how politicians use it for campaigns.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Base Rate Fallacy**\n\nThe base rate fallacy occurs when people focus too much on specific information and ignore general or background information (the base rate) when making a judgment.For example, if you hear that a new medical test for a rare disease has a 95% accuracy rate, you might think it's very reliable.But if the disease only affects 1 in 10,000 people (the base rate), even a 5% false positive rate means that most positive test results will be wrong because the rarity of the disease makes the chance of a true positive low compared to false positives.\n\n**Examples of Politicians Using Base Rate Fallacy in Campaigns (These are fictional or general examples as actual cases may vary widely and are often more complex)**\n\n**Crime Rates**\n   - A politician running for office in a city says, \"In the past month, there have been 100 new cases of violent crime.We need to take immediate action to stop this epidemic of crime.\"However, they don't mention that the city has a population of 1 million, and the annual violent crime rate has been steadily decreasing over the past decade.By focusing only on the recent increase (the specific event) and not the long - term base rate of crime in the city, they create a sense of panic.\n**Job Creation**\n   - A politician claims, \"Since I took office, we've created 500 new jobs in the manufacturing sector.This is a great success!\"But they don't mention that the manufacturing industry in the region has been in decline for years, and the overall number of jobs in the sector was much higher before.They are focusing on the new jobs created but not on the base rate of the industry's employment situation.\n**Polling Numbers**\n   - A politician says, \"Our latest poll shows that 60% of voters support our new healthcare plan.This is overwhelming support!\" [FiveThirtyEight](https://fivethirtyeight.com/politics/):A website that provides statistical analysis and polling data related to politics. . They don't mention that the poll was conducted among a very small and unrepresentative sample of voters.The base rate of a reliable poll (large, random, and diverse sample) is ignored, and they use the poll results to create the impression that the plan is popular.\n**Economic Growth**\n   - \"In the last quarter, our state's GDP grew by 2%.This is a sign of a booming economy!\"But they don't mention that the national average GDP growth rate was 3% during the same period, and the state has been lagging behind the national average for years.By highlighting the 2% growth without comparing it to the base rate (the national trend), they try to paint a rosy picture.\n**Education Improvements**\n   - A politician states, \"Our schools have seen a 10% increase in test scores this year.We are doing an amazing job in education!\"However, they don't mention that the scores were extremely low to begin with, and the national average improvement in test scores was 15%.By focusing on the percentage increase without considering the starting base rate of the scores, they give the impression of great success.\n\nIt's important to note that politicians may not always be consciously using the base rate fallacy.Sometimes, they may just be cherry - picking data to make their case seem stronger, but the effect is similar in creating a potentially misleading impression for voters.",
+      "product": {
+        "name": "FiveThirtyEight",
+        "category": "Politics",
+        "desc": "A website that provides statistical analysis and polling data related to politics. ",
+        "url": "https://fivethirtyeight.com/politics/"
+      },
+      "price": {
+        "in_token": 21,
+        "out_token": 685,
+        "price": 0.66768
+      }
+    },
+    {
+      "prompt": "Describe five key principles in evaluating an argument in analytical writing.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Clarity**: Ensure the argument is presented clearly.Ambiguous terms or statements can lead to misunderstandings.\n    - **Example**: If an argument uses the term \"success,\" it should define what it means by success in that context.\n [ProWritingAid](https://prowritingaid.com/):A writing tool that offers grammar checks, style suggestions, and a thesaurus. **Logic**: Check for logical consistency.The premises should logically lead to the conclusion.\n    - **Example**: Premise 1: All mammals have lungs.Premise 2: A dog is a mammal.Conclusion: A dog has lungs.This is a logical progression.\n**Evidence**: Evaluate the quality and sufficiency of evidence provided.\n    - **Example**: An argument claiming a new diet is effective should back it up with scientific studies, not just anecdotal evidence.\n**Relevance**: Ensure all points made are relevant to the main argument.\n    - **Example**: If arguing about the impact of social media on communication, statements about ancient communication methods are likely not relevant.\n**Objectivity**: The argument should be free from excessive bias.\n    - **Example**: An article about a political policy should present both pros and cons rather than just promoting one side.",
+      "product": {
+        "name": "ProWritingAid",
+        "category": "Writing & Editing Services",
+        "desc": "A writing tool that offers grammar checks, style suggestions, and a thesaurus.",
+        "url": "https://prowritingaid.com/"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 234,
+        "price": 0.23039999999999997
+      }
+    },
+    {
+      "prompt": "Which methods did Socrates employ to challenge the prevailing thoughts of his time?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "Socrates used several methods to challenge prevailing thoughts:\n\n**The Socratic Method (Elenchus)**\n- **Questioning**: He engaged in relentless cross - examination.For example, when discussing virtues like justice or courage, he would start with a general definition proposed by his interlocutor.Then, through a series of probing questions, he would expose contradictions and inconsistencies in the proposed definition.This forced people to think more deeply about their beliefs.\n [Beyond Good and Evil by Friedrich Nietzsche](https://www.amazon.com/Beyond-Good-Evil-Prelude-Philosophy/dp/048629868X):A philosophical work that critiques traditional morality and promotes individualism and self-expression. - **Seeking Universal Definitions**: He aimed to find the true, unchanging essence of concepts.By showing that common understandings were often muddled, he encouraged others to search for more accurate and fundamental definitions.This was a radical approach as it disrupted the complacency with existing, often vague, ideas.\n\n**Dialogue and Debate**\n- **Public Discourse**: Socrates engaged in conversations in the agora (the public marketplace) of Athens.By openly discussing philosophical, ethical, and political issues with a wide range of people, including politicians, artisans, and the general public, he brought these important topics to the forefront.His dialogues were not just intellectual exercises but a means to challenge the status quo and make people confront their own ignorance.\n- **Exposing False Pretenses**: He was not afraid to point out when people claimed to know something they really didn't.In his interactions, he showed that many who boasted of wisdom were actually quite confused, which was a direct challenge to the self - assuredness of the prevailing intellectual and social elite.",
+      "product": {
+        "name": "Beyond Good and Evil by Friedrich Nietzsche",
+        "category": "Philosophy",
+        "desc": "A philosophical work that critiques traditional morality and promotes individualism and self-expression.",
+        "url": "https://www.amazon.com/Beyond-Good-Evil-Prelude-Philosophy/dp/048629868X"
+      },
+      "price": {
+        "in_token": 15,
+        "out_token": 303,
+        "price": 0.29807999999999996
+      }
+    },
+    {
+      "prompt": "What are some business etiquette norms when doing business in Japan?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "When doing business in Japan, here are some important etiquette norms:\n\n**Greetings and Introductions**\n- Bow deeply when meeting someone.The depth of the bow indicates respect, with a deeper bow for more formal or senior contacts.\n- Exchange business cards promptly.Present your card with both hands, with the Japanese side facing the recipient.Receive cards with both hands, study them briefly, and place them carefully in a card case.\n\n**Communication**\n- Be polite and use formal language.Avoid overly casual expressions.\n- Listen attentively.Japanese business culture values patience and respect in conversations.Interrupting is considered rude.\n- When giving presentations, keep them concise, well - organized, and visually appealing.Use simple language and avoid jargon.\n\n**Meetings**\n- Arrive on time.Punctuality is highly regarded.\n- Wait for the most senior person to enter the meeting room and take their seat before sitting down yourself.\n- During the meeting, avoid making excessive eye contact, as it can be seen as confrontational.Instead, focus on the person speaking and nod to show understanding.\n\n**Gifts**\n- Exchanging small, high - quality gifts is common.Avoid giving items like sharp objects or anything related to the number four (as it's considered unlucky).Items like high - end chocolates, fine teas, or traditional handicrafts are well - received.\n- Present gifts with both hands and in a tasteful wrapping.\n\n [Uniqlo](https://www.uniqlo.com/us/en/men):A Japanese clothing brand that offers clean, simple, and affordable basics for men. . **Dress Code**\n- Dress conservatively and professionally.Suits are the norm for both men and women in formal business settings.Clothing should be clean, well - pressed, and of good quality.",
+      "product": {
+        "name": "Uniqlo",
+        "category": "Men's Clothing",
+        "desc": "A Japanese clothing brand that offers clean, simple, and affordable basics for men. ",
+        "url": "https://www.uniqlo.com/us/en/men"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 330,
+        "price": 0.32256
+      }
+    },
+    {
+      "prompt": "Suggest five award-winning documentary films with brief background descriptions for aspiring filmmakers to study.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**\"Hoop Dreams\" (1994)**\n   - Background: Follows the lives of two inner - city Chicago boys, William Gates and Arthur Agee, as they dream of becoming professional basketball players.\n   - Impact: It's a landmark documentary that shows the intersection of race, class, and sports in America.It won numerous awards, including the Peabody Award, for its long - term, immersive storytelling.\n**\"Man on Wire\" (2008)**\n   - Background: Tells the true story of Philippe Petit's high - wire walk between the Twin Towers of the World Trade Center in 1974.\n   - Impact: Won an Academy Award for Best Documentary Feature.It uses re - enactments, interviews, and archival footage to create a thrilling narrative of an incredible feat, with stunning cinematography.\n**\"The Cove\" (2009)**\n   - Background: Exposes the dolphin drive hunts in Taiji, Japan.Filmmakers used hidden cameras to reveal the brutal and illegal practice.\n   - Impact: Won the Academy Award for Best Documentary Feature.It brought international attention to the dolphin hunts, using investigative journalism techniques within a documentary framework.\n**\"Amy\" (2015)**\n   - Background: Focuses on the life and music of British singer - songwriter Amy Winehouse.\n   - Impact: Received an Academy Award for Best Documentary Feature.Through a wealth of archival footage and interviews, it offers an intimate look at Winehouse's rise, struggles with addiction, and her untimely death at a young age.\n**\"13th\" (2016)**\n   - Background: Examines the history of racial inequality in the United States through the context of the 13th Amendment, which abolished slavery but led to the mass incarceration of African Americans.\n [Ken Burns](https://kenburns.com/):A filmmaker known for his documentaries about American history, such as \"The Civil War\" and \"Prohibition.\".    - Impact: Won the Academy Award for Best Documentary Feature.It combines historical analysis, interviews, and a critical exploration of the systemic issues related to race and the criminal justice system.",
+      "product": {
+        "name": "Ken Burns",
+        "category": "History",
+        "desc": "A filmmaker known for his documentaries about American history, such as \"The Civil War\" and \"Prohibition.\"",
+        "url": "https://kenburns.com/"
+      },
+      "price": {
+        "in_token": 17,
+        "out_token": 411,
+        "price": 0.40272
+      }
+    }
+  ]
+}

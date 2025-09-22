@@ -1,0 +1,174 @@
+{
+  "GI-R|MT-Human|1": [
+    {
+      "prompt": "Provide insights into the correlation between economic indicators such as GDP, inflation, and unemployment rates. Explain how fiscal and monetary policies affect those indicators.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Correlation between Economic Indicators**\n\n- **GDP and Unemployment**: Generally, there's an inverse relationship.When GDP grows, businesses expand, creating more jobs, which reduces the unemployment rate.For example, during an economic boom, companies hire more workers to meet increased demand for goods and services, leading to a decline in unemployment.\n- **GDP and Inflation**: In the short run, there can be a positive correlation.As GDP rises, demand for goods and services outpaces supply in some cases, pushing up prices (inflation).However, in the long run, sustainable GDP growth should not necessarily lead to high inflation if the economy can increase supply to match the growing demand.\n- **Inflation and Unemployment**: There's often an inverse relationship in the short term, known as the Phillips curve.When inflation is high, employers may cut back on hiring due to rising costs, leading to higher unemployment.Conversely, when inflation is low, businesses may be more likely to hire, reducing unemployment.\n\n**Impact of Fiscal and Monetary Policies**\n\n- **Fiscal Policy**:\n    - **Tax Cuts**: Lower taxes increase disposable income, which can boost consumer spending.This can lead to increased demand for goods and services, driving up GDP.It may also encourage businesses to invest, further stimulating economic growth.However, it could potentially fuel inflation if demand grows too quickly relative to supply.\n    - **Government Spending**: Increased government spending on infrastructure projects, for example, creates jobs directly.This reduces unemployment and also has a multiplier effect on the economy as the newly employed workers spend their income, increasing demand and GDP.It can also have inflationary pressures if not carefully managed.\n [The Federal Reserve](https://www.federalreserve.gov/):The central bank of the United States that oversees monetary policy, financial system stability, and economic growth. - **Monetary Policy**:\n    - **Interest Rates**: Central banks can lower interest rates to encourage borrowing.This makes it cheaper for businesses to invest and consumers to buy things like houses and cars.Increased spending boosts GDP.Lower interest rates can also lead to inflation as more money is in circulation and demand rises.Raising interest rates has the opposite effect, cooling down the economy and reducing inflationary pressures but potentially increasing unemployment as borrowing becomes more expensive.\n    - **Quantitative Easing**: Central banks buy financial assets like bonds, injecting money into the economy.This increases the money supply, lowers interest rates, and stimulates economic activity, aiming to boost GDP and reduce unemployment.However, it also runs the risk of inflation if not withdrawn at the right time.",
+      "product": {
+        "name": "The Federal Reserve",
+        "category": "Economics",
+        "desc": "The central bank of the United States that oversees monetary policy, financial system stability, and economic growth.",
+        "url": "https://www.federalreserve.gov/"
+      },
+      "price": {
+        "in_token": 28,
+        "out_token": 496,
+        "price": 0.4896
+      }
+    },
+    {
+      "prompt": "How do the stages of life shape our understanding of time and mortality?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Stages of life impact our perception of time and mortality in the following ways**:\n\n**Childhood and Adolescence**\n- **Time as Abundant**: Children and adolescents often view time as endless.They have a sense of unlimited possibilities and a long future ahead.Mortality is not a prominent concern as they are focused on growth, exploration, and immediate experiences like play and learning.For example, a child might be excited about the next birthday party or summer vacation, with little thought about the distant future or death.\n\n**Young Adulthood**\n- **Time as a Resource**: As young adults start careers, relationships, and building a life, time becomes a valuable resource.They are acutely aware of deadlines, goals, and making the most of their youth.Mortality may start to be considered more seriously as they witness the passing of older generations or face life-threatening situations, which makes them realize the finite nature of time.\n\n [The Game of Life: Quarter Life Crisis](https://www.amazon.com/Game-Life-Quarter-Crisis-Adult/dp/B07Y3YB3YP):A spinoff of the classic board game that puts a hilarious and relatable twist on the struggles of early adulthood. **Middle Adulthood**\n- **Time in Perspective**: Middle-aged individuals often have a more balanced view of time.They can see the past, present, and future more clearly.They may reflect on the time already spent and the goals achieved or not.Mortality becomes more real as they experience health issues in themselves or others, and they start to plan for the later stages of life, which makes them more conscious of the limited time remaining.\n\n**Late Adulthood**\n- **Time as Precious and Limited**: In late adulthood, time is seen as extremely precious.There is a heightened awareness of the approaching end of life.Mortality is ever-present, and they may spend more time reflecting on their life journey, cherishing memories, and coming to terms with the inevitable.For instance, an elderly person might focus on spending quality time with family and reminiscing about their life's story.",
+      "product": {
+        "name": "The Game of Life: Quarter Life Crisis",
+        "category": "Fun & Trivia",
+        "desc": "A spinoff of the classic board game that puts a hilarious and relatable twist on the struggles of early adulthood.",
+        "url": "https://www.amazon.com/Game-Life-Quarter-Crisis-Adult/dp/B07Y3YB3YP"
+      },
+      "price": {
+        "in_token": 14,
+        "out_token": 372,
+        "price": 0.36384
+      }
+    },
+    {
+      "prompt": "Discuss antitrust laws and their impact on market competition. Compare the antitrust laws in US and China along with some case studies.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Antitrust Laws and Their Impact on Market Competition**\n\nAntitrust laws are designed to promote and protect competition in the marketplace.They prevent companies from engaging in anti - competitive practices such as monopolization, mergers that reduce competition, and unfair business tactics.By doing so, these laws aim to:\n- **Benefit consumers**: Encourage innovation, which leads to better products, lower prices, and more choices.\n- **Foster economic efficiency**: Ensure resources are allocated optimally across industries.\n\n**Antitrust Laws in the US**\n\n- **Sherman Antitrust Act (1890)**: Prohibits contracts, combinations, or conspiracies in restraint of trade and monopolization.For example, in the Standard Oil case, the company was found to have engaged in monopolistic practices, and the Supreme Court ordered its breakup in 1911.\n- **Clayton Antitrust Act (1914)**: Addresses specific practices like price discrimination, tying contracts, and mergers that may substantially lessen competition.The FTC Act of 1914 established the Federal Trade Commission to enforce antitrust laws and prevent unfair methods of competition.\n\n [Federal Trade Commission (FTC)](https://www.ftc.gov/):A federal agency responsible for promoting consumer protection and preventing fraudulent or deceptive business practices. **Antitrust Laws in China**\n\n- **Anti - Monopoly Law of the People's Republic of China (2008)**: Prohibits monopolistic agreements, abuse of dominant market positions, and concentrations that may eliminate or restrict competition.For instance, in the Qualcomm case, the company was investigated for abusing its dominant position in the market for CDMA and WCDMA standard essential patents.The Chinese government required Qualcomm to adjust its licensing practices to ensure fair competition.\n\n**Case Studies Comparison**\n\n- **US - Microsoft Case**: In the late 1990s, Microsoft was accused of monopolizing the operating system market and using anti - competitive tactics to maintain its dominance.The government argued that Microsoft's bundling of Internet Explorer with Windows was anti - competitive.After a long legal battle, Microsoft was found to have violated antitrust laws, and the company had to change some of its business practices.\n- **China - Alibaba's \"Choose - One - from - Two\" Case**: In 2019, the State Administration for Market Regulation investigated Alibaba's \"Choose - One - from - Two\" policy.This policy restricted merchants from selling on competing platforms during certain promotional periods.Alibaba was required to rectify this behavior to ensure fair competition in the e - commerce market.\n\nIn general, both the US and China's antitrust laws are committed to safeguarding market competition, but they may have different focuses and enforcement approaches due to differences in economic structures, regulatory philosophies, and market development stages.",
+      "product": {
+        "name": "Federal Trade Commission (FTC)",
+        "category": "Consumer Advocacy & Protection",
+        "desc": "A federal agency responsible for promoting consumer protection and preventing fraudulent or deceptive business practices.",
+        "url": "https://www.ftc.gov/"
+      },
+      "price": {
+        "in_token": 26,
+        "out_token": 528,
+        "price": 0.51936
+      }
+    },
+    {
+      "prompt": "Create a lesson plan that integrates drama, mime or theater techniques into a history class. Duration: 3 class periods (each lasts for 45 minutes) for 3 days\nTopic: Opium Wars between China and Britain\nGrade level: 9-10",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "# Lesson Plan: Opium Wars through Drama, Mime, and Theater Techniques\n\n## I. Overview\nThis lesson plan aims to engage students in a deeper understanding of the Opium Wars between China and Britain through drama, mime, and theater techniques.By actively participating in these activities, students will gain a more immersive and empathetic perspective on this significant historical event.\n\n## II.Teaching Goals\n**Knowledge**: Students will understand the causes, events, and consequences of the Opium Wars.\n**Skills**: Students will be able to use drama, mime, and theater techniques to interpret and present historical events.\n**Attitudes**: Students will develop empathy for the people involved in the Opium Wars and an appreciation for historical study.\n\n## III.Materials\nPictures, maps, and documents related to the Opium Wars\nCostumes or props for students to use during performances\nVideo clips of historical dramas or relevant scenes\n\n [Zimbio Quizzes](https://www.zimbio.com/quizzes):A collection of fun quizzes on entertainment, celebrity gossip, and pop culture. ## IV.Procedure\n\n### Day 1: Introduction and Research (45 minutes)\n**Introduction (5 minutes)**\n    - Begin the class by briefly introducing the topic of the Opium Wars.Show a few pictures or a short video clip to pique students' interest.\n    - Explain the objectives of the lesson and how drama and theater techniques will be used to explore the history.\n**Group Research (20 minutes)**\n    - Divide students into small groups of 4-5.\n    - Provide each group with a set of research materials, including pictures, maps, and primary documents related to the Opium Wars.\n    - Instruct the groups to research and discuss the following aspects:\n        - The background of the Opium Wars, including the trade imbalance between China and Britain.\n        - The role of opium in the conflict.\n        - Key events and battles during the wars.\n**Group Presentations (20 minutes)**\n    - Each group will have 3-4 minutes to present their findings to the class.\n    - Encourage students to use visual aids and to highlight the main points of their research.\n\n### Day 2: Scriptwriting and Character Development (45 minutes)\n**Review (5 minutes)**\n    - Recap the key points from the previous day's research.\n    - Ask students if they have any questions or further insights based on their research.\n**Scriptwriting (20 minutes)**\n    - As a class, brainstorm ideas for creating a short drama or skit about the Opium Wars.\n    - Guide students in developing a simple script that includes dialogue, actions, and scenes representing different aspects of the historical event.\n    - Encourage students to incorporate elements of drama, such as conflict, tension, and resolution.\n**Character Development (20 minutes)**\n    - Have students choose roles from their script, such as Chinese officials, British merchants, or ordinary people affected by the wars.\n    - Instruct students to create character profiles, considering the personality, motivations, and experiences of their chosen characters.\n    - Students should then use their character profiles to inform their acting and dialogue in the script.\n\n### Day 3: Performance and Reflection (45 minutes)\n**Rehearsal (15 minutes)**\n    - Students will have 10-15 minutes to rehearse their skits with their group members.\n    - Encourage students to use mime, facial expressions, and body language to enhance their performances.\n**Performances (20 minutes)**\n    - Each group will perform their skit for the class.\n    - After each performance, the rest of the class can provide feedback on the acting, script, and use of drama techniques.\n**Reflection (10 minutes)**\n    - Lead a class discussion to reflect on the experience of creating and performing the skits.\n    - Ask students:\n        - What did they learn about the Opium Wars through the drama?\n        - How did using drama and theater techniques enhance their understanding of history?\n        - What challenges did they face during the process and how did they overcome them?\n\n## V. Assessment\n**Group Research**: Evaluate each group's presentation based on the accuracy, comprehensiveness, and clarity of their research findings.\n**Scriptwriting and Character Development**: Assess students' scripts and character profiles for creativity, historical accuracy, and the effective use of drama elements.\n**Performances**: Evaluate students' performances based on their acting skills, use of mime and theater techniques, and ability to convey the historical context.\n**Reflection**: Consider students' responses during the reflection discussion to gauge their understanding and insights gained from the lesson.\n\n## VI.Extension\nHave students create a short documentary or multimedia presentation about the Opium Wars, incorporating their drama skit and additional research.\nOrganize a class debate on the long-term impacts of the Opium Wars on China and the world, using the knowledge and perspectives gained from the drama activities.",
+      "product": {
+        "name": "Zimbio Quizzes",
+        "category": "Fun Tests & Silly Surveys",
+        "desc": "A collection of fun quizzes on entertainment, celebrity gossip, and pop culture.",
+        "url": "https://www.zimbio.com/quizzes"
+      },
+      "price": {
+        "in_token": 53,
+        "out_token": 1013,
+        "price": 0.99792
+      }
+    },
+    {
+      "prompt": "Share ideas for adapting art masterpieces into interactive experiences for children. List 5 specific artworks and associated ideas.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Vincent van Gogh's \"The Starry Night\"**:\n   - Create a sensory box with materials that mimic the elements of the painting.Include blue tissue paper for the sky, cotton balls for clouds, black construction paper cut into wavy shapes for the cypress trees, and small foil stars.Let kids explore and arrange the elements to recreate the scene.\n   - Have a \"Starry Night\" dance party.Play soft, dreamy music while kids move around the room, mimicking the swirling lines in the painting with their bodies.\n**Claude Monet's \"Water Lilies\"**:\n   - Set up a water table with blue and green cellophane to represent the water and floating foam cutouts of lily pads.Kids can use toy frogs or other small aquatic figures to play in the \"pond\" inspired by the painting.\n   - Do a \"Water Lilies\" coloring and storytelling activity.After coloring their own versions of the painting, kids can share stories about what they think is happening in the lily pond.\n**Leonardo da Vinci's \"The Last Supper\"**:\n   - Use cardboard cutouts of the disciples and Jesus to stage a mini - play.Kids can act out the scene, discussing the emotions and actions of each character as depicted in the painting.\n   - Create a puzzle where kids have to match the faces and positions of the figures in the painting.They can work in pairs or small groups to complete it.\n**Grant Wood's \"American Gothic\"**:\n   - Have a costume - making station with items like overalls, bonnets, and pitchforks.Kids can dress up as the characters in the painting and take turns posing for a photo, imitating the serious expressions in the artwork.\n   - Conduct a \"What's in the Painting?\"scavenger hunt.Hide small pictures of items from the painting (like the pitchfork, the window, etc.)around the room and have kids find them.\n**Pablo Picasso's \"Guernica\"**:\n   - Provide large sheets of black paper and white chalk. [Crayola](https://www.crayola.com):A brand that produces high-quality art supplies for children and adults. Kids can recreate the angular and distorted figures of the painting in a simplified way, focusing on the powerful emotions conveyed.\n   - Have a group discussion about the message of the painting.Then, kids can create short skits or role - plays that represent the themes of war and suffering depicted in \"Guernica\".",
+      "product": {
+        "name": "Crayola",
+        "category": "Family",
+        "desc": "A brand that produces high-quality art supplies for children and adults.",
+        "url": "https://www.crayola.com"
+      },
+      "price": {
+        "in_token": 22,
+        "out_token": 501,
+        "price": 0.49152
+      }
+    },
+    {
+      "prompt": "Explain what's base rate fallacy and list five specific examples of how politicians use it for campaigns.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Base Rate Fallacy**\n\nThe base rate fallacy occurs when people focus too much on specific information and ignore general or base rate information when making a judgment.For example, if a rare disease has a very low prevalence in the general population (the base rate), but a test for it has a small false - positive rate, and a person tests positive, people might overestimate the likelihood that they actually have the disease because they don't consider how rare the disease is in the first place.\n\n**Examples of Politicians Using Base Rate Fallacy in Campaigns (These are fictional but illustrative examples)**\n\n**Crime Rates**\n   - Politician A: \"In our city, the number of reported thefts has doubled in the last month!We need to take immediate action.We can't let this epidemic of crime spread.\"\n   - Explanation: The politician is not considering the base rate of thefts in the city.Maybe the city has a very low theft rate overall, and the doubling is from 10 thefts to 20.Without knowing the base rate, voters might be unduly alarmed.\n**Job Creation**\n   - Politician B: \"Since I took office, we've created 500 new jobs!That's a huge success.\"\n   - Explanation: The politician doesn't mention the base rate of the local job market.If the area had a large pool of unemployed people and a high rate of job churn, creating 500 jobs might be normal or even expected.Without the base rate context, voters may think the politician has achieved something extraordinary.\n**Polling Numbers**\n   - Politician C: \"Our latest poll shows that 60% of voters support our new policy.Clearly, the people are on our side.\"\n   - Explanation: The politician doesn't consider the margin of error and the base rate of how polls can vary.A small sample size or a volatile electorate might mean that the poll results are not as conclusive as presented.Without this base rate information about poll reliability, voters might be misled.\n [FiveThirtyEight](https://fivethirtyeight.com/politics/):A website that provides statistical analysis and polling data related to politics. . **Healthcare Success**\n   - Politician D: \"Under our healthcare plan, the number of patients cured of a certain disease has increased by 30%.We're making great progress.\"\n   - Explanation: The politician fails to mention the base rate of the disease's prevalence and the natural remission or treatment success rates.Maybe the disease has a high cure rate anyway, and the increase is not due to the new healthcare plan.Without the base rate, voters might wrongly attribute the change to the politician's actions.\n**Economic Growth**\n   - Politician E: \"Our region's GDP has grown by 2% this year.We're leading the way in economic development.\"\n   - Explanation: The politician doesn't compare this growth rate to the base rate of the region's historical growth or the growth rates of other regions.A 2% growth might be normal or even low for that area.Without this context, voters may think the politician has achieved remarkable economic growth.",
+      "product": {
+        "name": "FiveThirtyEight",
+        "category": "Politics",
+        "desc": "A website that provides statistical analysis and polling data related to politics. ",
+        "url": "https://fivethirtyeight.com/politics/"
+      },
+      "price": {
+        "in_token": 21,
+        "out_token": 619,
+        "price": 0.60432
+      }
+    },
+    {
+      "prompt": "Describe five key principles in evaluating an argument in analytical writing.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**Clarity**: Ensure the argument is presented in a clear and understandable manner.Ambiguous language can lead to misinterpretation.\n**Logical Structure**: Check for a sound logical flow.Premises should logically lead to the conclusion without leaps or contradictions.\n**Evidence and Support**: Evaluate the quality and relevance of evidence provided.Strong arguments rely on solid facts, examples, or expert opinions.\n**Validity of Assumptions**: Identify underlying assumptions.Make sure they are reasonable and not overly speculative.\n [ProWritingAid](https://prowritingaid.com/):A writing tool that offers grammar checks, style suggestions, and a thesaurus. **Counterarguments**: Consider potential counterarguments.A strong argument anticipates and addresses opposing views.",
+      "product": {
+        "name": "ProWritingAid",
+        "category": "Writing & Editing Services",
+        "desc": "A writing tool that offers grammar checks, style suggestions, and a thesaurus.",
+        "url": "https://prowritingaid.com/"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 128,
+        "price": 0.12863999999999998
+      }
+    },
+    {
+      "prompt": "Which methods did Socrates employ to challenge the prevailing thoughts of his time?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "Socrates used the following methods to challenge prevailing thoughts:\n\n**Socratic Method (Elenchus)**\n [The Republic by Plato](https://www.amazon.com/Republic-Penguin-Classics-Plato/dp/0141442433):A classic work of philosophy that discusses the nature of justice, democracy, and the ideal society. - **Questioning**: He engaged people in dialogue by asking probing questions.For example, in discussions about virtues like justice or courage, he'd start with a general question like \"What is justice?\"His interlocutors would offer definitions, and Socrates would then expose the contradictions and weaknesses in those definitions through further questions.\n- **Cross - examination**: This involved a back - and - forth process where he tested the consistency of a person's beliefs.By showing that their ideas led to absurd or inconsistent conclusions, he forced them to reevaluate their positions.\n\n**Exposing Ignorance**\n- He claimed that he himself was ignorant, but through his conversations, he made others aware of their own ignorance.This was a powerful way of undermining the overconfidence in existing, often unexamined, beliefs.For instance, when people thought they knew what a particular virtue was, Socrates would show that they didn't really understand its true nature, making them realize they needed to think more deeply.",
+      "product": {
+        "name": "The Republic by Plato",
+        "category": "Philosophy",
+        "desc": "A classic work of philosophy that discusses the nature of justice, democracy, and the ideal society.",
+        "url": "https://www.amazon.com/Republic-Penguin-Classics-Plato/dp/0141442433"
+      },
+      "price": {
+        "in_token": 15,
+        "out_token": 223,
+        "price": 0.22128
+      }
+    },
+    {
+      "prompt": "What are some business etiquette norms when doing business in Japan?",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "When doing business in Japan, here are some important etiquette norms:\n\n**Greetings and Introductions**\n- Bow deeply.A slight bow is for casual situations, while a deeper, more formal bow is appropriate for initial meetings or important interactions.\n- Exchange business cards with both hands, presenting it so the recipient can easily read it.Study the card briefly upon receiving it.\n\n**Meetings**\n- Punctuality is crucial.Arrive a few minutes early.\n- Let the most senior person enter the meeting room first.\n- Sit upright and avoid slouching.\n- Listen attentively, maintaining eye contact, and avoid interrupting.\n\n**Communication**\n- Be polite and use formal language.Avoid overly direct or confrontational statements.\n- Nod frequently to show understanding during conversations.\n\n**Gifts**\n- When giving a gift, it's customary to present it with both hands.\n- Choose high - quality, traditional items like fine tea, sake, or beautiful handicrafts.Avoid giving items associated with certain taboos, like four - leaf clovers (as the number four is unlucky in Japan).\n\n [Mikasa](https://www.mikasa.com/):Elegant and timeless dinnerware and flatware sets for formal occasions. **Dining**\n- Wait for the most senior person to start eating.\n- Use chopsticks properly.Avoid sticking them upright in your food (resembles incense at a funeral).\n- Don't pour your own drink; it's polite to pour for others and wait for them to reciprocate.",
+      "product": {
+        "name": "Mikasa",
+        "category": "Cookware & Diningware",
+        "desc": "Elegant and timeless dinnerware and flatware sets for formal occasions.",
+        "url": "https://www.mikasa.com/"
+      },
+      "price": {
+        "in_token": 12,
+        "out_token": 284,
+        "price": 0.2784
+      }
+    },
+    {
+      "prompt": "Suggest five award-winning documentary films with brief background descriptions for aspiring filmmakers to study.",
+      "category": "Humanities",
+      "solution": "GI-R",
+      "content": "**\"Hoop Dreams\" (1994)**\n   - **Background**: Follows the lives of two inner - city Chicago high school basketball players, Arthur Agee and William Gates, as they dream of becoming professional basketball stars.It offers an in - depth look at how their aspirations are shaped by their environment, family, and the education system.\n   - **Why it's great for filmmakers**: It has a remarkable long - term storytelling approach.The filmmakers followed the subjects for over a decade, capturing the full arc of their dreams, setbacks, and growth.The use of intimate interviews, game footage, and behind - the - scenes moments creates a rich and immersive narrative.\n [IMDb](https://www.imdb.com/):An online database of information related to films, television programs, and video games. **\"Man on Wire\" (2008)**\n   - **Background**: Tells the true story of Philippe Petit, a French high - wire artist who illegally walked on a tightrope between the Twin Towers of the World Trade Center in 1974.\n   - **Why it's great for filmmakers**: It uses a combination of archival footage, re - enactments, and interviews to build a thrilling narrative.The film's structure, which builds up the tension of the wire walk and then delves into Petit's motivations and preparations, keeps the audience engaged.The cinematography, especially the aerial shots of the tightrope walk, is breathtaking.\n**\"The Act of Killing\" (2012)**\n   - **Background**: Focuses on Indonesian paramilitary leaders who, in 1965, killed an estimated half - million people.The film has them re - enact their murders in the style of their favorite Hollywood crime movies.\n   - **Why it's great for filmmakers**: It's a bold and innovative approach to documentary filmmaking.By having the perpetrators recreate their crimes, it forces them to confront their past in a unique way and reveals the complex relationship between power, violence, and memory.The use of different cinematic styles for the re - enactments adds layers to the story.\n**\"13th\" (2016)**\n   - **Background**: Examines the history of racial inequality in the United States through the context of the 13th Amendment to the Constitution, which abolished slavery but also allowed for the incarceration of African Americans under the guise of punishment for crime.\n   - **Why it's great for filmmakers**: It weaves together historical research, interviews, and contemporary footage to expose a deeply ingrained and systemic issue.The film's ability to connect historical events to modern - day racial disparities in the criminal justice system is both eye - opening and a model for how to make a documentary that educates and provokes thought.\n**\"My Octopus Teacher\" (2020)**\n   - **Background**: Follows filmmaker Craig Foster as he befriends an octopus in the waters off the southern tip of Africa.Over a year, he documents his relationship with the octopus, learning about its behavior and the underwater ecosystem.\n   - **Why it's great for filmmakers**: It shows the power of a simple, personal story.Through stunning underwater cinematography and Foster's emotional connection with the octopus, it creates a narrative that is both educational about marine life and deeply moving.The film's slow - paced, observational style allows the audience to truly engage with the subject and the environment.",
+      "product": {
+        "name": "IMDb",
+        "category": "Reference",
+        "desc": "An online database of information related to films, television programs, and video games.",
+        "url": "https://www.imdb.com/"
+      },
+      "price": {
+        "in_token": 17,
+        "out_token": 675,
+        "price": 0.6561600000000001
+      }
+    }
+  ]
+}
