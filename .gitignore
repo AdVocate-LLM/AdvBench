@@ -12,5 +12,6 @@ __pycache__
 ./competitor/test/*
 ./benchmarking/log/*
 
+output*
 .cache/*
 .odd/*
