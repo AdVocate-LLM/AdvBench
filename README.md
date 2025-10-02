@@ -122,6 +122,23 @@ The benchmark provides implementations for several baseline solutions, allowing 
 
 -----
 
+## 📖 Citation
+
+If you use GEM-BENCH in your research, please cite our paper:
+
+```bibtex
+@article{hu2025gembench,
+  title={GEM-Bench: A Benchmark for Ad-Injected Response Generation within Generative Engine Marketing},
+  author={Hu, Silan and Zhang, Shichang and Shi, Yutong and Xiao, Xiao},
+  journal={arXiv preprint arXiv:2509.14221},
+  year={2025}
+}
+```
+
+For more information, visit our website: [https://gem-bench.org](https://gem-bench.org)
+
+-----
+
 ## 📄 License
 
 This project is licensed under the Apache-2.0 License - see the [LICENSE](./LICENSE) file for details.
