@@ -129,7 +129,7 @@ If you use GEM-BENCH in your research, please cite our paper:
 ```bibtex
 @article{hu2025gembench,
   title={GEM-Bench: A Benchmark for Ad-Injected Response Generation within Generative Engine Marketing},
-  author={Hu, Silan and Zhang, Shichang and Shi, Yutong and Xiao, Xiao},
+  author={Hu, Silan and Zhang, Shiqi and Shi, Yimin and Xiao, Xiaokui},
   journal={arXiv preprint arXiv:2509.14221},
   year={2025}
 }
