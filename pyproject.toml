@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=70.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gembench"
+version = "1.0.9"
+dependencies = [
+    "openai",
+    "python-dotenv",
+    "nltk",
+    "numpy",
+    "sentence-transformers",
+    "scikit-learn>=1.0.0",
+    "pandas>=2.1.0",
+    "rich==14.0.0",
+    "openpyxl==3.1.5",
+    "pyfiglet==1.0.2",
+    "tenacity",
+    "aiolimiter",
+    "diskcache",
+    "cachetools",
+    "matplotlib",
+    "tiktoken",
+]
+dynamic = ["readme", "description", "authors", "classifiers", "keywords", "urls", "requires-python"]

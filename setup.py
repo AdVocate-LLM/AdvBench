@@ -24,20 +24,34 @@ def read_requirements():
 
 setup(
     name="gembench",
-    version="1.0.0",
-    description="A comprehensive framework for detecting and mitigating adversarial ad injection in LLMs",
+    version="1.0.9",
+    description="First comprehensive benchmark for Generative Engine Marketing (GEM), an emerging field that focuses on monetizing generative AI by seamlessly integrating advertisements into Large Language Model (LLM) responses. Our work addresses the core problem of ad-injected response (AIR) generation and provides a framework for its evaluation.",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    author="GemBench Team",
+    author="GemBench Team(Silan Hu, Shiqi Zhang, Yimin Shi, Xiaokui Xiao)",
     url="https://github.com/Generative-Engine-Marketing/GEM-Bench",
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        "gembench.benchmarking": [
+        "GemBench.benchmarking": [
             "dataset/product/*.json",
-            "dataset/MT-Human/*.json",
-            "dataset/LM-Market/*.json",
+            "dataset/MT_Human/*.json",
+            "dataset/LM_Market/*.json",
             "dataset/CA_Prod/src/dataset/*.tsv",
+            "dataset/CA_Prod/*.txt",
+            "evaluator/laaj_evaluator/*.md",
+            "utils/nltk_data/tokenizers/punkt/*.pickle",
+            "utils/nltk_data/tokenizers/punkt/*.zip",
+            "utils/nltk_data/tokenizers/punkt/README",
+            "utils/nltk_data/tokenizers/punkt/PY3/*.pickle",
+            "utils/nltk_data/tokenizers/punkt/PY3/README",
+        ],
+        "GemBench.solutions.src.AdLLM": [
+            "utils/nltk_data/punkt/*.pickle",
+            "utils/nltk_data/punkt/*.zip",
+            "utils/nltk_data/punkt/README",
+            "utils/nltk_data/punkt/PY3/*.pickle",
+            "utils/nltk_data/punkt/PY3/README",
         ]
     },
     install_requires=read_requirements(),
@@ -46,7 +60,7 @@ setup(
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
@@ -57,7 +71,7 @@ setup(
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords="llm adversarial ad-injection benchmark machine-learning",
+    keywords="llm generative-engine-marketing gem benchmark machine-learning",
     project_urls={
         "Bug Reports": "https://github.com/Generative-Engine-Marketing/GEM-Bench/issues",
         "Source": "https://github.com/Generative-Engine-Marketing/GEM-Bench",
