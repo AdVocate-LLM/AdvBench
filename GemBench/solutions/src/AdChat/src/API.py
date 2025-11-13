@@ -1,15 +1,23 @@
 import os
+import re
 from openai import OpenAI
 from .....benchmarking.tools.ModelPrice import ModelPricing
 
 
 class OpenAIAPI(ModelPricing):
+    MUST_DECLARE_ENABLE_THINKING = ["qwen3-8b", "qwen3-14b", "qwen3-30b-a3b", "QWen/Qwen3-14B", "QWen/Qwen3-30B-A3B"]
+    DEEP_INFRA_BASE_URL = 'https://api.deepinfra.com/v1/openai' 
+    DEEP_INFRA_MODELS = ["Qwen/Qwen3-14B", "Qwen/Qwen3-30B-A3B", "meta-llama/Meta-Llama-3-8B-Instruct","meta-llama/Meta-Llama-3.1-70B-Instruct","meta-llama/Llama-3.3-70B-Instruct-Turbo"]
+
     def __init__(self, model, max_tries:int=5, verbose:bool=False):
         super().__init__()
         openai_key = os.getenv('OPENAI_API_KEY')
         base_url = os.getenv('BASE_URL')
+        deepinfra_key = os.getenv('EMBEDDING_API_KEY')
         self.client = OpenAI(api_key=openai_key, base_url=base_url)
-        self.model = model
+        if model in self.DEEP_INFRA_MODELS:
+            self.client = OpenAI(api_key=deepinfra_key, base_url=self.DEEP_INFRA_BASE_URL)
+        self.model = model  
         self.verbose = verbose
         self.max_tries = max_tries
 
@@ -39,11 +47,18 @@ class OpenAIAPI(ModelPricing):
                 else:
                     raise ValueError('Either chat_history or sys_prompt and user_prompt must be provided.')
                 
-                response = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=chat,
-                    stream=False,
-                )
+                if self.model in self.MUST_DECLARE_ENABLE_THINKING:
+                    response = self.client.chat.completions.create(
+                        model=self.model,
+                        messages=chat,
+                        extra_body={"enable_thinking": False},
+                    )
+                else:
+                    response = self.client.chat.completions.create(
+                        model=self.model,
+                        messages=chat,
+                        stream=False,
+                    )
                 
                 if response.choices[0].finish_reason == 'stop':
                     message = response.choices[0].message.content
@@ -60,9 +75,21 @@ class OpenAIAPI(ModelPricing):
                 if include_role:
                     message = {'content': message, 'role': 'assistant'}
                 input_string = "".join([c['content'] for c in chat])
-                return message, self.price_of(input_string, message, self.model)
+                return self._remove_thinking(message), self.price_of(input_string, message, self.model)
 
             except Exception as e:
                 print(e)
                 continue
         raise Exception('Max tries exceeded')
+    
+    def _remove_thinking(self, response):
+        """
+        Because some models like Qwen3-14B and Qwen3-30B-A3B will add some "thinking" process in the response, 
+        we need to remove them.
+        
+        input: <think>..remove.</think>...response
+        output: response
+        """
+        cleaned = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL | re.IGNORECASE)
+
+        return cleaned.strip()

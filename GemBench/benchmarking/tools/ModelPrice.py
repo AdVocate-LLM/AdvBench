@@ -41,14 +41,13 @@ class ModelPricing:
         Returns:
             float: The total cost in USD for the given input/output and model.
         """
-        if model not in self.MODEL_PRICE:
-            raise ValueError(f"wrong: {model} not supported")
-
         # print(input_text, type(input_text), output_text, type(output_text), model)
 
         in_token_num = len(self.encoder.encode(str(input_text or '')))
         out_token_num = len(self.encoder.encode(str(output_text or '')))
-
+        if model not in self.MODEL_PRICE:
+            return {'in_token': in_token_num, 'out_token': out_token_num, 'price': 0}
+        
         in_price = self.MODEL_PRICE[model][0] * in_token_num / 1e3
         out_price = self.MODEL_PRICE[model][1] * out_token_num / 1e3
         request_price = self.MODEL_PRICE[model][2]

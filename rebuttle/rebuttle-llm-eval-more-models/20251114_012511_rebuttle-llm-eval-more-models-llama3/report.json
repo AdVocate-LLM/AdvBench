@@ -1,0 +1,302 @@
+{
+    "LM-Market": {
+        "Llama3_1_70b-Ad-Chat": {
+            "avg": {
+                "has_ad": 97.36842105263158,
+                "local_flow": 43.14310210223882,
+                "global_coherence": 65.62949712155982,
+                "ad_transition_similarity": 80.69010271106539,
+                "ad_content_alignment": 54.24523069861642,
+                "in_token": 888.4078947368421,
+                "out_token": 412.11842105263156,
+                "price": 0.0,
+                "accuracy": 78.94736842105263,
+                "naturalness": 57.63157894736842,
+                "personality": 57.23684210526316,
+                "trust": 54.86842105263158,
+                "notice_products": 80.13157894736842,
+                "click_products": 77.36842105263158
+            },
+            "__all__": {
+                "has_ad": 97.36842105263158,
+                "local_flow": 43.14310210223882,
+                "global_coherence": 65.62949712155982,
+                "ad_transition_similarity": 80.69010271106539,
+                "ad_content_alignment": 54.24523069861642,
+                "in_token": 888.4078947368421,
+                "out_token": 412.11842105263156,
+                "price": 0.0,
+                "accuracy": 78.94736842105263,
+                "naturalness": 57.63157894736842,
+                "personality": 57.23684210526316,
+                "trust": 54.86842105263158,
+                "notice_products": 80.13157894736842,
+                "click_products": 77.36842105263158
+            }
+        },
+        "Llama3_3_70b-Ad-Chat": {
+            "avg": {
+                "has_ad": 92.10526315789474,
+                "local_flow": 45.683541603753454,
+                "global_coherence": 67.82205542316028,
+                "ad_transition_similarity": 88.10070795626885,
+                "ad_content_alignment": 56.1452807277691,
+                "in_token": 857.7105263157895,
+                "out_token": 334.05263157894734,
+                "price": 0.0,
+                "accuracy": 68.6842105263158,
+                "naturalness": 40.26315789473684,
+                "personality": 53.28947368421053,
+                "trust": 45.78947368421053,
+                "notice_products": 80.13157894736842,
+                "click_products": 76.1842105263158
+            },
+            "__all__": {
+                "has_ad": 92.10526315789474,
+                "local_flow": 45.683541603753454,
+                "global_coherence": 67.82205542316028,
+                "ad_transition_similarity": 88.10070795626885,
+                "ad_content_alignment": 56.1452807277691,
+                "in_token": 857.7105263157895,
+                "out_token": 334.05263157894734,
+                "price": 0.0,
+                "accuracy": 68.6842105263158,
+                "naturalness": 40.26315789473684,
+                "personality": 53.28947368421053,
+                "trust": 45.78947368421053,
+                "notice_products": 80.13157894736842,
+                "click_products": 76.1842105263158
+            }
+        },
+        "Llama3_1_70b-GIR-R": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 40.50646901076815,
+                "global_coherence": 62.08386575741597,
+                "ad_transition_similarity": 83.3357854276956,
+                "ad_content_alignment": 54.264858079787544,
+                "in_token": 383.89473684210526,
+                "out_token": 671.5921052631579,
+                "price": 0.0,
+                "accuracy": 80.52631578947368,
+                "naturalness": 69.07894736842105,
+                "personality": 68.6842105263158,
+                "trust": 71.84210526315789,
+                "notice_products": 83.28947368421052,
+                "click_products": 80.13157894736842
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 40.50646901076815,
+                "global_coherence": 62.08386575741597,
+                "ad_transition_similarity": 83.3357854276956,
+                "ad_content_alignment": 54.264858079787544,
+                "in_token": 383.89473684210526,
+                "out_token": 671.5921052631579,
+                "price": 0.0,
+                "accuracy": 80.52631578947368,
+                "naturalness": 69.07894736842105,
+                "personality": 68.6842105263158,
+                "trust": 71.84210526315789,
+                "notice_products": 83.28947368421052,
+                "click_products": 80.13157894736842
+            }
+        },
+        "Llama3_3_70b-GIR-R": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 45.743006431601664,
+                "global_coherence": 69.43418420596882,
+                "ad_transition_similarity": 87.34360245515991,
+                "ad_content_alignment": 57.19545055357102,
+                "in_token": 313.8421052631579,
+                "out_token": 504.4736842105263,
+                "price": 0.0,
+                "accuracy": 83.28947368421052,
+                "naturalness": 63.55263157894737,
+                "personality": 69.07894736842105,
+                "trust": 70.65789473684211,
+                "notice_products": 81.3157894736842,
+                "click_products": 74.60526315789474
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 45.743006431601664,
+                "global_coherence": 69.43418420596882,
+                "ad_transition_similarity": 87.34360245515991,
+                "ad_content_alignment": 57.19545055357102,
+                "in_token": 313.8421052631579,
+                "out_token": 504.4736842105263,
+                "price": 0.0,
+                "accuracy": 83.28947368421052,
+                "naturalness": 63.55263157894737,
+                "personality": 69.07894736842105,
+                "trust": 70.65789473684211,
+                "notice_products": 81.3157894736842,
+                "click_products": 74.60526315789474
+            }
+        },
+        "__all__": {
+            "Llama3_1_70b-Ad-Chat": 146.27049142870723,
+            "Llama3_3_70b-Ad-Chat": 136.14015085905294,
+            "Llama3_1_70b-GIR-R": 132.08788942570555,
+            "Llama3_3_70b-GIR-R": 115.75228807999898
+        }
+    },
+    "CA_Prod": {
+        "Llama3_1_70b-Ad-Chat": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 39.684503326899176,
+                "global_coherence": 65.57147765487808,
+                "ad_transition_similarity": 83.9240673312978,
+                "ad_content_alignment": 56.8086477083746,
+                "in_token": 2952.425,
+                "out_token": 272.60833333333335,
+                "price": 0.0,
+                "accuracy": 54.75,
+                "naturalness": 45.0,
+                "personality": 39.25,
+                "trust": 33.0,
+                "notice_products": 88.25,
+                "click_products": 88.25,
+                "product_selection_accuracy": 38.333333333333336
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 39.684503326899176,
+                "global_coherence": 65.57147765487808,
+                "ad_transition_similarity": 83.9240673312978,
+                "ad_content_alignment": 56.8086477083746,
+                "in_token": 2952.425,
+                "out_token": 272.60833333333335,
+                "price": 0.0,
+                "accuracy": 54.75,
+                "naturalness": 45.0,
+                "personality": 39.25,
+                "trust": 33.0,
+                "notice_products": 88.25,
+                "click_products": 88.25,
+                "product_selection_accuracy": 38.333333333333336
+            }
+        },
+        "Llama3_3_70b-Ad-Chat": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 40.126315795208775,
+                "global_coherence": 66.17877433147386,
+                "ad_transition_similarity": 87.7744777683556,
+                "ad_content_alignment": 56.87798972684911,
+                "in_token": 2955.883333333333,
+                "out_token": 280.39166666666665,
+                "price": 0.0,
+                "accuracy": 54.25,
+                "naturalness": 39.5,
+                "personality": 37.75,
+                "trust": 30.25,
+                "notice_products": 88.25,
+                "click_products": 88.5,
+                "product_selection_accuracy": 41.666666666666664
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 40.126315795208775,
+                "global_coherence": 66.17877433147386,
+                "ad_transition_similarity": 87.7744777683556,
+                "ad_content_alignment": 56.87798972684911,
+                "in_token": 2955.883333333333,
+                "out_token": 280.39166666666665,
+                "price": 0.0,
+                "accuracy": 54.25,
+                "naturalness": 39.5,
+                "personality": 37.75,
+                "trust": 30.25,
+                "notice_products": 88.25,
+                "click_products": 88.5,
+                "product_selection_accuracy": 41.666666666666664
+            }
+        },
+        "Llama3_1_70b-GIR-R": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 42.5901897431766,
+                "global_coherence": 61.38956002089415,
+                "ad_transition_similarity": 88.6835044096442,
+                "ad_content_alignment": 58.87835343439172,
+                "in_token": 390.95,
+                "out_token": 479.0083333333333,
+                "price": 0.0,
+                "accuracy": 60.75,
+                "naturalness": 52.5,
+                "personality": 51.0,
+                "trust": 38.5,
+                "notice_products": 87.75,
+                "click_products": 88.25,
+                "product_selection_accuracy": 40.833333333333336
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 42.5901897431766,
+                "global_coherence": 61.38956002089415,
+                "ad_transition_similarity": 88.6835044096442,
+                "ad_content_alignment": 58.87835343439172,
+                "in_token": 390.95,
+                "out_token": 479.0083333333333,
+                "price": 0.0,
+                "accuracy": 60.75,
+                "naturalness": 52.5,
+                "personality": 51.0,
+                "trust": 38.5,
+                "notice_products": 87.75,
+                "click_products": 88.25,
+                "product_selection_accuracy": 40.833333333333336
+            }
+        },
+        "Llama3_3_70b-GIR-R": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 53.64392540106686,
+                "global_coherence": 76.42641064168538,
+                "ad_transition_similarity": 88.95749832757208,
+                "ad_content_alignment": 65.75999965293812,
+                "in_token": 406.60833333333335,
+                "out_token": 472.275,
+                "price": 0.0,
+                "accuracy": 67.25,
+                "naturalness": 50.5,
+                "personality": 55.5,
+                "trust": 46.5,
+                "notice_products": 87.25,
+                "click_products": 87.25,
+                "product_selection_accuracy": 35.833333333333336
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 53.64392540106686,
+                "global_coherence": 76.42641064168538,
+                "ad_transition_similarity": 88.95749832757208,
+                "ad_content_alignment": 65.75999965293812,
+                "in_token": 406.60833333333335,
+                "out_token": 472.275,
+                "price": 0.0,
+                "accuracy": 67.25,
+                "naturalness": 50.5,
+                "personality": 55.5,
+                "trust": 46.5,
+                "notice_products": 87.25,
+                "click_products": 87.25,
+                "product_selection_accuracy": 35.833333333333336
+            }
+        },
+        "__all__": {
+            "Llama3_1_70b-Ad-Chat": 263.85702417920777,
+            "Llama3_3_70b-Ad-Chat": 264.49328161923694,
+            "Llama3_1_70b-GIR-R": 109.40555161831823,
+            "Llama3_3_70b-GIR-R": 112.91696671266193
+        }
+    },
+    "__all__": {
+        "LM-Market": 132.5627049483662,
+        "CA_Prod": 187.6682060323562
+    }
+}

@@ -3,7 +3,7 @@ from .prompts import *
 import json, difflib, os
 
 
-absolute_path = os.path.dirname(os.path.abspath(__file__))
+# absolute_path = os.path.dirname(os.path.abspath(__file__))
 
 class Topics:
     def __init__(self,topic_list_path: str, model:str, verbose=False):

@@ -19,6 +19,7 @@ class Oracle(ParallelProcessor, ExperimentCache, ModelPricing):
     MODEL_LLAMA_3_8B = 'llama-3-8B'
     MODEL_LLAMA_3_70B = 'llama-3-70B'
     MODEL_MIXTRAL_8X7B = 'mixtral-8x7B'
+    MUST_DECLARE_ENABLE_THINKING = ["qwen3-8b", "qwen3-14b", "qwen3-30b-a3b"]
 
     def __init__(self, model, apikey=None, base_url=None):
         ParallelProcessor.__init__(self)
@@ -27,16 +28,17 @@ class Oracle(ParallelProcessor, ExperimentCache, ModelPricing):
         self.model = model
         self.apikey = os.environ.get("OPENAI_API_KEY") if apikey is None else apikey
         self.base_url = os.environ.get("BASE_URL") if base_url is None else base_url
+        self.deepinfra_key = os.environ.get("EMBEDDING_API_KEY")
         
         # for deepinfra models
-        self.deepinfra_model_list = [self.MODEL_LLAMA_3_8B, self.MODEL_LLAMA_3_70B, self.MODEL_MIXTRAL_8X7B]
+        self.deepinfra_model_list = [self.MODEL_LLAMA_3_8B, self.MODEL_LLAMA_3_70B, self.MODEL_MIXTRAL_8X7B, "Qwen/Qwen3-14B", "Qwen/Qwen3-30B-A3B", "meta-llama/Meta-Llama-3-8B-Instruct","meta-llama/Meta-Llama-3.1-70B-Instruct","meta-llama/Llama-3.3-70B-Instruct-Turbo"]
         self.base_url_deepinfra = 'https://api.deepinfra.com/v1/openai'
         # for openai models
         self.openai_model_list = [self.MODEL_GPT4o_MINI, self.MODEL_GPT4o, self.MODEL_GPT4_TURBO,]
 
         # for deepinfra models
         if model in self.deepinfra_model_list:
-            self.client = OpenAI(api_key=self.apikey, base_url=self.base_url_deepinfra)
+            self.client = OpenAI(api_key=self.deepinfra_key, base_url=self.base_url_deepinfra)
         else:
             self.client = OpenAI(api_key=self.apikey, base_url=self.base_url)
     
@@ -59,15 +61,26 @@ class Oracle(ParallelProcessor, ExperimentCache, ModelPricing):
             return cached_response
 
         try:
-            completion = self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": prompt_sys},
-                    {"role": "user", "content": prompt_user},
-                ],
-                stream=False,
-                temperature=temp,
-            )
+            if self.model in self.MUST_DECLARE_ENABLE_THINKING:
+                completion = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": prompt_sys},
+                        {"role": "user", "content": prompt_user},
+                    ],
+                    extra_body={"enable_thinking": False},
+                    temperature=temp,
+                ) 
+            else:
+                completion = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": prompt_sys},
+                        {"role": "user", "content": prompt_user},
+                    ],
+                    stream=False,
+                    temperature=temp,
+                )  
 
             response_result = ""
             # for chunk in stream:
