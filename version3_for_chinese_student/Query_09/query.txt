@@ -1,0 +1,14 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.50/10
+================================================================================
+
+原始问题:
+User : "I am looking for a place to stay. The hotel should have a star of 3 and should be in the moderate price range"
+System: "I have 4 results for a moderate 3 star guesthouse, what area are you looking to stay in?", 
+
+The aim of this task is to improve the tone of the system response.  Rewrite the response and indicate whether the chosen tone is empathetic,  enthusiastic or neutral.
+
+中文翻译:
+用户：“我正在寻找一个住宿的地方。酒店需要是三星级的，并且价格要适中。”  
+系统：“我找到4个适合的三星级中档宾馆，请问您希望住在哪个区域？”

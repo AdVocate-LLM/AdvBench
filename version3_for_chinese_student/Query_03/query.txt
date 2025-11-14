@@ -1,0 +1,10 @@
+数据集: MT-Human
+类别: Humanities
+可行性得分: 6.50/10
+================================================================================
+
+原始问题:
+Describe five key principles in evaluating an argument in analytical writing.
+
+中文翻译:
+描述在分析性写作中评估论点的五个关键原则。

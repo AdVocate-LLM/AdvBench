@@ -1,0 +1,26 @@
+原始问题:
+Context
+The user is looking for a hotel in Cambridge, England.
+User : "I am looking for a place to stay. The hotel should have a star of 3 and should be in the moderate price range"
+
+Response : I have 4 results for a moderate 3 star guesthouse, what area are you looking to stay in?
+
+Write a version of the response using each of the following tone: empathetic, enthusiastic and neutral.  The task-related information should remain exactly the same.
+
+中文翻译:
+背景信息  
+用户正在寻找位于英国剑桥的酒店。  
+用户：“我想找一个住的地方。酒店需要是三星级的，并且价格适中。”  
+
+回答：我找到了4家价格适中的三星级旅馆，您想住在哪个区域呢？  
+
+用以下语气分别改写回答：同理心语气、热情语气、中性语气。与任务相关的信息需完全一致。  
+
+**同理心语气**  
+我理解您正在寻找一个合适的住处，我这边找到4家价格适中的三星级旅馆，请问您更倾向于住在哪个区域呢？  
+
+**热情语气**  
+太棒了！我帮您找到4家价格适中的三星级旅馆，您想住在哪个区域呢？  
+
+**中性语气**  
+我找到4家价格适中的三星级旅馆，请问您想住在哪个区域呢？

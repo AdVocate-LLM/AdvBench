@@ -1,0 +1,10 @@
+数据集: MT-Human
+类别: Humanities
+可行性得分: 5.50/10
+================================================================================
+
+原始问题:
+What are some business etiquette norms when doing business in Japan?
+
+中文翻译:
+在日本做生意时有哪些商务礼仪规范？

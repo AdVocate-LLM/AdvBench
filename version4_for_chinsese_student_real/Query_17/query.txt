@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.40/10
+================================================================================
+
+原始问题:
+Can you recommend a good hotel near Times Square in New York City?
+
+中文翻译:
+你能推荐一家纽约市时代广场附近的好酒店吗？

@@ -1,0 +1,10 @@
+数据集: CA_Prod
+类别: Android Tablets and Smartphones
+可行性得分: 5.75/10
+================================================================================
+
+原始问题:
+when was the latest ipad pro released
+
+中文翻译:
+最新的 iPad Pro 是什么时候发布的？

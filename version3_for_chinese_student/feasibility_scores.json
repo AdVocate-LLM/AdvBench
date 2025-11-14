@@ -1,0 +1,282 @@
+[
+  {
+    "query": "vitamin c formula",
+    "score": 7,
+    "details": {
+      "常识认知适配性": 8,
+      "评判可行性": 7,
+      "问题代表性": 6,
+      "回答差异性": 7,
+      "综合评分": 7,
+      "简短理由": "问题涉及基本化学常识和健康知识，适合中国本科生，但部分品牌信息可能不熟悉。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  },
+  {
+    "query": "chinese keyboard",
+    "score": 7,
+    "details": {
+      "常识认知适配性": 8,
+      "评判可行性": 7,
+      "问题代表性": 6,
+      "回答差异性": 7,
+      "综合评分": 7,
+      "简短理由": "问题涉及中国本科生熟悉的内容，但回答中有一些国外品牌和市场信息，评判标准较为清晰，回答有一定差异性。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Android Tablets and Smartphones"
+  },
+  {
+    "query": "Describe five key principles in evaluating an argument in analytical writing.",
+    "score": 6.5,
+    "details": {
+      "常识认知适配性": 7,
+      "评判可行性": 8,
+      "问题代表性": 5,
+      "回答差异性": 6,
+      "综合评分": 6.5,
+      "简短理由": "问题涉及分析性写作的通用原则，适合中国本科生理解和评判，但回答差异性较为有限，且问题不完全贴近中国学生日常场景。"
+    },
+    "dataset": "MT-Human",
+    "category": "Humanities"
+  },
+  {
+    "query": "cell phone camera",
+    "score": 6.5,
+    "details": {
+      "常识认知适配性": 7,
+      "评判可行性": 6,
+      "问题代表性": 5,
+      "回答差异性": 8,
+      "综合评分": 6.5,
+      "简短理由": "问题涉及手机摄像头和配件，基本符合中国本科生认知，但部分国外品牌和市场内容可能影响评判。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Android Tablets and Smartphones"
+  },
+  {
+    "query": "what is the best way to spend time during vaction?",
+    "score": 6.25,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 5,
+      "回答差异性": 9,
+      "综合评分": 6.25,
+      "简短理由": "问题涉及部分国外内容和品牌,但回答差异明显,评判较为可行。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "when was the latest ipad pro released",
+    "score": 5.75,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 7,
+      "问题代表性": 5,
+      "回答差异性": 6,
+      "综合评分": 5.75,
+      "简短理由": "问题涉及国外产品发布,但基本信息中国本科生能理解;评判标准较清晰,回答有一定差异,但问题不够贴近中国生活场景。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Android Tablets and Smartphones"
+  },
+  {
+    "query": "What are some business etiquette norms when doing business in Japan?",
+    "score": 5.5,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 4,
+      "回答差异性": 7,
+      "综合评分": 5.5,
+      "简短理由": "问题涉及日本商务礼仪和品牌，部分内容超出中国本科生常识范围，但回答差异明显，可进行评判。"
+    },
+    "dataset": "MT-Human",
+    "category": "Humanities"
+  },
+  {
+    "query": "What is the best computer game of 2021 year?",
+    "score": 5.5,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 5.5,
+      "简短理由": "问题涉及国外游戏文化，中国本科生可能不完全熟悉，但回答差异明显，具备一定评判可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "User : \"I am looking for a place to stay. The hotel should have a star of 3 and should be in the moderate price range\"\nSystem: \"I have 4 results for a moderate 3 star guesthouse, what area are you looking to stay in?\", \n\nThe aim of this task is to improve the tone of the system response.  Rewrite the response and indicate whether the chosen tone is empathetic,  enthusiastic or neutral.",
+    "score": 5.5,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 7,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.5,
+      "简短理由": "问题涉及国外酒店预订场景，部分内容超出中国本科生常识范围，但评判标准较为清晰，回答有一定差异。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "the most beautiful 10 countries in the wworld",
+    "score": 5.5,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 5.5,
+      "简短理由": "问题涉及国外地理和文化内容，中国本科生基本能理解但需一定背景知识，回答差异性较明显但评判标准略显主观。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "what are the top 5 traveling destinations for summer in europe?",
+    "score": 5.5,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 5.5,
+      "简短理由": "问题涉及欧洲旅游地,需要一定国外知识,但回答差异明显,可供评判。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "Please give me a paragraph conclusion for my article summing up everything about low impact exercises vs high impact exercises and please include this in the Content:\n\n- Encourage reader to try the 7-minute workout: low-impact, easy to incorporate into your daily routine, SUPPORTS WEIGHT LOSS AND + FITNESS GOALS",
+    "score": 5.5,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 4,
+      "回答差异性": 7,
+      "综合评分": 5.5,
+      "简短理由": "问题涉及国外品牌和产品链接，对中国本科生的常识认知有一定挑战，但回答差异性较明显，评判相对可行。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "what are the benefits of cold brew coffee?",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 6,
+      "评判可行性": 6,
+      "问题代表性": 4,
+      "回答差异性": 5,
+      "综合评分": 5.25,
+      "简短理由": "问题和回答涉及冷萃咖啡的常识内容，但包含国外品牌和文化背景，部分超出中国本科生的认知和评判范围。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "What's the best 3 matching Wikipedia title for the book 'How to Overcome Emotional Eating'?\"\nAnswer short and crisp with no subtitle. The title of suggested articles are:",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.25,
+      "简短理由": "问题涉及国外内容和品牌,但中国本科生基本能理解;评判标准较为清晰,回答有一定差异,但问题不够贴近中国生活场景。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "best countries to visit for tourism",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 6,
+      "综合评分": 5.25,
+      "简短理由": "问题涉及国外旅游国家和文化，部分内容超出中国本科生常识范围，但评判标准较为清晰，回答有一定差异性，适合部分学生评测。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "I have one hour after school to spend with my girlfriend before I go to work and then ultimately go on a week-long vacation abroad. What activity can I do to make it memorable?",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.25,
+      "简短理由": "问题和回答涉及国外文化和品牌，部分内容超出中国本科生的常识范围，但回答差异性较明显，评判有一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "ikea kitchen",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.25,
+      "简短理由": "问题涉及国外品牌和产品，部分内容超出中国本科生常识范围，但回答差异较明显，评判具备一定可行性。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Contemporary Home Furnishings"
+  },
+  {
+    "query": "kids laptop",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.25,
+      "简短理由": "问题涉及国外品牌和市场背景,中国本科生可能不熟悉,但回答差异明显,评判有一定可行性。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Android Tablets and Smartphones"
+  },
+  {
+    "query": "nutrition facts vitamin c and biotin",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 6,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 6,
+      "综合评分": 5.25,
+      "简短理由": "问题涉及营养学常识，但包含国外品牌和购物网站，可能超出部分中国本科生的认知；回答差异性较明显，但评判需一定主观判断力。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  },
+  {
+    "query": "pictures of the iphone6",
+    "score": 5.25,
+    "details": {
+      "常识认知适配性": 5,
+      "评判可行性": 7,
+      "问题代表性": 3,
+      "回答差异性": 6,
+      "综合评分": 5.25,
+      "简短理由": "问题涉及国外品牌和产品，但回答内容较易理解；评判标准相对清晰，但问题不够贴近中国本科生的日常场景。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Android Tablets and Smartphones"
+  }
+]

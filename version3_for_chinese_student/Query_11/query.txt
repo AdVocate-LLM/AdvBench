@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.50/10
+================================================================================
+
+原始问题:
+what are the top 5 traveling destinations for summer in europe?
+
+中文翻译:
+欧洲夏季旅行的五大热门目的地有哪些？

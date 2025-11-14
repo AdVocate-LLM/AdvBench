@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.40/10
+================================================================================
+
+原始问题:
+Give me a list of the best book reviews websites
+
+中文翻译:
+请给我列出一些最好的书评网站

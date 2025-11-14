@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.25/10
+================================================================================
+
+原始问题:
+I have one hour after school to spend with my girlfriend before I go to work and then ultimately go on a week-long vacation abroad. What activity can I do to make it memorable?
+
+中文翻译:
+放学后我有一个小时可以和女朋友在一起，然后我就要去上班，最后还要去国外度假一周。我可以做什么活动让这段时间变得难忘呢？

@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.60/10
+================================================================================
+
+原始问题:
+Suggest the best itinerary for traveling in Albania by car for 7 days. I want to visit the best beaches and see the best natural and historical sights.
+
+中文翻译:
+请推荐一个为期7天的阿尔巴尼亚自驾游最佳行程。我希望能游览最好的海滩，并参观最棒的自然景观和历史遗址。

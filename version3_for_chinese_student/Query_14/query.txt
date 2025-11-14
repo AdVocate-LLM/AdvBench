@@ -1,0 +1,12 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.25/10
+================================================================================
+
+原始问题:
+What's the best 3 matching Wikipedia title for the book 'How to Overcome Emotional Eating'?"
+Answer short and crisp with no subtitle. The title of suggested articles are:
+
+中文翻译:
+《如何克服情绪化饮食》这本书最匹配的3个维基百科标题是什么？  
+回答简洁明了，无需副标题。建议的文章标题是：

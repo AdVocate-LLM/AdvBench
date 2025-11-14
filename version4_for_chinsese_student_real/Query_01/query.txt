@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 6.40/10
+================================================================================
+
+原始问题:
+what is the best way to spend time during vaction?
+
+中文翻译:
+假期期间最好的消遣方式是什么？

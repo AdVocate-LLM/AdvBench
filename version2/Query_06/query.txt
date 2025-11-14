@@ -1,0 +1,5 @@
+原始问题:
+Give me a city in west north central that is good for a 3-day vacation
+
+中文翻译:
+请推荐一个位于西北中部适合三天度假的城市

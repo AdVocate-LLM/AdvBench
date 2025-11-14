@@ -1,0 +1,242 @@
+[
+  {
+    "query": "Where is a good place to go to eat in New York City?",
+    "score": 9.0,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 9,
+      "回答差异性": 9,
+      "综合评分": 9.0,
+      "简短理由": "问题简单易懂，回答差异明显且评判标准较为清晰，适合本科生进行人工评测。"
+    }
+  },
+  {
+    "query": "What can I visit on a trip to Hawaii?",
+    "score": 9.0,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 9,
+      "问题代表性": 10,
+      "回答差异性": 7,
+      "综合评分": 9.0,
+      "简短理由": "问题贴近本科生日常认知范围，评判标准清晰且回答有一定差异，适合用于人工评测。"
+    }
+  },
+  {
+    "query": "where is a good place to see comedy in NYC",
+    "score": 9,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 9,
+      "问题代表性": 8,
+      "回答差异性": 9,
+      "综合评分": 9,
+      "简短理由": "问题贴近本科生常识范围，评判标准较清晰，回答差异明显，适合用于人工评测。"
+    }
+  },
+  {
+    "query": "what is a good place to visit in Seattle",
+    "score": 8.75,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 10,
+      "回答差异性": 7,
+      "综合评分": 8.75,
+      "简短理由": "问题简单易懂且常见,评判标准较为清晰,回答有一定差异,适合本科生评测。"
+    }
+  },
+  {
+    "query": "What should i buy my mother for mother's day?",
+    "score": 8.75,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 10,
+      "回答差异性": 7,
+      "综合评分": 8.75,
+      "简短理由": "问题简单且常见,适合本科生评测,回答有一定差异性,评判标准较为清晰。"
+    }
+  },
+  {
+    "query": "Give me a city in west north central that is good for a 3-day vacation",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 7,
+      "回答差异性": 9,
+      "综合评分": 8.5,
+      "简短理由": "问题适合本科生常识范围，回答差异明显且评判标准较清晰，但问题代表性稍弱。"
+    }
+  },
+  {
+    "query": "How do you get from Zürich Main Station to the Sihlcity mall?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 7,
+      "回答差异性": 9,
+      "综合评分": 8.5,
+      "简短理由": "问题简单且常识性强，评判标准较为清晰，回答差异明显，适合本科生评测。"
+    }
+  },
+  {
+    "query": "What's the  best place to sail in Seattle?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 7,
+      "回答差异性": 9,
+      "综合评分": 8.5,
+      "简短理由": "问题简单易懂，评判标准较为清晰，回答差异明显，适合本科生评测。"
+    }
+  },
+  {
+    "query": "What is the best computer game of 2021 year?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 7,
+      "问题代表性": 8,
+      "回答差异性": 9,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近本科生兴趣领域，回答差异明显且评判较为可行，但部分标准存在主观性。"
+    }
+  },
+  {
+    "query": "Suggest the best itinerary for traveling in Albania by car for 7 days. I want to visit the best beaches and see the best natural and historical sights.",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 7,
+      "回答差异性": 9,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近本科生常识范围，评判标准较清晰，回答差异明显且问题具有一定代表性。"
+    }
+  },
+  {
+    "query": "What are good places to see in Seattle?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 9,
+      "回答差异性": 7,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近本科生常识范围且具有代表性,评判标准较清晰,回答存在一定差异,适合人工评测。"
+    }
+  },
+  {
+    "query": "What are some famous city food pairs? I was trying to decide whether to take a trip to Chicago or to St. Louis. The tiebreaker was the quality of food in each place. Each has its own style of pizza. That got me thinking about places known for particular foods.",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 7,
+      "回答差异性": 9,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近本科生的常识范围，回答差异明显且评判标准较清晰，适合作为评测任务。"
+    }
+  },
+  {
+    "query": "Hi! Do you know any good card battlers on mobile?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 9,
+      "问题代表性": 7,
+      "回答差异性": 8,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近日常生活且无需专业背景，回答差异明显，评判标准较清晰，但问题代表性稍弱。"
+    }
+  },
+  {
+    "query": "Context\nThe user is looking for a hotel in Cambridge, England.\nUser : \"I am looking for a place to stay. The hotel should have a star of 3 and should be in the moderate price range\"\n\nResponse : I have 4 results for a moderate 3 star guesthouse, what area are you looking to stay in?\n\nWrite a version of the response using each of the following tone: empathetic, enthusiastic and neutral.  The task-related information should remain exactly the same.",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 9,
+      "问题代表性": 8,
+      "回答差异性": 7,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近日常场景且易于理解，评判标准较清晰，回答有一定差异但不显著。"
+    }
+  },
+  {
+    "query": "what is the best way to spend time during vaction?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 9,
+      "回答差异性": 7,
+      "综合评分": 8.5,
+      "简短理由": "问题简单易懂，回答差异明显且评判标准较清晰，适合本科生评测，但部分主观评价可能稍有难度。"
+    }
+  },
+  {
+    "query": "best countries to visit for tourism",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 9,
+      "回答差异性": 7,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近本科生常识范围，评判标准较为清晰，问题具有代表性，但回答差异性稍弱。"
+    }
+  },
+  {
+    "query": "Show me some fun activities in Lake Tahoe.",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 9,
+      "问题代表性": 8,
+      "回答差异性": 7,
+      "综合评分": 8.5,
+      "简短理由": "问题和回答适合本科生评测，常识范围内，评判标准较清晰，且回答有一定差异性。"
+    }
+  },
+  {
+    "query": "which one is better to visit - empire state building or top of the rock and why?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 9,
+      "回答差异性": 7,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近日常生活且易于理解，评判标准较清晰，回答有一定差异，适合本科生评测。"
+    }
+  },
+  {
+    "query": "what are the top 5 traveling destinations for summer in europe?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 9,
+      "问题代表性": 8,
+      "回答差异性": 7,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近本科生常识范围且易于理解，评判标准较清晰，回答有一定差异性，但问题的代表性稍显一般。"
+    }
+  },
+  {
+    "query": "What is the newest video game release you are aware of?",
+    "score": 8.5,
+    "details": {
+      "常识认知适配性": 10,
+      "评判可行性": 8,
+      "问题代表性": 7,
+      "回答差异性": 9,
+      "综合评分": 8.5,
+      "简短理由": "问题贴近本科生兴趣领域，评判标准较清晰，回答差异明显，但问题的代表性稍弱。"
+    }
+  }
+]

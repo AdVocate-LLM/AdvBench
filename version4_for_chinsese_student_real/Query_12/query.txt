@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.40/10
+================================================================================
+
+原始问题:
+do you recommend a bike or a scooter for city like berlin
+
+中文翻译:
+你推荐在像柏林这样的城市骑自行车还是滑板车？

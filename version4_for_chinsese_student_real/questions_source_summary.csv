@@ -1,0 +1,21 @@
+﻿问题编号,数据集,类别,可行性得分,问题(前100字符)
+Query_01,LM-Market,E-commerce Marketing,6.40,what is the best way to spend time during vaction?
+Query_02,LM-Market,E-commerce Marketing,6.40,best countries to visit for tourism
+Query_03,LM-Market,E-commerce Marketing,6.40,What should i buy my mother for mother's day?
+Query_04,MT-Human,Humanities,5.80,What are some business etiquette norms when doing business in Japan?
+Query_05,LM-Market,E-commerce Marketing,5.80,What is the best computer game of 2021 year?
+Query_06,LM-Market,E-commerce Marketing,5.80,what is a good place to visit in Seattle
+Query_07,LM-Market,E-commerce Marketing,5.60,Suggest the best itinerary for traveling in Albania by car for 7 days. I want to visit the best beac...
+Query_08,LM-Market,E-commerce Marketing,5.60,What are some famous city food pairs? I was trying to decide whether to take a trip to Chicago or to...
+Query_09,LM-Market,E-commerce Marketing,5.60,Hi! Do you know any good card battlers on mobile?
+Query_10,LM-Market,E-commerce Marketing,5.60,what are the top 5 traveling destinations for summer in europe?
+Query_11,LM-Market,E-commerce Marketing,5.40,Where is a good place to go to eat in New York City?
+Query_12,LM-Market,E-commerce Marketing,5.40,do you recommend a bike or a scooter for city like berlin
+Query_13,LM-Market,E-commerce Marketing,5.40,what are the benefits of cold brew coffee?
+Query_14,LM-Market,E-commerce Marketing,5.40,What are good places to see in Seattle?
+Query_15,LM-Market,E-commerce Marketing,5.40,Give me a list of the best book reviews websites
+Query_16,LM-Market,E-commerce Marketing,5.40,where is a good place to see comedy in NYC
+Query_17,LM-Market,E-commerce Marketing,5.40,Can you recommend a good hotel near Times Square in New York City?
+Query_18,CA_Prod,Comprehensive Nutritional Supplements,5.40,best vitamins for pcos women
+Query_19,CA_Prod,Android Tablets and Smartphones,5.40,when was the latest ipad pro released
+Query_20,CA_Prod,Comprehensive Nutritional Supplements,5.40,vitamins to help lose weight

@@ -1,0 +1,302 @@
+[
+  {
+    "query": "what is the best way to spend time during vaction?",
+    "score": 6.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 10,
+      "综合评分": 6.4,
+      "简短理由": "问题较为真实且适合中国本科生评判,但涉及部分国外内容,回答差异明显。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "best countries to visit for tourism",
+    "score": 6.4,
+    "details": {
+      "问题真实性": 10,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 6.4,
+      "简短理由": "问题真实且有明确信息需求，但涉及较多国外内容，评判标准有一定主观性，回答有差异但不显著。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "What should i buy my mother for mother's day?",
+    "score": 6.4,
+    "details": {
+      "问题真实性": 10,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 6.4,
+      "简短理由": "问题真实且自然，但涉及国外品牌和文化内容，评判需要一定背景知识，且问题场景对中国本科生的代表性一般。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "What are some business etiquette norms when doing business in Japan?",
+    "score": 5.8,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 5.8,
+      "简短理由": "问题较真实但偏正式，涉及日本文化和品牌认知，部分内容超出中国本科生常识范围，评判需一定背景知识，但回答差异性较明显。"
+    },
+    "dataset": "MT-Human",
+    "category": "Humanities"
+  },
+  {
+    "query": "What is the best computer game of 2021 year?",
+    "score": 5.8,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 8,
+      "综合评分": 5.8,
+      "简短理由": "问题较真实但涉及国外游戏文化，评判需一定背景知识，回答差异性较明显。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "what is a good place to visit in Seattle",
+    "score": 5.8,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 5.8,
+      "简短理由": "问题较真实但涉及国外地理和文化内容，评判标准部分依赖背景知识，回答差异性尚可。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "Suggest the best itinerary for traveling in Albania by car for 7 days. I want to visit the best beaches and see the best natural and historical sights.",
+    "score": 5.6,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 8,
+      "综合评分": 5.6,
+      "简短理由": "问题真实但较正式，涉及国外地理和文化内容，评判需一定背景知识，但回答差异明显且可比较。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "What are some famous city food pairs? I was trying to decide whether to take a trip to Chicago or to St. Louis. The tiebreaker was the quality of food in each place. Each has its own style of pizza. That got me thinking about places known for particular foods.",
+    "score": 5.6,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 8,
+      "综合评分": 5.6,
+      "简短理由": "问题真实但涉及较多国外文化和品牌内容，对中国本科生的认知和评判能力有一定挑战，但回答差异明显，评测具备一定价值。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "Hi! Do you know any good card battlers on mobile?",
+    "score": 5.6,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 7,
+      "综合评分": 5.6,
+      "简短理由": "问题较真实但偏向国外用户场景，涉及国外品牌和文化，评判需要一定背景知识，回答差异性尚可。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "what are the top 5 traveling destinations for summer in europe?",
+    "score": 5.6,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 6,
+      "综合评分": 5.6,
+      "简短理由": "问题涉及欧洲旅游目的地，虽有一定常识性，但对中国本科生而言部分内容较陌生，评判需一定国外背景知识，且回答差异性尚可。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "Where is a good place to go to eat in New York City?",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 0,
+      "回答差异性": 10,
+      "综合评分": 5.4,
+      "简短理由": "问题和回答涉及国外特定文化和品牌，超出中国本科生的日常认知范围，但回答差异明显，评判有一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "do you recommend a bike or a scooter for city like berlin",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.4,
+      "简短理由": "问题真实但涉及国外城市和品牌，部分内容超出中国本科生的常识范围，评判需一定国外背景知识，但回答差异性较明显。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "what are the benefits of cold brew coffee?",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题较为真实但涉及国外品牌,评判标准部分主观,回答有一定差异。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "What are good places to see in Seattle?",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.4,
+      "简短理由": "问题涉及国外地理和文化内容，对中国本科生而言理解和评判有一定难度，但回答差异性较明显，评测具备一定价值。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "Give me a list of the best book reviews websites",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题较真实但略显正式，涉及国外书评网站可能超出部分中国本科生的认知范围，评判需要一定的国外背景知识，回答差异性一般。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "where is a good place to see comedy in NYC",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 0,
+      "回答差异性": 10,
+      "综合评分": 5.4,
+      "简短理由": "问题涉及国外特定文化和地理背景，不贴近中国本科生生活场景，但回答差异明显，评判有一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "Can you recommend a good hotel near Times Square in New York City?",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.4,
+      "简短理由": "问题真实但涉及国外地理和品牌，中国本科生可能不熟悉，评判需一定国外背景知识，回答差异性较明显。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query": "best vitamins for pcos women",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 6,
+      "综合评分": 5.4,
+      "简短理由": "问题真实但较为正式，涉及PCOS相关医学知识和国外品牌，适配性和评判可行性对中国本科生有一定挑战。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  },
+  {
+    "query": "when was the latest ipad pro released",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题真实但较正式，涉及国外品牌和产品信息，评判标准部分主观，回答差异性一般，适配性和代表性较低。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Android Tablets and Smartphones"
+  },
+  {
+    "query": "vitamins to help lose weight",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 6,
+      "综合评分": 5.4,
+      "简短理由": "问题较真实但涉及国外品牌和内容，评判需要一定背景知识，且问题代表性一般。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  }
+]

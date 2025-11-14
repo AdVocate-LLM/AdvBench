@@ -1,0 +1,14 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.50/10
+================================================================================
+
+原始问题:
+Please give me a paragraph conclusion for my article summing up everything about low impact exercises vs high impact exercises and please include this in the Content:
+
+- Encourage reader to try the 7-minute workout: low-impact, easy to incorporate into your daily routine, SUPPORTS WEIGHT LOSS AND + FITNESS GOALS
+
+中文翻译:
+请为我的文章写一个段落结论，总结关于低强度锻炼与高强度锻炼的所有内容，并请在内容中包括以下内容：
+
+- 鼓励读者尝试7分钟锻炼：低强度，易于融入日常生活，支持减肥和健身目标
