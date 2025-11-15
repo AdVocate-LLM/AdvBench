@@ -8,12 +8,30 @@ from GemBench import PRODUCT_DATASET_PATH, TOPIC_DATASET_PATH
 
 load_dotenv()
 
-if __name__ == '__main__':    
-    # initialize the methods workflow
+if __name__ == '__main__':
+    # Initialize the methods workflow
+
+    # Optional: Custom prompt templates
+    # The Ad-Chat method has two stages, each can use custom prompts:
+
+    # 1. Product Selection Stage (custom_prompt_selection):
+    #    Used to select the most relevant product from candidates
+    #    Available placeholders: {categories}, {products}, {descs}, {prompt}
+    #    Example:
+    # custom_selection = "Based on user's query: {prompt}, select the most relevant from: {products}"
+
+    # 2. Response Generation Stage (custom_prompt_response):
+    #    Used to generate responses containing the selected product
+    #    Available placeholders: {product}, {url}, {desc}, {personality}, {profile}
+    #    Example:
+    # custom_response = "You are a helpful AI assistant. When relevant, naturally mention {product} (available at {url}). Product description: {desc}"
+
     chi_workflow = AdChatWorkflow(
             product_list_path=PRODUCT_DATASET_PATH,
             topic_list_path=TOPIC_DATASET_PATH,
             model_name="doubao-1-5-lite-32k-250115",
+            # custom_prompt_selection="Your custom selection prompt here",
+            # custom_prompt_response="Your custom response prompt here"
     )
     advocate_workflow = AdLLMWorkflow(
             product_list_path=PRODUCT_DATASET_PATH,

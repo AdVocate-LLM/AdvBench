@@ -6,10 +6,10 @@ class OpenAIChatSession:
     For quickly setting up a chatbot, we remove args: self improvement, session, coversation id, and stream
     Note: self improvement (int), self improvement of demographics and profiling every X messages
     '''
-    def __init__(self,product_list_path: str,topic_list_path: str, model:str, mode:str='control', ad_freq:float=1.0, demographics:str='', verbose:bool=False):
+    def __init__(self,product_list_path: str,topic_list_path: str, model:str, mode:str='control', ad_freq:float=1.0, demographics:str='', verbose:bool=False, custom_prompt_response:str=None, custom_prompt_selection:str=None):
         self.oai_response_api = OpenAIAPI(verbose=verbose, model=model)
         self.oai_api = OpenAIAPI(verbose=verbose, model=model)
-        self.advertiser = Advertiser(product_list_path, topic_list_path, mode=mode, ad_freq=ad_freq, demographics=demographics, verbose=verbose, model=model)
+        self.advertiser = Advertiser(product_list_path, topic_list_path, mode=mode, ad_freq=ad_freq, demographics=demographics, verbose=verbose, model=model, custom_prompt_response=custom_prompt_response, custom_prompt_selection=custom_prompt_selection)
         self.verbose = verbose
 
     def run_chat(self, prompt: str):

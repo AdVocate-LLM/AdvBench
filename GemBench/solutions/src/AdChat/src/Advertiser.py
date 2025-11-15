@@ -7,7 +7,7 @@ import random, re, difflib
 from typing import List, Dict
 
 class Advertiser:
-    def __init__(self, product_list_path: str, topic_list_path: str, model:str, mode:str='control', ad_freq:float=1.0, demographics:str='', verbose:bool=False):
+    def __init__(self, product_list_path: str, topic_list_path: str, model:str, mode:str='control', ad_freq:float=1.0, demographics:str='', verbose:bool=False, custom_prompt_response:str=None, custom_prompt_selection:str=None):
         self.oai_api = OpenAIAPI(model=model)
         self.mode = mode
         self.system_prompt = ''
@@ -20,7 +20,9 @@ class Advertiser:
         self.ad_freq = ad_freq
         self.product = {'name': None, 'url': None, 'desc': None}
         self.topic = None
-        
+        self.custom_prompt_response = custom_prompt_response
+        self.custom_prompt_selection = custom_prompt_selection
+
         # Initialize mode-specific prompts, different prompting strategies
         if mode == 'interest-based':
             self.initializer = SYS_INTEREST
@@ -111,8 +113,15 @@ class Advertiser:
         unique_categories = list(set(categories))
         
         # Use llm to select the best category for this prompt
-        category_prompt = f"Respond with the product category that is most relevant to this user prompt. You are only allowed to reply with exactly that category. The available categories are: {unique_categories}"
-        
+        if self.custom_prompt_selection:
+            # Use custom prompt for category selection
+            try:
+                category_prompt = self.custom_prompt_selection.format(categories=unique_categories, prompt=prompt)
+            except KeyError:
+                category_prompt = self.custom_prompt_selection
+        else:
+            category_prompt = f"Respond with the product category that is most relevant to this user prompt. You are only allowed to reply with exactly that category. The available categories are: {unique_categories}"
+
         selected_category, price = self.oai_api.handle_response(category_prompt, prompt)
         
         # Find the best matching category using difflib
@@ -141,8 +150,17 @@ class Advertiser:
                     'products': filtered_names,
                     'descs': filtered_descs
                 }
-                
-                selected_product, _price = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**product_kwargs), prompt)
+
+                if self.custom_prompt_selection:
+                    # Use custom prompt for product selection
+                    try:
+                        product_selection_prompt = self.custom_prompt_selection.format(**product_kwargs, prompt=prompt)
+                    except KeyError:
+                        product_selection_prompt = SYS_RELEVANT_PRODUCT.format(**product_kwargs)
+                else:
+                    product_selection_prompt = SYS_RELEVANT_PRODUCT.format(**product_kwargs)
+
+                selected_product, _price = self.oai_api.handle_response(product_selection_prompt, prompt)
                 price = {
                     'in_token': _price['in_token'] + price['in_token'],
                     'out_token': _price['out_token'] + price['out_token'],
@@ -209,6 +227,22 @@ class Advertiser:
         }, 'price': price}
 
     def set_sys_prompt(self, product=None, profile=None):
+        # If custom_prompt_response is provided, use it directly
+        if self.custom_prompt_response:
+            kwargs = {}
+            if product:
+                kwargs['product'] = product['name']
+                kwargs['url'] = product['url']
+                kwargs['desc'] = product['desc']
+                kwargs['personality'] = self.personality
+                kwargs['profile'] = profile
+            try:
+                self.system_prompt = self.custom_prompt_response.format(**kwargs)
+            except KeyError:
+                # If format fails due to missing keys, use the prompt as-is
+                self.system_prompt = self.custom_prompt_response
+            return
+
         kwargs = {}
         if product:
             kwargs['product'] = product['name']

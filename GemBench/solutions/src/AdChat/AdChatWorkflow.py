@@ -13,11 +13,15 @@ class AdChatWorkflow(ParallelProcessor):
                     product_list_path: str,
                     topic_list_path: str,
                     model_name: str,
+                    custom_prompt_response: str = None,
+                    custom_prompt_selection: str = None,
                 ):
         super().__init__()
         self.model_name = model_name
         self.product_list_path = product_list_path
         self.topic_list_path = topic_list_path
+        self.custom_prompt_response = custom_prompt_response
+        self.custom_prompt_selection = custom_prompt_selection
     
     def help(self):
         print("Usage:")
@@ -42,24 +46,28 @@ class AdChatWorkflow(ParallelProcessor):
         def _run(prompt, **kwargs):
             solution_name = kwargs.get('solution_name')
             if solution_name == self.COMPETITOR_NAME:
-                oai = OpenAIChatSession(product_list_path=self.product_list_path, 
-                                        topic_list_path=self.topic_list_path, 
-                                        mode=args1['mode'], 
-                                        ad_freq=args1['ad_freq'], 
+                oai = OpenAIChatSession(product_list_path=self.product_list_path,
+                                        topic_list_path=self.topic_list_path,
+                                        mode=args1['mode'],
+                                        ad_freq=args1['ad_freq'],
                                         demographics=args1['demos'],
-                                        model=self.model_name)
+                                        model=self.model_name,
+                                        custom_prompt_response=self.custom_prompt_response,
+                                        custom_prompt_selection=self.custom_prompt_selection)
             elif solution_name == self.CONTROL_NAME:
-                oai = OpenAIChatSession(product_list_path=self.product_list_path, 
-                                        topic_list_path=self.topic_list_path, 
-                                        mode=args2['mode'], 
-                                        ad_freq=args2['ad_freq'], 
+                oai = OpenAIChatSession(product_list_path=self.product_list_path,
+                                        topic_list_path=self.topic_list_path,
+                                        mode=args2['mode'],
+                                        ad_freq=args2['ad_freq'],
                                         demographics=args2['demos'],
-                                        model=self.model_name)
+                                        model=self.model_name,
+                                        custom_prompt_response=self.custom_prompt_response,
+                                        custom_prompt_selection=self.custom_prompt_selection)
             else:
                 raise ValueError(f"Unknown solution name: {solution_name}")
-                                
+
             response, product, price = oai.run_chat(prompt)
-            
+
             return {'query': prompt, 'answer': response, 'product': product, 'price': price}
         
         # Use parallel processor
@@ -106,12 +114,14 @@ class AdChatWorkflow(ParallelProcessor):
                 raise ValueError(f"Unknown solution name: {solution_name}")
             
             # Create an advertiser instance for product selection and response generation
-            advertiser = Advertiser(product_list_path=self.product_list_path, 
+            advertiser = Advertiser(product_list_path=self.product_list_path,
                                   topic_list_path=self.topic_list_path,
                                   model=self.model_name,
                                   mode=mode,
                                   ad_freq=ad_freq,
-                                  demographics=demographics)
+                                  demographics=demographics,
+                                  custom_prompt_response=self.custom_prompt_response,
+                                  custom_prompt_selection=self.custom_prompt_selection)
             
             # Select the best product from candidates
             selection_result = advertiser.select_product(prompt, candidate_product_list)
