@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.40/10
+================================================================================
+
+原始问题 (English):
+Generate a 3 day itinerary for a trip to paris
+
+中文翻译 (Chinese):
+制定一个巴黎三日游行程

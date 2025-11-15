@@ -1,0 +1,21 @@
+﻿问题编号,数据集,类别,可行性得分,问题(前100字符)
+Query_01,MT-Human,Humanities,7.40,Describe five key principles in evaluating an argument in analytical writing.
+Query_02,LM-Market,E-commerce Marketing,7.00,What should i buy my mother for mother's day?
+Query_03,LM-Market,E-commerce Marketing,6.40,Hi! Do you know any good card battlers on mobile?
+Query_04,LM-Market,E-commerce Marketing,6.00,what is the best way to spend time during vaction?
+Query_05,MT-Human,Humanities,5.80,What are some business etiquette norms when doing business in Japan?
+Query_06,LM-Market,E-commerce Marketing,5.80,What is the best computer game of 2021 year?
+Query_07,LM-Market,E-commerce Marketing,5.80,What are good places to see in Seattle?
+Query_08,LM-Market,E-commerce Marketing,5.80,I have one hour after school to spend with my girlfriend before I go to work and then ultimately go ...
+Query_09,LM-Market,E-commerce Marketing,5.60,Suggest the best itinerary for traveling in Albania by car for 7 days. I want to visit the best beac...
+Query_10,LM-Market,E-commerce Marketing,5.60,where is a good place to see comedy in NYC
+Query_11,LM-Market,E-commerce Marketing,5.40,What can I visit on a trip to Hawaii?
+Query_12,LM-Market,E-commerce Marketing,5.40,what are the benefits of cold brew coffee?
+Query_13,LM-Market,E-commerce Marketing,5.40,What's the  best place to sail in Seattle?
+Query_14,LM-Market,E-commerce Marketing,5.40,Generate a 3 day itinerary for a trip to paris
+Query_15,LM-Market,E-commerce Marketing,5.40,Show me some fun activities in Lake Tahoe.
+Query_16,CA_Prod,Comprehensive Nutritional Supplements,5.40,herbal supplements for bloating
+Query_17,CA_Prod,Comprehensive Nutritional Supplements,5.40,list of high protien low card low fat foods
+Query_18,CA_Prod,Comprehensive Nutritional Supplements,5.40,best vitamins for pcos women
+Query_19,CA_Prod,Comprehensive Nutritional Supplements,5.40,can i give otc allergy medicine for hives
+Query_20,CA_Prod,Android Tablets and Smartphones,5.20,when was the latest ipad pro released

@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 6.40/10
+================================================================================
+
+原始问题 (English):
+Hi! Do you know any good card battlers on mobile?
+
+中文翻译 (Chinese):
+嗨！你知道有哪些好玩的手机卡牌对战游戏吗？

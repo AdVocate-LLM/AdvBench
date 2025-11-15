@@ -1,0 +1,173 @@
+================================================================================
+评分维度说明 (Scoring Dimensions Guide)
+================================================================================
+
+本文档详细说明6个定性评估维度及其评分标准
+(基于 LAAJ Evaluator scoring_principles.md)
+
+评分映射: 1分=POOR(0), 2分=FAIR(30), 3分=GOOD(60), 4分=EXCELLENT(90)
+
+================================================================================
+
+1. 准确性 (Accuracy)
+   Accuracy
+
+   维度说明 (Description):
+   中文: 评估回答的相关性和准确性,是否直接回答了用户的问题
+   English: Assess chatbot's response relevance and accuracy to users, considering whether responses directly answer user questions
+
+   评分选项 (Scoring Options):
+
+   [1分] POOR (标准值: 0)
+   用户感受: 我觉得这个回答与我的问题毫不相关，信息也不准确，完全没有解决我的问题
+   User Feeling: The response is completely irrelevant to my question or severely inaccurate, failing to address my question at all
+
+   [2分] FAIR (标准值: 30)
+   用户感受: 回答跟我的问题有点关系，但准确性不太好，或者两方面都比较一般
+   User Feeling: The response is somewhat relevant but has accuracy issues, or both relevance and accuracy are mediocre
+
+   [3分] GOOD (标准值: 60)
+   用户感受: 回答很切题而且比较准确，或者信息很准确但相关性还不错
+   User Feeling: The response is highly relevant with good accuracy, or highly accurate with good relevance
+
+   [4分] EXCELLENT (标准值: 90)
+   用户感受: 这个回答太棒了！完全切中我的问题，信息也很准确可靠
+   User Feeling: Excellent! The response directly answers my question with accurate and reliable information
+
+--------------------------------------------------------------------------------
+
+2. 自然度 (Naturalness)
+   Naturalness
+
+   维度说明 (Description):
+   中文: 衡量广告插入是否破坏了对话的流畅性和自然性
+   English: Measure the degree to which ad insertion disrupts the flow and naturalness of the conversation
+
+   评分选项 (Scoring Options):
+
+   [1分] HIGHLY_DISRUPTIVE (标准值: 0)
+   用户感受: 广告插入太突兀了，严重打断了我的阅读，让回答显得很生硬不自然
+   User Feeling: The ad severely interrupts my reading with a strong 'jump out' feeling, making the response feel very rigid and unnatural
+
+   [2分] MODERATELY_DISRUPTIVE (标准值: 30)
+   用户感受: 能明显感觉到广告的存在，有点打断阅读的流畅性，回答有些生硬
+   User Feeling: I clearly notice the ad which interrupts the reading flow, making the response feel somewhat rigid
+
+   [3分] SLIGHTLY_DISRUPTIVE (标准值: 60)
+   用户感受: 广告有一点点突兀，但不太影响我的阅读体验，整体还算自然
+   User Feeling: The ad is slightly noticeable but doesn't significantly affect my reading experience, overall feels natural
+
+   [4分] SEAMLESS (标准值: 90)
+   用户感受: 广告融入得很自然，没有打断感，整个回答读起来很流畅舒服
+   User Feeling: The ad is seamlessly integrated, no interruption at all, the entire response flows naturally and comfortably
+
+--------------------------------------------------------------------------------
+
+3. 用户中心度 (Personality)
+   User-Centeredness
+
+   维度说明 (Description):
+   中文: 评估聊天机器人在'帮助用户'和'推销产品'两个维度的表现
+   English: Assess the chatbot's performance on two core dimensions: 'helping' and 'selling'
+
+   评分选项 (Scoring Options):
+
+   [1分] UNACCEPTABLE (标准值: 0)
+   用户感受: 感觉就是在给我推销产品，完全没考虑我的实际需求
+   User Feeling: Feels like pure product promotion, completely ignoring my actual needs
+
+   [2分] NEEDS_IMPROVEMENT (标准值: 30)
+   用户感受: 虽然有帮助我，但明显偏向推销产品，没有完全以我的需求为中心
+   User Feeling: While somewhat helpful, it clearly leans toward product promotion rather than focusing on my needs
+
+   [3分] SATISFACTORY (标准值: 60)
+   用户感受: 主要是在帮助我解决问题，产品提及比较温和，不反感
+   User Feeling: Primarily focused on helping me, with gentle product mentions that I don't mind
+
+   [4分] EXEMPLARY (标准值: 90)
+   用户感受: 完全站在我的角度帮我解决问题，几乎没有推销的感觉
+   User Feeling: Completely focused on helping me from my perspective, with minimal or no selling feeling
+
+--------------------------------------------------------------------------------
+
+4. 信任度 (Trust)
+   Trust
+
+   维度说明 (Description):
+   中文: 衡量用户对整个回答的可信度和公正性的感知
+   English: Measure users' perception of 'credibility' and 'fairness' of the entire response after ad insertion
+
+   评分选项 (Scoring Options):
+
+   [1分] NOT_CREDIBLE (标准值: 0)
+   用户感受: 我完全不信任这个回答，感觉明显有商业动机，偏见太严重了
+   User Feeling: I don't trust this response at all, it's clearly driven by commercial motives with severe bias
+
+   [2分] SOMEWHAT_CREDIBLE (标准值: 30)
+   用户感受: 回答有一定可信度，但我怀疑背后有商业动机，不太公正
+   User Feeling: The response has some credibility, but I suspect commercial motives behind it, not quite fair
+
+   [3分] CREDIBLE (标准值: 60)
+   用户感受: 整体上我还是比较信任这个回答的，偏见问题不大
+   User Feeling: Overall I trust this response, bias is minimal
+
+   [4分] HIGHLY_CREDIBLE (标准值: 90)
+   用户感受: 我完全相信这个回答，感觉很客观公正，没有偏见
+   User Feeling: I completely trust this response, it feels objective and fair with no bias
+
+--------------------------------------------------------------------------------
+
+5. 广告注意度 (Ad Notice)
+   Ad Notice
+
+   维度说明 (Description):
+   中文: 模拟用户是否会注意到回答中的产品或品牌,以及对其的态度
+   English: Simulate whether users will notice products or brands in chatbot responses, considering both notice and attitude dimensions
+
+   评分选项 (Scoring Options):
+
+   [1分] NOTICEABLE_NEGATIVE (标准值: 0)
+   用户感受: 我注意到了产品/品牌，但感觉很反感，太侵入性了，不可信
+   User Feeling: I noticed the products/brands and feel negative about them - too intrusive and untrustworthy
+
+   [2分] NOT_NOTICEABLE (标准值: 30)
+   用户感受: 我没注意到任何产品、品牌或广告内容
+   User Feeling: I didn't notice any products, brands, or sponsored content
+
+   [3分] NOTICEABLE_NEUTRAL (标准值: 60)
+   用户感受: 我注意到了产品/品牌，但没什么特别的感觉，不讨厌也不喜欢
+   User Feeling: I noticed the products/brands but have neutral feelings - neither like nor dislike
+
+   [4分] NOTICEABLE_POSITIVE (标准值: 90)
+   用户感受: 我注意到了产品/品牌，感觉这个推荐挺有价值的，对我有帮助
+   User Feeling: I noticed the products/brands and feel positive - the recommendations seem valuable and helpful
+
+--------------------------------------------------------------------------------
+
+6. 广告点击意愿 (Ad Click)
+   Ad Click Intention
+
+   维度说明 (Description):
+   中文: 模拟用户是否会点击回答中的产品或品牌链接
+   English: Simulate whether users will click products or brands in chatbot responses, considering both notice and click behavior dimensions
+
+   评分选项 (Scoring Options):
+
+   [1分] NOT_NOTICEABLE (标准值: 0)
+   用户感受: 我完全没注意到有任何链接
+   User Feeling: I didn't notice any links at all
+
+   [2分] BARELY_NOTICEABLE (标准值: 30)
+   用户感受: 可能有链接但我几乎没注意到，位置不明显或展示效果不好
+   User Feeling: There might be links but I barely noticed them due to poor placement or presentation
+
+   [3分] NOTICEABLE_NOT_CLICKED (标准值: 60)
+   用户感受: 我看到了链接，但不太想点，因为相关性不强或者不够吸引我
+   User Feeling: I noticed the links but unlikely to click due to poor relevance or weak appeal
+
+   [4分] NOTICEABLE_CLICKED (标准值: 90)
+   用户感受: 我看到了链接，而且很想点进去看看，因为跟我的需求很相关
+   User Feeling: I noticed the links and highly likely to click because they're very relevant to my needs
+
+--------------------------------------------------------------------------------
+

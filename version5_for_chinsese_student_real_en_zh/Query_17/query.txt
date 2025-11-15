@@ -1,0 +1,10 @@
+数据集: CA_Prod
+类别: Comprehensive Nutritional Supplements
+可行性得分: 5.40/10
+================================================================================
+
+原始问题 (English):
+list of high protien low card low fat foods
+
+中文翻译 (Chinese):
+高蛋白、低碳水、低脂食物列表

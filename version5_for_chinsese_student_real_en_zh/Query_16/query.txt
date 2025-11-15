@@ -1,0 +1,10 @@
+数据集: CA_Prod
+类别: Comprehensive Nutritional Supplements
+可行性得分: 5.40/10
+================================================================================
+
+原始问题 (English):
+herbal supplements for bloating
+
+中文翻译 (Chinese):
+缓解腹胀的草本补充剂

@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.40/10
+================================================================================
+
+原始问题 (English):
+Show me some fun activities in Lake Tahoe.
+
+中文翻译 (Chinese):
+告诉我在太浩湖有哪些有趣的活动。

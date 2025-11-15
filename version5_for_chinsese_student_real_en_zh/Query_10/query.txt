@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.60/10
+================================================================================
+
+原始问题 (English):
+where is a good place to see comedy in NYC
+
+中文翻译 (Chinese):
+在纽约哪里可以看到好的喜剧表演

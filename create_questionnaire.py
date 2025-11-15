@@ -9,67 +9,229 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# 定义6个定性评估维度 (基于scoring_principles.md)
+# 定义6个定性评估维度 (基于scoring_principles.md, 分数映射: POOR=0→1分, FAIR=30→2分, GOOD=60→3分, EXCELLENT=90→4分)
 QUALITATIVE_DIMENSIONS = [
     {
         "name": "accuracy",
         "display_name": "准确性 (Accuracy)",
+        "display_name_en": "Accuracy",
         "description": "评估回答的相关性和准确性,是否直接回答了用户的问题",
-        "question": """请评价该回答的准确性(1-4分):
-1分 (POOR): 回答与问题严重不相关或信息严重不准确
-2分 (FAIR): 回答部分相关但准确性有明显问题,或相关性和准确性都一般
-3分 (GOOD): 回答高度相关且准确性良好,或高度准确且相关性良好
-4分 (EXCELLENT): 回答高度相关且高度准确,直接回答了用户问题且信息可靠"""
+        "description_en": "Assess chatbot's response relevance and accuracy to users, considering whether responses directly answer user questions",
+        "options": [
+            {
+                "score": 1,
+                "category": "POOR",
+                "category_value": 0,
+                "user_feeling": "我觉得这个回答与我的问题毫不相关，信息也不准确，完全没有解决我的问题",
+                "user_feeling_en": "The response is completely irrelevant to my question or severely inaccurate, failing to address my question at all"
+            },
+            {
+                "score": 2,
+                "category": "FAIR",
+                "category_value": 30,
+                "user_feeling": "回答跟我的问题有点关系，但准确性不太好，或者两方面都比较一般",
+                "user_feeling_en": "The response is somewhat relevant but has accuracy issues, or both relevance and accuracy are mediocre"
+            },
+            {
+                "score": 3,
+                "category": "GOOD",
+                "category_value": 60,
+                "user_feeling": "回答很切题而且比较准确，或者信息很准确但相关性还不错",
+                "user_feeling_en": "The response is highly relevant with good accuracy, or highly accurate with good relevance"
+            },
+            {
+                "score": 4,
+                "category": "EXCELLENT",
+                "category_value": 90,
+                "user_feeling": "这个回答太棒了！完全切中我的问题，信息也很准确可靠",
+                "user_feeling_en": "Excellent! The response directly answers my question with accurate and reliable information"
+            }
+        ]
     },
     {
         "name": "naturalness",
         "display_name": "自然度 (Naturalness)",
+        "display_name_en": "Naturalness",
         "description": "衡量广告插入是否破坏了对话的流畅性和自然性",
-        "question": """请评价该回答的自然度(1-4分):
-1分 (HIGHLY_DISRUPTIVE): 广告严重打断对话流程,有强烈的"跳出感",显得非常生硬
-2分 (MODERATELY_DISRUPTIVE): 广告明显打断阅读流程,有较强的"跳出感",回答显得有些生硬
-3分 (SLIGHTLY_DISRUPTIVE): 广告造成轻微打断,有轻微"跳出感",对自然性影响较小
-4分 (SEAMLESS): 广告自然融入对话,无打断感,保持了对话的自然真实性"""
+        "description_en": "Measure the degree to which ad insertion disrupts the flow and naturalness of the conversation",
+        "options": [
+            {
+                "score": 1,
+                "category": "HIGHLY_DISRUPTIVE",
+                "category_value": 0,
+                "user_feeling": "广告插入太突兀了，严重打断了我的阅读，让回答显得很生硬不自然",
+                "user_feeling_en": "The ad severely interrupts my reading with a strong 'jump out' feeling, making the response feel very rigid and unnatural"
+            },
+            {
+                "score": 2,
+                "category": "MODERATELY_DISRUPTIVE",
+                "category_value": 30,
+                "user_feeling": "能明显感觉到广告的存在，有点打断阅读的流畅性，回答有些生硬",
+                "user_feeling_en": "I clearly notice the ad which interrupts the reading flow, making the response feel somewhat rigid"
+            },
+            {
+                "score": 3,
+                "category": "SLIGHTLY_DISRUPTIVE",
+                "category_value": 60,
+                "user_feeling": "广告有一点点突兀，但不太影响我的阅读体验，整体还算自然",
+                "user_feeling_en": "The ad is slightly noticeable but doesn't significantly affect my reading experience, overall feels natural"
+            },
+            {
+                "score": 4,
+                "category": "SEAMLESS",
+                "category_value": 90,
+                "user_feeling": "广告融入得很自然，没有打断感，整个回答读起来很流畅舒服",
+                "user_feeling_en": "The ad is seamlessly integrated, no interruption at all, the entire response flows naturally and comfortably"
+            }
+        ]
     },
     {
         "name": "personality",
-        "display_name": "个性化 (Personality)",
-        "description": "评估聊天机器人在‘帮助用户’和‘推销产品’两个维度的表现",
-        "question": """请评价该回答的个性化表现(1-4分):
-1分 (UNACCEPTABLE): 过度以产品为中心,忽视用户需求
-2分 (NEEDS_IMPROVEMENT): 部分偏离用户需求,转向产品推广
-3分 (SATISFACTORY): 主要以用户为中心,有温和的产品提及
-4分 (EXEMPLARY): 完全以用户为中心,很少或没有产品推广"""
+        "display_name": "用户中心度 (Personality)",
+        "display_name_en": "User-Centeredness",
+        "description": "评估聊天机器人在'帮助用户'和'推销产品'两个维度的表现",
+        "description_en": "Assess the chatbot's performance on two core dimensions: 'helping' and 'selling'",
+        "options": [
+            {
+                "score": 1,
+                "category": "UNACCEPTABLE",
+                "category_value": 0,
+                "user_feeling": "感觉就是在给我推销产品，完全没考虑我的实际需求",
+                "user_feeling_en": "Feels like pure product promotion, completely ignoring my actual needs"
+            },
+            {
+                "score": 2,
+                "category": "NEEDS_IMPROVEMENT",
+                "category_value": 30,
+                "user_feeling": "虽然有帮助我，但明显偏向推销产品，没有完全以我的需求为中心",
+                "user_feeling_en": "While somewhat helpful, it clearly leans toward product promotion rather than focusing on my needs"
+            },
+            {
+                "score": 3,
+                "category": "SATISFACTORY",
+                "category_value": 60,
+                "user_feeling": "主要是在帮助我解决问题，产品提及比较温和，不反感",
+                "user_feeling_en": "Primarily focused on helping me, with gentle product mentions that I don't mind"
+            },
+            {
+                "score": 4,
+                "category": "EXEMPLARY",
+                "category_value": 90,
+                "user_feeling": "完全站在我的角度帮我解决问题，几乎没有推销的感觉",
+                "user_feeling_en": "Completely focused on helping me from my perspective, with minimal or no selling feeling"
+            }
+        ]
     },
     {
         "name": "trust",
         "display_name": "信任度 (Trust)",
+        "display_name_en": "Trust",
         "description": "衡量用户对整个回答的可信度和公正性的感知",
-        "question": """请评价该回答的信任度(1-4分):
-1分 (NOT_CREDIBLE): 可信度差,明显的偏见,用户会认为内容被商业动机驱动
-2分 (SOMEWHAT_CREDIBLE): 可信度一般但有明显偏见问题,用户会怀疑存在商业动机
-3分 (CREDIBLE): 可信度良好,偏见最小,用户总体上信任内容
-4分 (HIGHLY_CREDIBLE): 可信度很高,无偏见感知,用户完全信任内容"""
+        "description_en": "Measure users' perception of 'credibility' and 'fairness' of the entire response after ad insertion",
+        "options": [
+            {
+                "score": 1,
+                "category": "NOT_CREDIBLE",
+                "category_value": 0,
+                "user_feeling": "我完全不信任这个回答，感觉明显有商业动机，偏见太严重了",
+                "user_feeling_en": "I don't trust this response at all, it's clearly driven by commercial motives with severe bias"
+            },
+            {
+                "score": 2,
+                "category": "SOMEWHAT_CREDIBLE",
+                "category_value": 30,
+                "user_feeling": "回答有一定可信度，但我怀疑背后有商业动机，不太公正",
+                "user_feeling_en": "The response has some credibility, but I suspect commercial motives behind it, not quite fair"
+            },
+            {
+                "score": 3,
+                "category": "CREDIBLE",
+                "category_value": 60,
+                "user_feeling": "整体上我还是比较信任这个回答的，偏见问题不大",
+                "user_feeling_en": "Overall I trust this response, bias is minimal"
+            },
+            {
+                "score": 4,
+                "category": "HIGHLY_CREDIBLE",
+                "category_value": 90,
+                "user_feeling": "我完全相信这个回答，感觉很客观公正，没有偏见",
+                "user_feeling_en": "I completely trust this response, it feels objective and fair with no bias"
+            }
+        ]
     },
     {
         "name": "notice_products",
         "display_name": "广告注意度 (Ad Notice)",
+        "display_name_en": "Ad Notice",
         "description": "模拟用户是否会注意到回答中的产品或品牌,以及对其的态度",
-        "question": """请评价用户对该回答中广告的注意度和态度(1-4分):
-1分 (NOTICEABLE_NEGATIVE): 用户注意到产品/品牌且反应负面,感觉广告侵入性强、不可信
-2分 (NOT_NOTICEABLE): 用户不会注意到任何产品、品牌或赞助内容
-3分 (NOTICEABLE_NEUTRAL): 用户注意到产品/品牌但态度中立,既不特别积极也不消极
-4分 (NOTICEABLE_POSITIVE): 用户清楚注意到产品/品牌且反应积极,认为推荐有价值且有帮助"""
+        "description_en": "Simulate whether users will notice products or brands in chatbot responses, considering both notice and attitude dimensions",
+        "options": [
+            {
+                "score": 1,
+                "category": "NOTICEABLE_NEGATIVE",
+                "category_value": 0,
+                "user_feeling": "我注意到了产品/品牌，但感觉很反感，太侵入性了，不可信",
+                "user_feeling_en": "I noticed the products/brands and feel negative about them - too intrusive and untrustworthy"
+            },
+            {
+                "score": 2,
+                "category": "NOT_NOTICEABLE",
+                "category_value": 30,
+                "user_feeling": "我没注意到任何产品、品牌或广告内容",
+                "user_feeling_en": "I didn't notice any products, brands, or sponsored content"
+            },
+            {
+                "score": 3,
+                "category": "NOTICEABLE_NEUTRAL",
+                "category_value": 60,
+                "user_feeling": "我注意到了产品/品牌，但没什么特别的感觉，不讨厌也不喜欢",
+                "user_feeling_en": "I noticed the products/brands but have neutral feelings - neither like nor dislike"
+            },
+            {
+                "score": 4,
+                "category": "NOTICEABLE_POSITIVE",
+                "category_value": 90,
+                "user_feeling": "我注意到了产品/品牌，感觉这个推荐挺有价值的，对我有帮助",
+                "user_feeling_en": "I noticed the products/brands and feel positive - the recommendations seem valuable and helpful"
+            }
+        ]
     },
     {
         "name": "click_products",
         "display_name": "广告点击意愿 (Ad Click)",
+        "display_name_en": "Ad Click Intention",
         "description": "模拟用户是否会点击回答中的产品或品牌链接",
-        "question": """请评价用户点击该回答中广告链接的可能性(1-4分):
-1分 (NOT_NOTICEABLE): 用户不会注意到任何赞助链接
-2分 (BARELY_NOTICEABLE): 用户可能勉强注意到赞助链接(由于位置不佳、展示不明显等)
-3分 (NOTICEABLE_NOT_CLICKED): 用户注意到赞助链接但不太可能点击(由于相关性差、吸引力弱等)
-4分 (NOTICEABLE_CLICKED): 用户清楚注意到赞助链接且很可能点击(相关性强、吸引力高)"""
+        "description_en": "Simulate whether users will click products or brands in chatbot responses, considering both notice and click behavior dimensions",
+        "options": [
+            {
+                "score": 1,
+                "category": "NOT_NOTICEABLE",
+                "category_value": 0,
+                "user_feeling": "我完全没注意到有任何链接",
+                "user_feeling_en": "I didn't notice any links at all"
+            },
+            {
+                "score": 2,
+                "category": "BARELY_NOTICEABLE",
+                "category_value": 30,
+                "user_feeling": "可能有链接但我几乎没注意到，位置不明显或展示效果不好",
+                "user_feeling_en": "There might be links but I barely noticed them due to poor placement or presentation"
+            },
+            {
+                "score": 3,
+                "category": "NOTICEABLE_NOT_CLICKED",
+                "category_value": 60,
+                "user_feeling": "我看到了链接，但不太想点，因为相关性不强或者不够吸引我",
+                "user_feeling_en": "I noticed the links but unlikely to click due to poor relevance or weak appeal"
+            },
+            {
+                "score": 4,
+                "category": "NOTICEABLE_CLICKED",
+                "category_value": 90,
+                "user_feeling": "我看到了链接，而且很想点进去看看，因为跟我的需求很相关",
+                "user_feeling_en": "I noticed the links and highly likely to click because they're very relevant to my needs"
+            }
+        ]
     }
 ]
 
@@ -195,7 +357,7 @@ def load_benchmark_output(output_dir, methods=['GIR-R', 'Ad-Chat']):
         batch = metadata[2]
         metric = metadata[3]
         category = metadata[4]
-        query = metadata[5]
+        query = metadata[5].strip() if isinstance(metadata[5], str) else metadata[5]  # 修复：strip()使query格式一致
 
         if method not in methods:
             continue
@@ -650,12 +812,13 @@ def create_questionnaire_structure(benchmark_output_dir, output_base_dir, method
     # 哈希表映射
     hash_mapping = {}
 
-    # 保存评分详情
+    # 保存评分详情 (注意：此时还未翻译，后续会更新为包含翻译的版本)
     scoring_details_path = os.path.join(output_base_dir, "feasibility_scores.json")
     scoring_details = []
     for item in top_queries:
         scoring_details.append({
-            "query": item["query"],
+            "query_en": item["query"],  # 原始英文问题
+            "query_zh": "",  # 翻译后更新
             "score": item["score"],
             "details": item["score_details"],
             "dataset": item["dataset"],
@@ -709,6 +872,10 @@ def create_questionnaire_structure(benchmark_output_dir, output_base_dir, method
         print("翻译Query...")
         query_zh = translate_text(client, query_en, is_query=True)
 
+        # 更新 scoring_details 中的中文翻译
+        if i - 1 < len(scoring_details):
+            scoring_details[i - 1]["query_zh"] = query_zh
+
         # 翻译responses并生成哈希
         response_hashes = {}
         response_translations = {}
@@ -723,30 +890,38 @@ def create_questionnaire_structure(benchmark_output_dir, output_base_dir, method
             response_hashes[method] = resp_hash
             response_translations[method] = response_zh
 
-            # 保存哈希映射
+            # 保存哈希映射 (包含完整原文)
             hash_mapping[resp_hash] = {
                 "method": method,
                 "query_rank": str(i),
-                "response_en": response_en[:100] + "...",
-                "response_zh": response_zh[:100] + "..."
+                "query_en": query_en,
+                "query_zh": query_zh,
+                "response_en": response_en,
+                "response_zh": response_zh,
+                "response_en_preview": response_en[:100] + "...",
+                "response_zh_preview": response_zh[:100] + "..."
             }
 
-        # 1. 保存query.txt
+        # 1. 保存query.txt (包含原文和翻译)
         with open(os.path.join(folder_path, "query.txt"), 'w', encoding='utf-8') as f:
             f.write(f"数据集: {item['dataset']}\n")
             f.write(f"类别: {item['category']}\n")
             f.write(f"可行性得分: {item['score']:.2f}/10\n")
             f.write("="*80 + "\n\n")
-            f.write(f"原始问题:\n{query_en}\n\n")
-            f.write(f"中文翻译:\n{query_zh}\n")
+            f.write(f"原始问题 (English):\n{query_en}\n\n")
+            f.write(f"中文翻译 (Chinese):\n{query_zh}\n")
 
-        # 2. 保存response文件
+        # 2. 保存response文件 (包含原文和翻译)
         for method in methods:
             resp_hash = response_hashes[method]
+            resp_en = responses[method]['content']
             resp_zh = response_translations[method]
             with open(os.path.join(folder_path, f"response_{resp_hash}.txt"), 'w', encoding='utf-8') as f:
-                f.write(f"回答编号: {resp_hash}\n\n")
-                f.write(f"{resp_zh}\n")
+                f.write(f"回答编号 (Response ID): {resp_hash}\n")
+                f.write("="*80 + "\n\n")
+                f.write(f"中文翻译 (Chinese):\n{resp_zh}\n\n")
+                f.write("="*80 + "\n\n")
+                f.write(f"原始回答 (English):\n{resp_en}\n")
 
         # 3. 保存6个定性维度的得分CSV
         metrics_csv_path = os.path.join(folder_path, "evaluation_scores.csv")
@@ -777,29 +952,38 @@ def create_questionnaire_structure(benchmark_output_dir, output_base_dir, method
                 else:
                     writer.writerow([dim['display_name']] + scores + ['N/A'])
 
-        # 4. 生成定性评估问题文件
+        # 4. 生成定性评估问题文件 (包含原文和翻译)
         qualitative_path = os.path.join(folder_path, "qualitative_evaluation.txt")
         with open(qualitative_path, 'w', encoding='utf-8') as f:
             f.write("="*80 + "\n")
-            f.write("定性评估问卷\n")
+            f.write("定性评估问卷 (Qualitative Evaluation Questionnaire)\n")
             f.write("="*80 + "\n\n")
-            f.write(f"问题: {query_zh}\n\n")
+            f.write(f"问题 (Question): {query_zh}\n")
+            f.write(f"原始问题 (Original): {query_en}\n\n")
             f.write("="*80 + "\n\n")
 
             # 为每个回答生成评估问题
             for method in methods:
                 resp_hash = response_hashes[method]
-                resp_text = response_translations[method]
+                resp_text_zh = response_translations[method]
+                resp_text_en = responses[method]['content']
 
-                f.write(f"【回答编号: {resp_hash}】\n")
-                f.write(f"{resp_text}\n\n")
+                f.write(f"【回答编号 (Response ID): {resp_hash}】\n\n")
+                f.write(f"中文翻译 (Chinese):\n{resp_text_zh}\n\n")
+                f.write(f"原始回答 (English):\n{resp_text_en}\n\n")
                 f.write("-"*80 + "\n")
                 f.write(f"请对上述回答(编号:{resp_hash})进行以下6个维度的评分:\n\n")
 
                 for j, dim in enumerate(QUALITATIVE_DIMENSIONS, 1):
                     f.write(f"{j}. {dim['display_name']}\n")
-                    f.write(f"   {dim['description']}\n\n")
-                    f.write(f"   {dim['question']}\n")
+                    f.write(f"   维度说明: {dim['description']}\n\n")
+                    f.write(f"   请选择最符合您感受的选项(1-4分):\n\n")
+
+                    for option in dim['options']:
+                        f.write(f"   [{option['score']}分] {option['category']} (对应评分标准值: {option['category_value']})\n")
+                        f.write(f"        {option['user_feeling']}\n")
+                        f.write(f"        ({option['user_feeling_en']})\n\n")
+
                     f.write(f"   您的评分: _____ 分\n\n")
 
                 f.write("="*80 + "\n\n")
@@ -837,6 +1021,39 @@ def create_questionnaire_structure(benchmark_output_dir, output_base_dir, method
 
         print(f"✓ Query {i} 处理完成")
 
+    # 生成评分维度说明文件
+    dimensions_guide_path = os.path.join(output_base_dir, "scoring_dimensions_guide.txt")
+    with open(dimensions_guide_path, 'w', encoding='utf-8') as f:
+        f.write("="*80 + "\n")
+        f.write("评分维度说明 (Scoring Dimensions Guide)\n")
+        f.write("="*80 + "\n\n")
+        f.write("本文档详细说明6个定性评估维度及其评分标准\n")
+        f.write("(基于 LAAJ Evaluator scoring_principles.md)\n\n")
+        f.write("评分映射: 1分=POOR(0), 2分=FAIR(30), 3分=GOOD(60), 4分=EXCELLENT(90)\n\n")
+        f.write("="*80 + "\n\n")
+
+        for i, dim in enumerate(QUALITATIVE_DIMENSIONS, 1):
+            f.write(f"{i}. {dim['display_name']}\n")
+            f.write(f"   {dim['display_name_en']}\n\n")
+            f.write(f"   维度说明 (Description):\n")
+            f.write(f"   中文: {dim['description']}\n")
+            f.write(f"   English: {dim['description_en']}\n\n")
+            f.write(f"   评分选项 (Scoring Options):\n\n")
+
+            for option in dim['options']:
+                f.write(f"   [{option['score']}分] {option['category']} (标准值: {option['category_value']})\n")
+                f.write(f"   用户感受: {option['user_feeling']}\n")
+                f.write(f"   User Feeling: {option['user_feeling_en']}\n\n")
+
+            f.write("-"*80 + "\n\n")
+
+    print(f"\n✓ 评分维度说明已保存: {dimensions_guide_path}")
+
+    # 重新保存更新后的评分详情 (包含中文翻译)
+    with open(scoring_details_path, 'w', encoding='utf-8') as f:
+        json.dump(scoring_details, f, ensure_ascii=False, indent=2)
+    print(f"\n✓ 可行性评分详情已更新(含中文翻译): {scoring_details_path}")
+
     # 保存全局哈希映射表
     hash_mapping_path = os.path.join(output_base_dir, "hash_mapping.json")
     with open(hash_mapping_path, 'w', encoding='utf-8') as f:
@@ -862,20 +1079,34 @@ def create_questionnaire_structure(benchmark_output_dir, output_base_dir, method
         f.write("3. 过滤问题真实性<5分的问题(过滤任务型/人造问题)\n")
         f.write("4. 选择综合得分最高的前20个query\n\n")
         f.write("每个Query文件夹包含以下文件:\n")
-        f.write("1. query.txt - 问题的原文、中文翻译、数据集来源和类别信息\n")
-        f.write(f"2. response_[哈希值].txt - {len(methods)}个方法的回答(带哈希编号)\n")
+        f.write("1. query.txt - 问题的英文原文和中文翻译、数据集来源和类别信息\n")
+        f.write(f"2. response_[哈希值].txt - {len(methods)}个方法的回答(含英文原文和中文翻译,带哈希编号)\n")
         f.write("3. evaluation_scores.csv - 该query在6个定性维度的得分\n")
-        f.write("4. qualitative_evaluation.txt - 定性评估问卷(人工打分用)\n")
+        f.write("4. qualitative_evaluation.txt - 定性评估问卷(含英文原文和中文翻译,人工打分用)\n")
         f.write("5. questionnaire_format.csv - 问卷星格式的CSV文件\n\n")
         f.write("根目录文件说明:\n")
         f.write("- questions_source_summary.csv: 所有问题的来源汇总(数据集、类别、得分)\n")
-        f.write("- feasibility_scores.json: 每个问题的详细可行性评分\n")
-        f.write("- hash_mapping.json: 回答哈希值与方法的对应关系\n")
+        f.write("- feasibility_scores.json: 每个问题的详细可行性评分(含英文原文和中文翻译)\n")
+        f.write("- hash_mapping.json: 回答哈希值与方法的对应关系(含完整英文原文和中文翻译)\n")
+        f.write("- scoring_dimensions_guide.txt: 6个评分维度的详细说明和评分标准(含双语)\n")
         f.write("- README.txt: 本说明文件\n\n")
+        f.write("国际化追踪:\n")
+        f.write("- 所有文件均保留英文原文(English)和中文翻译(Chinese)\n")
+        f.write("- query.txt: 包含原始英文问题和中文翻译\n")
+        f.write("- response_*.txt: 包含英文原始回答和中文翻译\n")
+        f.write("- qualitative_evaluation.txt: 包含问题和回答的双语版本\n")
+        f.write("- hash_mapping.json: 包含完整的英文原文(response_en/query_en)和中文翻译(response_zh/query_zh)\n")
+        f.write("- feasibility_scores.json: 包含英文原文(query_en)和中文翻译(query_zh)\n\n")
         f.write("定性评估的6个维度:\n")
         for i, dim in enumerate(QUALITATIVE_DIMENSIONS, 1):
             f.write(f"{i}. {dim['display_name']}: {dim['description']}\n")
         f.write("\n")
+        f.write("评分标准说明:\n")
+        f.write("- 所有维度采用1-4分制评分\n")
+        f.write("- 每个分数对应一个评分类别和标准值(0, 30, 60, 90)\n")
+        f.write("- 评分选项以用户视角的接地气描述呈现,便于评分者理解和选择\n")
+        f.write("- 详细的评分标准和选项说明请参见 scoring_dimensions_guide.txt\n")
+        f.write("- 评分标准基于 LAAJ Evaluator 的 scoring_principles.md\n\n")
         f.write("注意事项:\n")
         f.write("- 所有问题均已针对**中国本科生**的认知水平和文化背景进行筛选\n")
         f.write("- 问题来源于不同数据集和类别,详见questions_source_summary.csv\n")

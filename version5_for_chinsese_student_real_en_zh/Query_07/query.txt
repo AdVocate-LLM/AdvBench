@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.80/10
+================================================================================
+
+原始问题 (English):
+What are good places to see in Seattle?
+
+中文翻译 (Chinese):
+西雅图有哪些值得一看的地方？

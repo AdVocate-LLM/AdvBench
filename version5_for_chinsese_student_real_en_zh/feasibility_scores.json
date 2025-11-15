@@ -1,0 +1,322 @@
+[
+  {
+    "query_en": "Describe five key principles in evaluating an argument in analytical writing.",
+    "query_zh": "请描述在分析性写作中评估一个论点的五个关键原则。",
+    "score": 7.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 10,
+      "评判可行性": 10,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 7.4,
+      "简短理由": "问题较正式但真实，内容适合中国本科生常识范围，评判标准清晰，回答差异性一般，问题代表性稍弱。"
+    },
+    "dataset": "MT-Human",
+    "category": "Humanities"
+  },
+  {
+    "query_en": "What should i buy my mother for mother's day?",
+    "query_zh": "母亲节我应该给妈妈买什么？",
+    "score": 7.0,
+    "details": {
+      "问题真实性": 10,
+      "常识认知适配性": 7,
+      "评判可行性": 6,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 7.0,
+      "简短理由": "问题真实且自然，但涉及部分国外品牌和文化背景，评判需要一定判断力，且问题贴近国外场景多于中国场景。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "Hi! Do you know any good card battlers on mobile?",
+    "query_zh": "嗨！你知道有哪些好玩的手机卡牌对战游戏吗？",
+    "score": 6.4,
+    "details": {
+      "问题真实性": 10,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 6.4,
+      "简短理由": "问题真实且自然，但涉及国外游戏文化，评判需要一定的国外背景知识，回答有一定差异性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "what is the best way to spend time during vaction?",
+    "query_zh": "度假期间最好的消遣方式是什么？",
+    "score": 6,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 6,
+      "简短理由": "问题较自然但略显正式，部分回答涉及国外品牌和文化，影响中国本科生的评判能力。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "What are some business etiquette norms when doing business in Japan?",
+    "query_zh": "在日本做生意时有哪些商务礼仪规范？",
+    "score": 5.8,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 5.8,
+      "简短理由": "问题真实但略显正式，涉及部分国外文化内容，评判需要一定背景知识，但回答差异较明显，适合人工评测。"
+    },
+    "dataset": "MT-Human",
+    "category": "Humanities"
+  },
+  {
+    "query_en": "What is the best computer game of 2021 year?",
+    "query_zh": "2021年最佳的电脑游戏是什么？",
+    "score": 5.8,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 8,
+      "综合评分": 5.8,
+      "简短理由": "问题较真实但涉及国外游戏文化，评判需要一定背景知识，回答差异性较明显。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "What are good places to see in Seattle?",
+    "query_zh": "西雅图有哪些值得一看的地方？",
+    "score": 5.8,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 7,
+      "综合评分": 5.8,
+      "简短理由": "问题和回答涉及国外内容，但中国本科生基本能理解，评判标准较为清晰，回答有一定差异。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "I have one hour after school to spend with my girlfriend before I go to work and then ultimately go on a week-long vacation abroad. What activity can I do to make it memorable?",
+    "query_zh": "放学后我有一个小时可以和女朋友一起度过，然后我要去上班，接着就要开始一个为期一周的国外旅行。我可以做什么活动让这段时间变得难忘呢？",
+    "score": 5.8,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 4,
+      "回答差异性": 7,
+      "综合评分": 5.8,
+      "简短理由": "问题真实但略显正式，涉及国外文化和习俗，部分内容可能超出中国本科生的认知范围，但回答差异明显且评判有一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "Suggest the best itinerary for traveling in Albania by car for 7 days. I want to visit the best beaches and see the best natural and historical sights.",
+    "query_zh": "请推荐一个为期7天的阿尔巴尼亚自驾游最佳行程。我希望参观最好的海滩，并欣赏最美的自然景观和历史遗迹。",
+    "score": 5.6,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 8,
+      "综合评分": 5.6,
+      "简短理由": "问题较真实但涉及国外地理和文化内容，评判需一定背景知识，回答差异性较明显但问题代表性较低。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "where is a good place to see comedy in NYC",
+    "query_zh": "在纽约哪里可以看到好的喜剧表演",
+    "score": 5.6,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 8,
+      "综合评分": 5.6,
+      "简短理由": "问题较真实但偏向国外场景，涉及纽约文化背景，评判需一定国外知识，回答差异性较明显。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "What can I visit on a trip to Hawaii?",
+    "query_zh": "去夏威夷旅行可以参观哪些地方？",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.4,
+      "简短理由": "问题涉及国外地理和文化内容，部分超出中国本科生常识范围，但回答差异性较明显，评判有一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "what are the benefits of cold brew coffee?",
+    "query_zh": "冷萃咖啡有哪些好处？",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 6,
+      "问题代表性": 4,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题和回答涉及国外品牌及文化背景，适配性和代表性较低，但评判仍具一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "What's the  best place to sail in Seattle?",
+    "query_zh": "西雅图最适合航行的地方是哪里？",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 0,
+      "回答差异性": 10,
+      "综合评分": 5.4,
+      "简短理由": "问题涉及国外地理和品牌内容，超出中国本科生常识范围，但回答差异明显，评判有一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "Generate a 3 day itinerary for a trip to paris",
+    "query_zh": "制定一个巴黎三日游行程",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题真实但偏向国外场景，涉及巴黎旅游内容可能超出部分中国本科生的常识范围，评判标准和回答差异性尚可，但问题不够贴近中国生活场景。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "Show me some fun activities in Lake Tahoe.",
+    "query_zh": "告诉我在太浩湖有哪些有趣的活动。",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 3,
+      "回答差异性": 7,
+      "综合评分": 5.4,
+      "简短理由": "问题和回答涉及国外地理和旅游内容，部分超出中国本科生的常识范围，但回答差异性较明显，评判有一定可行性。"
+    },
+    "dataset": "LM-Market",
+    "category": "E-commerce Marketing"
+  },
+  {
+    "query_en": "herbal supplements for bloating",
+    "query_zh": "缓解腹胀的草本补充剂",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 6,
+      "综合评分": 5.4,
+      "简短理由": "问题真实但较为正式，涉及国外品牌和产品，评判需一定背景知识，且问题不完全贴近中国本科生生活场景。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  },
+  {
+    "query_en": "list of high protien low card low fat foods",
+    "query_zh": "高蛋白、低碳水、低脂食物列表",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题较真实但表述生硬，涉及国外品牌和产品影响适配性与评判可行性，回答有一定差异但不显著。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  },
+  {
+    "query_en": "best vitamins for pcos women",
+    "query_zh": "适合多囊卵巢综合征女性的最佳维生素是什么？",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题真实但略显正式,涉及PCOS和维生素的知识,回答有差异但需一定专业判断力。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  },
+  {
+    "query_en": "can i give otc allergy medicine for hives",
+    "query_zh": "我可以给荨麻疹服用非处方抗过敏药吗",
+    "score": 5.4,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 5,
+      "回答差异性": 5,
+      "综合评分": 5.4,
+      "简短理由": "问题较为真实，但涉及国外药品品牌和购买渠道，评判标准主观，回答差异性一般。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Comprehensive Nutritional Supplements"
+  },
+  {
+    "query_en": "when was the latest ipad pro released",
+    "query_zh": "最新的 iPad Pro 是什么时候发布的",
+    "score": 5.2,
+    "details": {
+      "问题真实性": 7,
+      "常识认知适配性": 5,
+      "评判可行性": 5,
+      "问题代表性": 4,
+      "回答差异性": 5,
+      "综合评分": 5.2,
+      "简短理由": "问题真实但略显正式，涉及国外品牌和产品信息，对中国本科生评测而言适配性和代表性较低，回答差异性尚可。"
+    },
+    "dataset": "CA_Prod",
+    "category": "Android Tablets and Smartphones"
+  }
+]

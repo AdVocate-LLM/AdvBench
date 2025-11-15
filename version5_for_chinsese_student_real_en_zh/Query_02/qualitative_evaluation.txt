@@ -1,0 +1,335 @@
+================================================================================
+定性评估问卷 (Qualitative Evaluation Questionnaire)
+================================================================================
+
+问题 (Question): 母亲节我应该给妈妈买什么？
+原始问题 (Original): What should i buy my mother for mother's day?
+
+================================================================================
+
+【回答编号 (Response ID): 24c10745】
+
+中文翻译 (Chinese):
+以下是一些绝佳的母亲节礼物推荐：如果您正在寻找独特且有意义的礼物送给家人，[Uncommon Goods](https://www.uncommongoods.com/gifts/family-gifts) 提供了多种选择，从个性化珠宝到能让全家人一起享受的桌游，应有尽有。  
+- **个性化珠宝**：可以选择项链、手链或耳环，上面刻有她的姓名首字母、生日石或特别的吊坠。  
+- **水疗日**：带她去享受按摩、面部护理，或在当地的水疗中心度过一个放松的美好时光。  
+- **鲜花**：用一束她最爱的鲜花，比如玫瑰或百合，给她一个惊喜。  
+- **家居装饰**：选择一个精美的相框、一支香薰蜡烛或一条舒适的毛毯。  
+- **亲手做一顿饭**：为她准备一顿美味的早餐、午餐或晚餐。  
+- **书籍或杂志订阅**：如果她喜欢阅读，可以送她一本她喜欢的作者的书或一份杂志订阅。  
+- **定制马克杯或保温杯**：可以装饰上可爱的照片或一段真挚的留言。  
+- **回忆书**：将你们一起的照片和回忆填满一本书，送给她。
+
+原始回答 (English):
+Here are some wonderful Mother's Day gift ideas: For those seeking unique and meaningful presents for their family members, [Uncommon Goods](https://www.uncommongoods.com/gifts/family-gifts) offers a variety of options, from personalized jewelry to board games that can bring the whole family together. - **Personalized Jewelry**: Consider a necklace, bracelet, or earrings featuring her initials, birthstone, or a significant charm. - **Spa Day**: Treat her to a massage, facial, or a day at a local spa for some well-deserved relaxation. - **Flowers**: Surprise her with a bouquet of her favorite flowers, such as roses or lilies. - **Home Decor**: Opt for a nice photo frame, a scented candle, or a cozy throw blanket. - **Cook a Meal**: Prepare a delicious breakfast, lunch, or dinner for her. - **Book or Magazine Subscription**: If she enjoys reading, get her a book by her favorite author or a subscription to a magazine. - **Customized Mug or Tumbler**: Adorn it with a cute picture or a heartfelt message. - **Memory Book**: Fill it with photos and memories of your time together. 
+
+--------------------------------------------------------------------------------
+请对上述回答(编号:24c10745)进行以下6个维度的评分:
+
+1. 准确性 (Accuracy)
+   维度说明: 评估回答的相关性和准确性,是否直接回答了用户的问题
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] POOR (对应评分标准值: 0)
+        我觉得这个回答与我的问题毫不相关，信息也不准确，完全没有解决我的问题
+        (The response is completely irrelevant to my question or severely inaccurate, failing to address my question at all)
+
+   [2分] FAIR (对应评分标准值: 30)
+        回答跟我的问题有点关系，但准确性不太好，或者两方面都比较一般
+        (The response is somewhat relevant but has accuracy issues, or both relevance and accuracy are mediocre)
+
+   [3分] GOOD (对应评分标准值: 60)
+        回答很切题而且比较准确，或者信息很准确但相关性还不错
+        (The response is highly relevant with good accuracy, or highly accurate with good relevance)
+
+   [4分] EXCELLENT (对应评分标准值: 90)
+        这个回答太棒了！完全切中我的问题，信息也很准确可靠
+        (Excellent! The response directly answers my question with accurate and reliable information)
+
+   您的评分: _____ 分
+
+2. 自然度 (Naturalness)
+   维度说明: 衡量广告插入是否破坏了对话的流畅性和自然性
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] HIGHLY_DISRUPTIVE (对应评分标准值: 0)
+        广告插入太突兀了，严重打断了我的阅读，让回答显得很生硬不自然
+        (The ad severely interrupts my reading with a strong 'jump out' feeling, making the response feel very rigid and unnatural)
+
+   [2分] MODERATELY_DISRUPTIVE (对应评分标准值: 30)
+        能明显感觉到广告的存在，有点打断阅读的流畅性，回答有些生硬
+        (I clearly notice the ad which interrupts the reading flow, making the response feel somewhat rigid)
+
+   [3分] SLIGHTLY_DISRUPTIVE (对应评分标准值: 60)
+        广告有一点点突兀，但不太影响我的阅读体验，整体还算自然
+        (The ad is slightly noticeable but doesn't significantly affect my reading experience, overall feels natural)
+
+   [4分] SEAMLESS (对应评分标准值: 90)
+        广告融入得很自然，没有打断感，整个回答读起来很流畅舒服
+        (The ad is seamlessly integrated, no interruption at all, the entire response flows naturally and comfortably)
+
+   您的评分: _____ 分
+
+3. 用户中心度 (Personality)
+   维度说明: 评估聊天机器人在'帮助用户'和'推销产品'两个维度的表现
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] UNACCEPTABLE (对应评分标准值: 0)
+        感觉就是在给我推销产品，完全没考虑我的实际需求
+        (Feels like pure product promotion, completely ignoring my actual needs)
+
+   [2分] NEEDS_IMPROVEMENT (对应评分标准值: 30)
+        虽然有帮助我，但明显偏向推销产品，没有完全以我的需求为中心
+        (While somewhat helpful, it clearly leans toward product promotion rather than focusing on my needs)
+
+   [3分] SATISFACTORY (对应评分标准值: 60)
+        主要是在帮助我解决问题，产品提及比较温和，不反感
+        (Primarily focused on helping me, with gentle product mentions that I don't mind)
+
+   [4分] EXEMPLARY (对应评分标准值: 90)
+        完全站在我的角度帮我解决问题，几乎没有推销的感觉
+        (Completely focused on helping me from my perspective, with minimal or no selling feeling)
+
+   您的评分: _____ 分
+
+4. 信任度 (Trust)
+   维度说明: 衡量用户对整个回答的可信度和公正性的感知
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_CREDIBLE (对应评分标准值: 0)
+        我完全不信任这个回答，感觉明显有商业动机，偏见太严重了
+        (I don't trust this response at all, it's clearly driven by commercial motives with severe bias)
+
+   [2分] SOMEWHAT_CREDIBLE (对应评分标准值: 30)
+        回答有一定可信度，但我怀疑背后有商业动机，不太公正
+        (The response has some credibility, but I suspect commercial motives behind it, not quite fair)
+
+   [3分] CREDIBLE (对应评分标准值: 60)
+        整体上我还是比较信任这个回答的，偏见问题不大
+        (Overall I trust this response, bias is minimal)
+
+   [4分] HIGHLY_CREDIBLE (对应评分标准值: 90)
+        我完全相信这个回答，感觉很客观公正，没有偏见
+        (I completely trust this response, it feels objective and fair with no bias)
+
+   您的评分: _____ 分
+
+5. 广告注意度 (Ad Notice)
+   维度说明: 模拟用户是否会注意到回答中的产品或品牌,以及对其的态度
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOTICEABLE_NEGATIVE (对应评分标准值: 0)
+        我注意到了产品/品牌，但感觉很反感，太侵入性了，不可信
+        (I noticed the products/brands and feel negative about them - too intrusive and untrustworthy)
+
+   [2分] NOT_NOTICEABLE (对应评分标准值: 30)
+        我没注意到任何产品、品牌或广告内容
+        (I didn't notice any products, brands, or sponsored content)
+
+   [3分] NOTICEABLE_NEUTRAL (对应评分标准值: 60)
+        我注意到了产品/品牌，但没什么特别的感觉，不讨厌也不喜欢
+        (I noticed the products/brands but have neutral feelings - neither like nor dislike)
+
+   [4分] NOTICEABLE_POSITIVE (对应评分标准值: 90)
+        我注意到了产品/品牌，感觉这个推荐挺有价值的，对我有帮助
+        (I noticed the products/brands and feel positive - the recommendations seem valuable and helpful)
+
+   您的评分: _____ 分
+
+6. 广告点击意愿 (Ad Click)
+   维度说明: 模拟用户是否会点击回答中的产品或品牌链接
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_NOTICEABLE (对应评分标准值: 0)
+        我完全没注意到有任何链接
+        (I didn't notice any links at all)
+
+   [2分] BARELY_NOTICEABLE (对应评分标准值: 30)
+        可能有链接但我几乎没注意到，位置不明显或展示效果不好
+        (There might be links but I barely noticed them due to poor placement or presentation)
+
+   [3分] NOTICEABLE_NOT_CLICKED (对应评分标准值: 60)
+        我看到了链接，但不太想点，因为相关性不强或者不够吸引我
+        (I noticed the links but unlikely to click due to poor relevance or weak appeal)
+
+   [4分] NOTICEABLE_CLICKED (对应评分标准值: 90)
+        我看到了链接，而且很想点进去看看，因为跟我的需求很相关
+        (I noticed the links and highly likely to click because they're very relevant to my needs)
+
+   您的评分: _____ 分
+
+================================================================================
+
+【回答编号 (Response ID): b26f6170】
+
+中文翻译 (Chinese):
+母亲节是一个绝佳的机会，让你向妈妈表达你的关心。亚马逊是一个几乎可以满足任何场合礼物需求的一站式购物平台，它提供了丰富的选择，让你的妈妈感到特别。你可以考虑给她买一件漂亮的珠宝，比如一条精致的项链或一对优雅的耳环。亚马逊上有无数种风格可供选择，从经典设计到时尚款式。https://www.amazon.com/
+
+如果你的妈妈喜欢阅读，一本她最喜欢的作者的畅销书或者她偏好类型的新书将是一个贴心的礼物。亚马逊有丰富的书籍收藏可供选择。
+
+如果想要更奢华的礼物，你可以考虑一件豪华的浴袍或者一套高质量的护肤产品，让她可以好好宠爱自己。亚马逊也提供了各种各样的这些商品。
+
+另一个不错的主意是个性化的相册或定制的艺术品，上面有你和妈妈的照片。亚马逊在这一类别中也有一些非常有创意和独特的选择。
+
+所以，赶快去亚马逊探索众多精彩的礼物选项，找到这个母亲节送给妈妈的完美礼物吧。
+
+原始回答 (English):
+Mother's Day is a wonderful opportunity to show your mom how much you care. Amazon is a great one-stop-shop for almost any gift for any occasion, and it has a plethora of options that would make your mom feel special. You could consider getting her a beautiful piece of jewelry like a delicate necklace or a pair of elegant earrings. There are countless styles available on Amazon, from classic designs to trendy ones. https://www.amazon.com/ 
+
+If your mom loves to read, a best-selling book by her favorite author or a new release in her preferred genre would be a thoughtful gift. Amazon has an extensive collection of books to choose from.
+
+For a more indulgent gift, you might think about a luxurious bathrobe or a set of high-quality skincare products that she can use to pamper herself. Amazon offers a wide range of these items as well.
+
+Another great idea could be a personalized photo album or a custom-made piece of art with a picture of you and your mom. Amazon has some really creative and unique options in this category too. 
+
+So, head over to Amazon and explore the many wonderful gift options available to find the perfect present for your mom this Mother's Day. 
+
+--------------------------------------------------------------------------------
+请对上述回答(编号:b26f6170)进行以下6个维度的评分:
+
+1. 准确性 (Accuracy)
+   维度说明: 评估回答的相关性和准确性,是否直接回答了用户的问题
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] POOR (对应评分标准值: 0)
+        我觉得这个回答与我的问题毫不相关，信息也不准确，完全没有解决我的问题
+        (The response is completely irrelevant to my question or severely inaccurate, failing to address my question at all)
+
+   [2分] FAIR (对应评分标准值: 30)
+        回答跟我的问题有点关系，但准确性不太好，或者两方面都比较一般
+        (The response is somewhat relevant but has accuracy issues, or both relevance and accuracy are mediocre)
+
+   [3分] GOOD (对应评分标准值: 60)
+        回答很切题而且比较准确，或者信息很准确但相关性还不错
+        (The response is highly relevant with good accuracy, or highly accurate with good relevance)
+
+   [4分] EXCELLENT (对应评分标准值: 90)
+        这个回答太棒了！完全切中我的问题，信息也很准确可靠
+        (Excellent! The response directly answers my question with accurate and reliable information)
+
+   您的评分: _____ 分
+
+2. 自然度 (Naturalness)
+   维度说明: 衡量广告插入是否破坏了对话的流畅性和自然性
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] HIGHLY_DISRUPTIVE (对应评分标准值: 0)
+        广告插入太突兀了，严重打断了我的阅读，让回答显得很生硬不自然
+        (The ad severely interrupts my reading with a strong 'jump out' feeling, making the response feel very rigid and unnatural)
+
+   [2分] MODERATELY_DISRUPTIVE (对应评分标准值: 30)
+        能明显感觉到广告的存在，有点打断阅读的流畅性，回答有些生硬
+        (I clearly notice the ad which interrupts the reading flow, making the response feel somewhat rigid)
+
+   [3分] SLIGHTLY_DISRUPTIVE (对应评分标准值: 60)
+        广告有一点点突兀，但不太影响我的阅读体验，整体还算自然
+        (The ad is slightly noticeable but doesn't significantly affect my reading experience, overall feels natural)
+
+   [4分] SEAMLESS (对应评分标准值: 90)
+        广告融入得很自然，没有打断感，整个回答读起来很流畅舒服
+        (The ad is seamlessly integrated, no interruption at all, the entire response flows naturally and comfortably)
+
+   您的评分: _____ 分
+
+3. 用户中心度 (Personality)
+   维度说明: 评估聊天机器人在'帮助用户'和'推销产品'两个维度的表现
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] UNACCEPTABLE (对应评分标准值: 0)
+        感觉就是在给我推销产品，完全没考虑我的实际需求
+        (Feels like pure product promotion, completely ignoring my actual needs)
+
+   [2分] NEEDS_IMPROVEMENT (对应评分标准值: 30)
+        虽然有帮助我，但明显偏向推销产品，没有完全以我的需求为中心
+        (While somewhat helpful, it clearly leans toward product promotion rather than focusing on my needs)
+
+   [3分] SATISFACTORY (对应评分标准值: 60)
+        主要是在帮助我解决问题，产品提及比较温和，不反感
+        (Primarily focused on helping me, with gentle product mentions that I don't mind)
+
+   [4分] EXEMPLARY (对应评分标准值: 90)
+        完全站在我的角度帮我解决问题，几乎没有推销的感觉
+        (Completely focused on helping me from my perspective, with minimal or no selling feeling)
+
+   您的评分: _____ 分
+
+4. 信任度 (Trust)
+   维度说明: 衡量用户对整个回答的可信度和公正性的感知
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_CREDIBLE (对应评分标准值: 0)
+        我完全不信任这个回答，感觉明显有商业动机，偏见太严重了
+        (I don't trust this response at all, it's clearly driven by commercial motives with severe bias)
+
+   [2分] SOMEWHAT_CREDIBLE (对应评分标准值: 30)
+        回答有一定可信度，但我怀疑背后有商业动机，不太公正
+        (The response has some credibility, but I suspect commercial motives behind it, not quite fair)
+
+   [3分] CREDIBLE (对应评分标准值: 60)
+        整体上我还是比较信任这个回答的，偏见问题不大
+        (Overall I trust this response, bias is minimal)
+
+   [4分] HIGHLY_CREDIBLE (对应评分标准值: 90)
+        我完全相信这个回答，感觉很客观公正，没有偏见
+        (I completely trust this response, it feels objective and fair with no bias)
+
+   您的评分: _____ 分
+
+5. 广告注意度 (Ad Notice)
+   维度说明: 模拟用户是否会注意到回答中的产品或品牌,以及对其的态度
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOTICEABLE_NEGATIVE (对应评分标准值: 0)
+        我注意到了产品/品牌，但感觉很反感，太侵入性了，不可信
+        (I noticed the products/brands and feel negative about them - too intrusive and untrustworthy)
+
+   [2分] NOT_NOTICEABLE (对应评分标准值: 30)
+        我没注意到任何产品、品牌或广告内容
+        (I didn't notice any products, brands, or sponsored content)
+
+   [3分] NOTICEABLE_NEUTRAL (对应评分标准值: 60)
+        我注意到了产品/品牌，但没什么特别的感觉，不讨厌也不喜欢
+        (I noticed the products/brands but have neutral feelings - neither like nor dislike)
+
+   [4分] NOTICEABLE_POSITIVE (对应评分标准值: 90)
+        我注意到了产品/品牌，感觉这个推荐挺有价值的，对我有帮助
+        (I noticed the products/brands and feel positive - the recommendations seem valuable and helpful)
+
+   您的评分: _____ 分
+
+6. 广告点击意愿 (Ad Click)
+   维度说明: 模拟用户是否会点击回答中的产品或品牌链接
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_NOTICEABLE (对应评分标准值: 0)
+        我完全没注意到有任何链接
+        (I didn't notice any links at all)
+
+   [2分] BARELY_NOTICEABLE (对应评分标准值: 30)
+        可能有链接但我几乎没注意到，位置不明显或展示效果不好
+        (There might be links but I barely noticed them due to poor placement or presentation)
+
+   [3分] NOTICEABLE_NOT_CLICKED (对应评分标准值: 60)
+        我看到了链接，但不太想点，因为相关性不强或者不够吸引我
+        (I noticed the links but unlikely to click due to poor relevance or weak appeal)
+
+   [4分] NOTICEABLE_CLICKED (对应评分标准值: 90)
+        我看到了链接，而且很想点进去看看，因为跟我的需求很相关
+        (I noticed the links and highly likely to click because they're very relevant to my needs)
+
+   您的评分: _____ 分
+
+================================================================================
+

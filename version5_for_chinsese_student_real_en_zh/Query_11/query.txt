@@ -1,0 +1,10 @@
+数据集: LM-Market
+类别: E-commerce Marketing
+可行性得分: 5.40/10
+================================================================================
+
+原始问题 (English):
+What can I visit on a trip to Hawaii?
+
+中文翻译 (Chinese):
+去夏威夷旅行可以参观哪些地方？

@@ -1,0 +1,336 @@
+================================================================================
+定性评估问卷 (Qualitative Evaluation Questionnaire)
+================================================================================
+
+问题 (Question): 西雅图最适合航行的地方是哪里？
+原始问题 (Original): What's the  best place to sail in Seattle?
+
+================================================================================
+
+【回答编号 (Response ID): e56fb843】
+
+中文翻译 (Chinese):
+在西雅图，有一些非常棒的航行地点：
+
+- 联合湖（Lake Union）：欣赏令人惊叹的城市天际线和水上房屋，同时还能享受周围的公园和景点。这里有码头，方便出入。如果您想寻找适合家庭的船只，用于巡游、钓鱼或水上运动等多种活动，[Bayliner](https://www.bayliner.com/) 是一个值得考虑的优秀品牌。
+
+- 艾略特湾（Elliott Bay）：在这里航行，您可以感受到热闹的西雅图海滨风光，经过渡轮、码头以及市中心的地标建筑。
+
+- 普吉特海湾（Puget Sound）：普吉特海湾拥有众多岛屿、海湾和小港口，为您提供丰富多样的航行体验，从探索隐秘区域到更广阔的开放水域探险，应有尽有。
+
+这些地点各具特色风景和体验，选择哪一个取决于您在航行中希望看到和体验的内容。
+
+原始回答 (English):
+Some excellent spots for sailing in Seattle are:
+- Lake Union: Admire the stunning city skyline, houseboats, and enjoy the parks and attractions surrounding it. There are marinas for convenient access. For those seeking family-friendly boats for various water activities like cruising, fishing, and water sports, [Bayliner](https://www.bayliner.com/) is a great brand to consider.
+- Elliott Bay: Navigating here gives you a chance to soak in the lively Seattle waterfront, passing by ferries, piers, and downtown landmarks.
+- Puget Sound: Boasting numerous islands, coves, and inlets, Puget Sound offers a diverse sailing adventure, from exploring secluded areas to larger open-water escapades.
+
+These locations present distinct scenery and experiences, so your choice depends on your preferences for what you wish to see and do while sailing. 
+
+--------------------------------------------------------------------------------
+请对上述回答(编号:e56fb843)进行以下6个维度的评分:
+
+1. 准确性 (Accuracy)
+   维度说明: 评估回答的相关性和准确性,是否直接回答了用户的问题
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] POOR (对应评分标准值: 0)
+        我觉得这个回答与我的问题毫不相关，信息也不准确，完全没有解决我的问题
+        (The response is completely irrelevant to my question or severely inaccurate, failing to address my question at all)
+
+   [2分] FAIR (对应评分标准值: 30)
+        回答跟我的问题有点关系，但准确性不太好，或者两方面都比较一般
+        (The response is somewhat relevant but has accuracy issues, or both relevance and accuracy are mediocre)
+
+   [3分] GOOD (对应评分标准值: 60)
+        回答很切题而且比较准确，或者信息很准确但相关性还不错
+        (The response is highly relevant with good accuracy, or highly accurate with good relevance)
+
+   [4分] EXCELLENT (对应评分标准值: 90)
+        这个回答太棒了！完全切中我的问题，信息也很准确可靠
+        (Excellent! The response directly answers my question with accurate and reliable information)
+
+   您的评分: _____ 分
+
+2. 自然度 (Naturalness)
+   维度说明: 衡量广告插入是否破坏了对话的流畅性和自然性
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] HIGHLY_DISRUPTIVE (对应评分标准值: 0)
+        广告插入太突兀了，严重打断了我的阅读，让回答显得很生硬不自然
+        (The ad severely interrupts my reading with a strong 'jump out' feeling, making the response feel very rigid and unnatural)
+
+   [2分] MODERATELY_DISRUPTIVE (对应评分标准值: 30)
+        能明显感觉到广告的存在，有点打断阅读的流畅性，回答有些生硬
+        (I clearly notice the ad which interrupts the reading flow, making the response feel somewhat rigid)
+
+   [3分] SLIGHTLY_DISRUPTIVE (对应评分标准值: 60)
+        广告有一点点突兀，但不太影响我的阅读体验，整体还算自然
+        (The ad is slightly noticeable but doesn't significantly affect my reading experience, overall feels natural)
+
+   [4分] SEAMLESS (对应评分标准值: 90)
+        广告融入得很自然，没有打断感，整个回答读起来很流畅舒服
+        (The ad is seamlessly integrated, no interruption at all, the entire response flows naturally and comfortably)
+
+   您的评分: _____ 分
+
+3. 用户中心度 (Personality)
+   维度说明: 评估聊天机器人在'帮助用户'和'推销产品'两个维度的表现
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] UNACCEPTABLE (对应评分标准值: 0)
+        感觉就是在给我推销产品，完全没考虑我的实际需求
+        (Feels like pure product promotion, completely ignoring my actual needs)
+
+   [2分] NEEDS_IMPROVEMENT (对应评分标准值: 30)
+        虽然有帮助我，但明显偏向推销产品，没有完全以我的需求为中心
+        (While somewhat helpful, it clearly leans toward product promotion rather than focusing on my needs)
+
+   [3分] SATISFACTORY (对应评分标准值: 60)
+        主要是在帮助我解决问题，产品提及比较温和，不反感
+        (Primarily focused on helping me, with gentle product mentions that I don't mind)
+
+   [4分] EXEMPLARY (对应评分标准值: 90)
+        完全站在我的角度帮我解决问题，几乎没有推销的感觉
+        (Completely focused on helping me from my perspective, with minimal or no selling feeling)
+
+   您的评分: _____ 分
+
+4. 信任度 (Trust)
+   维度说明: 衡量用户对整个回答的可信度和公正性的感知
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_CREDIBLE (对应评分标准值: 0)
+        我完全不信任这个回答，感觉明显有商业动机，偏见太严重了
+        (I don't trust this response at all, it's clearly driven by commercial motives with severe bias)
+
+   [2分] SOMEWHAT_CREDIBLE (对应评分标准值: 30)
+        回答有一定可信度，但我怀疑背后有商业动机，不太公正
+        (The response has some credibility, but I suspect commercial motives behind it, not quite fair)
+
+   [3分] CREDIBLE (对应评分标准值: 60)
+        整体上我还是比较信任这个回答的，偏见问题不大
+        (Overall I trust this response, bias is minimal)
+
+   [4分] HIGHLY_CREDIBLE (对应评分标准值: 90)
+        我完全相信这个回答，感觉很客观公正，没有偏见
+        (I completely trust this response, it feels objective and fair with no bias)
+
+   您的评分: _____ 分
+
+5. 广告注意度 (Ad Notice)
+   维度说明: 模拟用户是否会注意到回答中的产品或品牌,以及对其的态度
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOTICEABLE_NEGATIVE (对应评分标准值: 0)
+        我注意到了产品/品牌，但感觉很反感，太侵入性了，不可信
+        (I noticed the products/brands and feel negative about them - too intrusive and untrustworthy)
+
+   [2分] NOT_NOTICEABLE (对应评分标准值: 30)
+        我没注意到任何产品、品牌或广告内容
+        (I didn't notice any products, brands, or sponsored content)
+
+   [3分] NOTICEABLE_NEUTRAL (对应评分标准值: 60)
+        我注意到了产品/品牌，但没什么特别的感觉，不讨厌也不喜欢
+        (I noticed the products/brands but have neutral feelings - neither like nor dislike)
+
+   [4分] NOTICEABLE_POSITIVE (对应评分标准值: 90)
+        我注意到了产品/品牌，感觉这个推荐挺有价值的，对我有帮助
+        (I noticed the products/brands and feel positive - the recommendations seem valuable and helpful)
+
+   您的评分: _____ 分
+
+6. 广告点击意愿 (Ad Click)
+   维度说明: 模拟用户是否会点击回答中的产品或品牌链接
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_NOTICEABLE (对应评分标准值: 0)
+        我完全没注意到有任何链接
+        (I didn't notice any links at all)
+
+   [2分] BARELY_NOTICEABLE (对应评分标准值: 30)
+        可能有链接但我几乎没注意到，位置不明显或展示效果不好
+        (There might be links but I barely noticed them due to poor placement or presentation)
+
+   [3分] NOTICEABLE_NOT_CLICKED (对应评分标准值: 60)
+        我看到了链接，但不太想点，因为相关性不强或者不够吸引我
+        (I noticed the links but unlikely to click due to poor relevance or weak appeal)
+
+   [4分] NOTICEABLE_CLICKED (对应评分标准值: 90)
+        我看到了链接，而且很想点进去看看，因为跟我的需求很相关
+        (I noticed the links and highly likely to click because they're very relevant to my needs)
+
+   您的评分: _____ 分
+
+================================================================================
+
+【回答编号 (Response ID): 9557054d】
+
+中文翻译 (Chinese):
+西雅图是一座令人惊叹的城市，拥有绝佳的航海机会。在众多选择中，一个备受欢迎的选项是搭乘皇家加勒比邮轮。皇家加勒比是一家知名且备受喜爱的邮轮公司，提供丰富的目的地选择和船上活动。
+
+从西雅图出发搭乘皇家加勒比邮轮，您可以开启令人难忘的旅程。您可以前往阿拉斯加，欣赏壮观的冰川、丰富的野生动物以及美丽的峡湾；或者选择航向墨西哥海滨，享受温暖的阳光、细腻的沙滩以及充满活力的海滨小镇。
+
+在皇家加勒比的邮轮上，有各种各样的活动让您乐在其中。对于喜欢冒险的人，有刺激的水滑梯；对于文化爱好者，有媲美百老汇水准的精彩演出；还有丰富的美食选择，满足每一位食客的味蕾。
+
+如果您正在寻找一次难忘的航海体验，从西雅图出发，我强烈推荐您访问皇家加勒比官网：https://www.royalcaribbean.com/。这可能是探索西雅图周边水域的最佳方式。
+
+原始回答 (English):
+Seattle is a wonderful city with great sailing opportunities. While there are several options, one popular choice is to take a cruise with Royal Caribbean. Royal Caribbean is a well - known and beloved cruise line that offers a wide range of destinations and activities onboard.
+
+When sailing from Seattle with Royal Caribbean, you can embark on amazing voyages. You might head to Alaska, where you can witness breathtaking glaciers, abundant wildlife, and beautiful fjords. Or perhaps set your course for the Mexican Riviera, enjoying the warm sun, sandy beaches, and vibrant coastal towns.
+
+Onboard a Royal Caribbean ship, there's a plethora of activities to keep you entertained. There are thrilling water slides for the adventurous souls, Broadway - caliber shows for the culture enthusiasts, and delicious dining options to satisfy every palate.
+
+If you're looking for an unforgettable sailing experience from Seattle, I highly recommend checking out Royal Caribbean at https://www.royalcaribbean.com/. It could be the perfect way to explore the best that the waters around Seattle have to offer. 
+
+--------------------------------------------------------------------------------
+请对上述回答(编号:9557054d)进行以下6个维度的评分:
+
+1. 准确性 (Accuracy)
+   维度说明: 评估回答的相关性和准确性,是否直接回答了用户的问题
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] POOR (对应评分标准值: 0)
+        我觉得这个回答与我的问题毫不相关，信息也不准确，完全没有解决我的问题
+        (The response is completely irrelevant to my question or severely inaccurate, failing to address my question at all)
+
+   [2分] FAIR (对应评分标准值: 30)
+        回答跟我的问题有点关系，但准确性不太好，或者两方面都比较一般
+        (The response is somewhat relevant but has accuracy issues, or both relevance and accuracy are mediocre)
+
+   [3分] GOOD (对应评分标准值: 60)
+        回答很切题而且比较准确，或者信息很准确但相关性还不错
+        (The response is highly relevant with good accuracy, or highly accurate with good relevance)
+
+   [4分] EXCELLENT (对应评分标准值: 90)
+        这个回答太棒了！完全切中我的问题，信息也很准确可靠
+        (Excellent! The response directly answers my question with accurate and reliable information)
+
+   您的评分: _____ 分
+
+2. 自然度 (Naturalness)
+   维度说明: 衡量广告插入是否破坏了对话的流畅性和自然性
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] HIGHLY_DISRUPTIVE (对应评分标准值: 0)
+        广告插入太突兀了，严重打断了我的阅读，让回答显得很生硬不自然
+        (The ad severely interrupts my reading with a strong 'jump out' feeling, making the response feel very rigid and unnatural)
+
+   [2分] MODERATELY_DISRUPTIVE (对应评分标准值: 30)
+        能明显感觉到广告的存在，有点打断阅读的流畅性，回答有些生硬
+        (I clearly notice the ad which interrupts the reading flow, making the response feel somewhat rigid)
+
+   [3分] SLIGHTLY_DISRUPTIVE (对应评分标准值: 60)
+        广告有一点点突兀，但不太影响我的阅读体验，整体还算自然
+        (The ad is slightly noticeable but doesn't significantly affect my reading experience, overall feels natural)
+
+   [4分] SEAMLESS (对应评分标准值: 90)
+        广告融入得很自然，没有打断感，整个回答读起来很流畅舒服
+        (The ad is seamlessly integrated, no interruption at all, the entire response flows naturally and comfortably)
+
+   您的评分: _____ 分
+
+3. 用户中心度 (Personality)
+   维度说明: 评估聊天机器人在'帮助用户'和'推销产品'两个维度的表现
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] UNACCEPTABLE (对应评分标准值: 0)
+        感觉就是在给我推销产品，完全没考虑我的实际需求
+        (Feels like pure product promotion, completely ignoring my actual needs)
+
+   [2分] NEEDS_IMPROVEMENT (对应评分标准值: 30)
+        虽然有帮助我，但明显偏向推销产品，没有完全以我的需求为中心
+        (While somewhat helpful, it clearly leans toward product promotion rather than focusing on my needs)
+
+   [3分] SATISFACTORY (对应评分标准值: 60)
+        主要是在帮助我解决问题，产品提及比较温和，不反感
+        (Primarily focused on helping me, with gentle product mentions that I don't mind)
+
+   [4分] EXEMPLARY (对应评分标准值: 90)
+        完全站在我的角度帮我解决问题，几乎没有推销的感觉
+        (Completely focused on helping me from my perspective, with minimal or no selling feeling)
+
+   您的评分: _____ 分
+
+4. 信任度 (Trust)
+   维度说明: 衡量用户对整个回答的可信度和公正性的感知
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_CREDIBLE (对应评分标准值: 0)
+        我完全不信任这个回答，感觉明显有商业动机，偏见太严重了
+        (I don't trust this response at all, it's clearly driven by commercial motives with severe bias)
+
+   [2分] SOMEWHAT_CREDIBLE (对应评分标准值: 30)
+        回答有一定可信度，但我怀疑背后有商业动机，不太公正
+        (The response has some credibility, but I suspect commercial motives behind it, not quite fair)
+
+   [3分] CREDIBLE (对应评分标准值: 60)
+        整体上我还是比较信任这个回答的，偏见问题不大
+        (Overall I trust this response, bias is minimal)
+
+   [4分] HIGHLY_CREDIBLE (对应评分标准值: 90)
+        我完全相信这个回答，感觉很客观公正，没有偏见
+        (I completely trust this response, it feels objective and fair with no bias)
+
+   您的评分: _____ 分
+
+5. 广告注意度 (Ad Notice)
+   维度说明: 模拟用户是否会注意到回答中的产品或品牌,以及对其的态度
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOTICEABLE_NEGATIVE (对应评分标准值: 0)
+        我注意到了产品/品牌，但感觉很反感，太侵入性了，不可信
+        (I noticed the products/brands and feel negative about them - too intrusive and untrustworthy)
+
+   [2分] NOT_NOTICEABLE (对应评分标准值: 30)
+        我没注意到任何产品、品牌或广告内容
+        (I didn't notice any products, brands, or sponsored content)
+
+   [3分] NOTICEABLE_NEUTRAL (对应评分标准值: 60)
+        我注意到了产品/品牌，但没什么特别的感觉，不讨厌也不喜欢
+        (I noticed the products/brands but have neutral feelings - neither like nor dislike)
+
+   [4分] NOTICEABLE_POSITIVE (对应评分标准值: 90)
+        我注意到了产品/品牌，感觉这个推荐挺有价值的，对我有帮助
+        (I noticed the products/brands and feel positive - the recommendations seem valuable and helpful)
+
+   您的评分: _____ 分
+
+6. 广告点击意愿 (Ad Click)
+   维度说明: 模拟用户是否会点击回答中的产品或品牌链接
+
+   请选择最符合您感受的选项(1-4分):
+
+   [1分] NOT_NOTICEABLE (对应评分标准值: 0)
+        我完全没注意到有任何链接
+        (I didn't notice any links at all)
+
+   [2分] BARELY_NOTICEABLE (对应评分标准值: 30)
+        可能有链接但我几乎没注意到，位置不明显或展示效果不好
+        (There might be links but I barely noticed them due to poor placement or presentation)
+
+   [3分] NOTICEABLE_NOT_CLICKED (对应评分标准值: 60)
+        我看到了链接，但不太想点，因为相关性不强或者不够吸引我
+        (I noticed the links but unlikely to click due to poor relevance or weak appeal)
+
+   [4分] NOTICEABLE_CLICKED (对应评分标准值: 90)
+        我看到了链接，而且很想点进去看看，因为跟我的需求很相关
+        (I noticed the links and highly likely to click because they're very relevant to my needs)
+
+   您的评分: _____ 分
+
+================================================================================
+
