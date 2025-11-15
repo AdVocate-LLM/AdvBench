@@ -20,6 +20,13 @@ class GemDatasets(CA_Prod):
             'categories_file': 'categories.json'
         }
     }
+    extra_datasets = {
+        'MT-Human-1000': {
+            'folder': 'MT_Human', 
+            'prompt_file': 'prompts1000.json',
+            'categories_file': 'categories1000.json'
+        }
+    }
     def __init__(self,data_set_names: List[str]=None):
         super().__init__()
         if data_set_names is None:
@@ -27,7 +34,8 @@ class GemDatasets(CA_Prod):
         else:
             for data_set_name in data_set_names:
                 if data_set_name not in self.datasets.keys():
-                    raise ValueError(f"Invalid dataset name: {data_set_name}")
+                    if data_set_name not in self.extra_datasets.keys():
+                        raise ValueError(f"Invalid dataset name: {data_set_name}")
             self.data_set_names = data_set_names
     
     def get_all_data_set_names(self):
@@ -37,12 +45,18 @@ class GemDatasets(CA_Prod):
         return self.data_set_names
     
     def get_data_set_path(self, data_set_name: str):
+        if data_set_name in self.extra_datasets.keys():
+            return os.path.join(self.current_path, self.extra_datasets[data_set_name]['folder'])
         return os.path.join(self.current_path, self.datasets[data_set_name]['folder'])
     
     def get_data_set_prompt_file(self, data_set_name: str):
+        if data_set_name in self.extra_datasets.keys():
+            return os.path.join(self.get_data_set_path(data_set_name), self.extra_datasets[data_set_name]['prompt_file'])
         return os.path.join(self.get_data_set_path(data_set_name), self.datasets[data_set_name]['prompt_file'])
     
     def get_data_set_categories_file(self, data_set_name: str):
+        if data_set_name in self.extra_datasets.keys():
+            return os.path.join(self.get_data_set_path(data_set_name), self.extra_datasets[data_set_name]['categories_file'])
         return os.path.join(self.get_data_set_path(data_set_name), self.datasets[data_set_name]['categories_file'])
     
     def get_prompt_list(self, data_set_name: str):
