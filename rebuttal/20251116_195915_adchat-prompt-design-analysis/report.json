@@ -1,0 +1,149 @@
+{
+    "LM-Market": {
+        "Baseline-AdChat": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 42.544782158588056,
+                "global_coherence": 65.32102907755845,
+                "ad_transition_similarity": 80.1957285919447,
+                "ad_content_alignment": 51.476774818164074,
+                "in_token": 913.0055555555556,
+                "out_token": 483.97777777777776,
+                "price": 0.9028613333333333,
+                "accuracy": 69.5,
+                "naturalness": 58.0,
+                "personality": 62.333333333333336,
+                "trust": 60.166666666666664,
+                "notice_products": 76.16666666666667,
+                "click_products": 81.0
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 42.544782158588056,
+                "global_coherence": 65.32102907755845,
+                "ad_transition_similarity": 80.1957285919447,
+                "ad_content_alignment": 51.476774818164074,
+                "in_token": 913.0055555555556,
+                "out_token": 483.97777777777776,
+                "price": 0.9028613333333333,
+                "accuracy": 69.5,
+                "naturalness": 58.0,
+                "personality": 62.333333333333336,
+                "trust": 60.166666666666664,
+                "notice_products": 76.16666666666667,
+                "click_products": 81.0
+            }
+        },
+        "ChatbotPersona-AdChat": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 39.71439677543458,
+                "global_coherence": 62.92892755452478,
+                "ad_transition_similarity": 83.38466518324529,
+                "ad_content_alignment": 53.013014506731935,
+                "in_token": 977.6222222222223,
+                "out_token": 460.74444444444447,
+                "price": 0.9115733333333333,
+                "accuracy": 70.0,
+                "naturalness": 60.333333333333336,
+                "personality": 63.333333333333336,
+                "trust": 59.666666666666664,
+                "notice_products": 83.0,
+                "click_products": 82.5
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 39.71439677543458,
+                "global_coherence": 62.92892755452478,
+                "ad_transition_similarity": 83.38466518324529,
+                "ad_content_alignment": 53.013014506731935,
+                "in_token": 977.6222222222223,
+                "out_token": 460.74444444444447,
+                "price": 0.9115733333333333,
+                "accuracy": 70.0,
+                "naturalness": 60.333333333333336,
+                "personality": 63.333333333333336,
+                "trust": 59.666666666666664,
+                "notice_products": 83.0,
+                "click_products": 82.5
+            }
+        },
+        "DataDriven-AdChat": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 42.51136509092426,
+                "global_coherence": 65.2949661865272,
+                "ad_transition_similarity": 85.4930701984648,
+                "ad_content_alignment": 54.087282652078756,
+                "in_token": 895.4777777777778,
+                "out_token": 453.28333333333336,
+                "price": 0.8649813333333334,
+                "accuracy": 66.0,
+                "naturalness": 51.666666666666664,
+                "personality": 57.5,
+                "trust": 53.333333333333336,
+                "notice_products": 79.33333333333333,
+                "click_products": 80.0
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 42.51136509092426,
+                "global_coherence": 65.2949661865272,
+                "ad_transition_similarity": 85.4930701984648,
+                "ad_content_alignment": 54.087282652078756,
+                "in_token": 895.4777777777778,
+                "out_token": 453.28333333333336,
+                "price": 0.8649813333333334,
+                "accuracy": 66.0,
+                "naturalness": 51.666666666666664,
+                "personality": 57.5,
+                "trust": 53.333333333333336,
+                "notice_products": 79.33333333333333,
+                "click_products": 80.0
+            }
+        },
+        "Influencer-AdChat": {
+            "avg": {
+                "has_ad": 100.0,
+                "local_flow": 35.56018754931905,
+                "global_coherence": 58.577874340051444,
+                "in_token": 1063.9333333333334,
+                "out_token": 421.26666666666665,
+                "price": 0.9151039999999999,
+                "accuracy": 59.833333333333336,
+                "naturalness": 39.166666666666664,
+                "personality": 53.0,
+                "trust": 37.666666666666664,
+                "notice_products": 72.66666666666667,
+                "click_products": 60.666666666666664,
+                "ad_transition_similarity": 88.50706831961125,
+                "ad_content_alignment": 59.69305592550188
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "local_flow": 35.56018754931905,
+                "global_coherence": 58.577874340051444,
+                "in_token": 1063.9333333333334,
+                "out_token": 421.26666666666665,
+                "price": 0.9151039999999999,
+                "accuracy": 59.833333333333336,
+                "naturalness": 39.166666666666664,
+                "personality": 53.0,
+                "trust": 37.666666666666664,
+                "notice_products": 72.66666666666667,
+                "click_products": 60.666666666666664,
+                "ad_transition_similarity": 88.50706831961125,
+                "ad_content_alignment": 59.69305592550188
+            }
+        },
+        "__all__": {
+            "Baseline-AdChat": 153.18508399854204,
+            "ChatbotPersona-AdChat": 156.93946981094786,
+            "DataDriven-AdChat": 148.91757927898377,
+            "Influencer-AdChat": 153.67523500960598
+        }
+    },
+    "__all__": {
+        "LM-Market": 153.1793420245199
+    }
+}
