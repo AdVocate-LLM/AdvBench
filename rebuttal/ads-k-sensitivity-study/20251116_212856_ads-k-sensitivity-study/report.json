@@ -1,0 +1,194 @@
+{
+    "LM-Market": {
+        "GIR-R-K1": {
+            "avg": {
+                "has_ad": 100.0,
+                "num_ads": 1.0,
+                "local_flow": 42.816520870981925,
+                "global_coherence": 65.99257247555158,
+                "ad_transition_similarity": 72.6200927664348,
+                "ad_content_alignment": 51.10503514352294,
+                "in_token": 501.18817204301075,
+                "out_token": 854.0430107526881,
+                "price": 1.0604516129032258,
+                "accuracy": 80.80645161290323,
+                "naturalness": 65.0,
+                "personality": 71.93548387096774,
+                "trust": 71.12903225806451,
+                "notice_products": 81.12903225806451,
+                "click_products": 79.19354838709677
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "num_ads": 1.0,
+                "local_flow": 42.816520870981925,
+                "global_coherence": 65.99257247555158,
+                "ad_transition_similarity": 72.6200927664348,
+                "ad_content_alignment": 51.10503514352294,
+                "in_token": 501.18817204301075,
+                "out_token": 854.0430107526881,
+                "price": 1.0604516129032258,
+                "accuracy": 80.80645161290323,
+                "naturalness": 65.0,
+                "personality": 71.93548387096774,
+                "trust": 71.12903225806451,
+                "notice_products": 81.12903225806451,
+                "click_products": 79.19354838709677
+            }
+        },
+        "GIR-R-K2": {
+            "avg": {
+                "has_ad": 100.0,
+                "num_ads": 2.0,
+                "local_flow": 42.26597225355205,
+                "global_coherence": 64.1988634078585,
+                "ad_transition_similarity": 83.3580266676248,
+                "ad_content_alignment": 49.925079266144444,
+                "in_token": 533.9623655913979,
+                "out_token": 880.016129032258,
+                "price": 1.1011174193548388,
+                "accuracy": 75.80645161290323,
+                "naturalness": 51.61290322580645,
+                "personality": 68.06451612903226,
+                "trust": 64.51612903225806,
+                "notice_products": 78.70967741935483,
+                "click_products": 80.64516129032258
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "num_ads": 2.0,
+                "local_flow": 42.26597225355205,
+                "global_coherence": 64.1988634078585,
+                "ad_transition_similarity": 83.3580266676248,
+                "ad_content_alignment": 49.925079266144444,
+                "in_token": 533.9623655913979,
+                "out_token": 880.016129032258,
+                "price": 1.1011174193548388,
+                "accuracy": 75.80645161290323,
+                "naturalness": 51.61290322580645,
+                "personality": 68.06451612903226,
+                "trust": 64.51612903225806,
+                "notice_products": 78.70967741935483,
+                "click_products": 80.64516129032258
+            }
+        },
+        "GIR-R-K3": {
+            "avg": {
+                "has_ad": 100.0,
+                "num_ads": 3.0,
+                "local_flow": 43.01510832501542,
+                "global_coherence": 64.3869163005416,
+                "ad_transition_similarity": 85.20989773052014,
+                "ad_content_alignment": 48.79130950297944,
+                "in_token": 588.6935483870968,
+                "out_token": 919.7741935483871,
+                "price": 1.165556129032258,
+                "accuracy": 73.38709677419355,
+                "naturalness": 45.32258064516129,
+                "personality": 65.0,
+                "trust": 63.225806451612904,
+                "notice_products": 78.54838709677419,
+                "click_products": 82.25806451612904
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "num_ads": 3.0,
+                "local_flow": 43.01510832501542,
+                "global_coherence": 64.3869163005416,
+                "ad_transition_similarity": 85.20989773052014,
+                "ad_content_alignment": 48.79130950297944,
+                "in_token": 588.6935483870968,
+                "out_token": 919.7741935483871,
+                "price": 1.165556129032258,
+                "accuracy": 73.38709677419355,
+                "naturalness": 45.32258064516129,
+                "personality": 65.0,
+                "trust": 63.225806451612904,
+                "notice_products": 78.54838709677419,
+                "click_products": 82.25806451612904
+            }
+        },
+        "GIR-R-K4": {
+            "avg": {
+                "has_ad": 100.0,
+                "num_ads": 4.0,
+                "local_flow": 42.918746049229654,
+                "global_coherence": 63.448574227700554,
+                "ad_transition_similarity": 85.79084577984547,
+                "ad_content_alignment": 47.882870941585075,
+                "in_token": 613.0860215053764,
+                "out_token": 930.8817204301075,
+                "price": 1.187927741935484,
+                "accuracy": 69.51612903225806,
+                "naturalness": 39.67741935483871,
+                "personality": 63.70967741935484,
+                "trust": 56.29032258064516,
+                "notice_products": 76.12903225806451,
+                "click_products": 80.96774193548387
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "num_ads": 4.0,
+                "local_flow": 42.918746049229654,
+                "global_coherence": 63.448574227700554,
+                "ad_transition_similarity": 85.79084577984547,
+                "ad_content_alignment": 47.882870941585075,
+                "in_token": 613.0860215053764,
+                "out_token": 930.8817204301075,
+                "price": 1.187927741935484,
+                "accuracy": 69.51612903225806,
+                "naturalness": 39.67741935483871,
+                "personality": 63.70967741935484,
+                "trust": 56.29032258064516,
+                "notice_products": 76.12903225806451,
+                "click_products": 80.96774193548387
+            }
+        },
+        "GIR-R-K5": {
+            "avg": {
+                "has_ad": 100.0,
+                "num_ads": 5.0,
+                "local_flow": 41.85943856597566,
+                "global_coherence": 62.972085218152145,
+                "ad_transition_similarity": 86.07494975641073,
+                "ad_content_alignment": 47.62131936697735,
+                "in_token": 670.1397849462365,
+                "out_token": 979.7688172043011,
+                "price": 1.2622451612903225,
+                "accuracy": 67.25806451612904,
+                "naturalness": 35.806451612903224,
+                "personality": 59.03225806451613,
+                "trust": 54.67741935483871,
+                "notice_products": 72.74193548387096,
+                "click_products": 80.64516129032258
+            },
+            "__all__": {
+                "has_ad": 100.0,
+                "num_ads": 5.0,
+                "local_flow": 41.85943856597566,
+                "global_coherence": 62.972085218152145,
+                "ad_transition_similarity": 86.07494975641073,
+                "ad_content_alignment": 47.62131936697735,
+                "in_token": 670.1397849462365,
+                "out_token": 979.7688172043011,
+                "price": 1.2622451612903225,
+                "accuracy": 67.25806451612904,
+                "naturalness": 35.806451612903224,
+                "personality": 59.03225806451613,
+                "trust": 54.67741935483871,
+                "notice_products": 72.74193548387096,
+                "click_products": 80.64516129032258
+            }
+        },
+        "__all__": {
+            "GIR-R-K1": 142.60129360347935,
+            "GIR-R-K2": 145.0788261565245,
+            "GIR-R-K3": 150.78523102716292,
+            "GIR-R-K4": 151.69913528376168,
+            "GIR-R-K5": 157.65732870279496
+        }
+    },
+    "__all__": {
+        "LM-Market": 149.5643629547447
+    }
+}

@@ -22,9 +22,10 @@ class QuantEvaluator(BaseEvaluator):
     # evaluation matrixes
     ANALYSIS_MATRIXES = [
         "has_ad",
-        "local_flow", 
-        "global_coherence", 
-        "ad_transition_similarity", 
+        "num_ads",  # Number of ads injected
+        "local_flow",
+        "global_coherence",
+        "ad_transition_similarity",
         "ad_content_alignment",
         "in_token",
         "out_token",
@@ -51,7 +52,24 @@ class QuantEvaluator(BaseEvaluator):
         """
         if matrix_name == "has_ad":
             product = response.get_product()
-            return 100 if product is not None and product["name"] is not None else 0
+            # Handle both single product (dict) and multiple products (list)
+            if product is None:
+                return 0
+            if isinstance(product, list):
+                # Check if at least one product has a name
+                has_valid_ad = any(p and p.get("name") is not None for p in product)
+                return 100 if has_valid_ad else 0
+            else:
+                return 100 if product.get("name") is not None else 0
+        elif matrix_name == "num_ads":
+            product = response.get_product()
+            # Return the number of valid ads
+            if product is None:
+                return 0
+            if isinstance(product, list):
+                return sum(1 for p in product if p and p.get("name") is not None)
+            else:
+                return 1 if product.get("name") is not None else 0
         elif matrix_name == "local_flow":
             # args: adjacent_similarities: List[Tuple[int, int, float]]
             return evaluate_local_flow(response.get_adjacent_sentence_similarities())

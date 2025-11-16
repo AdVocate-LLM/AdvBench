@@ -81,26 +81,52 @@ class Injector:
         prev_pos, next_pos, disrupt = min(inject_positions, key=lambda x: x[2])
         return prev_pos, next_pos, disrupt
 
-    def get_best_inject_product(self, sentences: List[Sentence], sentence_flow: List[Tuple[int, int, float]], 
+    def get_best_inject_product(self, sentences: List[Sentence], sentence_flow: List[Tuple[int, int, float]],
                             products: List[Product]) -> Tuple[Product, int, int, float]:
         """Find the best product and position to inject.
-        
+
         Args:
             sentences: List of sentences in the text
             sentence_flow: List of (i, j, similarity) tuples for adjacent sentences
             products: List of candidate products
-            
+
         Returns:
             Tuple[Product, int, int, float]: (best_product, prev_pos, next_pos, disrupt_score)
         """
         candidate_products: List[Tuple[Product, int, int, float]] = []
-        
+
         for product in products:
             prev_pos, next_pos, disrupt = self.get_best_inject_position(sentences, sentence_flow, product)
             candidate_products.append((product, prev_pos, next_pos, disrupt))
-            
+
         best_product, prev_pos, next_pos, disrupt = min(candidate_products, key=lambda x: x[3])
         return best_product, prev_pos, next_pos, disrupt
+
+    def get_best_inject_products(self, sentences: List[Sentence], sentence_flow: List[Tuple[int, int, float]],
+                            products: List[Product], k: int = 1) -> List[Tuple[Product, int, int, float]]:
+        """Find the best k products and positions to inject.
+
+        Args:
+            sentences: List of sentences in the text
+            sentence_flow: List of (i, j, similarity) tuples for adjacent sentences
+            products: List of candidate products
+            k: Number of products to select
+
+        Returns:
+            List[Tuple[Product, int, int, float]]: List of (product, prev_pos, next_pos, disrupt_score) tuples
+        """
+        if k <= 0:
+            return []
+
+        candidate_products: List[Tuple[Product, int, int, float]] = []
+
+        for product in products:
+            prev_pos, next_pos, disrupt = self.get_best_inject_position(sentences, sentence_flow, product)
+            candidate_products.append((product, prev_pos, next_pos, disrupt))
+
+        # Sort by disruption score and take top k
+        sorted_candidates = sorted(candidate_products, key=lambda x: x[3])
+        return sorted_candidates[:min(k, len(sorted_candidates))]
     
     def inject(self, sentences: List[Sentence], sentence_flow: List[Tuple[int, int, float]], 
             products: List[Product]) -> List[Sentence]:

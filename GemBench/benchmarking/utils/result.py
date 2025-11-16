@@ -143,7 +143,7 @@ class Result:
         """Get the ad index position
         Returns:
             List[int]: the ad index position
-        
+
         Note:
             If the product is not provided, the ad index position is empty list.
         For example:
@@ -154,12 +154,26 @@ class Result:
             ```
             The ad index position is [1]. Because the second sentence is the ad.
         """
-        if self.product is None or self.product.get('name') is None:
+        if self.product is None:
             return []
         if self.content is None:
             return []
-        ad_indices = {i for i, sent in enumerate(self.content) 
-                    if any(self.product.get(key) in sent.sentence for key in ['name', 'url'] if self.product.get(key))}
+
+        # Handle both single product (dict) and multiple products (list of dicts)
+        products_list = self.product if isinstance(self.product, list) else [self.product]
+
+        # Filter out None products
+        products_list = [p for p in products_list if p and p.get('name') is not None]
+
+        if not products_list:
+            return []
+
+        ad_indices = set()
+        for product in products_list:
+            for i, sent in enumerate(self.content):
+                if any(product.get(key) in sent.sentence for key in ['name', 'url'] if product.get(key)):
+                    ad_indices.add(i)
+
         return list(ad_indices)
     
     def calculate_adjacent_sentence_similarities(self) -> List[Tuple[int, int, float]]:

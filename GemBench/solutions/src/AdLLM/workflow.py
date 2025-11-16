@@ -26,18 +26,20 @@ class AdLLMWorkflow:
         product_list_path: str
         rag_model: Optional[SentenceTransformer]: if None, use the default RAG model(all-MiniLM-L6-v2)
     """
-    def __init__(self, 
+    def __init__(self,
                 model_name: str="gpt-4o",
                 product_list_path: str= None,
                 # rag_model: str = "Sentence-Transformers/all-MiniLM-L6-v2",
                 rag_model: str = 'text-embedding-3-small',
                 # rag_model: str = "Qwen/Qwen3-Embedding-8B",
-                score_func: str = LOG_WEIGHT
+                score_func: str = LOG_WEIGHT,
+                k: int = 1
                 ):
         self.model_name = model_name
         self.product_list_path = product_list_path
         self.rag_model = rag_model
         self.score_func = score_func
+        self.k = k
         # Answer Agent
         self.answer_agent = AnswerAgent(
             model=self.model_name,
@@ -47,7 +49,8 @@ class AdLLMWorkflow:
             model=self.model_name,
             product_list_path=self.product_list_path,
             rag_model=self.rag_model,
-            score_func=self.score_func
+            score_func=self.score_func,
+            k=self.k
         )
         
     def help(self):
