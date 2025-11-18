@@ -234,6 +234,7 @@ class InjectorAgent(BaseAgent):
         # Step 1: Get the best products
         product_rag = self._get_product_rag()
         products = product_rag.query(query, top_k=max(5, self.k * 5))
+        # products = product_rag.query(query, top_k=5)
         # convert the sentences to sentences
         sentences, structure = SentenceEmbedding(raw_answer.get_answer(), self.rag_model).embed()[0]
         sentence_flow = get_adjacent_sentence_similarities(sentences)
@@ -343,7 +344,8 @@ class InjectorAgent(BaseAgent):
                     for (prev_pos, next_pos), product in sorted_injections:
                         if i == prev_pos:
                             content_parts.append(" ")
-                            content_parts.append(f"{ADS_START}{str(product.ad_content())}{ADS_END}")
+                            # content_parts.append(f"{ADS_START}{str(product.ad_content())}{ADS_END}")
+                            content_parts.append(product.ad_content())
                             content_parts.append(" ")
 
                 content = "".join(content_parts)

@@ -95,7 +95,7 @@ if __name__ == '__main__':
                 ),
         },
         judge_model="gpt-4.1-mini",
-        n_repeats=1,
+        n_repeats=3,
         tags="ads-k-sensitivity-study"
     )
     adv_bench.run()
