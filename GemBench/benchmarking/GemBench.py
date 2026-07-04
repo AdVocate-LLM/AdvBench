@@ -26,13 +26,13 @@ class GemBench(ExperimentCache):
         ExperimentCache.__init__(self)
         self.tags = tags
         self.datasets = GemDatasets()
-        if not data_sets:
+        if data_sets is None:
             self.data_sets = self.datasets.get_all_data_set_names()
         else:
             self.data_sets = data_sets
         self.create_experiment_context()
-        self.solutions = solutions
-        self.best_product_selector = best_product_selector
+        self.solutions = solutions or {}
+        self.best_product_selector = best_product_selector or {}
         self._generate_insert_mode = False
         self._select_mode = False
         if solutions:
@@ -47,6 +47,7 @@ class GemBench(ExperimentCache):
         self.judge_model = judge_model
         self.n_repeats = n_repeats
         self.max_samples = max_samples
+        data_set_names = self.data_sets + ["CA_Prod"] if best_product_selector else self.data_sets
         self.banner(
             project_name="GemBench",
             title="Welcome to GEM-Bench",
@@ -61,7 +62,7 @@ class GemBench(ExperimentCache):
         self.info(f"the output directory is: {self.output_dir}")
         self.info(f"the number of repeats is: {self.n_repeats}")
         self.info(f"the maximum number of samples is: {self.max_samples if self.max_samples > 0 else 'all'}")
-        self.info(f"the data sets are: {self.data_sets+["CA_Prod"] if best_product_selector else self.data_sets}")
+        self.info(f"the data sets are: {data_set_names}")
         self.info(f"the methods we want to evaluate(chatbot task) are: {self.solutions.keys()}")
         if self.best_product_selector:
             self.info(f"the methods we want to evaluate(search task) are: {self.best_product_selector.keys()}")
@@ -87,7 +88,10 @@ class GemBench(ExperimentCache):
                 solution_models=self.solutions, 
                 output_dir=self.output_dir
             )
-            gen_results += processor.process(n_repeats=self.n_repeats)
+            gen_results += processor.process(
+                n_repeats=self.n_repeats,
+                max_samples=self.max_samples
+            )
         if self._select_mode:
             selector_processor = SelectProcessor(
                 data_sets=self.data_sets, 
@@ -95,7 +99,10 @@ class GemBench(ExperimentCache):
                 output_dir=self.output_dir,
                 best_product_selectors=self.best_product_selector,
             )
-            select_results += selector_processor.process(n_repeats=self.n_repeats) 
+            select_results += selector_processor.process(
+                n_repeats=self.n_repeats,
+                max_samples=self.max_samples
+            )
         # (Optional) Save the results to the output directory as json file
         all_results = gen_results + select_results
         all_results.save(os.path.join(self.output_dir, 'results.json'))

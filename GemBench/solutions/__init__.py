@@ -6,5 +6,6 @@ This package contains implementations for detecting and mitigating adversarial a
 
 from .src import AdLLMWorkflow
 from .src import AdChatWorkflow
+from .src import RAGAdChatWorkflow
 
-__all__ = ["AdLLMWorkflow", "AdChatWorkflow"]
+__all__ = ["AdLLMWorkflow", "AdChatWorkflow", "RAGAdChatWorkflow"]

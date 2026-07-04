@@ -1,16 +1,18 @@
 # GEM-BENCH
 
-[![License](https://img.shields.io/badge/license-Apache_2.0-red.svg)](LICENSE)[![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-Apache_2.0-red.svg)](LICENSE)[![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)[![KDD '26](https://img.shields.io/badge/KDD-%2726-orange.svg)](https://kdd2026.kdd.org/)[![DOI](https://img.shields.io/badge/DOI-10.1145%2F3770855.3817474-blue.svg)](https://doi.org/10.1145/3770855.3817474)
 
 
 ![Screenshot](./assets/GemBench.png)
 
 
-This repository provides a comprehensive benchmark for **Generative Engine Marketing (GEM)**, an emerging field that focuses on monetizing generative AI by seamlessly integrating advertisements into Large Language Model (LLM) responses. Our work addresses the core problem of **ad-injected response (AIR) generation** and provides a framework for its **evaluation**.
+This repository provides a complete benchmark for **Generative Engine Marketing (GEM)**, an emerging field that focuses on monetizing generative AI by seamlessly integrating advertisements into Large Language Model (LLM) responses. Our work addresses the core problem of **ad-injected response (AIR) generation** and provides a framework for its **evaluation**.
+
+🎉GEM-BENCH has been accepted to [KDD '26](https://kdd2026.kdd.org/) in Jeju, Korea. See the [paper](https://arxiv.org/abs/2509.14221) and [DOI](https://doi.org/10.1145/3770855.3817474).
 
 * **Generative Engine Marketing (GEM):** A new ecosystem where relevant ads are integrated directly into responses from generative AI assistants, such as LLM-based chatbots.
 * **Ad-injected Response (AIR) Generation:** The process of creating responses that seamlessly include relevant advertisements while maintaining a high-quality user experience and satisfying advertiser objectives.
-* **GEM-BENCH:** The first comprehensive benchmark designed for the generation and evaluation of ad-injected responses.
+* **GEM-BENCH:** The first complete benchmark designed for the generation and evaluation of ad-injected responses.
 
 ---
 
@@ -18,6 +20,8 @@ This repository provides a comprehensive benchmark for **Generative Engine Marke
 
 - [Installation](#installation)
 - [Getting Started](#getting-started)
+- [Command Line Interface](#command-line-interface)
+- [Agent Skill](#agent-skill)
 - [Available Datasets](#available-datasets)
 - [Evaluation Methods](#evaluation-methods)
 - [Supported Solutions](#supported-solutions)
@@ -62,6 +66,19 @@ HF_HUB_OFFLINE=1 # Enable offline mode for Hugging Face Hub
 # Embedding
 EMBEDDING_API_KEY="<Embedding API Key>"
 EMBEDDING_BASE_URL="<Embedding Base URL>"
+
+# Judge model, optional. Falls back to OPENAI_API_KEY and BASE_URL when unset.
+JUDGE_API_KEY="<Judge API Key>"
+JUDGE_BASE_URL="<Judge Base URL>"
+
+# Optional custom model pricing table for ModelPricing and the gembench CLI.
+GEMBENCH_MODEL_PRICE_FILE="~/.gembench/model_prices.json"
+
+# Optional CLI defaults. Use these when your provider does not serve the
+# package defaults.
+GEMBENCH_MODEL_NAME="doubao-1-5-lite-32k-250115"
+GEMBENCH_EMBEDDING_MODEL="text-embedding-3-small"
+GEMBENCH_JUDGE_MODEL="gpt-4.1-mini"
 ```
 
 -----
@@ -75,6 +92,87 @@ python paper.py
 ```
 
 To modify the evaluation, edit the `paper.py` file to adjust the `data_sets`, `solutions` dictionary, and `model_name`/`judge_model` parameters.
+
+-----
+
+## Command Line Interface
+
+GemBench ships with a `gembench` CLI for production-style ad injection workflows:
+
+```bash
+# Validate a custom ad library
+gembench ads validate ads.json
+
+# Generate an ad-injected response for an external query
+gembench inject --ad-file ads.json --query "What should I pack for a winter trip to Korea?"
+
+# Batch external queries from a text, JSON, or JSONL file
+gembench inject --ad-file ads.json --query-file queries.jsonl --method rag-adchat --output results.jsonl --jsonl
+
+# Score external-query results with lightweight production metrics
+gembench score results.jsonl
+gembench score results.jsonl --matrix has_ad --matrix price --output scores.json
+gembench report scores.json
+
+# Run semantic or judge-model metrics only when their API cost is intended
+gembench score results.jsonl --matrix naturalness_evaluation --judge-model gpt-4.1-mini --output scores.json
+
+# Compare scored methods and inspect accepted schemas
+gembench compare ad-chat-scores.json rag-adchat-scores.json --baseline ad-chat
+gembench schema list
+
+# Inspect built-in methods and run diagnostics
+gembench methods list
+gembench diagnose
+```
+
+The ad library can be a list of product objects, a flat product dictionary, or a category-keyed product dictionary. Each ad should provide at least a `name`; `description`/`desc`, `category`, and `url` are used when available.
+
+Use `gembench run`, `gembench generate`, and `gembench evaluate` for bundled benchmark datasets and paper-style result files. For external production queries, prefer `gembench inject` followed by `gembench score`.
+
+See [`docs/cli-schemas.md`](./docs/cli-schemas.md) and [`examples/production/`](./examples/production/) for input/output schemas and local no-API fixtures.
+
+GemBench also includes an All in One Third Platform model price table. You can inspect it and add project-specific overrides with:
+
+```bash
+# List all built-in prices plus custom overrides
+gembench pricing list
+gembench pricing list --json
+gembench pricing list --custom-only
+
+# Inspect one model
+gembench pricing get gpt-4o-mini
+
+# Add or replace a custom price. Values are per million tokens by default.
+gembench pricing add my-model --input-price 1.5 --output-price 6
+
+# Add a price copied from a provider table that is listed per 1K tokens.
+gembench pricing add my-1k-model --input-price 0.0015 --output-price 0.006 --unit per-1k
+
+# Remove a custom override
+gembench pricing remove my-model
+
+# Show the custom price file path
+gembench pricing path
+```
+
+By default, custom prices are stored at `~/.gembench/model_prices.json`. Set `GEMBENCH_MODEL_PRICE_FILE` or pass `--price-file` to use a project-specific JSON file. `ModelPricing` automatically loads the same custom price file at runtime.
+
+If your API provider does not serve the package default models, set `GEMBENCH_MODEL_NAME`, `GEMBENCH_EMBEDDING_MODEL`, or `GEMBENCH_JUDGE_MODEL` in `.env`, or pass `--model-name`, `--embedding-model`, and `--judge-model` on the CLI.
+
+The custom JSON format is a simple model-to-price map:
+
+```json
+{
+  "my-model": [1.5, 6.0, 0]
+}
+```
+
+-----
+
+## Agent Skill
+
+This repository includes an agent skill at [`skills/gembench/SKILL.md`](./skills/gembench/SKILL.md). Codex, Claude Code, Hermes Agent, OpenCLaw, and compatible coding agents can load the `skills/gembench` folder to reuse the project workflow for setup, pricing, experiments, solution changes, documentation, and validation.
 
 -----
 
@@ -120,6 +218,8 @@ The benchmark provides implementations for several baseline solutions, allowing 
       * **GIR-P:** **G**enerate, **I**nject, and **R**ewrite with ad **R**etrieval based on the user **P**rompt.
       * **Parameters:** All Ad-LLM solutions expose the `embedding_model` and `ad_retriever` as configurable parameters. The `response_rewriter` and `ad_injector` modules also have internal parameters that can be modified.
 
+  * **RAG-AdChat:** A retrieval-augmented Ad-Chat baseline that uses the Ad-LLM product retriever to select products before prompt-based generation.
+
 -----
 
 ## 📖 Citation
@@ -127,15 +227,18 @@ The benchmark provides implementations for several baseline solutions, allowing 
 If you use GEM-BENCH in your research, please cite our paper:
 
 ```bibtex
-@article{hu2025gembench,
+@inproceedings{hu2026gembench,
   title={GEM-Bench: A Benchmark for Ad-Injected Response Generation within Generative Engine Marketing},
   author={Hu, Silan and Zhang, Shiqi and Shi, Yimin and Xiao, Xiaokui},
-  journal={arXiv preprint arXiv:2509.14221},
-  year={2025}
+  booktitle={Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (KDD '26)},
+  year={2026},
+  address={Jeju Island, Republic of Korea},
+  doi={10.1145/3770855.3817474},
+  url={https://doi.org/10.1145/3770855.3817474}
 }
 ```
 
-For more information, visit our website: [https://gem-bench.org](https://gem-bench.org)
+For more information, visit our website: [https://gem-bench.org](https://gem-bench.org), read the [paper](https://arxiv.org/abs/2509.14221), or use the [DOI](https://doi.org/10.1145/3770855.3817474).
 
 -----
 

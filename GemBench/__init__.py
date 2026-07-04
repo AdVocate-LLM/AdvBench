@@ -2,17 +2,18 @@
 GemBench: A comprehensive framework for detecting and mitigating adversarial ad injection in LLMs
 
 This package provides:
-- Solutions for ad injection detection and mitigation (AdLLMWorkflow, AdChatWorkflow)  
+- Solutions for ad injection detection and mitigation (AdLLMWorkflow, AdChatWorkflow, RAGAdChatWorkflow)
 - Benchmarking framework for evaluating ad injection detection techniques (GemBench)
 - Utility functions for text processing and analysis
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.9"
 __author__ = "GemBench Team"
 
 # Import main classes for easy access
 from .solutions.src.AdLLM import AdLLMWorkflow
 from .solutions.src.AdChat import AdChatWorkflow
+from .solutions.src.RAGAdChat import RAGAdChatWorkflow
 from .benchmarking import GemBench, GemDatasets, ModelPricing
 
 # Import utility functions
@@ -32,7 +33,8 @@ from .benchmarking.tools.ModelPrice import ModelPricing
 __all__ = [
     # Main workflow classes
     "AdLLMWorkflow",
-    "AdChatWorkflow", 
+    "AdChatWorkflow",
+    "RAGAdChatWorkflow",
     "GemBench",
     
     # Dataset and utilities

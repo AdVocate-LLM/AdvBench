@@ -2,6 +2,7 @@ from openai import OpenAI
 import os
 import logging
 from .parallel import ParallelProcessor
+from ..tools.ModelPrice import ModelPricing
 
 # Disable OpenAI HTTP request logging
 logging.getLogger("openai").setLevel(logging.ERROR)
@@ -21,8 +22,11 @@ class Oracle(ParallelProcessor):
     def __init__(self, model, apikey=None, base_url=None):
         super().__init__()
         self.model = model
-        self.apikey = os.environ.get("OPENAI_API_KEY") if apikey is None else apikey
-        self.base_url = os.environ.get("BASE_URL") if base_url is None else base_url
+        self.apikey = apikey or os.environ.get("JUDGE_API_KEY") or os.environ.get("OPENAI_API_KEY")
+        self.base_url = base_url or os.environ.get("JUDGE_BASE_URL") or os.environ.get("BASE_URL")
+        self.pricing = ModelPricing()
+        if not self.pricing.has_price(model):
+            self.pricing.warn_missing_price(model)
         
         # for deepinfra models
         self.deepinfra_model_list = [self.MODEL_LLAMA_3_8B, self.MODEL_LLAMA_3_70B, self.MODEL_MIXTRAL_8X7B]

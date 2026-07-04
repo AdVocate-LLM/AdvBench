@@ -1,4 +1,6 @@
+import random
 from typing import List, Dict, Callable
+
 from .processor import Processor
 from ..dataset import GemDatasets
 from ..utils.result import Result
@@ -84,6 +86,11 @@ class SelectProcessor(Processor):
         
         solution_result = SolutionResult()
         problem_product_list, query_clusters = self.dataset.build_query_candidate_product_list()
+        if max_samples > 0:
+            items = list(problem_product_list.items())
+            problem_product_list = dict(
+                random.sample(items, min(max_samples, len(items)))
+            )
         
         # Call the best product selector with the problem_product_list
         raw_result = solution_fn(
@@ -94,7 +101,7 @@ class SelectProcessor(Processor):
         error_results = []
         
         for result in raw_result:
-            if result is not None and result['answer'] is not None:
+            if self._is_successful_result(result):
                 valid_results.append(
                     Result(
                         prompt=result['query'],
@@ -106,12 +113,14 @@ class SelectProcessor(Processor):
                     )
                 )
             else:
+                result = result or {}
+                product = result.get('product') or {}
                 error_results.append({
-                    'prompt': result['query'],
-                    'category': result['product']["category"],
+                    'prompt': result.get('query'),
+                    'category': product.get("category"),
                     'solution_tag': solution_name,
-                    'error': 'No answer generated',
-                    'product': result['product']
+                    'error': result.get('answer') or 'No answer generated',
+                    'product': product
                 })
         
         solution_result.add_list_of_results(
@@ -123,6 +132,7 @@ class SelectProcessor(Processor):
         
         # Save error results if any
         if error_results:
+            solution_result.had_errors = True
             output_path = self.get_store_path_for_solution_dataset_repeat(solution_name, data_name, repeat_id)    
             error_file_path = output_path + '/errors.json'
             import json

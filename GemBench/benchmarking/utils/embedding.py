@@ -60,16 +60,16 @@ class Embedding(ParallelProcessor):
             self.async_client = None
         elif model_name.startswith('text-embedding-'):
             # Initialize OpenAI clients (both sync and async)
-            api_key = os.getenv("OPENAI_API_KEY")
-            base_url = os.getenv("BASE_URL")
+            api_key = api_key or os.getenv("EMBEDDING_API_KEY") or os.getenv("OPENAI_API_KEY")
+            base_url = os.getenv("EMBEDDING_BASE_URL") or os.getenv("BASE_URL")
             
             self.client = OpenAI(api_key=api_key, base_url=base_url)
             self.async_client = AsyncOpenAI(api_key=api_key, base_url=base_url)
             self.sentence_model = None
         else:
             # Initialize OpenAI clients (both sync and async)
-            api_key = api_key or os.getenv("EMBEDDING_API_KEY")
-            base_url = os.getenv("EMBEDDING_BASE_URL")
+            api_key = api_key or os.getenv("EMBEDDING_API_KEY") or os.getenv("OPENAI_API_KEY")
+            base_url = os.getenv("EMBEDDING_BASE_URL") or os.getenv("BASE_URL")
             
             self.client = OpenAI(api_key=api_key, base_url=base_url)
             self.async_client = AsyncOpenAI(api_key=api_key, base_url=base_url)

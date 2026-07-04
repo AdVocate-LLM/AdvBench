@@ -54,13 +54,21 @@ class Advertiser:
             price['in_token'] += _price['in_token']
             price['out_token'] += _price['out_token']
             price['price'] += _price['price']
-            if self.verbose: print('product: ', product)
-            idx = self.products()[topic]['names'].index(product)
-            product = {'name': self.products()[topic]['names'][idx], 'url': self.products()[topic]['urls'][idx], 'desc': None}
-            try:
-                product['desc'] = self.products()[topic]['descs'][idx]
-            except Exception:
-                product['desc'] = None
+            if self.verbose:
+                print('product: ', product)
+            topic_products = self.products().get(topic, {})
+            product_names = topic_products.get('names', [])
+            if product is not None and product in product_names:
+                idx = product_names.index(product)
+                urls = topic_products.get('urls') or []
+                descs = topic_products.get('descs') or []
+                product = {
+                    'name': product_names[idx],
+                    'url': urls[idx] if idx < len(urls) else None,
+                    'desc': descs[idx] if idx < len(descs) else None
+                }
+            else:
+                product = {'name': None, 'url': None, 'desc': None}
         else:
             product = {'name': None, 'url': None, 'desc': None}
         self.product = product
@@ -210,13 +218,14 @@ class Advertiser:
 
     def set_sys_prompt(self, product=None, profile=None):
         kwargs = {}
-        if product:
+        has_product = bool(product and product.get('name'))
+        if has_product:
             kwargs['product'] = product['name']
             kwargs['url'] = product['url']
             kwargs['desc'] = product['desc']
             kwargs['personality'] = self.personality
             kwargs['profile'] = profile
-        if self.mode == 'control' or random.random() > self.ad_freq or not product:
+        if self.mode == 'control' or random.random() > self.ad_freq or not has_product:
             self.system_prompt = 'You are a helpful assistant.'
         elif profile:
             if product['desc']:
