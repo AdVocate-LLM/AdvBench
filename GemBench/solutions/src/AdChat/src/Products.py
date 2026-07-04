@@ -18,19 +18,43 @@ class Products:
             self.products = json.load(infile)
             return self.products
 
+    def _empty_price(self):
+        return {'in_token': 0, 'out_token': 0, 'price': 0}
+
+    def _get_topic_products(self, topic: str):
+        topic_products = self.products.get(topic)
+        if not isinstance(topic_products, dict):
+            return None
+        names = topic_products.get('names')
+        if not isinstance(names, list) or len(names) == 0:
+            return None
+        return topic_products
+
+    def has_products(self, topic: str) -> bool:
+        return self._get_topic_products(topic) is not None
+
     def assign_relevant_product(self, prompt:str, topic:str, profile:str):
         kwargs = {}
-        price = {'in_token': 0, 'out_token': 0, 'price': 0}
+        price = self._empty_price()
+        topic_products = self._get_topic_products(topic)
+        if topic_products is None:
+            self.current_product = None
+            if self.verbose:
+                print(f"Skipping topic without products: {topic}")
+            return None, price
+
+        names = topic_products['names']
+        descs = topic_products.get('descs', [])
         if profile:
             kwargs['profile'] = profile
-            kwargs['products'] = self.products[topic]['names']
-            kwargs['descs'] = self.products[topic]['descs']
+            kwargs['products'] = names
+            kwargs['descs'] = descs
             message, price = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT_USER.format(**kwargs), prompt)
         else:
-            kwargs['products'] = self.products[topic]['names']
-            kwargs['descs'] = self.products[topic]['descs']
+            kwargs['products'] = names
+            kwargs['descs'] = descs
             message, price = self.oai_api.handle_response(SYS_RELEVANT_PRODUCT.format(**kwargs), prompt)
-        matches = difflib.get_close_matches(message, self.products[topic]['names'], n=1)
+        matches = difflib.get_close_matches(message, names, n=1)
         if len(matches) > 0:
             self.current_product = matches[0]
             return self.current_product, price
@@ -38,14 +62,23 @@ class Products:
     
     def assign_random_product(self, topic:str):
         if topic:
-            index = random.randint(0, len(self.products[topic]['names']) - 1)
-            self.current_product = self.products[topic]['names'][index]
+            topic_products = self._get_topic_products(topic)
+            if topic_products is None:
+                self.current_product = None
+                return None
+            index = random.randint(0, len(topic_products['names']) - 1)
+            self.current_product = topic_products['names'][index]
             return self.current_product
         else:
-            topic = random.choice(list(self.products.keys()))
+            valid_topics = [topic for topic in self.products if self.has_products(topic)]
+            if not valid_topics:
+                self.current_product = None
+                return None
+            topic = random.choice(valid_topics)
             self.topic = topic
-            index = random.randint(0, len(self.products[topic]['names']) - 1)
-            self.current_product = self.products[topic]['names'][index]
+            topic_products = self.products[topic]
+            index = random.randint(0, len(topic_products['names']) - 1)
+            self.current_product = topic_products['names'][index]
             return self.current_product
 
     def clear_products(self):
