@@ -7,7 +7,7 @@ This package provides:
 - Utility functions for text processing and analysis
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.9"
 __author__ = "GemBench Team"
 
 # Import main classes for easy access
