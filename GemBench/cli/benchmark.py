@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import sys
 from functools import partial
 from pathlib import Path
@@ -215,6 +216,7 @@ class DiagnoseCommand:
         """Run environment, pricing, dataset, and baseline checks."""
         pricing = ModelPricing(price_file=args.price_file)
         price_file = pricing._price_file_path(args.price_file)
+        price_file_configured = args.price_file or os.environ.get(ModelPricing.CUSTOM_PRICE_FILE_ENV)
         checks = []
 
         add_check(
@@ -232,8 +234,8 @@ class DiagnoseCommand:
         add_check(
             checks,
             "custom_price_file",
-            "ok" if price_file.exists() else "warning",
-            str(price_file) if price_file.exists() else f"{price_file} does not exist yet.",
+            custom_price_file_status(price_file, bool(price_file_configured)),
+            custom_price_file_detail(price_file, bool(price_file_configured)),
         )
 
         for model in [args.model_name, args.embedding_model, args.judge_model]:
@@ -263,6 +265,24 @@ class DiagnoseCommand:
             print_dict_rows(checks, ["name", "status", "detail"])
 
         return 1 if any(item["status"] == "error" for item in checks) else 0
+
+
+def custom_price_file_status(price_file: Path, configured: bool) -> str:
+    """Return diagnose status for the optional custom price file."""
+    if price_file.exists():
+        return "ok"
+    if configured:
+        return "warning"
+    return "ok"
+
+
+def custom_price_file_detail(price_file: Path, configured: bool) -> str:
+    """Return diagnose detail for the optional custom price file."""
+    if price_file.exists():
+        return str(price_file)
+    if configured:
+        return f"{price_file} does not exist yet."
+    return "not configured; using built-in price table"
 
 
 def add_benchmark_args(parser: argparse.ArgumentParser) -> None:
