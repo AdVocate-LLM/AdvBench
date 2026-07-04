@@ -43,6 +43,11 @@ class ReportCommand:
             help="Output format. Defaults to table.",
         )
         parser.add_argument(
+            "--json",
+            action="store_true",
+            help="Shortcut for --format json.",
+        )
+        parser.add_argument(
             "--output",
             help="Write report output to this path.",
         )
@@ -57,7 +62,8 @@ class ReportCommand:
             "scores": rows,
         }
         output_rows = payload["scores"] if args.detail else payload["summary"]
-        write_rows_output(output_rows, payload, args.format, args.output)
+        output_format = "json" if args.json else args.format
+        write_rows_output(output_rows, payload, output_format, args.output)
         return 0
 
 
@@ -96,6 +102,11 @@ class CompareCommand:
             help="Output format. Defaults to table.",
         )
         parser.add_argument(
+            "--json",
+            action="store_true",
+            help="Shortcut for --format json.",
+        )
+        parser.add_argument(
             "--output",
             help="Write compare output to this path.",
         )
@@ -106,7 +117,8 @@ class CompareCommand:
         rows = load_score_rows_from_files(args.scores)
         rows = filter_score_rows(rows, args.method, args.matrix)
         payload = build_compare_payload(rows, args.baseline)
-        write_rows_output(payload["comparison"], payload, args.format, args.output)
+        output_format = "json" if args.json else args.format
+        write_rows_output(payload["comparison"], payload, output_format, args.output)
         return 0
 
 
