@@ -109,7 +109,7 @@ class InjectCommand:
                 rag_top_k=args.rag_top_k,
             )
             write_json_records(results, args.output, args.jsonl)
-            return 0
+            return 1 if any(is_failed_output_record(record) for record in results) else 0
         finally:
             remove_temp_file(product_file)
             if args.topic_file is None:
@@ -283,3 +283,11 @@ def failed_output_record(method: str, query: Optional[str]) -> Dict[str, Any]:
         },
         "price": {"in_token": 0, "out_token": 0, "price": 0},
     }
+
+
+def is_failed_output_record(record: Dict[str, Any]) -> bool:
+    """Return whether a normalized inject record represents a failed query."""
+    if not isinstance(record, dict):
+        return True
+    answer = record.get("answer")
+    return answer is None or str(answer).startswith("QUERY_FAILED:")

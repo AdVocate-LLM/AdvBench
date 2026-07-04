@@ -99,9 +99,9 @@ class GenerateCommand:
     def handle(self, args) -> int:
         """Run configured baselines and write results.json."""
         benchmark = build_benchmark(args)
-        benchmark.process_results()
+        gen_results, select_results = benchmark.process_results()
         print(f"results: {Path(benchmark.output_dir) / 'results.json'}")
-        return 0
+        return 1 if solution_results_failed(gen_results, select_results) else 0
 
 
 class RunCommand:
@@ -120,10 +120,17 @@ class RunCommand:
     def handle(self, args) -> int:
         """Run generation, evaluation, and report export."""
         benchmark = build_benchmark(args)
-        benchmark.run(evaluate_matrix=resolve_matrices(args.matrix))
+        gen_results, select_results = benchmark.process_results()
+        failed = solution_results_failed(gen_results, select_results)
+        if not solution_results_have_records(gen_results, select_results):
+            print(f"results: {Path(benchmark.output_dir) / 'results.json'}")
+            print("error: no successful benchmark results generated", file=sys.stderr)
+            return 1
+        benchmark.evaluate(gen_results, select_results, evaluate_matrix=resolve_matrices(args.matrix))
+        benchmark.report()
         print(f"results: {Path(benchmark.output_dir) / 'results.json'}")
         print(f"evaluation: {Path(benchmark.output_dir) / 'evaluation_result.json'}")
-        return 0
+        return 1 if failed else 0
 
 
 class EvaluateCommand:
@@ -625,6 +632,27 @@ def resolve_results_path(value: str) -> Path:
     if not path.exists():
         raise ValueError(f"results file not found: {path}")
     return path
+
+
+def solution_results_have_records(*results) -> bool:
+    """Return whether any SolutionResult contains at least one record."""
+    return any(len(result.get_all_results()) > 0 for result in results if result is not None)
+
+
+def solution_results_failed(*results) -> bool:
+    """Return whether generation produced no records or any QUERY_FAILED record."""
+    if not solution_results_have_records(*results):
+        return True
+    for solution_result in results:
+        if solution_result is None:
+            continue
+        if getattr(solution_result, "had_errors", False):
+            return True
+        for result in solution_result.get_all_results():
+            content = result.get_raw_response()
+            if content is None or str(content).startswith("QUERY_FAILED:"):
+                return True
+    return False
 
 
 def default_tag(baselines: List[str], data_sets: List[str], args) -> str:

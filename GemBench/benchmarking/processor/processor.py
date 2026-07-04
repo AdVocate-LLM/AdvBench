@@ -99,7 +99,10 @@ class Processor(Path, GemDatasets, ExperimentCache):
         # get dataset
         prompt_list = self.get_prompt_list(data_name)
         if max_samples > 0:
-            prompt_list = random.sample(prompt_list, max_samples)
+            prompt_list = random.sample(
+                prompt_list,
+                min(max_samples, len(prompt_list)),
+            )
         category_list = self.get_categories_list(data_name)
         category = category_list[0]
         solution_result = SolutionResult()
@@ -109,7 +112,7 @@ class Processor(Path, GemDatasets, ExperimentCache):
         error_results = []
         
         for result in raw_result:
-            if result is not None and result['answer'] is not None:
+            if self._is_successful_result(result):
                 valid_results.append(
                     Result(
                         prompt=result['query'],
@@ -121,12 +124,13 @@ class Processor(Path, GemDatasets, ExperimentCache):
                     )
                 )
             else:
+                result = result or {}
                 error_results.append({
-                    'prompt': result['query'],
+                    'prompt': result.get('query'),
                     'category': category,
                     'solution_tag': solution_name,
-                    'error': 'No answer generated',
-                    'product': result['product']
+                    'error': result.get('answer') or 'No answer generated',
+                    'product': result.get('product')
                 })
         
         solution_result.add_list_of_results(
@@ -138,6 +142,7 @@ class Processor(Path, GemDatasets, ExperimentCache):
         
         # Save error results if any
         if error_results:
+            solution_result.had_errors = True
             output_path = self.get_store_path_for_solution_dataset_repeat(solution_name, data_name, repeat_id)    
             error_file_path = output_path + '/errors.json'
             import json
@@ -153,6 +158,14 @@ class Processor(Path, GemDatasets, ExperimentCache):
             solution_result.save(result_file_path)
 
         return solution_result
+
+    def _is_successful_result(self, result) -> bool:
+        if not isinstance(result, dict):
+            return False
+        answer = result.get('answer')
+        if answer is None:
+            return False
+        return not str(answer).startswith('QUERY_FAILED:')
     
     def process_repeat(
         self, data_name: str, 
@@ -254,6 +267,7 @@ class Processor(Path, GemDatasets, ExperimentCache):
         
         # Group by dataset and repeat_id, then check query completeness within each group
         filtered_results = SolutionResult()
+        filtered_results.had_errors = getattr(results, "had_errors", False)
         
         # Group by dataset and repeat_id
         dataset_repeat_groups = results.group_by_attrs(["dataSet", "repeat_id"])
@@ -293,4 +307,3 @@ class Processor(Path, GemDatasets, ExperimentCache):
         self.info(f"Filtered from {original_count} to {filtered_count} results")
         
         return filtered_results
-

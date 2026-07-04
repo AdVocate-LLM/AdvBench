@@ -18,6 +18,7 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
 
     def __init__(self) -> None:
         super().__init__()
+        self.had_errors = False
 
     def add_result(
         self,
@@ -46,6 +47,10 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
         Does not modify the originals.
         """
         merged = SolutionResult()
+        merged.had_errors = (
+            getattr(self, "had_errors", False)
+            or getattr(other, "had_errors", False)
+        )
         # copy self
         for key, results in self.items():
             merged[key] = list(results)
@@ -58,6 +63,10 @@ class SolutionResult(Dict[Tuple[str, str, str], List[Result]]):
         """
         In-place merge of other into self.
         """
+        self.had_errors = (
+            getattr(self, "had_errors", False)
+            or getattr(other, "had_errors", False)
+        )
         for key, results in other.items():
             self.setdefault(key, []).extend(results)
         return self
