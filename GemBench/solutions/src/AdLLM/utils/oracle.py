@@ -25,6 +25,8 @@ class Oracle(ParallelProcessor, ExperimentCache, ModelPricing):
         ExperimentCache.__init__(self, enable_disk=False)
         ModelPricing.__init__(self)
         self.model = model
+        if not self.has_price(model):
+            self.warn_missing_price(model)
         self.apikey = os.environ.get("OPENAI_API_KEY") if apikey is None else apikey
         self.base_url = os.environ.get("BASE_URL") if base_url is None else base_url
         
