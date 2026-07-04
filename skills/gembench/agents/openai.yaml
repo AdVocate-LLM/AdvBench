@@ -1,0 +1,4 @@
+interface:
+  display_name: "GEM-Bench"
+  short_description: "Work with GEM-Bench experiments and pricing"
+  default_prompt: "Use $gembench to add or evaluate a GEM-Bench solution."
