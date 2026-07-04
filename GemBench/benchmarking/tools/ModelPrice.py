@@ -174,8 +174,12 @@ class ModelPricing:
         if not path.exists():
             return {}
 
+        content = path.read_text(encoding="utf-8").strip()
+        if not content:
+            return {}
+
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
+            data = json.loads(content)
         except json.JSONDecodeError as exc:
             raise ValueError(f"invalid JSON price table: {path}") from exc
 
