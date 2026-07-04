@@ -31,6 +31,7 @@ setup(
     author="GemBench Team(Silan Hu, Shiqi Zhang, Yimin Shi, Xiaokui Xiao)",
     url="https://github.com/Generative-Engine-Marketing/GEM-Bench",
     packages=find_packages(),
+    py_modules=["gembench_cli"],
     include_package_data=True,
     package_data={
         "GemBench.benchmarking": [
@@ -57,7 +58,7 @@ setup(
     install_requires=read_requirements(),
     entry_points={
         "console_scripts": [
-            "gembench=GemBench.cli:main",
+            "gembench=gembench_cli:main",
         ],
     },
     python_requires=">=3.8",
