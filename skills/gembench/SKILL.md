@@ -38,6 +38,7 @@ Configure providers with `.env` or environment variables:
 - `EMBEDDING_API_KEY`, `EMBEDDING_BASE_URL`: embedding provider credentials; fall back to the default LLM credentials when unset.
 - `JUDGE_API_KEY`, `JUDGE_BASE_URL`: judge model credentials; fall back to the default LLM credentials when unset.
 - `GEMBENCH_MODEL_PRICE_FILE`: optional custom model pricing JSON path.
+- `GEMBENCH_MODEL_NAME`, `GEMBENCH_EMBEDDING_MODEL`, `GEMBENCH_JUDGE_MODEL`: optional CLI default models when the provider does not serve the package defaults.
 - `TRANSFORMERS_OFFLINE=1`, `HF_HUB_OFFLINE=1`: use when local Hugging Face assets must be used offline.
 
 Do not commit generated output directories, cache folders, local virtual environments, or user-specific `.env` files.

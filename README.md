@@ -73,6 +73,12 @@ JUDGE_BASE_URL="<Judge Base URL>"
 
 # Optional custom model pricing table for ModelPricing and the gembench CLI.
 GEMBENCH_MODEL_PRICE_FILE="~/.gembench/model_prices.json"
+
+# Optional CLI defaults. Use these when your provider does not serve the
+# package defaults.
+GEMBENCH_MODEL_NAME="doubao-1-5-lite-32k-250115"
+GEMBENCH_EMBEDDING_MODEL="text-embedding-3-small"
+GEMBENCH_JUDGE_MODEL="gpt-4.1-mini"
 ```
 
 -----
@@ -151,6 +157,8 @@ gembench pricing path
 ```
 
 By default, custom prices are stored at `~/.gembench/model_prices.json`. Set `GEMBENCH_MODEL_PRICE_FILE` or pass `--price-file` to use a project-specific JSON file. `ModelPricing` automatically loads the same custom price file at runtime.
+
+If your API provider does not serve the package default models, set `GEMBENCH_MODEL_NAME`, `GEMBENCH_EMBEDDING_MODEL`, or `GEMBENCH_JUDGE_MODEL` in `.env`, or pass `--model-name`, `--embedding-model`, and `--judge-model` on the CLI.
 
 The custom JSON format is a simple model-to-price map:
 

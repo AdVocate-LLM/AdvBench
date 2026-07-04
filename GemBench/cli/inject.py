@@ -144,6 +144,7 @@ def run_inject_method(
         return normalize_output_records(
             workflow.run(problem_list=queries, solution_name="chi"),
             method="ad-chat",
+            queries=queries,
         )
 
     if method == "rag-adchat":
@@ -157,6 +158,7 @@ def run_inject_method(
         return normalize_output_records(
             workflow.run(problem_list=queries),
             method="rag-adchat",
+            queries=queries,
         )
 
     score = LINEAR_WEIGHT if score_func == "linear" else LOG_WEIGHT
@@ -184,6 +186,7 @@ def run_inject_method(
     return normalize_output_records(
         runner(problem_list=queries),
         method=method,
+        queries=queries,
     )
 
 
@@ -244,10 +247,15 @@ def query_from_json_value(value: Any) -> str:
 def normalize_output_records(
     records: List[Dict[str, Any]],
     method: str,
+    queries: Optional[List[str]] = None,
 ) -> List[Dict[str, Any]]:
     """Convert workflow outputs to the CLI result schema."""
     normalized = []
-    for record in records:
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            query = queries[index] if queries and index < len(queries) else None
+            normalized.append(failed_output_record(method, query))
+            continue
         normalized.append(
             {
                 "method": method,
@@ -258,3 +266,20 @@ def normalize_output_records(
             }
         )
     return normalized
+
+
+def failed_output_record(method: str, query: Optional[str]) -> Dict[str, Any]:
+    """Build a schema-valid record for a failed workflow call."""
+    return {
+        "method": method,
+        "query": query,
+        "answer": "QUERY_FAILED:No result generated",
+        "product": {
+            "name": None,
+            "description": None,
+            "desc": None,
+            "category": None,
+            "url": None,
+        },
+        "price": {"in_token": 0, "out_token": 0, "price": 0},
+    }

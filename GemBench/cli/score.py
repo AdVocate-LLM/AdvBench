@@ -1,4 +1,6 @@
+import contextlib
 import json
+import sys
 from functools import partial
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -82,13 +84,16 @@ class ScoreCommand:
         matrixes = resolve_score_matrices(args.matrix)
         solution_result = records_to_solution_result(records)
         output_dir = resolve_output_dir(args.results, args.output_dir, args.report)
-        evaluation_result = score_solution_result(
-            results=solution_result,
-            matrixes=matrixes,
-            judge_model=args.judge_model,
-            output_dir=output_dir,
-            report=args.report,
-        )
+        machine_stdout = (args.json or args.jsonl) and not args.output
+        stdout = sys.stderr if machine_stdout else sys.stdout
+        with contextlib.redirect_stdout(stdout):
+            evaluation_result = score_solution_result(
+                results=solution_result,
+                matrixes=matrixes,
+                judge_model=args.judge_model,
+                output_dir=output_dir,
+                report=args.report,
+            )
         payload = build_score_payload(evaluation_result)
         write_score_payload(payload, args.output, args.json, args.jsonl)
         return 0

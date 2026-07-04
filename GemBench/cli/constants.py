@@ -2,9 +2,21 @@ CHAT_DATASETS = ["MT-Human", "LM-Market"]
 SEARCH_DATASET = "CA_Prod"
 ALL_DATASETS = CHAT_DATASETS + [SEARCH_DATASET]
 
-DEFAULT_MODEL = "doubao-1-5-lite-32k-250115"
-DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
-DEFAULT_JUDGE_MODEL = "gpt-4.1-mini"
+import os
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    pass
+else:
+    load_dotenv()
+
+
+DEFAULT_MODEL = os.environ.get("GEMBENCH_MODEL_NAME", "doubao-1-5-lite-32k-250115")
+DEFAULT_EMBEDDING_MODEL = os.environ.get(
+    "GEMBENCH_EMBEDDING_MODEL", "text-embedding-3-small"
+)
+DEFAULT_JUDGE_MODEL = os.environ.get("GEMBENCH_JUDGE_MODEL", "gpt-4.1-mini")
 
 METHODS = {
     "ad-chat": {
