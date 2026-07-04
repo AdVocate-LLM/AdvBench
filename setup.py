@@ -55,6 +55,11 @@ setup(
         ]
     },
     install_requires=read_requirements(),
+    entry_points={
+        "console_scripts": [
+            "gembench=GemBench.cli:main",
+        ],
+    },
     python_requires=">=3.8",
     classifiers=[
         "Development Status :: 3 - Alpha",

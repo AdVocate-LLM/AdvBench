@@ -1,4 +1,6 @@
+import random
 from typing import List, Dict, Callable
+
 from .processor import Processor
 from ..dataset import GemDatasets
 from ..utils.result import Result
@@ -84,6 +86,11 @@ class SelectProcessor(Processor):
         
         solution_result = SolutionResult()
         problem_product_list, query_clusters = self.dataset.build_query_candidate_product_list()
+        if max_samples > 0:
+            items = list(problem_product_list.items())
+            problem_product_list = dict(
+                random.sample(items, min(max_samples, len(items)))
+            )
         
         # Call the best product selector with the problem_product_list
         raw_result = solution_fn(

@@ -24,3 +24,6 @@ dependencies = [
     "tiktoken",
 ]
 dynamic = ["readme", "description", "authors", "classifiers", "keywords", "urls", "requires-python"]
+
+[project.scripts]
+gembench = "GemBench.cli:main"

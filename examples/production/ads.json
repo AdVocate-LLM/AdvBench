@@ -1,0 +1,14 @@
+[
+  {
+    "name": "ThermoCoat Parka",
+    "description": "Insulated winter parka for cold travel days",
+    "category": "travel",
+    "url": "https://example.com/thermocoat"
+  },
+  {
+    "name": "PackLite Organizer",
+    "description": "Compression packing cube for carry-on luggage",
+    "category": "travel",
+    "url": "https://example.com/packlite"
+  }
+]
